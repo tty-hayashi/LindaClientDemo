@@ -1,33 +1,25 @@
 Smalltalk createPackage: 'LindaClient'!
 (Smalltalk packageAt: 'LindaClient') imports: {'linda' -> 'linda-client'. 'socketIo' -> 'socket.io'. 'amber/jquery/Wrappers-JQuery'. 'amber/web/Web'. 'silk/Silk'}!
 Object subclass: #LindaClientApp
-	instanceVariableNames: 'lindaClient alpha beta gamma'
+	instanceVariableNames: 'lindaClient tickets'
 	package: 'LindaClient'!
 
 !LindaClientApp methodsFor: 'accessing'!
 
-alpha
-	^ alpha
+lindaClient
+	^ lindaClient
 !
 
-alpha: anObject
-	alpha := anObject
+lindaClient: anObject
+	lindaClient := anObject
 !
 
-beta
-	^ beta
+tickets
+	^ tickets
 !
 
-beta: anObject
-	beta := anObject
-!
-
-gamma
-	^ gamma
-!
-
-gamma: anObject
-	gamma := anObject
+tickets: anObject
+	tickets := anObject
 ! !
 
 !LindaClientApp methodsFor: 'action'!
@@ -40,6 +32,13 @@ doAmberWith
 
 doJQueryAppend
 	'#output-list' asJQuery append: '<li>jQuery append added me!!</li>'
+!
+
+doJQueryPrepend: aMsg
+	| elem|
+	elem := '<p/>' asJQuery.
+	elem html: aMsg.
+	'#output-list' asJQuery prepend: elem
 !
 
 doSilkTAG
@@ -73,50 +72,209 @@ LindaClientApp subclass: #LindaFactorialMaster
 	instanceVariableNames: ''
 	package: 'LindaClient'!
 
-!LindaFactorialMaster methodsFor: 'action'!
-
-doAmberWith
-	| tag |
-	tag := (HTMLCanvas onJQuery: '#output-list' asJQuery) root.
-	tag with: [ :html | html li with: 'Amber Web #with: added me!!' ]
-!
-
-doJQueryAppend
-	'#output-list' asJQuery append: '<li>jQuery append added me!!</li>'
-!
-
-doSilkTAG
-	'#output-list' asSilk LI: 'Silk TAG: added me!!'
-! !
-
 !LindaFactorialMaster methodsFor: 'starting'!
 
 augmentPage
 	'#amber-with' asJQuery click: [ self doAmberWith ].
 	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
 	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
-	window addEventListener: #deviceorientation with: self deviceorientationHandler
+!
+
+map
+!
+
+reduce
 ! !
 
 !LindaFactorialMaster class methodsFor: 'starting'!
+
+example
+
+	| app tickets n lot ts ans|
+	app := LindaFactorialMaster new.
+	app tickets: 5.
+	n := 100.
+	lot := n / app tickets.
+	app lindaClient: (LindaClient serverUrl: 'http://127.0.0.1:8931').
+	ts := app lindaClient tupleSpace: 'factorial'.
+	(1 to: n by: lot) do:[:i | 
+		ts write: #{#type -> #fact . #i -> i. #lot -> lot}.].
+	ans := OrderedCollection new.
+	(1 to: app tickets) do:[:i | 	
+		ts take: #{#type -> #ans} callback: [:err :t |
+			ans add: (t data at: #ans).
+			(i = app tickets)
+				ifTrue: [(ans inject: 1 into: [:sum :e | sum * e]) inspect].
+		]].
+!
 
 start
 	self new augmentPage
 ! !
 
-LindaClientApp subclass: #LindaFactorialWorker
+LindaClientApp subclass: #LindaFactorialSolver
 	instanceVariableNames: ''
 	package: 'LindaClient'!
+
+!LindaFactorialSolver class methodsFor: 'as yet unclassified'!
+
+example
+
+	| linda tickets base lot ts ans|
+	tickets := 5.
+	linda := LindaClient serverUrl: 'http://127.0.0.1:8931'.
+	ts := linda tupleSpace: 'factorial'.
+	ts take: #{#type -> #fact} callback: [:err :t | 
+		base := t data at: 'i'.
+		lot := t data at: 'lot'.
+		ans := (base to: (base + lot - 1)) inject: 1 into: [:sum :elm | sum * elm].
+		ts write: #{#type -> #ans . #i -> base . #ans -> ans} .
+	].
+! !
+
+LindaClientApp subclass: #LindaFibMaster
+	instanceVariableNames: 'n result'
+	package: 'LindaClient'!
+
+!LindaFibMaster methodsFor: 'accessing'!
+
+n
+	^ n
+!
+
+n: anObject
+	n := anObject
+!
+
+readTuple
+
+	self tupleSpace read: #{#type -> 'fib-result' . #n -> self n} callback: [:err :t | 
+		self result: (t data at: 'value')]
+!
+
+result
+	^ result
+!
+
+result: anObject
+	result := anObject
+!
+
+tupleSpace
+
+	^self lindaClient tupleSpace: 'fibonatch'
+!
+
+writeTuple
+
+	self tupleSpace write: #{#type -> 'fib' . #n -> self n}
+! !
+
+!LindaFibMaster methodsFor: 'starting'!
+
+augmentPage
+	'#amber-with' asJQuery click: [ self doAmberWith ].
+	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
+	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
+! !
+
+!LindaFibMaster class methodsFor: 'starting'!
+
+example
+
+	| app  lot ts ans|
+	app := LindaFibMaster new.
+	app lindaClient: (LindaClient serverUrl: 'http://127.0.0.1:8931').
+	app n: 100.
+	app writeTuple.
+	app readTuple.
+	app inspect
+!
+
+start
+	self new augmentPage
+! !
+
+LindaClientApp subclass: #LindaFibSolver
+	instanceVariableNames: ''
+	package: 'LindaClient'!
+
+!LindaFibSolver methodsFor: 'starting'!
+
+augmentPage
+	'#amber-with' asJQuery click: [ self doAmberWith ].
+	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
+	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
+!
+
+fib: n
+	| ans id value |
+	ans := self readIndex: n.
+	ans isEmpty
+		ifTrue: [n < 2
+					ifTrue: [value := 1]
+					ifFalse: [value := (self fib:(n - 1)) + (self fib: (n - 2)) + 1].
+				self writeIndex: n value: value]
+		ifFalse: [value := ans data at: 'value'].
+	^value
+!
+
+orgfib: n
+		^ n < 2
+		ifTrue: [1]
+		ifFalse: [(self fib:(n - 1)) + (self fib: (n - 2)) + 1]
+!
+
+readIndex: anIndex 
+	| ans id |
+	ans := OrderedCollection new.
+	id := self tupleSpace read: #{#type -> 'fib-result' . #n -> anIndex } callback: [:err :tu | ans add: tu ].
+	[self tupleSpace cancel: id] valueWithTimeout:10.
+	^ans reject: [:e | e isNil]
+!
+
+tupleSpace
+
+	^self lindaClient tupleSpace: 'fibonatch'
+!
+
+writeIndex: anIndex value: aValue
+	self tupleSpace write: #{#type -> 'fib-result' . #n -> anIndex . #value -> aValue}
+!
+
+writeValue: n
+	| ans id |
+	ans := OrderedCollection new.
+	id := self tupleSpace read: #{} callback: [:err :tu | ans add: tu ].
+	[self tupleSpace cancel: id] valueWithTimeout:10.
+	ans isEmpty
+		ifTrue: [[(self fib:(n - 1)) + (self fib: (n - 2)) + 1]].
+! !
+
+!LindaFibSolver class methodsFor: 'starting'!
+
+example
+
+	| solver |
+	solver := LindaFibSolver new.
+	solver lindaClient: (LindaClient serverUrl: 'http://127.0.0.1:8931').
+	solver tupleSpace take: #{#type -> 'fib'} callback: [:err :t | 
+		solver fib: (t data at: 'n')]
+!
+
+start
+	self new augmentPage
+! !
 
 LindaClientApp subclass: #LindaGyroMaster
 	instanceVariableNames: ''
 	package: 'LindaClient'!
 
-LindaClientApp subclass: #LindaGyroWorker
+LindaClientApp subclass: #LindaGyroSolver
 	instanceVariableNames: 'alpha beta gamma'
 	package: 'LindaClient'!
 
-!LindaGyroWorker methodsFor: 'accessing'!
+!LindaGyroSolver methodsFor: 'accessing'!
 
 alpha
 	^ alpha
@@ -142,7 +300,7 @@ gamma: anObject
 	gamma := anObject
 ! !
 
-!LindaGyroWorker methodsFor: 'action'!
+!LindaGyroSolver methodsFor: 'action'!
 
 doAmberWith
 	| tag |
@@ -158,7 +316,7 @@ doSilkTAG
 	'#output-list' asSilk LI: 'Silk TAG: added me!!'
 ! !
 
-!LindaGyroWorker methodsFor: 'starting'!
+!LindaGyroSolver methodsFor: 'starting'!
 
 augmentPage
 	'#amber-with' asJQuery click: [ self doAmberWith ].
@@ -175,7 +333,7 @@ deviceorientationHandler
 		Transcript show: event printString; cr.].
 ! !
 
-!LindaGyroWorker class methodsFor: 'starting'!
+!LindaGyroSolver class methodsFor: 'starting'!
 
 start
 	self new augmentPage
@@ -209,6 +367,7 @@ new
 !
 
 proxy: aJSProxy
+	aJSProxy isNil ifTrue: [^nil].
 	^self new proxy: aJSProxy ; yourself
 ! !
 
@@ -385,21 +544,21 @@ read: aTupleHashedCollection
 read: aTupleHashedCollection callback: aBlockClosure
 	"aBlockClosure <[:err :tuple | ]>"
 	
-	^self proxy read: aTupleHashedCollection asJSON with: aBlockClosure
+	^self proxy read: aTupleHashedCollection asJSON with: [:e :t | aBlockClosure value: e value: (Tuple proxy: t)]
 !
 
 take: aTupleHashedCollection
 	"aBlockClosure <[:err :tuple | ]>"
 	| ans |
 	ans := OrderedCollection new.
-	self take: aTupleHashedCollection callback: [:e :t| ans add: (Tuple proxy: t)].
+	self take: aTupleHashedCollection callback: [:e :t| ans add: t].
 	^ans
 !
 
 take: aTupleHashedCollection callback: aBlockClosure
 	"aBlockClosure <[:err :tuple | ]>"
 	
-	^self proxy take: aTupleHashedCollection asJSON with: aBlockClosure
+	^self proxy take: aTupleHashedCollection asJSON with: [:e :t | aBlockClosure value: e value: (Tuple proxy: t)]
 !
 
 watch: aTupleHashedCollection callback: aBlockClosure
