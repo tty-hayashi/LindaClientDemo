@@ -997,17 +997,52 @@ $globals.LindaFibSolver);
 
 $core.addMethod(
 $core.method({
+selector: "fib2:",
+protocol: 'starting',
+fn: function (n){
+"use strict";
+
+var self=this;
+var ans,id,value,v1,v2;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=self._tupleSpace();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["tupleSpace"]=1;
+//>>excludeEnd("ctx");
+$recv($1)._write_($globals.HashedCollection._newFromPairs_(["type","fib","n",n]));
+$recv(self._tupleSpace())._read_callback_($globals.HashedCollection._newFromPairs_(["type","fib-result","n",n]),(function(err,t){
+
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"fib2:",{n:n,ans:ans,id:id,value:value,v1:v1,v2:v2},$globals.LindaFibSolver)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["n"],
+source: "fib2: n\x0a\x09| ans id value v1 v2 |\x0a\x09self tupleSpace write: #{#type -> 'fib' . #n -> n}.\x0a\x09self tupleSpace read: #{#type -> 'fib-result' . #n -> n } callback: [:err :t | ]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["write:", "tupleSpace", "read:callback:"]
+}),
+$globals.LindaFibSolver);
+
+$core.addMethod(
+$core.method({
 selector: "fib:",
 protocol: 'starting',
 fn: function (n){
 "use strict";
 
 var self=this;
-var ans,id,value;
+var ans,id,value,v1,v2;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$2,$5,$4,$3,$6;
+var $1,$2,$3,$5,$4,$6;
 ans=self._readIndex_(n);
 $1=$recv(ans)._isEmpty();
 if($core.assert($1)){
@@ -1016,20 +1051,31 @@ if($core.assert($2)){
 value=(1);
 value;
 } else {
-$5=$recv(n).__minus((1));
+$3=$recv(n).__minus((1));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["-"]=1;
 //>>excludeEnd("ctx");
-$4=self._fib_($5);
+v1=self._fib2_($3);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["fib:"]=1;
+$ctx1.sendIdx["fib2:"]=1;
 //>>excludeEnd("ctx");
-$3=$recv($4).__plus(self._fib_($recv(n).__minus((2))));
-value=$recv($3).__plus((1));
+v1;
+v2=self._fib2_($recv(n).__minus((2)));
+v2;
+$5=$recv(v1)._notNil();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["notNil"]=1;
+//>>excludeEnd("ctx");
+$4=$recv($5).__and($recv(v2)._notNil());
+if($core.assert($4)){
+value=$recv($recv(v1).__plus(v2)).__plus((1));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["+"]=1;
 //>>excludeEnd("ctx");
 value;
+} else {
+return self;
+};
 };
 self._writeIndex_value_(n,value);
 } else {
@@ -1039,15 +1085,15 @@ value;
 $6=value;
 return $6;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"fib:",{n:n,ans:ans,id:id,value:value},$globals.LindaFibSolver)});
+}, function($ctx1) {$ctx1.fill(self,"fib:",{n:n,ans:ans,id:id,value:value,v1:v1,v2:v2},$globals.LindaFibSolver)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["n"],
-source: "fib: n\x0a\x09| ans id value |\x0a\x09ans := self readIndex: n.\x0a\x09ans isEmpty\x0a\x09\x09ifTrue: [n < 2\x0a\x09\x09\x09\x09\x09ifTrue: [value := 1]\x0a\x09\x09\x09\x09\x09ifFalse: [value := (self fib:(n - 1)) + (self fib: (n - 2)) + 1].\x0a\x09\x09\x09\x09self writeIndex: n value: value]\x0a\x09\x09ifFalse: [value := ans data at: 'value'].\x0a\x09^value",
+source: "fib: n\x0a\x09| ans id value v1 v2 |\x0a\x09ans := self readIndex: n.\x0a\x09ans isEmpty\x0a\x09\x09ifTrue: [n < 2\x0a\x09\x09\x09\x09\x09ifTrue: [value := 1]\x0a\x09\x09\x09\x09\x09ifFalse: [v1 := (self fib2:(n - 1)).\x0a\x09\x09\x09\x09\x09\x09\x09v2 := (self fib2: (n - 2)). \x0a\x09\x09\x09\x09\x09\x09\x09(v1 notNil & v2 notNil)\x0a\x09\x09\x09\x09\x09\x09\x09\x09ifTrue: [value := v1 + v2 + 1]\x0a\x09\x09\x09\x09\x09\x09\x09\x09ifFalse: [^self]].\x0a\x09\x09\x09\x09self writeIndex: n value: value]\x0a\x09\x09ifFalse: [value := ans data at: 'value'].\x0a\x09^value",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["readIndex:", "ifTrue:ifFalse:", "isEmpty", "<", "+", "fib:", "-", "writeIndex:value:", "at:", "data"]
+messageSends: ["readIndex:", "ifTrue:ifFalse:", "isEmpty", "<", "fib2:", "-", "&", "notNil", "+", "writeIndex:value:", "at:", "data"]
 }),
 $globals.LindaFibSolver);
 
@@ -1152,6 +1198,53 @@ source: "readIndex: anIndex \x0a\x09| ans id |\x0a\x09ans := OrderedCollection n
 referencedClasses: ["OrderedCollection"],
 //>>excludeEnd("ide");
 messageSends: ["new", "read:callback:", "tupleSpace", "add:", "valueWithTimeout:", "cancel:", "reject:", "isNil"]
+}),
+$globals.LindaFibSolver);
+
+$core.addMethod(
+$core.method({
+selector: "readIndexWait:",
+protocol: 'starting',
+fn: function (anIndex){
+"use strict";
+
+var self=this;
+var ans,id;
+function $OrderedCollection(){return $globals.OrderedCollection||(typeof OrderedCollection=="undefined"?nil:OrderedCollection)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+ans=$recv($OrderedCollection())._new();
+id=$recv(self._tupleSpace())._read_callback_($globals.HashedCollection._newFromPairs_(["type","fib-result","n",anIndex]),(function(err,tu){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(ans)._add_(tu);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({err:err,tu:tu},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+$1=$recv(ans)._reject_((function(e){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(e)._isNil();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({e:e},$ctx1,2)});
+//>>excludeEnd("ctx");
+}));
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"readIndexWait:",{anIndex:anIndex,ans:ans,id:id},$globals.LindaFibSolver)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anIndex"],
+source: "readIndexWait: anIndex \x0a\x09| ans id |\x0a\x09ans := OrderedCollection new.\x0a\x09id := self tupleSpace read: #{#type -> 'fib-result' . #n -> anIndex } callback: [:err :tu | ans add: tu ].\x0a\x09^ans reject: [:e | e isNil]",
+referencedClasses: ["OrderedCollection"],
+//>>excludeEnd("ide");
+messageSends: ["new", "read:callback:", "tupleSpace", "add:", "reject:", "isNil"]
 }),
 $globals.LindaFibSolver);
 

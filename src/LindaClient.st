@@ -207,13 +207,23 @@ augmentPage
 	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
 !
 
+fib2: n
+	| ans id value v1 v2 |
+	self tupleSpace write: #{#type -> 'fib' . #n -> n}.
+	self tupleSpace read: #{#type -> 'fib-result' . #n -> n } callback: [:err :t | ]
+!
+
 fib: n
-	| ans id value |
+	| ans id value v1 v2 |
 	ans := self readIndex: n.
 	ans isEmpty
 		ifTrue: [n < 2
 					ifTrue: [value := 1]
-					ifFalse: [value := (self fib:(n - 1)) + (self fib: (n - 2)) + 1].
+					ifFalse: [v1 := (self fib2:(n - 1)).
+							v2 := (self fib2: (n - 2)). 
+							(v1 notNil & v2 notNil)
+								ifTrue: [value := v1 + v2 + 1]
+								ifFalse: [^self]].
 				self writeIndex: n value: value]
 		ifFalse: [value := ans data at: 'value'].
 	^value
@@ -230,6 +240,13 @@ readIndex: anIndex
 	ans := OrderedCollection new.
 	id := self tupleSpace read: #{#type -> 'fib-result' . #n -> anIndex } callback: [:err :tu | ans add: tu ].
 	[self tupleSpace cancel: id] valueWithTimeout:10.
+	^ans reject: [:e | e isNil]
+!
+
+readIndexWait: anIndex 
+	| ans id |
+	ans := OrderedCollection new.
+	id := self tupleSpace read: #{#type -> 'fib-result' . #n -> anIndex } callback: [:err :tu | ans add: tu ].
 	^ans reject: [:e | e isNil]
 !
 
