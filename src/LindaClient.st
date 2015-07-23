@@ -138,6 +138,13 @@ LindaClientApp subclass: #LindaFibMaster
 
 !LindaFibMaster methodsFor: 'accessing'!
 
+map
+
+	(self n to: 1 by: -1) do: [:i |
+		self tupleSpace write: #{#type -> 'fib' . #n -> i}].
+		self tupleSpace write: #{#type -> 'fib-result' . #n -> 0 . #value -> 1}.
+!
+
 n
 	^ n
 !
@@ -185,8 +192,8 @@ example
 	| app  lot ts ans|
 	app := LindaFibMaster new.
 	app lindaClient: (LindaClient serverUrl: 'http://127.0.0.1:8931').
-	app n: 100.
-	app writeTuple.
+	app n: 10.
+	app map.
 	app readTuple.
 	app inspect
 !
@@ -207,28 +214,6 @@ augmentPage
 	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
 !
 
-fib2: n
-	| ans id value v1 v2 |
-	self tupleSpace write: #{#type -> 'fib' . #n -> n}.
-	self tupleSpace read: #{#type -> 'fib-result' . #n -> n } callback: [:err :t | ]
-!
-
-fib: n
-	| ans id value v1 v2 |
-	ans := self readIndex: n.
-	ans isEmpty
-		ifTrue: [n < 2
-					ifTrue: [value := 1]
-					ifFalse: [v1 := (self fib2:(n - 1)).
-							v2 := (self fib2: (n - 2)). 
-							(v1 notNil & v2 notNil)
-								ifTrue: [value := v1 + v2 + 1]
-								ifFalse: [^self]].
-				self writeIndex: n value: value]
-		ifFalse: [value := ans data at: 'value'].
-	^value
-!
-
 orgfib: n
 		^ n < 2
 		ifTrue: [1]
@@ -239,15 +224,30 @@ readIndex: anIndex
 	| ans id |
 	ans := OrderedCollection new.
 	id := self tupleSpace read: #{#type -> 'fib-result' . #n -> anIndex } callback: [:err :tu | ans add: tu ].
-	[self tupleSpace cancel: id] valueWithTimeout:10.
+	[self tupleSpace cancel: id] valueWithTimeout:1.
 	^ans reject: [:e | e isNil]
 !
 
-readIndexWait: anIndex 
-	| ans id |
-	ans := OrderedCollection new.
-	id := self tupleSpace read: #{#type -> 'fib-result' . #n -> anIndex } callback: [:err :tu | ans add: tu ].
-	^ans reject: [:e | e isNil]
+reduce: n
+	| ans id value v1 v2 |
+	Transcript show: n printString; cr.
+	ans := self readIndex: n.
+	ans isEmpty
+		ifTrue: [n < 2
+					ifTrue: [self writeIndex: n value: 1]
+					ifFalse: [
+						self tupleSpace read: #{#type -> 'fib-result' . #n -> (n - 2)} callback: [:e1 :t1 |
+							self tupleSpace read: #{#type -> 'fib-result' .  #n -> (n - 1)} callback: [:e2 :t2 |
+								v1 := (t1 data at: 'value').
+								v2 := (t2 data at: 'value').
+								Transcript show: 'n: ', n printString, ' v1 ', v1 printString, ' v2 ', v2 printString; cr.
+								self writeIndex: n value: (v1 + v2 + 1).
+								]
+							]
+						]
+					]
+		ifFalse: [value := ans data at: 'value'].
+	^value
 !
 
 tupleSpace
@@ -256,16 +256,8 @@ tupleSpace
 !
 
 writeIndex: anIndex value: aValue
-	self tupleSpace write: #{#type -> 'fib-result' . #n -> anIndex . #value -> aValue}
-!
 
-writeValue: n
-	| ans id |
-	ans := OrderedCollection new.
-	id := self tupleSpace read: #{} callback: [:err :tu | ans add: tu ].
-	[self tupleSpace cancel: id] valueWithTimeout:10.
-	ans isEmpty
-		ifTrue: [[(self fib:(n - 1)) + (self fib: (n - 2)) + 1]].
+	self tupleSpace write: #{#type -> 'fib-result' . #n -> anIndex . #value -> aValue}
 ! !
 
 !LindaFibSolver class methodsFor: 'starting'!
@@ -276,7 +268,7 @@ example
 	solver := LindaFibSolver new.
 	solver lindaClient: (LindaClient serverUrl: 'http://127.0.0.1:8931').
 	solver tupleSpace take: #{#type -> 'fib'} callback: [:err :t | 
-		solver fib: (t data at: 'n')]
+		solver reduce: (t data at: 'n')]
 !
 
 start
