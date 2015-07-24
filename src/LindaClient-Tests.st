@@ -9,7 +9,7 @@ serverUrl
 	^'http://127.0.0.1:8931'
 !
 
-tupleName
+tupleSpaceName
 	^'testSample'
 ! !
 
@@ -26,7 +26,7 @@ estTupleSpaceReading
 
 setUp
 	client := LindaClient serverUrl: self serverUrl.
-	tupleSpace := client tupleSpace: self tupleName
+	tupleSpace := client tupleSpace: self tupleSpaceName
 !
 
 testServerUrl
@@ -36,6 +36,10 @@ testServerUrl
 testTupleSpaceWriting
 	Transcript show: 'writing'; cr.
 	tupleSpace write: #{#type -> 'chat'. #message -> 'aaa'} options: #{#from -> 'xxx'}.
+!
+
+testTuplespaceName
+	self assert: (tupleSpace name = self tupleSpaceName)
 ! !
 
 LindaAbstractTest subclass: #SocketIoTest

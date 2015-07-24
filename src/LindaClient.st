@@ -1,7 +1,7 @@
 Smalltalk createPackage: 'LindaClient'!
 (Smalltalk packageAt: 'LindaClient') imports: {'linda' -> 'linda-client'. 'socketIo' -> 'socket.io'. 'amber/jquery/Wrappers-JQuery'. 'amber/web/Web'. 'silk/Silk'}!
 Object subclass: #LindaClientApp
-	instanceVariableNames: 'lindaClient tickets'
+	instanceVariableNames: 'serverUrl tickets lindaClient'
 	package: 'LindaClient'!
 
 !LindaClientApp methodsFor: 'accessing'!
@@ -139,10 +139,16 @@ LindaClientApp subclass: #LindaFibMaster
 !LindaFibMaster methodsFor: 'accessing'!
 
 map
-
+	| requestTuple resultTuple |
+	resultTuple := FibTuple result.
+	
 	(self n to: 1 by: -1) do: [:i |
-		self tupleSpace write: #{#type -> 'fib' . #n -> i}].
-		self tupleSpace write: #{#type -> 'fib-result' . #n -> 0 . #value -> 1}.
+		requestTuple := FibTuple fib.
+		requestTuple n: i.
+		self tupleSpace write: requestTuple].
+		
+	resultTuple n: 0; answer: 0.
+	self tupleSpace write: resultTuple.
 !
 
 n
@@ -153,10 +159,12 @@ n: anObject
 	n := anObject
 !
 
-readTuple
-
-	self tupleSpace read: #{#type -> 'fib-result' . #n -> self n} callback: [:err :t | 
-		self result: (t data at: 'value')]
+readResultTuple
+	| tuple |
+	tuple := FibTuple result.
+	tuple n: self n.
+	self tupleSpace read: tuple callback: [:err :t | 
+		self result: t answer]
 !
 
 result
@@ -169,12 +177,7 @@ result: anObject
 
 tupleSpace
 
-	^self lindaClient tupleSpace: 'fibonatch'
-!
-
-writeTuple
-
-	self tupleSpace write: #{#type -> 'fib' . #n -> self n}
+	^self lindaClient tupleSpace: FibTuple tupleSpaceName
 ! !
 
 !LindaFibMaster methodsFor: 'starting'!
@@ -194,7 +197,7 @@ example
 	app lindaClient: (LindaClient serverUrl: 'http://127.0.0.1:8931').
 	app n: 10.
 	app map.
-	app readTuple.
+	app readResultTuple.
 	app inspect
 !
 
@@ -220,44 +223,45 @@ orgfib: n
 		ifFalse: [(self fib:(n - 1)) + (self fib: (n - 2)) + 1]
 !
 
-readIndex: anIndex 
-	| ans id |
+readResultNoWait: anIndex 
+	| ans id tuple |
 	ans := OrderedCollection new.
-	id := self tupleSpace read: #{#type -> 'fib-result' . #n -> anIndex } callback: [:err :tu | ans add: tu ].
+	tuple := FibTuple result.
+	tuple n: anIndex.
+	id := self tupleSpace read: tuple callback: [:err :tu | ans add: tu ].
 	[self tupleSpace cancel: id] valueWithTimeout:1.
 	^ans reject: [:e | e isNil]
 !
 
 reduce: n
 	| ans id value v1 v2 |
-	Transcript show: n printString; cr.
-	ans := self readIndex: n.
+	ans := self readResultNoWait: n.
 	ans isEmpty
-		ifTrue: [n < 2
-					ifTrue: [self writeIndex: n value: 1]
+		ifTrue: [n < 3
+					ifTrue: [self writeResult: n value: 1]
 					ifFalse: [
 						self tupleSpace read: #{#type -> 'fib-result' . #n -> (n - 2)} callback: [:e1 :t1 |
 							self tupleSpace read: #{#type -> 'fib-result' .  #n -> (n - 1)} callback: [:e2 :t2 |
-								v1 := (t1 data at: 'value').
-								v2 := (t2 data at: 'value').
-								Transcript show: 'n: ', n printString, ' v1 ', v1 printString, ' v2 ', v2 printString; cr.
-								self writeIndex: n value: (v1 + v2 + 1).
+								v1 := (t1 data at: 'answer').
+								v2 := (t2 data at: 'answer').
+								self writeResult: n value: (v1 + v2).
 								]
 							]
 						]
 					]
-		ifFalse: [value := ans data at: 'value'].
-	^value
 !
 
 tupleSpace
 
-	^self lindaClient tupleSpace: 'fibonatch'
+	^self lindaClient tupleSpace: FibTuple tupleSpaceName
 !
 
-writeIndex: anIndex value: aValue
-
-	self tupleSpace write: #{#type -> 'fib-result' . #n -> anIndex . #value -> aValue}
+writeResult: anIndex value: aValue
+	| tuple |
+	tuple := FibTuple result.
+	tuple n: anIndex.
+	tuple answer: aValue.
+	self tupleSpace write: tuple
 ! !
 
 !LindaFibSolver class methodsFor: 'starting'!
@@ -381,7 +385,7 @@ proxy: aJSProxy
 ! !
 
 LindaProxy subclass: #LindaClient
-	instanceVariableNames: 'serverUrl'
+	instanceVariableNames: ''
 	package: 'LindaClient'!
 
 !LindaClient methodsFor: 'accessing'!
@@ -469,7 +473,8 @@ LindaProxy subclass: #Tuple
 !Tuple methodsFor: 'accessing'!
 
 asJSON
-	self proxy ifNil: [proxy := data asJSON].
+	self proxy ifNil: [proxy := self data asJSON].
+	self proxy at: #class put: self class name.
 	^proxy
 !
 
@@ -493,6 +498,98 @@ fromAddress
 
 keys
 	^self keys: self data
+!
+
+type
+	^self data at: #type
+!
+
+type: anObject
+	self data at: #type put: anObject
+! !
+
+!Tuple class methodsFor: 'as yet unclassified'!
+
+fromJSON: aProxy
+	| tupleClassName |
+	aProxy ifNil: [^nil].
+	tupleClassName := aProxy data at: 'class' ifAbsent: ['Tuple'].
+	^(Smalltalk globals at: tupleClassName) proxy: aProxy
+! !
+
+Tuple subclass: #FibTuple
+	instanceVariableNames: ''
+	package: 'LindaClient'!
+
+!FibTuple methodsFor: 'as yet unclassified'!
+
+answer
+
+	^self data at: self class answerKey
+!
+
+answer: anInteger
+
+	self data at: self class answerKey put: anInteger
+!
+
+n
+
+	^self data at: self class nKey
+!
+
+n: anIndex
+
+	^self data at: self class nKey put: anIndex
+!
+
+value
+
+	^self data at: 'value'
+!
+
+value: anInteger
+
+	self data at: 'value' put: anInteger
+! !
+
+!FibTuple class methodsFor: 'accessor '!
+
+answerKey
+	^'answer'.
+!
+
+fibTypeKey
+	^'fib'.
+!
+
+nKey
+	^'n'.
+!
+
+resultTypeKey
+	^'fib-result'.
+!
+
+tupleSpaceName
+
+	^'fibSpace'
+! !
+
+!FibTuple class methodsFor: 'as yet unclassified'!
+
+fib
+	| tuple |
+	tuple := self new.
+	tuple type: self fibTypeKey.
+	^tuple
+!
+
+result
+	| tuple |
+	tuple := self new.
+	tuple type: self resultTypeKey.
+	^tuple
 ! !
 
 LindaProxy subclass: #TupleSpace
@@ -546,14 +643,14 @@ read: aTupleHashedCollection
 	"aBlockClosure <[:err :tuple | ]>"
 	| ans |
 	ans := OrderedCollection new.
-	self read: aTupleHashedCollection callback: [:e :t| ans add: (Tuple proxy: t)].
+	self read: aTupleHashedCollection callback: [:e :t| ans add: (Tuple fromJSON: t)].
 	^ans
 !
 
 read: aTupleHashedCollection callback: aBlockClosure
 	"aBlockClosure <[:err :tuple | ]>"
 	
-	^self proxy read: aTupleHashedCollection asJSON with: [:e :t | aBlockClosure value: e value: (Tuple proxy: t)]
+	^self proxy read: aTupleHashedCollection asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]
 !
 
 take: aTupleHashedCollection
@@ -567,7 +664,7 @@ take: aTupleHashedCollection
 take: aTupleHashedCollection callback: aBlockClosure
 	"aBlockClosure <[:err :tuple | ]>"
 	
-	^self proxy take: aTupleHashedCollection asJSON with: [:e :t | aBlockClosure value: e value: (Tuple proxy: t)]
+	^self proxy take: aTupleHashedCollection asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]
 !
 
 watch: aTupleHashedCollection callback: aBlockClosure

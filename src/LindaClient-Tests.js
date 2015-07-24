@@ -27,7 +27,7 @@ $globals.LindaAbstractTest);
 
 $core.addMethod(
 $core.method({
-selector: "tupleName",
+selector: "tupleSpaceName",
 protocol: 'as yet unclassified',
 fn: function (){
 "use strict";
@@ -38,7 +38,7 @@ return "testSample";
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "tupleName\x0a\x09^'testSample'",
+source: "tupleSpaceName\x0a\x09^'testSample'",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: []
@@ -111,7 +111,7 @@ function $LindaClient(){return $globals.LindaClient||(typeof LindaClient=="undef
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 self["@client"]=$recv($LindaClient())._serverUrl_(self._serverUrl());
-self["@tupleSpace"]=$recv(self["@client"])._tupleSpace_(self._tupleName());
+self["@tupleSpace"]=$recv(self["@client"])._tupleSpace_(self._tupleSpaceName());
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"setUp",{},$globals.LindaClientTest)});
@@ -119,10 +119,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "setUp\x0a\x09client := LindaClient serverUrl: self serverUrl.\x0a\x09tupleSpace := client tupleSpace: self tupleName",
+source: "setUp\x0a\x09client := LindaClient serverUrl: self serverUrl.\x0a\x09tupleSpace := client tupleSpace: self tupleSpaceName",
 referencedClasses: ["LindaClient"],
 //>>excludeEnd("ide");
-messageSends: ["serverUrl:", "serverUrl", "tupleSpace:", "tupleName"]
+messageSends: ["serverUrl:", "serverUrl", "tupleSpace:", "tupleSpaceName"]
 }),
 $globals.LindaClientTest);
 
@@ -179,6 +179,32 @@ source: "testTupleSpaceWriting\x0a\x09Transcript show: 'writing'; cr.\x0a\x09tup
 referencedClasses: ["Transcript"],
 //>>excludeEnd("ide");
 messageSends: ["show:", "cr", "write:options:"]
+}),
+$globals.LindaClientTest);
+
+$core.addMethod(
+$core.method({
+selector: "testTuplespaceName",
+protocol: 'as yet unclassified',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self._assert_($recv($recv(self["@tupleSpace"])._name()).__eq(self._tupleSpaceName()));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"testTuplespaceName",{},$globals.LindaClientTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "testTuplespaceName\x0a\x09self assert: (tupleSpace name = self tupleSpaceName)",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["assert:", "=", "name", "tupleSpaceName"]
 }),
 $globals.LindaClientTest);
 
