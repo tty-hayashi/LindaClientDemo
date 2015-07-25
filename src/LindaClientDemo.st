@@ -52,14 +52,6 @@ augmentPage
 	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
 	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
 	window addEventListener: #deviceorientation with: self deviceorientationHandler
-!
-
-deviceorientationHandler
-	^[:event |
-		self alpha: event alpha.
-		self beta: event beta.
-		self gamma: event gamma.
-		Transcript show: event printString; cr.].
 ! !
 
 !LindaClientApp class methodsFor: 'starting'!
@@ -405,6 +397,36 @@ LindaClientApp subclass: #LindaGyroWorker
 	instanceVariableNames: ''
 	package: 'LindaClientDemo'!
 
+!LindaGyroWorker methodsFor: 'accessing'!
+
+gX
+	^(viewModel at: #gX) value
+!
+
+gX: aValue
+	(viewModel at: #gX) value: aValue
+!
+
+gY
+	^(viewModel at: #gY) value
+!
+
+gY: aValue
+	(viewModel at: #gY) value: aValue
+!
+
+gZ
+	^(viewModel at: #gZ) value
+!
+
+gZ: aValue
+	(viewModel at: #gZ) value: aValue
+!
+
+handleName 
+	^(viewModel at: #handleName ) value
+! !
+
 !LindaGyroWorker methodsFor: 'action'!
 
 doAmberWith
@@ -419,6 +441,10 @@ doJQueryAppend
 
 doSilkTAG
 	'#output-list' asSilk LI: 'Silk TAG: added me!!'
+!
+
+setupHandle
+	window addEventListener: #devicemotion with: self devicemotionHandler.
 ! !
 
 !LindaGyroWorker methodsFor: 'starting'!
@@ -427,19 +453,24 @@ augmentPage
 	'#amber-with' asJQuery click: [ self doAmberWith ].
 	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
 	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
-	
+	'#start' asJQuery click: [ self setupHandle ].
+
 	viewModel := #{
+		#handleName -> (ko observable: 'handle name') .
 		#gX -> (ko observable: 0) .
 		#gY -> (ko observable: 0) .
 		#gZ -> (ko observable: 0) .
+		
+		"
 		#tiltLR -> (ko observable: 0).
 		#tiltFB -> (ko observable: 0).
 		#webRotate -> (ko observable: 'rotate(', (30) printString, 'deg) rotate3d(1,0,0, ', ((30) * -1) printString, 'deg)').
 		#mozRotate -> (ko observable: 'rotate(', (30) printString, 'deg)').
+		"
+		
 		#rotateYX -> (ko observable: 
 		'rotateX(', 30 printString, 'deg)', 
 		' rotateY(', 30 printString, 'deg)')
-		"#rotateYX -> (ko observable: 'rotateX(30deg) rotate(30deg)')"
 	}.
 	ko applyBindings: viewModel.
 	window addEventListener: #devicemotion with: self devicemotionHandler.
@@ -447,28 +478,48 @@ augmentPage
 
 devicemotionHandler
 	^[:event |
-		"(viewModel at: #accX) value: event acceleration x.
-		(viewModel at: #accY) value: event acceleration y.
-		(viewModel at: #accZ) value: event acceleration z."
-		(viewModel at: #gX) value: (event accelerationIncludingGravity x * 10) rounded.
-		(viewModel at: #gY) value: (event accelerationIncludingGravity y * 10) rounded.
-		(viewModel at: #gZ) value: (event accelerationIncludingGravity z * 10) rounded.
-		(viewModel at: #tiltLR) value: event rotationRate gamma.
-		(viewModel at: #tiltFB) value: event rotationRate beta.
-		(viewModel at: #gZ) value: (event accelerationIncludingGravity z * 10) rounded.
-		(viewModel at: #webRotate) value: 'rotate(', (viewModel at: #tiltLR) value printString, 'deg) rotate3d(1,0,0, ', ((viewModel at: #tiltFB) value * -1) printString, 'deg)' .
-		(viewModel at: #mozRotate) value: 'rotate(', (viewModel at: #tiltLR) value printString, 'deg)' .
-		(viewModel at: #rotateYX) value: 'rotateX(', ((viewModel at: #gY) value) printString, 'deg)', 
-		' rotateY(', ((viewModel at: #gX) value) printString, 'deg)'
+		self 
+			gX: (event accelerationIncludingGravity x rounded)
+			gY: (event accelerationIncludingGravity y rounded)
+			gZ: (event accelerationIncludingGravity z rounded)		
 	].
 !
 
-deviceorientationHandler
+gX: xValue gY: yValue gZ: zValue
+	
+	(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) 
+		ifTrue: [
+	
+			self gX: (xValue rounded) * 10.
+			self gY: (yValue rounded) * 10.
+			self gZ: (zValue rounded) * 10.
+
+			(viewModel at: #rotateYX) value: 'rotateX(', yValue printString, 'deg)', 
+				' rotateY(', xValue printString, 'deg)'.
+		]
+!
+
+olddevicemotionHandler
 	^[:event |
-		self alpha: event alpha.
-		self beta: event beta.
-		self gamma: event gamma.
-		Transcript show: event printString; cr.].
+		"(viewModel at: #accX) value: event acceleration x.
+		(viewModel at: #accY) value: event acceleration y.
+		(viewModel at: #accZ) value: event acceleration z."
+		
+		(viewModel at: #gX) value: (event accelerationIncludingGravity x rounded) * 10.
+		(viewModel at: #gY) value: (event accelerationIncludingGravity y rounded) * 10.
+		(viewModel at: #gZ) value: (event accelerationIncludingGravity z rounded) * 10.
+		
+		"
+		(viewModel at: #tiltLR) value: event rotationRate gamma rounded.
+		(viewModel at: #tiltFB) value: event rotationRate beta rounded.
+		(viewModel at: #webRotate) value: 'rotate(', (viewModel at: #tiltLR) value printString, 'deg) rotate3d(1,0,0, ', ((viewModel at: #tiltFB) value * -1) printString, 'deg)' .
+		(viewModel at: #mozRotate) value: 'rotate(', (viewModel at: #tiltLR) value printString, 'deg)' .
+		"
+		(viewModel at: #rotateYX) value: 'rotateX(', (self gY) printString, 'deg)', 
+		' rotateY(', (self gX) printString, 'deg)'.
+		
+		
+	].
 ! !
 
 !LindaGyroWorker class methodsFor: 'starting'!
