@@ -451,8 +451,8 @@ devicemotionHandler
 		(viewModel at: #gX) value: event accelerationIncludingGravity x * 100.
 		(viewModel at: #gY) value: event accelerationIncludingGravity y * 100.
 		(viewModel at: #gZ) value: event accelerationIncludingGravity z * 100.
-		(viewModel at: #rotateYX) value: 'rotateX(', (viewModel at: #accY) printString, 'deg)', 
-		' rotateY(', (viewModel at: #accX) printString, 'deg)'.
+		(viewModel at: #rotateYX) value: 'rotateX(', ((viewModel at: #accY) / 10 ) printString, 'deg)', 
+		' rotateY(', ((viewModel at: #accX) / 10) printString, 'deg)'.
 	].
 !
 
