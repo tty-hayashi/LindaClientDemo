@@ -445,9 +445,9 @@ augmentPage
 
 devicemotionHandler
 	^[:event |
-		(viewModel at: #accX) value: event acceleration x.
+		"(viewModel at: #accX) value: event acceleration x.
 		(viewModel at: #accY) value: event acceleration y.
-		(viewModel at: #accZ) value: event acceleration z.
+		(viewModel at: #accZ) value: event acceleration z."
 		(viewModel at: #gX) value: (event accelerationIncludingGravity x * 10) rounded.
 		(viewModel at: #gY) value: (event accelerationIncludingGravity y * 10) rounded.
 		(viewModel at: #gZ) value: (event accelerationIncludingGravity z * 10) rounded.
