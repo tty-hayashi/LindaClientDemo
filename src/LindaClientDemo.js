@@ -1893,50 +1893,7 @@ $globals.LindaFibWorker.klass);
 $core.addClass('LindaGyroMaster', $globals.LindaClientApp, [], 'LindaClientDemo');
 
 
-$core.addClass('LindaGyroWorker', $globals.LindaClientApp, ['alpha', 'beta', 'gamma'], 'LindaClientDemo');
-$core.addMethod(
-$core.method({
-selector: "alpha",
-protocol: 'accessing',
-fn: function (){
-"use strict";
-
-var self=this;
-var $1;
-$1=self["@alpha"];
-return $1;
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "alpha\x0a\x09^ alpha",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: []
-}),
-$globals.LindaGyroWorker);
-
-$core.addMethod(
-$core.method({
-selector: "alpha:",
-protocol: 'accessing',
-fn: function (anObject){
-"use strict";
-
-var self=this;
-self["@alpha"]=anObject;
-return self;
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["anObject"],
-source: "alpha: anObject\x0a\x09alpha := anObject",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: []
-}),
-$globals.LindaGyroWorker);
-
+$core.addClass('LindaGyroWorker', $globals.LindaClientApp, [], 'LindaClientDemo');
 $core.addMethod(
 $core.method({
 selector: "augmentPage",
@@ -1948,7 +1905,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1;
+var $1,$2,$3;
 $1="#amber-with"._asJQuery();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["asJQuery"]=1;
@@ -1984,6 +1941,16 @@ return self._doJQueryAppend();
 //>>excludeEnd("ctx");
 }));
 $recv(window)._addEventListener_with_("devicemotion",self._devicemotionHandler());
+$2=$recv(ko)._observable_((0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["observable:"]=1;
+//>>excludeEnd("ctx");
+$3=$recv(ko)._observable_((0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["observable:"]=2;
+//>>excludeEnd("ctx");
+self["@viewModel"]=$globals.HashedCollection._newFromPairs_(["accX",$2,"accY",$3,"accZ",$recv(ko)._observable_((0))]);
+$recv(ko)._applyBindings_(self["@viewModel"]);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"augmentPage",{},$globals.LindaGyroWorker)});
@@ -1991,53 +1958,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x0a\x09window addEventListener: #devicemotion with: self devicemotionHandler",
+source: "augmentPage\x0a\x09'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x0a\x09window addEventListener: #devicemotion with: self devicemotionHandler.\x0a\x09\x0a\x09viewModel := #{\x0a\x09\x09#accX -> (ko observable: 0) .\x0a\x09\x09#accY -> (ko observable: 0) .\x0a\x09\x09#accZ -> (ko observable: 0) \x0a\x09}.\x0a\x09ko applyBindings: viewModel",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["click:", "asJQuery", "doAmberWith", "on:bind:", "asSilk", "doSilkTAG", "doJQueryAppend", "addEventListener:with:", "devicemotionHandler"]
-}),
-$globals.LindaGyroWorker);
-
-$core.addMethod(
-$core.method({
-selector: "beta",
-protocol: 'accessing',
-fn: function (){
-"use strict";
-
-var self=this;
-var $1;
-$1=self["@beta"];
-return $1;
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "beta\x0a\x09^ beta",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: []
-}),
-$globals.LindaGyroWorker);
-
-$core.addMethod(
-$core.method({
-selector: "beta:",
-protocol: 'accessing',
-fn: function (anObject){
-"use strict";
-
-var self=this;
-self["@beta"]=anObject;
-return self;
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["anObject"],
-source: "beta: anObject\x0a\x09beta := anObject",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: []
+messageSends: ["click:", "asJQuery", "doAmberWith", "on:bind:", "asSilk", "doSilkTAG", "doJQueryAppend", "addEventListener:with:", "devicemotionHandler", "observable:", "applyBindings:"]
 }),
 $globals.LindaGyroWorker);
 
@@ -2209,49 +2133,6 @@ source: "doSilkTAG\x0a\x09'#output-list' asSilk LI: 'Silk TAG: added me!'",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["LI:", "asSilk"]
-}),
-$globals.LindaGyroWorker);
-
-$core.addMethod(
-$core.method({
-selector: "gamma",
-protocol: 'accessing',
-fn: function (){
-"use strict";
-
-var self=this;
-var $1;
-$1=self["@gamma"];
-return $1;
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "gamma\x0a\x09^ gamma",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: []
-}),
-$globals.LindaGyroWorker);
-
-$core.addMethod(
-$core.method({
-selector: "gamma:",
-protocol: 'accessing',
-fn: function (anObject){
-"use strict";
-
-var self=this;
-self["@gamma"]=anObject;
-return self;
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["anObject"],
-source: "gamma: anObject\x0a\x09gamma := anObject",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: []
 }),
 $globals.LindaGyroWorker);
 

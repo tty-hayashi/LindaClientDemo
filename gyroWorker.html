@@ -6,6 +6,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="tetha" />
     <script type='text/javascript' src='the.js'></script>
+    <link rel="stylesheet" href="pers.css" type="text/css">
   </head>
 
   <body>
@@ -19,10 +20,14 @@
   <button id="jquery-append">Hello from jQuery append</button>
   <p/>
   <button id="start">START</button>
-  <p>対象:<span data-bind="text: targetNumber"></span></p>
-  <p>結果:<span data-bind="text: resultNumber"></span></p>
-  <ul id="output-list"></ul>
-  <div id="log"></div>
+  <div id="data">
+	  <p>X: <span data-bind="text: accX"></span></p>
+	  <p>Y: <span data-bind="text: accY"></span></p>
+	  <p>Z: <span data-bind="text: accZ"></span></p>
+  </div>
+  <ol id="output-list"></ul>
+
+
   <script type='text/javascript'>
       require(['app'], function (amber) {
           amber.initialize({

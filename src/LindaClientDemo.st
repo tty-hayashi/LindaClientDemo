@@ -402,34 +402,8 @@ LindaClientApp subclass: #LindaGyroMaster
 	package: 'LindaClientDemo'!
 
 LindaClientApp subclass: #LindaGyroWorker
-	instanceVariableNames: 'alpha beta gamma'
+	instanceVariableNames: ''
 	package: 'LindaClientDemo'!
-
-!LindaGyroWorker methodsFor: 'accessing'!
-
-alpha
-	^ alpha
-!
-
-alpha: anObject
-	alpha := anObject
-!
-
-beta
-	^ beta
-!
-
-beta: anObject
-	beta := anObject
-!
-
-gamma
-	^ gamma
-!
-
-gamma: anObject
-	gamma := anObject
-! !
 
 !LindaGyroWorker methodsFor: 'action'!
 
@@ -453,7 +427,14 @@ augmentPage
 	'#amber-with' asJQuery click: [ self doAmberWith ].
 	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
 	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
-	window addEventListener: #devicemotion with: self devicemotionHandler
+	window addEventListener: #devicemotion with: self devicemotionHandler.
+	
+	viewModel := #{
+		#accX -> (ko observable: 0) .
+		#accY -> (ko observable: 0) .
+		#accZ -> (ko observable: 0) 
+	}.
+	ko applyBindings: viewModel
 !
 
 devicemotionHandler
