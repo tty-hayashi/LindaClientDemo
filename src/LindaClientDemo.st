@@ -432,7 +432,13 @@ augmentPage
 	viewModel := #{
 		#accX -> (ko observable: 0) .
 		#accY -> (ko observable: 0) .
-		#accZ -> (ko observable: 0) 
+		#accZ -> (ko observable: 0) .
+		#gX -> (ko observable: 0) .
+		#gY -> (ko observable: 0) .
+		#gZ -> (ko observable: 0) .
+		#rotateYX -> (ko observable: 'rotateX(30deg) rotateY(30deg)').
+		#rotateX -> (ko observable: 'rotateX(30deg)').
+		#rotateY -> (ko observable: 'rotateY(30deg)')
 	}.
 	ko applyBindings: viewModel
 !
@@ -441,7 +447,13 @@ devicemotionHandler
 	^[:event |
 		(viewModel at: #accX) value: event acceleration x.
 		(viewModel at: #accY) value: event acceleration y.
-		(viewModel at: #accZ) value: event acceleration z.].
+		(viewModel at: #accZ) value: event acceleration z.
+		(viewModel at: #gX) value: event accelerationIncludingGravity x * 100.
+		(viewModel at: #gY) value: event accelerationIncludingGravity y * 100.
+		(viewModel at: #gZ) value: event accelerationIncludingGravity z * 100.
+		(viewModel at: #rotateYX) value: 'rotateX(', (viewModel at: #gY) printString, 'deg)', 
+		' rotateY(', (viewModel at: #gX) printString, 'deg)'.
+	].
 !
 
 deviceorientationHandler
