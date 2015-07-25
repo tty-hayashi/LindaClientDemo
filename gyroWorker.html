@@ -2,11 +2,11 @@
 <html>
 
   <head>
-    <title>Fib Worker</title>
+    <title>Gyro Worker</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="tetha" />
     <script type='text/javascript' src='the.js'></script>
-    <link rel="stylesheet" href="pers.css" type="text/css">
+    <link rel="stylesheet" href="3d.css" type="text/css">
   </head>
 
   <body>
@@ -21,9 +21,12 @@
   <p/>
   <button id="start">START</button>
   <div id="data">
-	  <p>X: <span data-bind="text: accX"></span></p>
-	  <p>Y: <span data-bind="text: accY"></span></p>
-	  <p>Z: <span data-bind="text: accZ"></span></p>
+	  <p>X: <span data-bind="text: gX"></span></p>
+	  <p>Y: <span data-bind="text: gY"></span></p>
+	  <p>Z: <span data-bind="text: gZ"></span></p>
+  </div>
+  <div id="box3d">
+  	  <img src="amslertest.gif" id="plane" width="192" height="192" data-bind="style: {webkitTransform: rotateYX(), MozTransform: rotateYX()}" >
   </div>
   <ol id="output-list"></ul>
 
