@@ -439,8 +439,9 @@ augmentPage
 
 devicemotionHandler
 	^[:event |
-
-		Transcript show: event printString; cr.].
+		(viewModel at: #accX) value: event acceleration x.
+		(viewModel at: #accY) value: event acceleration y.
+		(viewModel at: #accZ) value: event acceleration z.].
 !
 
 deviceorientationHandler

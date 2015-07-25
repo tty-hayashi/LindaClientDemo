@@ -1973,18 +1973,41 @@ fn: function (){
 "use strict";
 
 var self=this;
-function $Transcript(){return $globals.Transcript||(typeof Transcript=="undefined"?nil:Transcript)}
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $2,$1;
+var $2,$4,$3,$5,$7,$6,$1;
 $1=(function(event){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$recv($Transcript())._show_($recv(event)._printString());
-$2=$recv($Transcript())._cr();
-return $2;
+$2=$recv(self["@viewModel"])._at_("accX");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["at:"]=1;
+//>>excludeEnd("ctx");
+$4=$recv(event)._acceleration();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["acceleration"]=1;
+//>>excludeEnd("ctx");
+$3=$recv($4)._x();
+$recv($2)._value_($3);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["value:"]=1;
+//>>excludeEnd("ctx");
+$5=$recv(self["@viewModel"])._at_("accY");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["at:"]=2;
+//>>excludeEnd("ctx");
+$7=$recv(event)._acceleration();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["acceleration"]=2;
+//>>excludeEnd("ctx");
+$6=$recv($7)._y();
+$recv($5)._value_($6);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["value:"]=2;
+//>>excludeEnd("ctx");
+return $recv($recv(self["@viewModel"])._at_("accZ"))._value_($recv($recv(event)._acceleration())._z());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({event:event},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -1996,10 +2019,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "devicemotionHandler\x0a\x09^[:event |\x0a\x0a\x09\x09Transcript show: event printString; cr.].",
-referencedClasses: ["Transcript"],
+source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09(viewModel at: #accX) value: event acceleration x.\x0a\x09\x09(viewModel at: #accY) value: event acceleration y.\x0a\x09\x09(viewModel at: #accZ) value: event acceleration z.].",
+referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["show:", "printString", "cr"]
+messageSends: ["value:", "at:", "x", "acceleration", "y", "z"]
 }),
 $globals.LindaGyroWorker);
 
