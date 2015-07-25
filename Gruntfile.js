@@ -33,7 +33,8 @@ module.exports = function (grunt) {
             all: {
                 src: [
                     'src/LindaClient.st', // list all sources in dependency order
-                    'src/LindaClient-Tests.st' // list all tests in dependency order
+                    'src/LindaClient-Tests.st', // list all tests in dependency order
+		    'src/LindaClientDemo.st' // list all sources in dependency order
                 ],
                 amd_namespace: 'amber-lindaclient',
                 libraries: ['SUnit', 'Web']

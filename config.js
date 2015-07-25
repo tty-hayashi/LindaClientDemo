@@ -16,6 +16,7 @@ require.config({
     "jquery.blockUI": "bower_components/blockui/jquery.blockUI",
     "socket.io": "bower_components/socket.io-client/socket.io",
     "linda-client": "node_modules/linda/lib/linda-client",
+    "knockout": "bower_components/knockout/dist/knockout",
     "silk": "bower_components/silk/src",
     "helios": "bower_components/helios/src",
     "helios/resources": "bower_components/helios/resources",
