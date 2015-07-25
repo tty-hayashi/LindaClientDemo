@@ -453,8 +453,8 @@ devicemotionHandler
 		(viewModel at: #gX) value: (event accelerationIncludingGravity x * 10) rounded.
 		(viewModel at: #gY) value: (event accelerationIncludingGravity y * 10) rounded.
 		(viewModel at: #gZ) value: (event accelerationIncludingGravity z * 10) rounded.
-		(viewModel at: #tiltLR) value: event gamma.
-		(viewModel at: #tiltFB) value: event beta.
+		(viewModel at: #tiltLR) value: event rotationRate gamma.
+		(viewModel at: #tiltFB) value: event rotationRate beta.
 		(viewModel at: #gZ) value: (event accelerationIncludingGravity z * 10) rounded.
 		(viewModel at: #webRotate) value: 'rotate(', (viewModel at: #tiltLR) printString, 'deg) rotate3d(1,0,0, ', ((viewModel at: #tiltFB) * -1) printString, 'deg)' .
 		(viewModel at: #mozRotate) value: 'rotate(', (viewModel at: #tiltLR) printString, 'deg)' .
