@@ -2095,7 +2095,7 @@ $19=$recv(self["@viewModel"])._at_("rotateYX");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["at:"]=7;
 //>>excludeEnd("ctx");
-$26=$recv(self["@viewModel"])._at_("gY");
+$26=$recv(self["@viewModel"])._at_("accY");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["at:"]=8;
 //>>excludeEnd("ctx");
@@ -2112,7 +2112,7 @@ $22=$recv($23).__comma(" rotateY(");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx[","]=3;
 //>>excludeEnd("ctx");
-$21=$recv($22).__comma($recv($recv(self["@viewModel"])._at_("gX"))._printString());
+$21=$recv($22).__comma($recv($recv(self["@viewModel"])._at_("accX"))._printString());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx[","]=2;
 //>>excludeEnd("ctx");
@@ -2132,7 +2132,7 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09(viewModel at: #accX) value: event acceleration x.\x0a\x09\x09(viewModel at: #accY) value: event acceleration y.\x0a\x09\x09(viewModel at: #accZ) value: event acceleration z.\x0a\x09\x09(viewModel at: #gX) value: event accelerationIncludingGravity x * 100.\x0a\x09\x09(viewModel at: #gY) value: event accelerationIncludingGravity y * 100.\x0a\x09\x09(viewModel at: #gZ) value: event accelerationIncludingGravity z * 100.\x0a\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', (viewModel at: #gY) printString, 'deg)', \x0a\x09\x09' rotateY(', (viewModel at: #gX) printString, 'deg)'.\x0a\x09].",
+source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09(viewModel at: #accX) value: event acceleration x.\x0a\x09\x09(viewModel at: #accY) value: event acceleration y.\x0a\x09\x09(viewModel at: #accZ) value: event acceleration z.\x0a\x09\x09(viewModel at: #gX) value: event accelerationIncludingGravity x * 100.\x0a\x09\x09(viewModel at: #gY) value: event accelerationIncludingGravity y * 100.\x0a\x09\x09(viewModel at: #gZ) value: event accelerationIncludingGravity z * 100.\x0a\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', (viewModel at: #accY) printString, 'deg)', \x0a\x09\x09' rotateY(', (viewModel at: #accX) printString, 'deg)'.\x0a\x09].",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["value:", "at:", "x", "acceleration", "y", "z", "*", "accelerationIncludingGravity", ",", "printString"]
