@@ -6,9 +6,17 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="tetha" />
     <script type='text/javascript' src='the.js'></script>
-    <link rel="stylesheet" href="3d.css" type="text/css">
+    <style type="text/css">
+        #box3d {
+            width: 100%;
+            height:192px;
+            padding: 0px;
+            text-align: center;
+            -webkit-perspective: 400;
+            -webkit-perspective-origin: 0px 0px;
+        }  
+    </style>
   </head>
-
   <body>
   <p>This is a sample app. It contains some
   <a href="parts.html">batteries included</a>
@@ -21,12 +29,12 @@
   <p/>
   <button id="start">START</button>
   <div id="data">
-	  <p>X: <span data-bind="text: gX"></span></p>
-	  <p>Y: <span data-bind="text: gY"></span></p>
-	  <p>Z: <span data-bind="text: gZ"></span></p>
+	  <p>tiltLR: <span data-bind="text: tiltLR"></span></p>
+	  <p>tiltFB: <span data-bind="text: tiltFB"></span></p>
   </div>
   <div id="box3d">
-  	  <img src="amslertest.gif" id="plane" width="192" height="192" data-bind="style: {WebkitTransform: rotateYX(), MozTransform: rotateYX(), transform: rotateYX()}" >
+  	  <!-- <img src="amslertest.gif" id="plane" width="192" height="192" data-bind="style: {WebkitTransform: rotateYX(), MozTransform: rotateYX(), transform: rotateYX()}" > -->
+	   <img src="amslertest.gif" id="plane" width="192" height="192" data-bind="style: {WebkitTransform: webRotate(), MozTransform: mozRotate(), transform: webRotate()}" >
   </div>
   <ol id="output-list"></ul>
 
