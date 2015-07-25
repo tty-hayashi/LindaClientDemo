@@ -2000,7 +2000,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $2,$4,$3,$5,$7,$6,$8,$9,$10,$13,$12,$11,$14,$17,$16,$15,$18,$19,$26,$25,$24,$23,$22,$21,$20,$1;
+var $2,$4,$3,$5,$7,$6,$8,$9,$10,$13,$12,$11,$14,$17,$16,$15,$18,$19,$27,$26,$25,$24,$23,$22,$21,$20,$1;
 $1=(function(event){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
@@ -2095,9 +2095,13 @@ $19=$recv(self["@viewModel"])._at_("rotateYX");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["at:"]=7;
 //>>excludeEnd("ctx");
-$26=$recv(self["@viewModel"])._at_("accY");
+$27=$recv(self["@viewModel"])._at_("accY");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["at:"]=8;
+//>>excludeEnd("ctx");
+$26=$recv($27).__slash((10));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["/"]=1;
 //>>excludeEnd("ctx");
 $25=$recv($26)._printString();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -2112,7 +2116,7 @@ $22=$recv($23).__comma(" rotateY(");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx[","]=3;
 //>>excludeEnd("ctx");
-$21=$recv($22).__comma($recv($recv(self["@viewModel"])._at_("accX"))._printString());
+$21=$recv($22).__comma($recv($recv($recv(self["@viewModel"])._at_("accX")).__slash((10)))._printString());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx[","]=2;
 //>>excludeEnd("ctx");
@@ -2132,10 +2136,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09(viewModel at: #accX) value: event acceleration x.\x0a\x09\x09(viewModel at: #accY) value: event acceleration y.\x0a\x09\x09(viewModel at: #accZ) value: event acceleration z.\x0a\x09\x09(viewModel at: #gX) value: event accelerationIncludingGravity x * 100.\x0a\x09\x09(viewModel at: #gY) value: event accelerationIncludingGravity y * 100.\x0a\x09\x09(viewModel at: #gZ) value: event accelerationIncludingGravity z * 100.\x0a\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', (viewModel at: #accY) printString, 'deg)', \x0a\x09\x09' rotateY(', (viewModel at: #accX) printString, 'deg)'.\x0a\x09].",
+source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09(viewModel at: #accX) value: event acceleration x.\x0a\x09\x09(viewModel at: #accY) value: event acceleration y.\x0a\x09\x09(viewModel at: #accZ) value: event acceleration z.\x0a\x09\x09(viewModel at: #gX) value: event accelerationIncludingGravity x * 100.\x0a\x09\x09(viewModel at: #gY) value: event accelerationIncludingGravity y * 100.\x0a\x09\x09(viewModel at: #gZ) value: event accelerationIncludingGravity z * 100.\x0a\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', ((viewModel at: #accY) / 10 ) printString, 'deg)', \x0a\x09\x09' rotateY(', ((viewModel at: #accX) / 10) printString, 'deg)'.\x0a\x09].",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["value:", "at:", "x", "acceleration", "y", "z", "*", "accelerationIncludingGravity", ",", "printString"]
+messageSends: ["value:", "at:", "x", "acceleration", "y", "z", "*", "accelerationIncludingGravity", ",", "printString", "/"]
 }),
 $globals.LindaGyroWorker);
 
