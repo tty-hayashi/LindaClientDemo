@@ -2057,7 +2057,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $2,$6,$5,$4,$3,$7,$11,$10,$9,$8,$12,$16,$15,$14,$13,$17,$19,$18,$20,$21,$23,$22,$24,$31,$30,$29,$28,$27,$35,$34,$33,$32,$26,$25,$36,$41,$40,$39,$38,$37,$42,$49,$48,$47,$46,$45,$44,$43,$1;
+var $2,$6,$5,$4,$3,$7,$11,$10,$9,$8,$12,$16,$15,$14,$13,$17,$19,$18,$20,$21,$23,$22,$24,$31,$30,$29,$28,$27,$35,$34,$33,$32,$26,$25,$36,$41,$40,$39,$38,$37,$42,$50,$49,$48,$47,$46,$45,$44,$43,$1;
 $1=(function(event){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
@@ -2220,6 +2220,9 @@ $41=$recv(self["@viewModel"])._at_("tiltLR");
 $ctx2.sendIdx["at:"]=11;
 //>>excludeEnd("ctx");
 $40=$recv($41)._value();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["value"]=3;
+//>>excludeEnd("ctx");
 $39=$recv($40)._printString();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["printString"]=3;
@@ -2240,9 +2243,13 @@ $42=$recv(self["@viewModel"])._at_("rotateYX");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["at:"]=12;
 //>>excludeEnd("ctx");
-$49=$recv(self["@viewModel"])._at_("gY");
+$50=$recv(self["@viewModel"])._at_("gY");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["at:"]=13;
+//>>excludeEnd("ctx");
+$49=$recv($50)._value();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["value"]=4;
 //>>excludeEnd("ctx");
 $48=$recv($49)._printString();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -2257,7 +2264,7 @@ $45=$recv($46).__comma(" rotateY(");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx[","]=9;
 //>>excludeEnd("ctx");
-$44=$recv($45).__comma($recv($recv(self["@viewModel"])._at_("gX"))._printString());
+$44=$recv($45).__comma($recv($recv($recv(self["@viewModel"])._at_("gX"))._value())._printString());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx[","]=8;
 //>>excludeEnd("ctx");
@@ -2277,7 +2284,7 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09\x22(viewModel at: #accX) value: event acceleration x.\x0a\x09\x09(viewModel at: #accY) value: event acceleration y.\x0a\x09\x09(viewModel at: #accZ) value: event acceleration z.\x22\x0a\x09\x09(viewModel at: #gX) value: (event accelerationIncludingGravity x * 10) rounded.\x0a\x09\x09(viewModel at: #gY) value: (event accelerationIncludingGravity y * 10) rounded.\x0a\x09\x09(viewModel at: #gZ) value: (event accelerationIncludingGravity z * 10) rounded.\x0a\x09\x09(viewModel at: #tiltLR) value: event rotationRate gamma.\x0a\x09\x09(viewModel at: #tiltFB) value: event rotationRate beta.\x0a\x09\x09(viewModel at: #gZ) value: (event accelerationIncludingGravity z * 10) rounded.\x0a\x09\x09(viewModel at: #webRotate) value: 'rotate(', (viewModel at: #tiltLR) value printString, 'deg) rotate3d(1,0,0, ', ((viewModel at: #tiltFB) value * -1) printString, 'deg)' .\x0a\x09\x09(viewModel at: #mozRotate) value: 'rotate(', (viewModel at: #tiltLR) value printString, 'deg)' .\x0a\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', ((viewModel at: #gY)) printString, 'deg)', \x0a\x09\x09' rotateY(', ((viewModel at: #gX)) printString, 'deg)'\x0a\x09].",
+source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09\x22(viewModel at: #accX) value: event acceleration x.\x0a\x09\x09(viewModel at: #accY) value: event acceleration y.\x0a\x09\x09(viewModel at: #accZ) value: event acceleration z.\x22\x0a\x09\x09(viewModel at: #gX) value: (event accelerationIncludingGravity x * 10) rounded.\x0a\x09\x09(viewModel at: #gY) value: (event accelerationIncludingGravity y * 10) rounded.\x0a\x09\x09(viewModel at: #gZ) value: (event accelerationIncludingGravity z * 10) rounded.\x0a\x09\x09(viewModel at: #tiltLR) value: event rotationRate gamma.\x0a\x09\x09(viewModel at: #tiltFB) value: event rotationRate beta.\x0a\x09\x09(viewModel at: #gZ) value: (event accelerationIncludingGravity z * 10) rounded.\x0a\x09\x09(viewModel at: #webRotate) value: 'rotate(', (viewModel at: #tiltLR) value printString, 'deg) rotate3d(1,0,0, ', ((viewModel at: #tiltFB) value * -1) printString, 'deg)' .\x0a\x09\x09(viewModel at: #mozRotate) value: 'rotate(', (viewModel at: #tiltLR) value printString, 'deg)' .\x0a\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', ((viewModel at: #gY) value) printString, 'deg)', \x0a\x09\x09' rotateY(', ((viewModel at: #gX) value) printString, 'deg)'\x0a\x09].",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["value:", "at:", "rounded", "*", "x", "accelerationIncludingGravity", "y", "z", "gamma", "rotationRate", "beta", ",", "printString", "value"]

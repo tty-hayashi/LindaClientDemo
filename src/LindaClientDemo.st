@@ -458,8 +458,8 @@ devicemotionHandler
 		(viewModel at: #gZ) value: (event accelerationIncludingGravity z * 10) rounded.
 		(viewModel at: #webRotate) value: 'rotate(', (viewModel at: #tiltLR) value printString, 'deg) rotate3d(1,0,0, ', ((viewModel at: #tiltFB) value * -1) printString, 'deg)' .
 		(viewModel at: #mozRotate) value: 'rotate(', (viewModel at: #tiltLR) value printString, 'deg)' .
-		(viewModel at: #rotateYX) value: 'rotateX(', ((viewModel at: #gY)) printString, 'deg)', 
-		' rotateY(', ((viewModel at: #gX)) printString, 'deg)'
+		(viewModel at: #rotateYX) value: 'rotateX(', ((viewModel at: #gY) value) printString, 'deg)', 
+		' rotateY(', ((viewModel at: #gX) value) printString, 'deg)'
 	].
 !
 
