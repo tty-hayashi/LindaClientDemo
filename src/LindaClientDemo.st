@@ -427,20 +427,22 @@ augmentPage
 	'#amber-with' asJQuery click: [ self doAmberWith ].
 	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
 	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
-	window addEventListener: #devicemotion with: self devicemotionHandler.
 	
 	viewModel := #{
-		#accX -> (ko observable: 0) .
-		#accY -> (ko observable: 0) .
-		#accZ -> (ko observable: 0) .
 		#gX -> (ko observable: 0) .
 		#gY -> (ko observable: 0) .
 		#gZ -> (ko observable: 0) .
-		#rotateYX -> (ko observable: 'rotateX(30deg) rotateY(30deg)').
-		#rotateX -> (ko observable: 'rotateX(30deg)').
-		#rotateY -> (ko observable: 'rotateY(30deg)')
+		#tiltLR -> (ko observable: 0).
+		#tiltFB -> (ko observable: 0).
+		#webRotate -> (ko observable: 'rotate(', (30) printString, 'deg) rotate3d(1,0,0, ', ((30) * -1) printString, 'deg)').
+		#mozRotate -> (ko observable: 'rotate(', (30) printString, 'deg)').
+		#rotateYX -> (ko observable: 
+		'rotateX(', 30 printString, 'deg)', 
+		' rotateY(', 30 printString, 'deg)')
+		"#rotateYX -> (ko observable: 'rotateX(30deg) rotate(30deg)')"
 	}.
-	ko applyBindings: viewModel
+	ko applyBindings: viewModel.
+	window addEventListener: #devicemotion with: self devicemotionHandler.
 !
 
 devicemotionHandler
@@ -451,8 +453,13 @@ devicemotionHandler
 		(viewModel at: #gX) value: (event accelerationIncludingGravity x * 10) rounded.
 		(viewModel at: #gY) value: (event accelerationIncludingGravity y * 10) rounded.
 		(viewModel at: #gZ) value: (event accelerationIncludingGravity z * 10) rounded.
+		(viewModel at: #tiltLR) value: event gamma.
+		(viewModel at: #tiltFB) value: event beta.
+		(viewModel at: #gZ) value: (event accelerationIncludingGravity z * 10) rounded.
+		(viewModel at: #webRotate) value: 'rotate(', (viewModel at: #tiltLR) printString, 'deg) rotate3d(1,0,0, ', ((viewModel at: #tiltFB) * -1) printString, 'deg)' .
+		(viewModel at: #mozRotate) value: 'rotate(', (viewModel at: #tiltLR) printString, 'deg)' .
 		(viewModel at: #rotateYX) value: 'rotateX(', ((viewModel at: #gY)) printString, 'deg)', 
-		' rotateY(', ((viewModel at: #gX)) printString, 'deg)'.
+		' rotateY(', ((viewModel at: #gX)) printString, 'deg)'
 	].
 !
 
