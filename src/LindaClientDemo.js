@@ -2000,7 +2000,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $2,$4,$3,$5,$7,$6,$8,$9,$10,$13,$12,$11,$14,$17,$16,$15,$18,$19,$27,$26,$25,$24,$23,$22,$21,$20,$1;
+var $2,$4,$3,$5,$7,$6,$8,$9,$10,$14,$13,$12,$11,$15,$19,$18,$17,$16,$20,$21,$28,$27,$26,$25,$24,$23,$22,$1;
 $1=(function(event){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
@@ -2053,78 +2053,82 @@ $10=$recv(self["@viewModel"])._at_("gX");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["at:"]=4;
 //>>excludeEnd("ctx");
-$13=$recv(event)._accelerationIncludingGravity();
+$14=$recv(event)._accelerationIncludingGravity();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["accelerationIncludingGravity"]=1;
 //>>excludeEnd("ctx");
-$12=$recv($13)._x();
-$11=$recv($12).__star((100));
+$13=$recv($14)._x();
+$12=$recv($13).__star((10));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["*"]=1;
+//>>excludeEnd("ctx");
+$11=$recv($12)._rounded();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["rounded"]=1;
 //>>excludeEnd("ctx");
 $recv($10)._value_($11);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["value:"]=4;
 //>>excludeEnd("ctx");
-$14=$recv(self["@viewModel"])._at_("gY");
+$15=$recv(self["@viewModel"])._at_("gY");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["at:"]=5;
 //>>excludeEnd("ctx");
-$17=$recv(event)._accelerationIncludingGravity();
+$19=$recv(event)._accelerationIncludingGravity();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["accelerationIncludingGravity"]=2;
 //>>excludeEnd("ctx");
-$16=$recv($17)._y();
-$15=$recv($16).__star((100));
+$18=$recv($19)._y();
+$17=$recv($18).__star((10));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["*"]=2;
 //>>excludeEnd("ctx");
-$recv($14)._value_($15);
+$16=$recv($17)._rounded();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["rounded"]=2;
+//>>excludeEnd("ctx");
+$recv($15)._value_($16);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["value:"]=5;
 //>>excludeEnd("ctx");
-$18=$recv(self["@viewModel"])._at_("gZ");
+$20=$recv(self["@viewModel"])._at_("gZ");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["at:"]=6;
 //>>excludeEnd("ctx");
-$recv($18)._value_($recv($recv($recv(event)._accelerationIncludingGravity())._z()).__star((100)));
+$recv($20)._value_($recv($recv($recv($recv(event)._accelerationIncludingGravity())._z()).__star((10)))._rounded());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["value:"]=6;
 //>>excludeEnd("ctx");
-$19=$recv(self["@viewModel"])._at_("rotateYX");
+$21=$recv(self["@viewModel"])._at_("rotateYX");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["at:"]=7;
 //>>excludeEnd("ctx");
-$27=$recv(self["@viewModel"])._at_("accY");
+$28=$recv(self["@viewModel"])._at_("gY");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["at:"]=8;
 //>>excludeEnd("ctx");
-$26=$recv($27).__slash((10));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["/"]=1;
-//>>excludeEnd("ctx");
-$25=$recv($26)._printString();
+$27=$recv($28)._printString();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["printString"]=1;
 //>>excludeEnd("ctx");
-$24="rotateX(".__comma($25);
-$23=$recv($24).__comma("deg)");
+$26="rotateX(".__comma($27);
+$25=$recv($26).__comma("deg)");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx[","]=4;
 //>>excludeEnd("ctx");
-$22=$recv($23).__comma(" rotateY(");
+$24=$recv($25).__comma(" rotateY(");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx[","]=3;
 //>>excludeEnd("ctx");
-$21=$recv($22).__comma($recv($recv($recv(self["@viewModel"])._at_("accX")).__slash((10)))._printString());
+$23=$recv($24).__comma($recv($recv(self["@viewModel"])._at_("gX"))._printString());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx[","]=2;
 //>>excludeEnd("ctx");
-$20=$recv($21).__comma("deg)");
+$22=$recv($23).__comma("deg)");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx[","]=1;
 //>>excludeEnd("ctx");
-return $recv($19)._value_($20);
+return $recv($21)._value_($22);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({event:event},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -2136,10 +2140,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09(viewModel at: #accX) value: event acceleration x.\x0a\x09\x09(viewModel at: #accY) value: event acceleration y.\x0a\x09\x09(viewModel at: #accZ) value: event acceleration z.\x0a\x09\x09(viewModel at: #gX) value: event accelerationIncludingGravity x * 100.\x0a\x09\x09(viewModel at: #gY) value: event accelerationIncludingGravity y * 100.\x0a\x09\x09(viewModel at: #gZ) value: event accelerationIncludingGravity z * 100.\x0a\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', ((viewModel at: #accY) / 10 ) printString, 'deg)', \x0a\x09\x09' rotateY(', ((viewModel at: #accX) / 10) printString, 'deg)'.\x0a\x09].",
+source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09(viewModel at: #accX) value: event acceleration x.\x0a\x09\x09(viewModel at: #accY) value: event acceleration y.\x0a\x09\x09(viewModel at: #accZ) value: event acceleration z.\x0a\x09\x09(viewModel at: #gX) value: (event accelerationIncludingGravity x * 10) rounded.\x0a\x09\x09(viewModel at: #gY) value: (event accelerationIncludingGravity y * 10) rounded.\x0a\x09\x09(viewModel at: #gZ) value: (event accelerationIncludingGravity z * 10) rounded.\x0a\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', ((viewModel at: #gY)) printString, 'deg)', \x0a\x09\x09' rotateY(', ((viewModel at: #gX)) printString, 'deg)'.\x0a\x09].",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["value:", "at:", "x", "acceleration", "y", "z", "*", "accelerationIncludingGravity", ",", "printString", "/"]
+messageSends: ["value:", "at:", "x", "acceleration", "y", "z", "rounded", "*", "accelerationIncludingGravity", ",", "printString"]
 }),
 $globals.LindaGyroWorker);
 
