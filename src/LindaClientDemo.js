@@ -77,47 +77,6 @@ $globals.LindaClientApp);
 
 $core.addMethod(
 $core.method({
-selector: "deviceorientationHandler",
-protocol: 'starting',
-fn: function (){
-"use strict";
-
-var self=this;
-function $Transcript(){return $globals.Transcript||(typeof Transcript=="undefined"?nil:Transcript)}
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $2,$1;
-$1=(function(event){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-self._alpha_($recv(event)._alpha());
-self._beta_($recv(event)._beta());
-self._gamma_($recv(event)._gamma());
-$recv($Transcript())._show_($recv(event)._printString());
-$2=$recv($Transcript())._cr();
-return $2;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({event:event},$ctx1,1)});
-//>>excludeEnd("ctx");
-});
-return $1;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"deviceorientationHandler",{},$globals.LindaClientApp)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "deviceorientationHandler\x0a\x09^[:event |\x0a\x09\x09self alpha: event alpha.\x0a\x09\x09self beta: event beta.\x0a\x09\x09self gamma: event gamma.\x0a\x09\x09Transcript show: event printString; cr.].",
-referencedClasses: ["Transcript"],
-//>>excludeEnd("ide");
-messageSends: ["alpha:", "alpha", "beta:", "beta", "gamma:", "gamma", "show:", "printString", "cr"]
-}),
-$globals.LindaClientApp);
-
-$core.addMethod(
-$core.method({
 selector: "doAmberWith",
 protocol: 'action',
 fn: function (){
@@ -1905,7 +1864,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$2,$3,$4,$5,$6,$8,$13,$12,$11,$14,$10,$9,$7,$16,$19,$18,$17,$15,$21,$27,$26,$25,$24,$23,$22,$20;
+var $1,$2,$3,$4,$5,$6,$8,$14,$13,$12,$11,$10,$9,$7;
 $1="#amber-with"._asJQuery();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["asJQuery"]=1;
@@ -1931,7 +1890,11 @@ return self._doSilkTAG();
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
 //>>excludeEnd("ctx");
 }));
-$recv("#jquery-append"._asJQuery())._click_((function(){
+$2="#jquery-append"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["asJQuery"]=2;
+//>>excludeEnd("ctx");
+$recv($2)._click_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -1940,44 +1903,49 @@ return self._doJQueryAppend();
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,3)});
 //>>excludeEnd("ctx");
 }));
-$2=$recv(ko)._observable_((0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["click:"]=2;
+//>>excludeEnd("ctx");
+$recv("#start"._asJQuery())._click_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return self._setupHandle();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,4)});
+//>>excludeEnd("ctx");
+}));
+$3=$recv(ko)._observable_("handle name");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["observable:"]=1;
 //>>excludeEnd("ctx");
-$3=$recv(ko)._observable_((0));
+$4=$recv(ko)._observable_((0));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["observable:"]=2;
 //>>excludeEnd("ctx");
-$4=$recv(ko)._observable_((0));
+$5=$recv(ko)._observable_((0));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["observable:"]=3;
 //>>excludeEnd("ctx");
-$5=$recv(ko)._observable_((0));
+$6=$recv(ko)._observable_((0));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["observable:"]=4;
 //>>excludeEnd("ctx");
-$6=$recv(ko)._observable_((0));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["observable:"]=5;
-//>>excludeEnd("ctx");
 $8=ko;
-$13=(30)._printString();
+$14=(30)._printString();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["printString"]=1;
 //>>excludeEnd("ctx");
-$12="rotate(".__comma($13);
+$13="rotateX(".__comma($14);
+$12=$recv($13).__comma("deg)");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=4;
 //>>excludeEnd("ctx");
-$11=$recv($12).__comma("deg) rotate3d(1,0,0, ");
+$11=$recv($12).__comma(" rotateY(");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=3;
 //>>excludeEnd("ctx");
-$14=$recv((30).__star((-1)))._printString();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["printString"]=2;
-//>>excludeEnd("ctx");
-$10=$recv($11).__comma($14);
+$10=$recv($11).__comma((30)._printString());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=2;
 //>>excludeEnd("ctx");
@@ -1986,50 +1954,7 @@ $9=$recv($10).__comma("deg)");
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
 $7=$recv($8)._observable_($9);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["observable:"]=6;
-//>>excludeEnd("ctx");
-$16=ko;
-$19=(30)._printString();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["printString"]=3;
-//>>excludeEnd("ctx");
-$18="rotate(".__comma($19);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=6;
-//>>excludeEnd("ctx");
-$17=$recv($18).__comma("deg)");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=5;
-//>>excludeEnd("ctx");
-$15=$recv($16)._observable_($17);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["observable:"]=7;
-//>>excludeEnd("ctx");
-$21=ko;
-$27=(30)._printString();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["printString"]=4;
-//>>excludeEnd("ctx");
-$26="rotateX(".__comma($27);
-$25=$recv($26).__comma("deg)");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=10;
-//>>excludeEnd("ctx");
-$24=$recv($25).__comma(" rotateY(");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=9;
-//>>excludeEnd("ctx");
-$23=$recv($24).__comma((30)._printString());
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=8;
-//>>excludeEnd("ctx");
-$22=$recv($23).__comma("deg)");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=7;
-//>>excludeEnd("ctx");
-$20=$recv($21)._observable_($22);
-self["@viewModel"]=$globals.HashedCollection._newFromPairs_(["gX",$2,"gY",$3,"gZ",$4,"tiltLR",$5,"tiltFB",$6,"webRotate",$7,"mozRotate",$15,"rotateYX",$20]);
+self["@viewModel"]=$globals.HashedCollection._newFromPairs_(["handleName",$3,"gX",$4,"gY",$5,"gZ",$6,"rotateYX",$7]);
 $recv(ko)._applyBindings_(self["@viewModel"]);
 $recv(window)._addEventListener_with_("devicemotion",self._devicemotionHandler());
 return self;
@@ -2039,10 +1964,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x0a\x09\x0a\x09viewModel := #{\x0a\x09\x09#gX -> (ko observable: 0) .\x0a\x09\x09#gY -> (ko observable: 0) .\x0a\x09\x09#gZ -> (ko observable: 0) .\x0a\x09\x09#tiltLR -> (ko observable: 0).\x0a\x09\x09#tiltFB -> (ko observable: 0).\x0a\x09\x09#webRotate -> (ko observable: 'rotate(', (30) printString, 'deg) rotate3d(1,0,0, ', ((30) * -1) printString, 'deg)').\x0a\x09\x09#mozRotate -> (ko observable: 'rotate(', (30) printString, 'deg)').\x0a\x09\x09#rotateYX -> (ko observable: \x0a\x09\x09'rotateX(', 30 printString, 'deg)', \x0a\x09\x09' rotateY(', 30 printString, 'deg)')\x0a\x09\x09\x22#rotateYX -> (ko observable: 'rotateX(30deg) rotate(30deg)')\x22\x0a\x09}.\x0a\x09ko applyBindings: viewModel.\x0a\x09window addEventListener: #devicemotion with: self devicemotionHandler.",
+source: "augmentPage\x0a\x09'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x0a\x09'#start' asJQuery click: [ self setupHandle ].\x0a\x0a\x09viewModel := #{\x0a\x09\x09#handleName -> (ko observable: 'handle name') .\x0a\x09\x09#gX -> (ko observable: 0) .\x0a\x09\x09#gY -> (ko observable: 0) .\x0a\x09\x09#gZ -> (ko observable: 0) .\x0a\x09\x09\x0a\x09\x09\x22\x0a\x09\x09#tiltLR -> (ko observable: 0).\x0a\x09\x09#tiltFB -> (ko observable: 0).\x0a\x09\x09#webRotate -> (ko observable: 'rotate(', (30) printString, 'deg) rotate3d(1,0,0, ', ((30) * -1) printString, 'deg)').\x0a\x09\x09#mozRotate -> (ko observable: 'rotate(', (30) printString, 'deg)').\x0a\x09\x09\x22\x0a\x09\x09\x0a\x09\x09#rotateYX -> (ko observable: \x0a\x09\x09'rotateX(', 30 printString, 'deg)', \x0a\x09\x09' rotateY(', 30 printString, 'deg)')\x0a\x09}.\x0a\x09ko applyBindings: viewModel.\x0a\x09window addEventListener: #devicemotion with: self devicemotionHandler.\x0a\x09\x0a\x09",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["click:", "asJQuery", "doAmberWith", "on:bind:", "asSilk", "doSilkTAG", "doJQueryAppend", "observable:", ",", "printString", "*", "applyBindings:", "addEventListener:with:", "devicemotionHandler"]
+messageSends: ["click:", "asJQuery", "doAmberWith", "on:bind:", "asSilk", "doSilkTAG", "doJQueryAppend", "setupHandle", "observable:", ",", "printString", "applyBindings:", "addEventListener:with:", "devicemotionHandler"]
 }),
 $globals.LindaGyroWorker);
 
@@ -2057,222 +1982,30 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $2,$6,$5,$4,$3,$7,$11,$10,$9,$8,$12,$16,$15,$14,$13,$17,$19,$18,$20,$21,$23,$22,$24,$31,$30,$29,$28,$27,$35,$34,$33,$32,$26,$25,$36,$41,$40,$39,$38,$37,$42,$50,$49,$48,$47,$46,$45,$44,$43,$1;
+var $4,$3,$2,$7,$6,$5,$1;
 $1=(function(event){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$2=$recv(self["@viewModel"])._at_("gX");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["at:"]=1;
-//>>excludeEnd("ctx");
-$6=$recv(event)._accelerationIncludingGravity();
+$4=$recv(event)._accelerationIncludingGravity();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["accelerationIncludingGravity"]=1;
 //>>excludeEnd("ctx");
-$5=$recv($6)._x();
-$4=$recv($5).__star((10));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["*"]=1;
-//>>excludeEnd("ctx");
-$3=$recv($4)._rounded();
+$3=$recv($4)._x();
+$2=$recv($3)._rounded();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["rounded"]=1;
 //>>excludeEnd("ctx");
-$recv($2)._value_($3);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["value:"]=1;
-//>>excludeEnd("ctx");
-$7=$recv(self["@viewModel"])._at_("gY");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["at:"]=2;
-//>>excludeEnd("ctx");
-$11=$recv(event)._accelerationIncludingGravity();
+$7=$recv(event)._accelerationIncludingGravity();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["accelerationIncludingGravity"]=2;
 //>>excludeEnd("ctx");
-$10=$recv($11)._y();
-$9=$recv($10).__star((10));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["*"]=2;
-//>>excludeEnd("ctx");
-$8=$recv($9)._rounded();
+$6=$recv($7)._y();
+$5=$recv($6)._rounded();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["rounded"]=2;
 //>>excludeEnd("ctx");
-$recv($7)._value_($8);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["value:"]=2;
-//>>excludeEnd("ctx");
-$12=$recv(self["@viewModel"])._at_("gZ");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["at:"]=3;
-//>>excludeEnd("ctx");
-$16=$recv(event)._accelerationIncludingGravity();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["accelerationIncludingGravity"]=3;
-//>>excludeEnd("ctx");
-$15=$recv($16)._z();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["z"]=1;
-//>>excludeEnd("ctx");
-$14=$recv($15).__star((10));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["*"]=3;
-//>>excludeEnd("ctx");
-$13=$recv($14)._rounded();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["rounded"]=3;
-//>>excludeEnd("ctx");
-$recv($12)._value_($13);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["value:"]=3;
-//>>excludeEnd("ctx");
-$17=$recv(self["@viewModel"])._at_("tiltLR");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["at:"]=4;
-//>>excludeEnd("ctx");
-$19=$recv(event)._rotationRate();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["rotationRate"]=1;
-//>>excludeEnd("ctx");
-$18=$recv($19)._gamma();
-$recv($17)._value_($18);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["value:"]=4;
-//>>excludeEnd("ctx");
-$20=$recv(self["@viewModel"])._at_("tiltFB");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["at:"]=5;
-//>>excludeEnd("ctx");
-$recv($20)._value_($recv($recv(event)._rotationRate())._beta());
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["value:"]=5;
-//>>excludeEnd("ctx");
-$21=$recv(self["@viewModel"])._at_("gZ");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["at:"]=6;
-//>>excludeEnd("ctx");
-$23=$recv($recv($recv(event)._accelerationIncludingGravity())._z()).__star((10));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["*"]=4;
-//>>excludeEnd("ctx");
-$22=$recv($23)._rounded();
-$recv($21)._value_($22);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["value:"]=6;
-//>>excludeEnd("ctx");
-$24=$recv(self["@viewModel"])._at_("webRotate");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["at:"]=7;
-//>>excludeEnd("ctx");
-$31=$recv(self["@viewModel"])._at_("tiltLR");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["at:"]=8;
-//>>excludeEnd("ctx");
-$30=$recv($31)._value();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["value"]=1;
-//>>excludeEnd("ctx");
-$29=$recv($30)._printString();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["printString"]=1;
-//>>excludeEnd("ctx");
-$28="rotate(".__comma($29);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx[","]=4;
-//>>excludeEnd("ctx");
-$27=$recv($28).__comma("deg) rotate3d(1,0,0, ");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx[","]=3;
-//>>excludeEnd("ctx");
-$35=$recv(self["@viewModel"])._at_("tiltFB");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["at:"]=9;
-//>>excludeEnd("ctx");
-$34=$recv($35)._value();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["value"]=2;
-//>>excludeEnd("ctx");
-$33=$recv($34).__star((-1));
-$32=$recv($33)._printString();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["printString"]=2;
-//>>excludeEnd("ctx");
-$26=$recv($27).__comma($32);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx[","]=2;
-//>>excludeEnd("ctx");
-$25=$recv($26).__comma("deg)");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx[","]=1;
-//>>excludeEnd("ctx");
-$recv($24)._value_($25);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["value:"]=7;
-//>>excludeEnd("ctx");
-$36=$recv(self["@viewModel"])._at_("mozRotate");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["at:"]=10;
-//>>excludeEnd("ctx");
-$41=$recv(self["@viewModel"])._at_("tiltLR");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["at:"]=11;
-//>>excludeEnd("ctx");
-$40=$recv($41)._value();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["value"]=3;
-//>>excludeEnd("ctx");
-$39=$recv($40)._printString();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["printString"]=3;
-//>>excludeEnd("ctx");
-$38="rotate(".__comma($39);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx[","]=6;
-//>>excludeEnd("ctx");
-$37=$recv($38).__comma("deg)");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx[","]=5;
-//>>excludeEnd("ctx");
-$recv($36)._value_($37);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["value:"]=8;
-//>>excludeEnd("ctx");
-$42=$recv(self["@viewModel"])._at_("rotateYX");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["at:"]=12;
-//>>excludeEnd("ctx");
-$50=$recv(self["@viewModel"])._at_("gY");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["at:"]=13;
-//>>excludeEnd("ctx");
-$49=$recv($50)._value();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["value"]=4;
-//>>excludeEnd("ctx");
-$48=$recv($49)._printString();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["printString"]=4;
-//>>excludeEnd("ctx");
-$47="rotateX(".__comma($48);
-$46=$recv($47).__comma("deg)");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx[","]=10;
-//>>excludeEnd("ctx");
-$45=$recv($46).__comma(" rotateY(");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx[","]=9;
-//>>excludeEnd("ctx");
-$44=$recv($45).__comma($recv($recv($recv(self["@viewModel"])._at_("gX"))._value())._printString());
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx[","]=8;
-//>>excludeEnd("ctx");
-$43=$recv($44).__comma("deg)");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx[","]=7;
-//>>excludeEnd("ctx");
-return $recv($42)._value_($43);
+return self._gX_gY_gZ_($2,$5,$recv($recv($recv(event)._accelerationIncludingGravity())._z())._rounded());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({event:event},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -2284,51 +2017,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09\x22(viewModel at: #accX) value: event acceleration x.\x0a\x09\x09(viewModel at: #accY) value: event acceleration y.\x0a\x09\x09(viewModel at: #accZ) value: event acceleration z.\x22\x0a\x09\x09(viewModel at: #gX) value: (event accelerationIncludingGravity x * 10) rounded.\x0a\x09\x09(viewModel at: #gY) value: (event accelerationIncludingGravity y * 10) rounded.\x0a\x09\x09(viewModel at: #gZ) value: (event accelerationIncludingGravity z * 10) rounded.\x0a\x09\x09(viewModel at: #tiltLR) value: event rotationRate gamma.\x0a\x09\x09(viewModel at: #tiltFB) value: event rotationRate beta.\x0a\x09\x09(viewModel at: #gZ) value: (event accelerationIncludingGravity z * 10) rounded.\x0a\x09\x09(viewModel at: #webRotate) value: 'rotate(', (viewModel at: #tiltLR) value printString, 'deg) rotate3d(1,0,0, ', ((viewModel at: #tiltFB) value * -1) printString, 'deg)' .\x0a\x09\x09(viewModel at: #mozRotate) value: 'rotate(', (viewModel at: #tiltLR) value printString, 'deg)' .\x0a\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', ((viewModel at: #gY) value) printString, 'deg)', \x0a\x09\x09' rotateY(', ((viewModel at: #gX) value) printString, 'deg)'\x0a\x09].",
+source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09self \x0a\x09\x09\x09gX: (event accelerationIncludingGravity x rounded)\x0a\x09\x09\x09gY: (event accelerationIncludingGravity y rounded)\x0a\x09\x09\x09gZ: (event accelerationIncludingGravity z rounded)\x09\x09\x0a\x09].",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["value:", "at:", "rounded", "*", "x", "accelerationIncludingGravity", "y", "z", "gamma", "rotationRate", "beta", ",", "printString", "value"]
-}),
-$globals.LindaGyroWorker);
-
-$core.addMethod(
-$core.method({
-selector: "deviceorientationHandler",
-protocol: 'starting',
-fn: function (){
-"use strict";
-
-var self=this;
-function $Transcript(){return $globals.Transcript||(typeof Transcript=="undefined"?nil:Transcript)}
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $2,$1;
-$1=(function(event){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-self._alpha_($recv(event)._alpha());
-self._beta_($recv(event)._beta());
-self._gamma_($recv(event)._gamma());
-$recv($Transcript())._show_($recv(event)._printString());
-$2=$recv($Transcript())._cr();
-return $2;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({event:event},$ctx1,1)});
-//>>excludeEnd("ctx");
-});
-return $1;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"deviceorientationHandler",{},$globals.LindaGyroWorker)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "deviceorientationHandler\x0a\x09^[:event |\x0a\x09\x09self alpha: event alpha.\x0a\x09\x09self beta: event beta.\x0a\x09\x09self gamma: event gamma.\x0a\x09\x09Transcript show: event printString; cr.].",
-referencedClasses: ["Transcript"],
-//>>excludeEnd("ide");
-messageSends: ["alpha:", "alpha", "beta:", "beta", "gamma:", "gamma", "show:", "printString", "cr"]
+messageSends: ["gX:gY:gZ:", "rounded", "x", "accelerationIncludingGravity", "y", "z"]
 }),
 $globals.LindaGyroWorker);
 
@@ -2421,6 +2113,408 @@ source: "doSilkTAG\x0a\x09'#output-list' asSilk LI: 'Silk TAG: added me!'",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["LI:", "asSilk"]
+}),
+$globals.LindaGyroWorker);
+
+$core.addMethod(
+$core.method({
+selector: "gX",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv($recv(self["@viewModel"])._at_("gX"))._value();
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"gX",{},$globals.LindaGyroWorker)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "gX\x0a\x09^(viewModel at: #gX) value",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value", "at:"]
+}),
+$globals.LindaGyroWorker);
+
+$core.addMethod(
+$core.method({
+selector: "gX:",
+protocol: 'accessing',
+fn: function (aValue){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv($recv(self["@viewModel"])._at_("gX"))._value_(aValue);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"gX:",{aValue:aValue},$globals.LindaGyroWorker)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aValue"],
+source: "gX: aValue\x0a\x09(viewModel at: #gX) value: aValue",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value:", "at:"]
+}),
+$globals.LindaGyroWorker);
+
+$core.addMethod(
+$core.method({
+selector: "gX:gY:gZ:",
+protocol: 'starting',
+fn: function (xValue,yValue,zValue){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $3,$4,$2,$1,$6,$5,$8,$7,$9,$15,$14,$13,$12,$11,$10;
+$3=$recv(self._gX()).__tild_eq(xValue);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["~="]=1;
+//>>excludeEnd("ctx");
+$4=$recv(self._gY()).__tild_eq(yValue);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["~="]=2;
+//>>excludeEnd("ctx");
+$2=$recv($3).__and($4);
+$1=$recv($2).__and($recv(self._gZ()).__tild_eq(zValue));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["&"]=1;
+//>>excludeEnd("ctx");
+if($core.assert($1)){
+$6=$recv(xValue)._rounded();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["rounded"]=1;
+//>>excludeEnd("ctx");
+$5=$recv($6).__star((10));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["*"]=1;
+//>>excludeEnd("ctx");
+self._gX_($5);
+$8=$recv(yValue)._rounded();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["rounded"]=2;
+//>>excludeEnd("ctx");
+$7=$recv($8).__star((10));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["*"]=2;
+//>>excludeEnd("ctx");
+self._gY_($7);
+self._gZ_($recv($recv(zValue)._rounded()).__star((10)));
+$9=$recv(self["@viewModel"])._at_("rotateYX");
+$15=$recv(yValue)._printString();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["printString"]=1;
+//>>excludeEnd("ctx");
+$14="rotateX(".__comma($15);
+$13=$recv($14).__comma("deg)");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=4;
+//>>excludeEnd("ctx");
+$12=$recv($13).__comma(" rotateY(");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=3;
+//>>excludeEnd("ctx");
+$11=$recv($12).__comma($recv(xValue)._printString());
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=2;
+//>>excludeEnd("ctx");
+$10=$recv($11).__comma("deg)");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+$recv($9)._value_($10);
+};
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"gX:gY:gZ:",{xValue:xValue,yValue:yValue,zValue:zValue},$globals.LindaGyroWorker)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["xValue", "yValue", "zValue"],
+source: "gX: xValue gY: yValue gZ: zValue\x0a\x09\x0a\x09(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) \x0a\x09\x09ifTrue: [\x0a\x09\x0a\x09\x09\x09self gX: (xValue rounded) * 10.\x0a\x09\x09\x09self gY: (yValue rounded) * 10.\x0a\x09\x09\x09self gZ: (zValue rounded) * 10.\x0a\x0a\x09\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', yValue printString, 'deg)', \x0a\x09\x09\x09\x09' rotateY(', xValue printString, 'deg)'.\x0a\x09\x09]\x0a\x09",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["ifTrue:", "&", "~=", "gX", "gY", "gZ", "gX:", "*", "rounded", "gY:", "gZ:", "value:", "at:", ",", "printString"]
+}),
+$globals.LindaGyroWorker);
+
+$core.addMethod(
+$core.method({
+selector: "gY",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv($recv(self["@viewModel"])._at_("gY"))._value();
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"gY",{},$globals.LindaGyroWorker)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "gY\x0a\x09^(viewModel at: #gY) value",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value", "at:"]
+}),
+$globals.LindaGyroWorker);
+
+$core.addMethod(
+$core.method({
+selector: "gY:",
+protocol: 'accessing',
+fn: function (aValue){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv($recv(self["@viewModel"])._at_("gY"))._value_(aValue);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"gY:",{aValue:aValue},$globals.LindaGyroWorker)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aValue"],
+source: "gY: aValue\x0a\x09(viewModel at: #gY) value: aValue",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value:", "at:"]
+}),
+$globals.LindaGyroWorker);
+
+$core.addMethod(
+$core.method({
+selector: "gZ",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv($recv(self["@viewModel"])._at_("gZ"))._value();
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"gZ",{},$globals.LindaGyroWorker)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "gZ\x0a\x09^(viewModel at: #gZ) value",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value", "at:"]
+}),
+$globals.LindaGyroWorker);
+
+$core.addMethod(
+$core.method({
+selector: "gZ:",
+protocol: 'accessing',
+fn: function (aValue){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv($recv(self["@viewModel"])._at_("gZ"))._value_(aValue);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"gZ:",{aValue:aValue},$globals.LindaGyroWorker)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aValue"],
+source: "gZ: aValue\x0a\x09(viewModel at: #gZ) value: aValue",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value:", "at:"]
+}),
+$globals.LindaGyroWorker);
+
+$core.addMethod(
+$core.method({
+selector: "handleName",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv($recv(self["@viewModel"])._at_("handleName"))._value();
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"handleName",{},$globals.LindaGyroWorker)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "handleName \x0a\x09^(viewModel at: #handleName ) value",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value", "at:"]
+}),
+$globals.LindaGyroWorker);
+
+$core.addMethod(
+$core.method({
+selector: "olddevicemotionHandler",
+protocol: 'starting',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $2,$6,$5,$4,$3,$7,$11,$10,$9,$8,$12,$13,$19,$18,$17,$16,$15,$14,$1;
+$1=(function(event){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+$2=$recv(self["@viewModel"])._at_("gX");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["at:"]=1;
+//>>excludeEnd("ctx");
+$6=$recv(event)._accelerationIncludingGravity();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["accelerationIncludingGravity"]=1;
+//>>excludeEnd("ctx");
+$5=$recv($6)._x();
+$4=$recv($5)._rounded();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["rounded"]=1;
+//>>excludeEnd("ctx");
+$3=$recv($4).__star((10));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["*"]=1;
+//>>excludeEnd("ctx");
+$recv($2)._value_($3);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["value:"]=1;
+//>>excludeEnd("ctx");
+$7=$recv(self["@viewModel"])._at_("gY");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["at:"]=2;
+//>>excludeEnd("ctx");
+$11=$recv(event)._accelerationIncludingGravity();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["accelerationIncludingGravity"]=2;
+//>>excludeEnd("ctx");
+$10=$recv($11)._y();
+$9=$recv($10)._rounded();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["rounded"]=2;
+//>>excludeEnd("ctx");
+$8=$recv($9).__star((10));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["*"]=2;
+//>>excludeEnd("ctx");
+$recv($7)._value_($8);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["value:"]=2;
+//>>excludeEnd("ctx");
+$12=$recv(self["@viewModel"])._at_("gZ");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["at:"]=3;
+//>>excludeEnd("ctx");
+$recv($12)._value_($recv($recv($recv($recv(event)._accelerationIncludingGravity())._z())._rounded()).__star((10)));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["value:"]=3;
+//>>excludeEnd("ctx");
+$13=$recv(self["@viewModel"])._at_("rotateYX");
+$19=$recv(self._gY())._printString();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["printString"]=1;
+//>>excludeEnd("ctx");
+$18="rotateX(".__comma($19);
+$17=$recv($18).__comma("deg)");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx[","]=4;
+//>>excludeEnd("ctx");
+$16=$recv($17).__comma(" rotateY(");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx[","]=3;
+//>>excludeEnd("ctx");
+$15=$recv($16).__comma($recv(self._gX())._printString());
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx[","]=2;
+//>>excludeEnd("ctx");
+$14=$recv($15).__comma("deg)");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+return $recv($13)._value_($14);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({event:event},$ctx1,1)});
+//>>excludeEnd("ctx");
+});
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"olddevicemotionHandler",{},$globals.LindaGyroWorker)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "olddevicemotionHandler\x0a\x09^[:event |\x0a\x09\x09\x22(viewModel at: #accX) value: event acceleration x.\x0a\x09\x09(viewModel at: #accY) value: event acceleration y.\x0a\x09\x09(viewModel at: #accZ) value: event acceleration z.\x22\x0a\x09\x09\x0a\x09\x09(viewModel at: #gX) value: (event accelerationIncludingGravity x rounded) * 10.\x0a\x09\x09(viewModel at: #gY) value: (event accelerationIncludingGravity y rounded) * 10.\x0a\x09\x09(viewModel at: #gZ) value: (event accelerationIncludingGravity z rounded) * 10.\x0a\x09\x09\x0a\x09\x09\x22\x0a\x09\x09(viewModel at: #tiltLR) value: event rotationRate gamma rounded.\x0a\x09\x09(viewModel at: #tiltFB) value: event rotationRate beta rounded.\x0a\x09\x09(viewModel at: #webRotate) value: 'rotate(', (viewModel at: #tiltLR) value printString, 'deg) rotate3d(1,0,0, ', ((viewModel at: #tiltFB) value * -1) printString, 'deg)' .\x0a\x09\x09(viewModel at: #mozRotate) value: 'rotate(', (viewModel at: #tiltLR) value printString, 'deg)' .\x0a\x09\x09\x22\x0a\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', (self gY) printString, 'deg)', \x0a\x09\x09' rotateY(', (self gX) printString, 'deg)'.\x0a\x09\x09\x0a\x09\x09\x0a\x09].",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value:", "at:", "*", "rounded", "x", "accelerationIncludingGravity", "y", "z", ",", "printString", "gY", "gX"]
+}),
+$globals.LindaGyroWorker);
+
+$core.addMethod(
+$core.method({
+selector: "setupHandle",
+protocol: 'action',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(window)._addEventListener_with_("devicemotion",self._devicemotionHandler());
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"setupHandle",{},$globals.LindaGyroWorker)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "setupHandle\x0a\x09window addEventListener: #devicemotion with: self devicemotionHandler.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["addEventListener:with:", "devicemotionHandler"]
 }),
 $globals.LindaGyroWorker);
 
