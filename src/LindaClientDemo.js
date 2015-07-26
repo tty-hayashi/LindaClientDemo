@@ -823,7 +823,7 @@ $1=$recv(ko)._observable_((0));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["observable:"]=1;
 //>>excludeEnd("ctx");
-self["@viewModel"]=$globals.HashedCollection._newFromPairs_(["tickets",$1,"serverUrl",$recv(ko)._observable_("http://127.0.0.1:8931")]);
+self["@viewModel"]=$globals.HashedCollection._newFromPairs_(["tickets",$1,"serverUrl",$recv(ko)._observable_("https://node-linda-ststudy.herokuapp.com")]);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"setupViewModel",{},$globals.LindaClientApp)});
@@ -831,7 +831,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "setupViewModel\x0a\x0a\x09viewModel := #{\x0a\x09\x09#tickets -> (ko observable: 0) .\x0a\x09\x09#serverUrl -> (ko observable: 'http://127.0.0.1:8931') \x0a\x09}.",
+source: "setupViewModel\x0a\x0a\x09viewModel := #{\x0a\x09\x09#tickets -> (ko observable: 0) .\x0a\x09\x09#serverUrl -> (ko observable: 'https://node-linda-ststudy.herokuapp.com') \x0a\x09}.",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["observable:"]
