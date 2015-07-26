@@ -137,11 +137,15 @@ data: anObject
 !
 
 expireAt
-	^ self proxy at: 'expire_at'
+	^ self proxy at: 'expire_at' ifAbsent: [nil]
+!
+
+from 
+	^self proxy at: 'from' ifAbsent: [nil]
 !
 
 fromAddress
-	^self proxy at: 'from'
+	^self proxy at: 'from' ifAbsent: [nil]
 !
 
 keys
@@ -243,7 +247,7 @@ take: aTupleHashedCollection callback: aBlockClosure
 watch: aTupleHashedCollection callback: aBlockClosure
 	"aBlockClosure <[:err :tuple | ]>"
 	
-	^self proxy watch: aTupleHashedCollection with: aBlockClosure
+	^self proxy watch: aTupleHashedCollection asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]
 !
 
 write: aTupleHashedCollection 

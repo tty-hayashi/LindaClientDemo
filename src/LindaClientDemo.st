@@ -139,7 +139,7 @@ tupleSpaceName
 ! !
 
 Object subclass: #LindaClientApp
-	instanceVariableNames: 'serverUrl tickets lindaClient viewModel'
+	instanceVariableNames: 'lindaClient viewModel watchId'
 	package: 'LindaClientDemo'!
 
 !LindaClientApp methodsFor: 'accessing'!
@@ -555,13 +555,26 @@ start
 ! !
 
 LindaClientApp subclass: #LindaGyroMaster
-	instanceVariableNames: ''
+	instanceVariableNames: 'list workers listModel'
 	package: 'LindaClientDemo'!
 
 !LindaGyroMaster methodsFor: 'accessing'!
 
 tupleSpace
 	^self lindaClient tupleSpace: GyroTuple tupleSpaceName
+!
+
+workerAt: aKey
+	^self workers at: aKey
+!
+
+workerAt: aKey put: aWorker
+	self workers at: aKey put: aWorker
+!
+
+workers
+	workers ifNil: [workers := #{}].
+	^workers
 ! !
 
 !LindaGyroMaster methodsFor: 'action'!
@@ -569,9 +582,16 @@ tupleSpace
 startDemo
 	| tuple |
 	super startDemo.
+	self inspect.
 	tuple := GyroTuple new.
-	self tupleSpace watch: tuple callback: [:err :t |
-		self doJQueryPrepend: t asJSON printString.
+	watchId ifNotNil: [self tupleSpace cancel: watchId].
+	list := OrderedCollection new.
+	watchId := self tupleSpace watch: tuple callback: [:err :t |
+		list add: t.
+		self workerAt: t fromAddress put: t.
+		(self viewModel at: #workers) value: (self workers values collect: [:e | e data]).
+
+		"self doJQueryPrepend: t asJSON printString."
 	].
 ! !
 
@@ -579,6 +599,13 @@ startDemo
 
 augmentPage
 	super augmentPage.
+!
+
+setupViewModel
+	super setupViewModel.
+	viewModel addAll: #{
+		#workers -> (ko observableArray: #())
+	}.
 ! !
 
 LindaClientApp subclass: #LindaGyroWorker

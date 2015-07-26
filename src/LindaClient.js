@@ -605,7 +605,10 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv(self._proxy())._at_("expire_at");
+$1=$recv(self._proxy())._at_ifAbsent_("expire_at",(function(){
+return nil;
+
+}));
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"expireAt",{},$globals.Tuple)});
@@ -613,10 +616,40 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "expireAt\x0a\x09^ self proxy at: 'expire_at'",
+source: "expireAt\x0a\x09^ self proxy at: 'expire_at' ifAbsent: [nil]",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["at:", "proxy"]
+messageSends: ["at:ifAbsent:", "proxy"]
+}),
+$globals.Tuple);
+
+$core.addMethod(
+$core.method({
+selector: "from",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._proxy())._at_ifAbsent_("from",(function(){
+return nil;
+
+}));
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"from",{},$globals.Tuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "from \x0a\x09^self proxy at: 'from' ifAbsent: [nil]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:ifAbsent:", "proxy"]
 }),
 $globals.Tuple);
 
@@ -632,7 +665,10 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv(self._proxy())._at_("from");
+$1=$recv(self._proxy())._at_ifAbsent_("from",(function(){
+return nil;
+
+}));
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"fromAddress",{},$globals.Tuple)});
@@ -640,10 +676,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "fromAddress\x0a\x09^self proxy at: 'from'",
+source: "fromAddress\x0a\x09^self proxy at: 'from' ifAbsent: [nil]",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["at:", "proxy"]
+messageSends: ["at:ifAbsent:", "proxy"]
 }),
 $globals.Tuple);
 
@@ -1115,11 +1151,20 @@ fn: function (aTupleHashedCollection,aBlockClosure){
 "use strict";
 
 var self=this;
+function $Tuple(){return $globals.Tuple||(typeof Tuple=="undefined"?nil:Tuple)}
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv(self._proxy())._watch_with_(aTupleHashedCollection,aBlockClosure);
+$1=$recv(self._proxy())._watch_with_($recv(aTupleHashedCollection)._asJSON(),(function(e,t){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(aBlockClosure)._value_value_(e,$recv($Tuple())._fromJSON_(t));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({e:e,t:t},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"watch:callback:",{aTupleHashedCollection:aTupleHashedCollection,aBlockClosure:aBlockClosure},$globals.TupleSpace)});
@@ -1127,10 +1172,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aTupleHashedCollection", "aBlockClosure"],
-source: "watch: aTupleHashedCollection callback: aBlockClosure\x0a\x09\x22aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09^self proxy watch: aTupleHashedCollection with: aBlockClosure",
-referencedClasses: [],
+source: "watch: aTupleHashedCollection callback: aBlockClosure\x0a\x09\x22aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09^self proxy watch: aTupleHashedCollection asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]",
+referencedClasses: ["Tuple"],
 //>>excludeEnd("ide");
-messageSends: ["watch:with:", "proxy"]
+messageSends: ["watch:with:", "proxy", "asJSON", "value:value:", "fromJSON:"]
 }),
 $globals.TupleSpace);
 
