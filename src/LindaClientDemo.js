@@ -2,7 +2,7 @@ define("amber-lindaclient/LindaClientDemo", ["amber/boot"
 //>>excludeStart("imports", pragmas.excludeImports);
 , "knockout", "linda-client", "socket.io", "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"
 //>>excludeEnd("imports");
-, "amber_core/Kernel-Objects"], function($boot
+, "amber-lindaclient/LindaClient", "amber_core/Kernel-Objects"], function($boot
 //>>excludeStart("imports", pragmas.excludeImports);
 ,ko,linda,socketIo
 //>>excludeEnd("imports");
@@ -12,6 +12,551 @@ $core.addPackage('LindaClientDemo');
 $core.packages["LindaClientDemo"].innerEval = function (expr) { return eval(expr); };
 $core.packages["LindaClientDemo"].imports = ["ko=knockout", "linda=linda-client", "socketIo=socket.io", "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"];
 $core.packages["LindaClientDemo"].transport = {"type":"amd","amdNamespace":"amber-lindaclient"};
+
+$core.addClass('FibTuple', $globals.Tuple, [], 'LindaClientDemo');
+$core.addMethod(
+$core.method({
+selector: "answer",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._data())._at_($recv(self._class())._answerKey());
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"answer",{},$globals.FibTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "answer\x0a\x0a\x09^self data at: self class answerKey",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:", "data", "answerKey", "class"]
+}),
+$globals.FibTuple);
+
+$core.addMethod(
+$core.method({
+selector: "answer:",
+protocol: 'accessing',
+fn: function (anInteger){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self._data())._at_put_($recv(self._class())._answerKey(),anInteger);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"answer:",{anInteger:anInteger},$globals.FibTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anInteger"],
+source: "answer: anInteger\x0a\x0a\x09self data at: self class answerKey put: anInteger",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:put:", "data", "answerKey", "class"]
+}),
+$globals.FibTuple);
+
+$core.addMethod(
+$core.method({
+selector: "n",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._data())._at_($recv(self._class())._nKey());
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"n",{},$globals.FibTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "n\x0a\x0a\x09^self data at: self class nKey",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:", "data", "nKey", "class"]
+}),
+$globals.FibTuple);
+
+$core.addMethod(
+$core.method({
+selector: "n:",
+protocol: 'accessing',
+fn: function (anIndex){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._data())._at_put_($recv(self._class())._nKey(),anIndex);
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"n:",{anIndex:anIndex},$globals.FibTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anIndex"],
+source: "n: anIndex\x0a\x0a\x09^self data at: self class nKey put: anIndex",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:put:", "data", "nKey", "class"]
+}),
+$globals.FibTuple);
+
+
+$core.addMethod(
+$core.method({
+selector: "answerKey",
+protocol: 'accessor ',
+fn: function (){
+"use strict";
+
+var self=this;
+return "answer";
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "answerKey\x0a\x09^'answer'.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.FibTuple.klass);
+
+$core.addMethod(
+$core.method({
+selector: "fib",
+protocol: 'as yet unclassified',
+fn: function (){
+"use strict";
+
+var self=this;
+var tuple;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+tuple=self._new();
+$recv(tuple)._type_(self._fibTypeKey());
+$1=tuple;
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"fib",{tuple:tuple},$globals.FibTuple.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "fib\x0a\x09| tuple |\x0a\x09tuple := self new.\x0a\x09tuple type: self fibTypeKey.\x0a\x09^tuple",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["new", "type:", "fibTypeKey"]
+}),
+$globals.FibTuple.klass);
+
+$core.addMethod(
+$core.method({
+selector: "fibTypeKey",
+protocol: 'accessor ',
+fn: function (){
+"use strict";
+
+var self=this;
+return "fib";
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "fibTypeKey\x0a\x09^'fib'.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.FibTuple.klass);
+
+$core.addMethod(
+$core.method({
+selector: "nKey",
+protocol: 'accessor ',
+fn: function (){
+"use strict";
+
+var self=this;
+return "n";
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "nKey\x0a\x09^'n'.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.FibTuple.klass);
+
+$core.addMethod(
+$core.method({
+selector: "result",
+protocol: 'as yet unclassified',
+fn: function (){
+"use strict";
+
+var self=this;
+var tuple;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+tuple=self._new();
+$recv(tuple)._type_(self._resultTypeKey());
+$1=tuple;
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"result",{tuple:tuple},$globals.FibTuple.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "result\x0a\x09| tuple |\x0a\x09tuple := self new.\x0a\x09tuple type: self resultTypeKey.\x0a\x09^tuple",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["new", "type:", "resultTypeKey"]
+}),
+$globals.FibTuple.klass);
+
+$core.addMethod(
+$core.method({
+selector: "resultTypeKey",
+protocol: 'accessor ',
+fn: function (){
+"use strict";
+
+var self=this;
+return "fib-result";
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "resultTypeKey\x0a\x09^'fib-result'.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.FibTuple.klass);
+
+$core.addMethod(
+$core.method({
+selector: "tupleSpaceName",
+protocol: 'tuple space',
+fn: function (){
+"use strict";
+
+var self=this;
+return "fibSpace";
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "tupleSpaceName\x0a\x0a\x09^'fibSpace'",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.FibTuple.klass);
+
+
+$core.addClass('GyroTuple', $globals.Tuple, [], 'LindaClientDemo');
+$core.addMethod(
+$core.method({
+selector: "gX",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._data())._at_($recv(self._class())._gXKey());
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"gX",{},$globals.GyroTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "gX\x0a\x0a\x09^self data at: self class gXKey",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:", "data", "gXKey", "class"]
+}),
+$globals.GyroTuple);
+
+$core.addMethod(
+$core.method({
+selector: "gX:",
+protocol: 'accessing',
+fn: function (aValue){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self._data())._at_put_($recv(self._class())._gXKey(),aValue);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"gX:",{aValue:aValue},$globals.GyroTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aValue"],
+source: "gX: aValue\x0a\x0a\x09self data at: self class gXKey put: aValue",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:put:", "data", "gXKey", "class"]
+}),
+$globals.GyroTuple);
+
+$core.addMethod(
+$core.method({
+selector: "gY",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._data())._at_($recv(self._class())._gYKey());
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"gY",{},$globals.GyroTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "gY\x0a\x0a\x09^self data at: self class gYKey",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:", "data", "gYKey", "class"]
+}),
+$globals.GyroTuple);
+
+$core.addMethod(
+$core.method({
+selector: "gY:",
+protocol: 'accessing',
+fn: function (aValue){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self._data())._at_put_($recv(self._class())._gYKey(),aValue);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"gY:",{aValue:aValue},$globals.GyroTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aValue"],
+source: "gY: aValue\x0a\x0a\x09self data at: self class gYKey put: aValue",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:put:", "data", "gYKey", "class"]
+}),
+$globals.GyroTuple);
+
+$core.addMethod(
+$core.method({
+selector: "gZ",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._data())._at_($recv(self._class())._gZKey());
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"gZ",{},$globals.GyroTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "gZ\x0a\x0a\x09^self data at: self class gZKey",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:", "data", "gZKey", "class"]
+}),
+$globals.GyroTuple);
+
+$core.addMethod(
+$core.method({
+selector: "gZ:",
+protocol: 'accessing',
+fn: function (aValue){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self._data())._at_put_($recv(self._class())._gZKey(),aValue);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"gZ:",{aValue:aValue},$globals.GyroTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aValue"],
+source: "gZ: aValue\x0a\x0a\x09self data at: self class gZKey put: aValue",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:put:", "data", "gZKey", "class"]
+}),
+$globals.GyroTuple);
+
+$core.addMethod(
+$core.method({
+selector: "handleName",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._data())._at_($recv(self._class())._handleNameKey());
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"handleName",{},$globals.GyroTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "handleName\x0a\x0a\x09^self data at: self class handleNameKey",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:", "data", "handleNameKey", "class"]
+}),
+$globals.GyroTuple);
+
+$core.addMethod(
+$core.method({
+selector: "handleName:",
+protocol: 'accessing',
+fn: function (aString){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self._data())._at_put_($recv(self._class())._handleNameKey(),aString);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"handleName:",{aString:aString},$globals.GyroTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "handleName: aString\x0a\x0a\x09self data at: self class handleNameKey put: aString",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:put:", "data", "handleNameKey", "class"]
+}),
+$globals.GyroTuple);
+
+
+$core.addMethod(
+$core.method({
+selector: "gXKey",
+protocol: 'accessor key',
+fn: function (){
+"use strict";
+
+var self=this;
+return "gX";
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "gXKey\x0a\x09^'gX'.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.GyroTuple.klass);
+
+$core.addMethod(
+$core.method({
+selector: "handleNameKey",
+protocol: 'accessor key',
+fn: function (){
+"use strict";
+
+var self=this;
+return "handleName";
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "handleNameKey\x0a\x09^'handleName'.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.GyroTuple.klass);
+
+$core.addMethod(
+$core.method({
+selector: "tupleSpaceName",
+protocol: 'tuple space',
+fn: function (){
+"use strict";
+
+var self=this;
+return "gyroSpace";
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "tupleSpaceName\x0a\x0a\x09^'gyroSpace'",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.GyroTuple.klass);
+
 
 $core.addClass('LindaClientApp', $globals.Object, ['serverUrl', 'tickets', 'lindaClient', 'viewModel'], 'LindaClientDemo');
 $core.addMethod(
@@ -25,42 +570,8 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1;
-$1="#amber-with"._asJQuery();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["asJQuery"]=1;
-//>>excludeEnd("ctx");
-$recv($1)._click_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._doAmberWith();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["click:"]=1;
-//>>excludeEnd("ctx");
-$recv("#silk-tag"._asSilk())._on_bind_("click",(function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._doSilkTAG();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
-//>>excludeEnd("ctx");
-}));
-$recv("#jquery-append"._asJQuery())._click_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._doJQueryAppend();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,3)});
-//>>excludeEnd("ctx");
-}));
-$recv(window)._addEventListener_with_("deviceorientation",self._deviceorientationHandler());
+self._setupViewModel();
+$recv(ko)._applyBindings_(self["@viewModel"]);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"augmentPage",{},$globals.LindaClientApp)});
@@ -68,10 +579,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x0a\x09window addEventListener: #deviceorientation with: self deviceorientationHandler",
+source: "augmentPage\x0a\x09\x0a\x09self setupViewModel.\x0a\x09ko applyBindings: viewModel.",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["click:", "asJQuery", "doAmberWith", "on:bind:", "asSilk", "doSilkTAG", "doJQueryAppend", "addEventListener:with:", "deviceorientationHandler"]
+messageSends: ["setupViewModel", "applyBindings:"]
 }),
 $globals.LindaClientApp);
 
@@ -244,23 +755,113 @@ $globals.LindaClientApp);
 
 $core.addMethod(
 $core.method({
+selector: "serverUrl",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv($recv(self["@viewModel"])._at_("serverUrl"))._value();
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"serverUrl",{},$globals.LindaClientApp)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "serverUrl\x0a\x09^ (viewModel at: #serverUrl) value",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value", "at:"]
+}),
+$globals.LindaClientApp);
+
+$core.addMethod(
+$core.method({
+selector: "setupLindaClient",
+protocol: 'starting',
+fn: function (){
+"use strict";
+
+var self=this;
+function $LindaClient(){return $globals.LindaClient||(typeof LindaClient=="undefined"?nil:LindaClient)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self["@lindaClient"]=$recv($LindaClient())._serverUrl_(self._serverUrl());
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"setupLindaClient",{},$globals.LindaClientApp)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "setupLindaClient\x0a\x0a\x09lindaClient := LindaClient serverUrl: self serverUrl",
+referencedClasses: ["LindaClient"],
+//>>excludeEnd("ide");
+messageSends: ["serverUrl:", "serverUrl"]
+}),
+$globals.LindaClientApp);
+
+$core.addMethod(
+$core.method({
+selector: "setupViewModel",
+protocol: 'starting',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(ko)._observable_((0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["observable:"]=1;
+//>>excludeEnd("ctx");
+self["@viewModel"]=$globals.HashedCollection._newFromPairs_(["tickets",$1,"serverUrl",$recv(ko)._observable_("http://127.0.0.1:8931")]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"setupViewModel",{},$globals.LindaClientApp)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "setupViewModel\x0a\x0a\x09viewModel := #{\x0a\x09\x09#tickets -> (ko observable: 0) .\x0a\x09\x09#serverUrl -> (ko observable: 'http://127.0.0.1:8931') \x0a\x09}.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["observable:"]
+}),
+$globals.LindaClientApp);
+
+$core.addMethod(
+$core.method({
 selector: "tickets",
 protocol: 'accessing',
 fn: function (){
 "use strict";
 
 var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
 var $1;
-$1=self["@tickets"];
+$1=$recv($recv(self["@viewModel"])._at_("tickets"))._value();
 return $1;
-
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"tickets",{},$globals.LindaClientApp)});
+//>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "tickets\x0a\x09^ tickets",
+source: "tickets\x0a\x09^ (viewModel at: #tickets) value",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: []
+messageSends: ["value", "at:"]
 }),
 $globals.LindaClientApp);
 
@@ -268,20 +869,25 @@ $core.addMethod(
 $core.method({
 selector: "tickets:",
 protocol: 'accessing',
-fn: function (anObject){
+fn: function (anInteger){
 "use strict";
 
 var self=this;
-self["@tickets"]=anObject;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv($recv(self["@viewModel"])._at_("tickets"))._value_(anInteger);
 return self;
-
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"tickets:",{anInteger:anInteger},$globals.LindaClientApp)});
+//>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["anObject"],
-source: "tickets: anObject\x0a\x09tickets := anObject",
+args: ["anInteger"],
+source: "tickets: anInteger\x0a\x09(viewModel at: #tickets) value: anInteger",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: []
+messageSends: ["value:", "at:"]
 }),
 $globals.LindaClientApp);
 
@@ -1850,6 +2456,39 @@ $globals.LindaFibWorker.klass);
 
 
 $core.addClass('LindaGyroMaster', $globals.LindaClientApp, [], 'LindaClientDemo');
+$core.addMethod(
+$core.method({
+selector: "augmentPage",
+protocol: 'as yet unclassified',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true, 
+//>>excludeEnd("ctx");
+$globals.LindaGyroMaster.superclass.fn.prototype._augmentPage.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"augmentPage",{},$globals.LindaGyroMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "augmentPage\x0a\x09super augmentPage.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["augmentPage"]
+}),
+$globals.LindaGyroMaster);
+
 
 
 $core.addClass('LindaGyroWorker', $globals.LindaClientApp, [], 'LindaClientDemo');
@@ -1864,98 +2503,23 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$2,$3,$4,$5,$6,$8,$14,$13,$12,$11,$10,$9,$7;
-$1="#amber-with"._asJQuery();
+(
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["asJQuery"]=1;
+$ctx1.supercall = true, 
 //>>excludeEnd("ctx");
-$recv($1)._click_((function(){
+$globals.LindaGyroWorker.superclass.fn.prototype._augmentPage.apply($recv(self), []));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._doAmberWith();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["click:"]=1;
-//>>excludeEnd("ctx");
-$recv("#silk-tag"._asSilk())._on_bind_("click",(function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._doSilkTAG();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
-//>>excludeEnd("ctx");
-}));
-$2="#jquery-append"._asJQuery();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["asJQuery"]=2;
-//>>excludeEnd("ctx");
-$recv($2)._click_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._doJQueryAppend();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,3)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["click:"]=2;
-//>>excludeEnd("ctx");
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
 $recv("#start"._asJQuery())._click_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
 return self._setupHandle();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,4)});
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
 }));
-$3=$recv(ko)._observable_("handle name");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["observable:"]=1;
-//>>excludeEnd("ctx");
-$4=$recv(ko)._observable_((0));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["observable:"]=2;
-//>>excludeEnd("ctx");
-$5=$recv(ko)._observable_((0));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["observable:"]=3;
-//>>excludeEnd("ctx");
-$6=$recv(ko)._observable_((0));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["observable:"]=4;
-//>>excludeEnd("ctx");
-$8=ko;
-$14=(30)._printString();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["printString"]=1;
-//>>excludeEnd("ctx");
-$13="rotateX(".__comma($14);
-$12=$recv($13).__comma("deg)");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=4;
-//>>excludeEnd("ctx");
-$11=$recv($12).__comma(" rotateY(");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=3;
-//>>excludeEnd("ctx");
-$10=$recv($11).__comma((30)._printString());
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=2;
-//>>excludeEnd("ctx");
-$9=$recv($10).__comma("deg)");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=1;
-//>>excludeEnd("ctx");
-$7=$recv($8)._observable_($9);
-self["@viewModel"]=$globals.HashedCollection._newFromPairs_(["handleName",$3,"gX",$4,"gY",$5,"gZ",$6,"rotateYX",$7]);
-$recv(ko)._applyBindings_(self["@viewModel"]);
 $recv(window)._addEventListener_with_("devicemotion",self._devicemotionHandler());
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1964,10 +2528,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x0a\x09'#start' asJQuery click: [ self setupHandle ].\x0a\x0a\x09viewModel := #{\x0a\x09\x09#handleName -> (ko observable: 'handle name') .\x0a\x09\x09#gX -> (ko observable: 0) .\x0a\x09\x09#gY -> (ko observable: 0) .\x0a\x09\x09#gZ -> (ko observable: 0) .\x0a\x09\x09\x0a\x09\x09\x22\x0a\x09\x09#tiltLR -> (ko observable: 0).\x0a\x09\x09#tiltFB -> (ko observable: 0).\x0a\x09\x09#webRotate -> (ko observable: 'rotate(', (30) printString, 'deg) rotate3d(1,0,0, ', ((30) * -1) printString, 'deg)').\x0a\x09\x09#mozRotate -> (ko observable: 'rotate(', (30) printString, 'deg)').\x0a\x09\x09\x22\x0a\x09\x09\x0a\x09\x09#rotateYX -> (ko observable: \x0a\x09\x09'rotateX(', 30 printString, 'deg)', \x0a\x09\x09' rotateY(', 30 printString, 'deg)')\x0a\x09}.\x0a\x09ko applyBindings: viewModel.\x0a\x09window addEventListener: #devicemotion with: self devicemotionHandler.\x0a\x09\x0a\x09",
+source: "augmentPage\x0a\x0a\x09super augmentPage.\x0a\x0a\x09'#start' asJQuery click: [ self setupHandle ].\x0a\x0a\x09window addEventListener: #devicemotion with: self devicemotionHandler.\x0a\x09\x0a\x09",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["click:", "asJQuery", "doAmberWith", "on:bind:", "asSilk", "doSilkTAG", "doJQueryAppend", "setupHandle", "observable:", ",", "printString", "applyBindings:", "addEventListener:with:", "devicemotionHandler"]
+messageSends: ["augmentPage", "click:", "asJQuery", "setupHandle", "addEventListener:with:", "devicemotionHandler"]
 }),
 $globals.LindaGyroWorker);
 
@@ -2172,83 +2736,111 @@ $globals.LindaGyroWorker);
 $core.addMethod(
 $core.method({
 selector: "gX:gY:gZ:",
-protocol: 'starting',
+protocol: 'updating',
 fn: function (xValue,yValue,zValue){
 "use strict";
 
 var self=this;
+var tuple;
+function $GyroTupe(){return $globals.GyroTupe||(typeof GyroTupe=="undefined"?nil:GyroTupe)}
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $3,$4,$2,$1,$6,$5,$8,$7,$9,$15,$14,$13,$12,$11,$10;
-$3=$recv(self._gX()).__tild_eq(xValue);
+var $4,$3,$6,$5,$2,$8,$7,$1,$10,$9,$12,$11,$13,$19,$18,$17,$16,$15,$14;
+$4=self._gX();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["gX"]=1;
+//>>excludeEnd("ctx");
+$3=$recv($4).__tild_eq(xValue);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["~="]=1;
 //>>excludeEnd("ctx");
-$4=$recv(self._gY()).__tild_eq(yValue);
+$6=self._gY();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["gY"]=1;
+//>>excludeEnd("ctx");
+$5=$recv($6).__tild_eq(yValue);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["~="]=2;
 //>>excludeEnd("ctx");
-$2=$recv($3).__and($4);
-$1=$recv($2).__and($recv(self._gZ()).__tild_eq(zValue));
+$2=$recv($3).__and($5);
+$8=self._gZ();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["gZ"]=1;
+//>>excludeEnd("ctx");
+$7=$recv($8).__tild_eq(zValue);
+$1=$recv($2).__and($7);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["&"]=1;
 //>>excludeEnd("ctx");
 if($core.assert($1)){
-$6=$recv(xValue)._rounded();
+$10=$recv(xValue)._rounded();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["rounded"]=1;
 //>>excludeEnd("ctx");
-$5=$recv($6).__star((10));
+$9=$recv($10).__star((10));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["*"]=1;
 //>>excludeEnd("ctx");
-self._gX_($5);
-$8=$recv(yValue)._rounded();
+self._gX_($9);
+$12=$recv(yValue)._rounded();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["rounded"]=2;
 //>>excludeEnd("ctx");
-$7=$recv($8).__star((10));
+$11=$recv($12).__star((10));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["*"]=2;
 //>>excludeEnd("ctx");
-self._gY_($7);
+self._gY_($11);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["gY:"]=1;
+//>>excludeEnd("ctx");
 self._gZ_($recv($recv(zValue)._rounded()).__star((10)));
-$9=$recv(self["@viewModel"])._at_("rotateYX");
-$15=$recv(yValue)._printString();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["gZ:"]=1;
+//>>excludeEnd("ctx");
+$13=$recv(self["@viewModel"])._at_("rotateYX");
+$19=$recv(yValue)._printString();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["printString"]=1;
 //>>excludeEnd("ctx");
-$14="rotateX(".__comma($15);
-$13=$recv($14).__comma("deg)");
+$18="rotateX(".__comma($19);
+$17=$recv($18).__comma("deg)");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=4;
 //>>excludeEnd("ctx");
-$12=$recv($13).__comma(" rotateY(");
+$16=$recv($17).__comma(" rotateY(");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=3;
 //>>excludeEnd("ctx");
-$11=$recv($12).__comma($recv(xValue)._printString());
+$15=$recv($16).__comma($recv(xValue)._printString());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=2;
 //>>excludeEnd("ctx");
-$10=$recv($11).__comma("deg)");
+$14=$recv($15).__comma("deg)");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
-$recv($9)._value_($10);
+$recv($13)._value_($14);
+tuple=$recv($GyroTupe())._new();
+tuple;
+$recv(tuple)._handleName_(self._handleName());
+$recv(tuple)._gx_(self._gX());
+$recv(tuple)._gY_(self._gY());
+$recv(tuple)._gZ_(self._gZ());
+$recv(self._tupleSpace())._write_(tuple);
 };
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"gX:gY:gZ:",{xValue:xValue,yValue:yValue,zValue:zValue},$globals.LindaGyroWorker)});
+}, function($ctx1) {$ctx1.fill(self,"gX:gY:gZ:",{xValue:xValue,yValue:yValue,zValue:zValue,tuple:tuple},$globals.LindaGyroWorker)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["xValue", "yValue", "zValue"],
-source: "gX: xValue gY: yValue gZ: zValue\x0a\x09\x0a\x09(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) \x0a\x09\x09ifTrue: [\x0a\x09\x0a\x09\x09\x09self gX: (xValue rounded) * 10.\x0a\x09\x09\x09self gY: (yValue rounded) * 10.\x0a\x09\x09\x09self gZ: (zValue rounded) * 10.\x0a\x0a\x09\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', yValue printString, 'deg)', \x0a\x09\x09\x09\x09' rotateY(', xValue printString, 'deg)'.\x0a\x09\x09]\x0a\x09",
-referencedClasses: [],
+source: "gX: xValue gY: yValue gZ: zValue\x0a\x09| tuple |\x0a\x09(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) \x0a\x09\x09ifTrue: [\x0a\x09\x0a\x09\x09\x09self gX: (xValue rounded) * 10.\x0a\x09\x09\x09self gY: (yValue rounded) * 10.\x0a\x09\x09\x09self gZ: (zValue rounded) * 10.\x0a\x0a\x09\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', yValue printString, 'deg)', \x0a\x09\x09\x09\x09' rotateY(', xValue printString, 'deg)'.\x0a\x09\x09\x09tuple := GyroTupe new.\x0a\x09\x09\x09tuple handleName: self handleName.\x0a\x09\x09\x09tuple gx: self gX.\x0a\x09\x09\x09tuple gY: self gY.\x0a\x09\x09\x09tuple gZ: self gZ.\x0a\x09\x09\x09self tupleSpace write: tuple.\x0a\x09\x09]\x0a\x09",
+referencedClasses: ["GyroTupe"],
 //>>excludeEnd("ide");
-messageSends: ["ifTrue:", "&", "~=", "gX", "gY", "gZ", "gX:", "*", "rounded", "gY:", "gZ:", "value:", "at:", ",", "printString"]
+messageSends: ["ifTrue:", "&", "~=", "gX", "gY", "gZ", "gX:", "*", "rounded", "gY:", "gZ:", "value:", "at:", ",", "printString", "new", "handleName:", "handleName", "gx:", "write:", "tupleSpace"]
 }),
 $globals.LindaGyroWorker);
 
@@ -2518,10 +3110,9 @@ messageSends: ["addEventListener:with:", "devicemotionHandler"]
 }),
 $globals.LindaGyroWorker);
 
-
 $core.addMethod(
 $core.method({
-selector: "start",
+selector: "setupViewModel",
 protocol: 'starting',
 fn: function (){
 "use strict";
@@ -2530,19 +3121,98 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self._new())._augmentPage();
+var $1,$3,$4,$5,$6,$8,$14,$13,$12,$11,$10,$9,$7,$2;
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true, 
+//>>excludeEnd("ctx");
+$globals.LindaGyroWorker.superclass.fn.prototype._setupViewModel.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+$1=self["@viewModel"];
+$3=$recv(ko)._observable_("handle name");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["observable:"]=1;
+//>>excludeEnd("ctx");
+$4=$recv(ko)._observable_((0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["observable:"]=2;
+//>>excludeEnd("ctx");
+$5=$recv(ko)._observable_((0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["observable:"]=3;
+//>>excludeEnd("ctx");
+$6=$recv(ko)._observable_((0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["observable:"]=4;
+//>>excludeEnd("ctx");
+$8=ko;
+$14=(30)._printString();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["printString"]=1;
+//>>excludeEnd("ctx");
+$13="rotateX(".__comma($14);
+$12=$recv($13).__comma("deg)");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=4;
+//>>excludeEnd("ctx");
+$11=$recv($12).__comma(" rotateY(");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=3;
+//>>excludeEnd("ctx");
+$10=$recv($11).__comma((30)._printString());
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=2;
+//>>excludeEnd("ctx");
+$9=$recv($10).__comma("deg)");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+$7=$recv($8)._observable_($9);
+$2=$globals.HashedCollection._newFromPairs_(["handleName",$3,"gX",$4,"gY",$5,"gZ",$6,"rotateYX",$7]);
+$recv($1)._addAll_($2);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"start",{},$globals.LindaGyroWorker.klass)});
+}, function($ctx1) {$ctx1.fill(self,"setupViewModel",{},$globals.LindaGyroWorker)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "start\x0a\x09self new augmentPage",
+source: "setupViewModel\x0a\x0a\x09super setupViewModel.\x0a\x09\x0a\x09viewModel addAll: #{\x0a\x09\x09#handleName -> (ko observable: 'handle name') .\x0a\x09\x09#gX -> (ko observable: 0) .\x0a\x09\x09#gY -> (ko observable: 0) .\x0a\x09\x09#gZ -> (ko observable: 0) .\x0a\x09\x09\x0a\x09\x09\x22\x0a\x09\x09#tiltLR -> (ko observable: 0).\x0a\x09\x09#tiltFB -> (ko observable: 0).\x0a\x09\x09#webRotate -> (ko observable: 'rotate(', (30) printString, 'deg) rotate3d(1,0,0, ', ((30) * -1) printString, 'deg)').\x0a\x09\x09#mozRotate -> (ko observable: 'rotate(', (30) printString, 'deg)').\x0a\x09\x09\x22\x0a\x09\x09\x0a\x09\x09#rotateYX -> (ko observable: \x0a\x09\x09'rotateX(', 30 printString, 'deg)', \x0a\x09\x09' rotateY(', 30 printString, 'deg)')\x0a\x09}.\x0a\x09\x0a\x09\x0a\x09",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["augmentPage", "new"]
+messageSends: ["setupViewModel", "addAll:", "observable:", ",", "printString"]
 }),
-$globals.LindaGyroWorker.klass);
+$globals.LindaGyroWorker);
+
+$core.addMethod(
+$core.method({
+selector: "tupeSpace",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+function $GyroTuple(){return $globals.GyroTuple||(typeof GyroTuple=="undefined"?nil:GyroTuple)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._lindaClient())._tupleSpace_($recv($GyroTuple())._tupleSpaceName());
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"tupeSpace",{},$globals.LindaGyroWorker)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "tupeSpace\x0a\x09^self lindaClient tupleSpace: GyroTuple tupleSpaceName",
+referencedClasses: ["GyroTuple"],
+//>>excludeEnd("ide");
+messageSends: ["tupleSpace:", "lindaClient", "tupleSpaceName"]
+}),
+$globals.LindaGyroWorker);
+
 
 });
