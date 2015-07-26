@@ -570,6 +570,15 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
+$recv("#start"._asJQuery())._click_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return self._setupHandle();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
 self._setupViewModel();
 $recv(ko)._applyBindings_(self["@viewModel"]);
 return self;
@@ -579,10 +588,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09\x0a\x09self setupViewModel.\x0a\x09ko applyBindings: viewModel.",
+source: "augmentPage\x0a\x09\x0a\x09'#start' asJQuery click: [ self setupHandle ].\x0a\x0a\x09self setupViewModel.\x0a\x09ko applyBindings: viewModel.",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["setupViewModel", "applyBindings:"]
+messageSends: ["click:", "asJQuery", "setupHandle", "setupViewModel", "applyBindings:"]
 }),
 $globals.LindaClientApp);
 
@@ -2482,7 +2491,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09super augmentPage.",
+source: "augmentPage\x0a\x09super augmentPage.\x0a\x09\x0a\x09",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["augmentPage"]
@@ -2511,16 +2520,6 @@ $globals.LindaGyroWorker.superclass.fn.prototype._augmentPage.apply($recv(self),
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
-$recv("#start"._asJQuery())._click_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._setupHandle();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
-//>>excludeEnd("ctx");
-}));
-$recv(window)._addEventListener_with_("devicemotion",self._devicemotionHandler());
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"augmentPage",{},$globals.LindaGyroWorker)});
@@ -2528,10 +2527,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x0a\x09super augmentPage.\x0a\x0a\x09'#start' asJQuery click: [ self setupHandle ].\x0a\x0a\x09window addEventListener: #devicemotion with: self devicemotionHandler.\x0a\x09\x0a\x09",
+source: "augmentPage\x0a\x0a\x09super augmentPage.\x0a\x0a\x09\x0a\x09",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["augmentPage", "click:", "asJQuery", "setupHandle", "addEventListener:with:", "devicemotionHandler"]
+messageSends: ["augmentPage"]
 }),
 $globals.LindaGyroWorker);
 
@@ -3095,6 +3094,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
+self._setupLindaClient();
 $recv(window)._addEventListener_with_("devicemotion",self._devicemotionHandler());
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -3103,10 +3103,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "setupHandle\x0a\x09window addEventListener: #devicemotion with: self devicemotionHandler.",
+source: "setupHandle\x0a\x0a\x09self setupLindaClient.\x0a\x09window addEventListener: #devicemotion with: self devicemotionHandler.",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["addEventListener:with:", "devicemotionHandler"]
+messageSends: ["setupLindaClient", "addEventListener:with:", "devicemotionHandler"]
 }),
 $globals.LindaGyroWorker);
 
