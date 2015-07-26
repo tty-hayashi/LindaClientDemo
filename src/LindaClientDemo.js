@@ -519,6 +519,46 @@ $globals.GyroTuple.klass);
 
 $core.addMethod(
 $core.method({
+selector: "gYKey",
+protocol: 'accessor key',
+fn: function (){
+"use strict";
+
+var self=this;
+return "gY";
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "gYKey\x0a\x09^'gY'.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.GyroTuple.klass);
+
+$core.addMethod(
+$core.method({
+selector: "gZKey",
+protocol: 'accessor key',
+fn: function (){
+"use strict";
+
+var self=this;
+return "gZ";
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "gZKey\x0a\x09^'gZ'.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.GyroTuple.klass);
+
+$core.addMethod(
+$core.method({
 selector: "handleNameKey",
 protocol: 'accessor key',
 fn: function (){
@@ -775,7 +815,7 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv($recv(self["@viewModel"])._at_("serverUrl"))._value();
+$1=$recv($recv(self._viewModel())._at_("serverUrl"))._value();
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"serverUrl",{},$globals.LindaClientApp)});
@@ -783,10 +823,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "serverUrl\x0a\x09^ (viewModel at: #serverUrl) value",
+source: "serverUrl\x0a\x09^ (self viewModel at: #serverUrl) value",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["value", "at:"]
+messageSends: ["value", "at:", "viewModel"]
 }),
 $globals.LindaClientApp);
 
@@ -833,7 +873,7 @@ $1=$recv(ko)._observable_((0));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["observable:"]=1;
 //>>excludeEnd("ctx");
-self["@viewModel"]=$globals.HashedCollection._newFromPairs_(["tickets",$1,"serverUrl",$recv(ko)._observable_("https://node-linda-ststudy.herokuapp.com")]);
+self["@viewModel"]=$globals.HashedCollection._newFromPairs_(["tickets",$1,"serverUrl",$recv(ko)._observable_("http://node-linda-ststudy.herokuapp.com")]);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"setupViewModel",{},$globals.LindaClientApp)});
@@ -841,7 +881,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "setupViewModel\x0a\x0a\x09viewModel := #{\x0a\x09\x09#tickets -> (ko observable: 0) .\x0a\x09\x09#serverUrl -> (ko observable: 'https://node-linda-ststudy.herokuapp.com') \x0a\x09}.",
+source: "setupViewModel\x0a\x0a\x09viewModel := #{\x0a\x09\x09#tickets -> (ko observable: 0) .\x0a\x09\x09#serverUrl -> (ko observable: 'http://node-linda-ststudy.herokuapp.com') \x0a\x09}.",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["observable:"]
@@ -886,7 +926,7 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv($recv(self["@viewModel"])._at_("tickets"))._value();
+$1=$recv($recv(self._viewModel())._at_("tickets"))._value();
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"tickets",{},$globals.LindaClientApp)});
@@ -894,10 +934,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "tickets\x0a\x09^ (viewModel at: #tickets) value",
+source: "tickets\x0a\x09^ (self viewModel at: #tickets) value",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["value", "at:"]
+messageSends: ["value", "at:", "viewModel"]
 }),
 $globals.LindaClientApp);
 
@@ -912,7 +952,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv($recv(self["@viewModel"])._at_("tickets"))._value_(anInteger);
+$recv($recv(self._viewModel())._at_("tickets"))._value_(anInteger);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"tickets:",{anInteger:anInteger},$globals.LindaClientApp)});
@@ -920,10 +960,43 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["anInteger"],
-source: "tickets: anInteger\x0a\x09(viewModel at: #tickets) value: anInteger",
+source: "tickets: anInteger\x0a\x09(self viewModel at: #tickets) value: anInteger",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["value:", "at:"]
+messageSends: ["value:", "at:", "viewModel"]
+}),
+$globals.LindaClientApp);
+
+$core.addMethod(
+$core.method({
+selector: "viewModel",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $2,$1,$receiver;
+$2=self["@viewModel"];
+if(($receiver = $2) == null || $receiver.isNil){
+self["@viewModel"]=$globals.HashedCollection._newFromPairs_([]);
+$1=self["@viewModel"];
+} else {
+$1=$2;
+};
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"viewModel",{},$globals.LindaClientApp)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "viewModel\x0a\x09^viewModel ifNil: [viewModel := #{}]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["ifNil:"]
 }),
 $globals.LindaClientApp);
 
@@ -1099,6 +1172,7 @@ app=$recv($LindaFactorialMaster())._new();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["new"]=1;
 //>>excludeEnd("ctx");
+$recv(app)._setupViewModel();
 $recv(app)._tickets_((5));
 n=(100);
 $1=n;
@@ -1107,7 +1181,7 @@ $2=$recv(app)._tickets();
 $ctx1.sendIdx["tickets"]=1;
 //>>excludeEnd("ctx");
 lot=$recv($1).__slash($2);
-$recv(app)._lindaClient_($recv($LindaClient())._serverUrl_("http://127.0.0.1:8931"));
+$recv(app)._lindaClient_($recv($LindaClient())._serverUrl_("http://node-linda-ststudy.herokuapp.com"));
 ts=$recv($recv(app)._lindaClient())._tupleSpace_("factorial");
 $recv((1)._to_by_(n,lot))._do_((function(i){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1163,10 +1237,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "example\x0a\x0a\x09| app tickets n lot ts ans|\x0a\x09app := LindaFactorialMaster new.\x0a\x09app tickets: 5.\x0a\x09n := 100.\x0a\x09lot := n / app tickets.\x0a\x09app lindaClient: (LindaClient serverUrl: 'http://127.0.0.1:8931').\x0a\x09ts := app lindaClient tupleSpace: 'factorial'.\x0a\x09(1 to: n by: lot) do:[:i | \x0a\x09\x09ts write: #{#type -> #fact . #i -> i. #lot -> lot}.].\x0a\x09ans := OrderedCollection new.\x0a\x09(1 to: app tickets) do:[:i | \x09\x0a\x09\x09ts take: #{#type -> #ans} callback: [:err :t |\x0a\x09\x09\x09ans add: (t data at: #ans).\x0a\x09\x09\x09(i = app tickets)\x0a\x09\x09\x09\x09ifTrue: [(ans inject: 1 into: [:sum :e | sum * e]) inspect].\x0a\x09\x09]].",
+source: "example\x0a\x0a\x09| app tickets n lot ts ans|\x0a\x09app := LindaFactorialMaster new.\x0a\x09app setupViewModel.\x0a\x09app tickets: 5.\x0a\x09n := 100.\x0a\x09lot := n / app tickets.\x0a\x09app lindaClient: (LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com').\x0a\x09ts := app lindaClient tupleSpace: 'factorial'.\x0a\x09(1 to: n by: lot) do:[:i | \x0a\x09\x09ts write: #{#type -> #fact . #i -> i. #lot -> lot}.].\x0a\x09ans := OrderedCollection new.\x0a\x09(1 to: app tickets) do:[:i | \x09\x0a\x09\x09ts take: #{#type -> #ans} callback: [:err :t |\x0a\x09\x09\x09ans add: (t data at: #ans).\x0a\x09\x09\x09(i = app tickets)\x0a\x09\x09\x09\x09ifTrue: [(ans inject: 1 into: [:sum :e | sum * e]) inspect].\x0a\x09\x09]].",
 referencedClasses: ["LindaFactorialMaster", "LindaClient", "OrderedCollection"],
 //>>excludeEnd("ide");
-messageSends: ["new", "tickets:", "/", "tickets", "lindaClient:", "serverUrl:", "tupleSpace:", "lindaClient", "do:", "to:by:", "write:", "to:", "take:callback:", "add:", "at:", "data", "ifTrue:", "=", "inspect", "inject:into:", "*"]
+messageSends: ["new", "setupViewModel", "tickets:", "/", "tickets", "lindaClient:", "serverUrl:", "tupleSpace:", "lindaClient", "do:", "to:by:", "write:", "to:", "take:callback:", "add:", "at:", "data", "ifTrue:", "=", "inspect", "inject:into:", "*"]
 }),
 $globals.LindaFactorialMaster.klass);
 
@@ -1227,14 +1301,13 @@ fn: function (){
 "use strict";
 
 var self=this;
-var linda,tickets,base,lot,ts,ans;
+var linda,base,lot,ts,ans;
 function $LindaClient(){return $globals.LindaClient||(typeof LindaClient=="undefined"?nil:LindaClient)}
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-tickets=(5);
-linda=$recv($LindaClient())._serverUrl_("http://127.0.0.1:8931");
+linda=$recv($LindaClient())._serverUrl_("http://node-linda-ststudy.herokuapp.com");
 ts=$recv(linda)._tupleSpace_("factorial");
 $recv(ts)._take_callback_($globals.HashedCollection._newFromPairs_(["type","fact"]),(function(err,t){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1268,12 +1341,12 @@ return $recv(ts)._write_($globals.HashedCollection._newFromPairs_(["type","ans",
 }));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"example",{linda:linda,tickets:tickets,base:base,lot:lot,ts:ts,ans:ans},$globals.LindaFactorialSolver.klass)});
+}, function($ctx1) {$ctx1.fill(self,"example",{linda:linda,base:base,lot:lot,ts:ts,ans:ans},$globals.LindaFactorialSolver.klass)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "example\x0a\x0a\x09| linda tickets base lot ts ans|\x0a\x09tickets := 5.\x0a\x09linda := LindaClient serverUrl: 'http://127.0.0.1:8931'.\x0a\x09ts := linda tupleSpace: 'factorial'.\x0a\x09ts take: #{#type -> #fact} callback: [:err :t | \x0a\x09\x09base := t data at: 'i'.\x0a\x09\x09lot := t data at: 'lot'.\x0a\x09\x09ans := (base to: (base + lot - 1)) inject: 1 into: [:sum :elm | sum * elm].\x0a\x09\x09ts write: #{#type -> #ans . #i -> base . #ans -> ans} .\x0a\x09].\x0a\x09",
+source: "example\x0a\x0a\x09| linda  base lot ts ans|\x0a\x09linda := LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com'.\x0a\x09ts := linda tupleSpace: 'factorial'.\x0a\x09ts take: #{#type -> #fact} callback: [:err :t | \x0a\x09\x09base := t data at: 'i'.\x0a\x09\x09lot := t data at: 'lot'.\x0a\x09\x09ans := (base to: (base + lot - 1)) inject: 1 into: [:sum :elm | sum * elm].\x0a\x09\x09ts write: #{#type -> #ans . #i -> base . #ans -> ans} .\x0a\x09].\x0a\x09",
 referencedClasses: ["LindaClient"],
 //>>excludeEnd("ide");
 messageSends: ["serverUrl:", "tupleSpace:", "take:callback:", "at:", "data", "inject:into:", "to:", "-", "+", "*", "write:"]
@@ -1591,7 +1664,7 @@ function $LindaClient(){return $globals.LindaClient||(typeof LindaClient=="undef
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 app=$recv($LindaFibMaster())._new();
-$recv(app)._lindaClient_($recv($LindaClient())._serverUrl_("http://127.0.0.1:8931"));
+$recv(app)._lindaClient_($recv($LindaClient())._serverUrl_("http://node-linda-ststudy.herokuapp.com"));
 $recv(app)._n_((10));
 $recv(app)._map();
 $recv(app)._readResultTuple();
@@ -1603,7 +1676,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "example\x0a\x0a\x09| app  lot ts ans|\x0a\x09app := LindaFibMaster new.\x0a\x09app lindaClient: (LindaClient serverUrl: 'http://127.0.0.1:8931').\x0a\x09app n: 10.\x0a\x09app map.\x0a\x09app readResultTuple.\x0a\x09app inspect\x0a\x09",
+source: "example\x0a\x0a\x09| app  lot ts ans|\x0a\x09app := LindaFibMaster new.\x0a\x09app lindaClient: (LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com').\x0a\x09app n: 10.\x0a\x09app map.\x0a\x09app readResultTuple.\x0a\x09app inspect\x0a\x09",
 referencedClasses: ["LindaFibMaster", "LindaClient"],
 //>>excludeEnd("ide");
 messageSends: ["new", "lindaClient:", "serverUrl:", "n:", "map", "readResultTuple", "inspect"]
@@ -1959,7 +2032,7 @@ function $LindaClient(){return $globals.LindaClient||(typeof LindaClient=="undef
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 solver=$recv($LindaFibSolver())._new();
-$recv(solver)._lindaClient_($recv($LindaClient())._serverUrl_("http://127.0.0.1:8931"));
+$recv(solver)._lindaClient_($recv($LindaClient())._serverUrl_("http://node-linda-ststudy.herokuapp.com"));
 $recv($recv(solver)._tupleSpace())._take_callback_($globals.HashedCollection._newFromPairs_(["type","fib"]),(function(err,t){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
@@ -1976,7 +2049,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "example\x0a\x0a\x09| solver |\x0a\x09solver := LindaFibSolver new.\x0a\x09solver lindaClient: (LindaClient serverUrl: 'http://127.0.0.1:8931').\x0a\x09solver tupleSpace take: #{#type -> 'fib'} callback: [:err :t | \x0a\x09\x09solver reduce: (t data at: 'n')]",
+source: "example\x0a\x0a\x09| solver |\x0a\x09solver := LindaFibSolver new.\x0a\x09solver lindaClient: (LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com').\x0a\x09solver tupleSpace take: #{#type -> 'fib'} callback: [:err :t | \x0a\x09\x09solver reduce: (t data at: 'n')]",
 referencedClasses: ["LindaFibSolver", "LindaClient"],
 //>>excludeEnd("ide");
 messageSends: ["new", "lindaClient:", "serverUrl:", "take:callback:", "tupleSpace", "reduce:", "at:", "data"]
@@ -2440,7 +2513,7 @@ function $LindaClient(){return $globals.LindaClient||(typeof LindaClient=="undef
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 solver=$recv($LindaFibWorker())._new();
-$recv(solver)._lindaClient_($recv($LindaClient())._serverUrl_("http://127.0.0.1:8931"));
+$recv(solver)._lindaClient_($recv($LindaClient())._serverUrl_("http://node-linda-ststudy.herokuapp.com"));
 $recv($recv(solver)._tupleSpace())._take_callback_($globals.HashedCollection._newFromPairs_(["type","fib"]),(function(err,t){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
@@ -2457,7 +2530,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "example\x0a\x0a\x09| solver |\x0a\x09solver := LindaFibWorker new.\x0a\x09solver lindaClient: (LindaClient serverUrl: 'http://127.0.0.1:8931').\x0a\x09solver tupleSpace take: #{#type -> 'fib'} callback: [:err :t | \x0a\x09\x09solver reduce: (t data at: 'n')]",
+source: "example\x0a\x0a\x09| solver |\x0a\x09solver := LindaFibWorker new.\x0a\x09solver lindaClient: (LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com').\x0a\x09solver tupleSpace take: #{#type -> 'fib'} callback: [:err :t | \x0a\x09\x09solver reduce: (t data at: 'n')]",
 referencedClasses: ["LindaFibWorker", "LindaClient"],
 //>>excludeEnd("ide");
 messageSends: ["new", "lindaClient:", "serverUrl:", "take:callback:", "tupleSpace", "reduce:", "at:", "data"]
@@ -2567,34 +2640,6 @@ source: "startDemo\x0a\x09| tuple |\x0a\x09super startDemo.\x0a\x09tuple := Gyro
 referencedClasses: ["GyroTuple"],
 //>>excludeEnd("ide");
 messageSends: ["startDemo", "new", "watch:callback:", "tupleSpace", "doJQueryPrepend:", "printString", "asJSON"]
-}),
-$globals.LindaGyroMaster);
-
-$core.addMethod(
-$core.method({
-selector: "tupeSpace",
-protocol: 'accessing',
-fn: function (){
-"use strict";
-
-var self=this;
-function $GyroTuple(){return $globals.GyroTuple||(typeof GyroTuple=="undefined"?nil:GyroTuple)}
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-$1=$recv(self._lindaClient())._tupleSpace_($recv($GyroTuple())._tupleSpaceName());
-return $1;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"tupeSpace",{},$globals.LindaGyroMaster)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "tupeSpace\x0a\x09^self lindaClient tupleSpace: GyroTuple tupleSpaceName",
-referencedClasses: ["GyroTuple"],
-//>>excludeEnd("ide");
-messageSends: ["tupleSpace:", "lindaClient", "tupleSpaceName"]
 }),
 $globals.LindaGyroMaster);
 
