@@ -196,7 +196,7 @@ setupViewModel
 
 	viewModel := #{
 		#tickets -> (ko observable: 0) .
-		#serverUrl -> (ko observable: 'http://127.0.0.1:8931') 
+		#serverUrl -> (ko observable: 'https://node-linda-ststudy.herokuapp.com') 
 	}.
 ! !
 
