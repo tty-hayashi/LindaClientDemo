@@ -684,7 +684,7 @@ gX: xValue gY: yValue gZ: zValue
 				' rotateY(', xValue printString, 'deg)'.
 			tuple := GyroTuple new.
 			tuple handleName: self handleName.
-			tuple gx: self gX.
+			tuple gX: self gX.
 			tuple gY: self gY.
 			tuple gZ: self gZ.
 			self tupleSpace write: tuple.
