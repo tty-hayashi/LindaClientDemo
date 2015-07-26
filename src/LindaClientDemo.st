@@ -138,6 +138,58 @@ tupleSpaceName
 	^'gyroSpace'
 ! !
 
+Object subclass: #LindaBasicDemo
+	instanceVariableNames: ''
+	package: 'LindaClientDemo'!
+
+!LindaBasicDemo class methodsFor: 'pholosoper table'!
+
+phil: anIndex total: num
+	"[LindaBasicDemo phil: 4 total: 5] valueWithInterval: 2000"
+	
+	| ts |
+	ts := self philosopherTupleSpace.
+	
+	Transcript show: 'Phil ', anIndex printString, ' is thinking'; cr.
+	ts read: #{'type' -> 'ticket'} callback: [:err1 :ti |
+		ts read: #{'type' -> 'chopstick' . 'i' -> anIndex} callback: [:err2 :c1 |
+			ts read: #{'type' -> 'chopstick' . 'i' -> ((anIndex + 1) \\ num)} callback: [:err3 :c2 |
+				Transcript show: 'Phil ', anIndex printString, ' starts eating'; cr.
+				Transcript show: 'Phil ', anIndex printString, ' ends eating'; cr.
+				ts write: #{'type' -> 'chopstick' . 'i' -> anIndex}.
+				ts write: #{'type' -> 'chopstick' . 'i' -> ((anIndex + 1) \\ num)}.
+				ts write: #{'type' -> 'ticket'} .
+			].
+		].
+	].
+!
+
+philMasterTotal: num
+	"LindaBasicDemo philosopherTupleSpace take: #{} callback: [:e :t| Transcript show: t; cr].
+
+	LindaBasicDemo philMasterTotal: 5.
+
+	1 to: 5 do: [:i |
+		[LindaBasicDemo phil: i total: 5] valueWithInterval: 2000
+	]"
+
+| ts |
+	ts := self philosopherTupleSpace.
+	1 to: num do: [:i |
+		ts write: #{'type' -> 'chopstick' . 'i' -> i}.
+	].
+	
+	(num - 1) timesRepeat: [
+		ts write: #{'type' -> 'ticket'} .
+	]
+!
+
+philosopherTupleSpace
+	| lindaClient |
+	lindaClient := LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com'.
+	^lindaClient tupleSpace: 'philTable'
+! !
+
 Object subclass: #LindaClientApp
 	instanceVariableNames: 'lindaClient viewModel watchId'
 	package: 'LindaClientDemo'!

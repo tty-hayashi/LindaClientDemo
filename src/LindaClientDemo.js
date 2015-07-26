@@ -598,6 +598,213 @@ messageSends: []
 $globals.GyroTuple.klass);
 
 
+$core.addClass('LindaBasicDemo', $globals.Object, [], 'LindaClientDemo');
+
+$core.addMethod(
+$core.method({
+selector: "phil:total:",
+protocol: 'pholosoper table',
+fn: function (anIndex,num){
+"use strict";
+
+var self=this;
+var ts;
+function $Transcript(){return $globals.Transcript||(typeof Transcript=="undefined"?nil:Transcript)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $3,$2,$1,$4,$5,$8,$7,$6,$11,$10,$9,$12,$13,$14;
+ts=self._philosopherTupleSpace();
+$3=$recv(anIndex)._printString();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["printString"]=1;
+//>>excludeEnd("ctx");
+$2="Phil ".__comma($3);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=2;
+//>>excludeEnd("ctx");
+$1=$recv($2).__comma(" is thinking");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+$recv($Transcript())._show_($1);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["show:"]=1;
+//>>excludeEnd("ctx");
+$4=$recv($Transcript())._cr();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["cr"]=1;
+//>>excludeEnd("ctx");
+$recv(ts)._read_callback_($globals.HashedCollection._newFromPairs_(["type","ticket"]),(function(err1,ti){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(ts)._read_callback_($globals.HashedCollection._newFromPairs_(["type","chopstick","i",anIndex]),(function(err2,c1){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx3) {
+//>>excludeEnd("ctx");
+$5=ts;
+$8=$recv(anIndex).__plus((1));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx3.sendIdx["+"]=1;
+//>>excludeEnd("ctx");
+$7=$recv($8).__backslash_backslash(num);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx3.sendIdx["\x5c\x5c"]=1;
+//>>excludeEnd("ctx");
+$6=$globals.HashedCollection._newFromPairs_(["type","chopstick","i",$7]);
+return $recv($5)._read_callback_($6,(function(err3,c2){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx4) {
+//>>excludeEnd("ctx");
+$11=$recv(anIndex)._printString();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx4.sendIdx["printString"]=2;
+//>>excludeEnd("ctx");
+$10="Phil ".__comma($11);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx4.sendIdx[","]=4;
+//>>excludeEnd("ctx");
+$9=$recv($10).__comma(" starts eating");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx4.sendIdx[","]=3;
+//>>excludeEnd("ctx");
+$recv($Transcript())._show_($9);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx4.sendIdx["show:"]=2;
+//>>excludeEnd("ctx");
+$12=$recv($Transcript())._cr();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx4.sendIdx["cr"]=2;
+//>>excludeEnd("ctx");
+$12;
+$13=$recv("Phil ".__comma($recv(anIndex)._printString())).__comma(" ends eating");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx4.sendIdx[","]=5;
+//>>excludeEnd("ctx");
+$recv($Transcript())._show_($13);
+$14=$recv($Transcript())._cr();
+$14;
+$recv(ts)._write_($globals.HashedCollection._newFromPairs_(["type","chopstick","i",anIndex]));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx4.sendIdx["write:"]=1;
+//>>excludeEnd("ctx");
+$recv(ts)._write_($globals.HashedCollection._newFromPairs_(["type","chopstick","i",$recv($recv(anIndex).__plus((1))).__backslash_backslash(num)]));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx4.sendIdx["write:"]=2;
+//>>excludeEnd("ctx");
+return $recv(ts)._write_($globals.HashedCollection._newFromPairs_(["type","ticket"]));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx4) {$ctx4.fillBlock({err3:err3,c2:c2},$ctx3,3)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx3) {$ctx3.fillBlock({err2:err2,c1:c1},$ctx2,2)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["read:callback:"]=2;
+//>>excludeEnd("ctx");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({err1:err1,ti:ti},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["read:callback:"]=1;
+//>>excludeEnd("ctx");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"phil:total:",{anIndex:anIndex,num:num,ts:ts},$globals.LindaBasicDemo.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anIndex", "num"],
+source: "phil: anIndex total: num\x0a\x09\x22[LindaBasicDemo phil: 4 total: 5] valueWithInterval: 2000\x22\x0a\x09\x0a\x09| ts |\x0a\x09ts := self philosopherTupleSpace.\x0a\x09\x0a\x09Transcript show: 'Phil ', anIndex printString, ' is thinking'; cr.\x0a\x09ts read: #{'type' -> 'ticket'} callback: [:err1 :ti |\x0a\x09\x09ts read: #{'type' -> 'chopstick' . 'i' -> anIndex} callback: [:err2 :c1 |\x0a\x09\x09\x09ts read: #{'type' -> 'chopstick' . 'i' -> ((anIndex + 1) \x5c\x5c num)} callback: [:err3 :c2 |\x0a\x09\x09\x09\x09Transcript show: 'Phil ', anIndex printString, ' starts eating'; cr.\x0a\x09\x09\x09\x09Transcript show: 'Phil ', anIndex printString, ' ends eating'; cr.\x0a\x09\x09\x09\x09ts write: #{'type' -> 'chopstick' . 'i' -> anIndex}.\x0a\x09\x09\x09\x09ts write: #{'type' -> 'chopstick' . 'i' -> ((anIndex + 1) \x5c\x5c num)}.\x0a\x09\x09\x09\x09ts write: #{'type' -> 'ticket'} .\x0a\x09\x09\x09].\x0a\x09\x09].\x0a\x09].\x09",
+referencedClasses: ["Transcript"],
+//>>excludeEnd("ide");
+messageSends: ["philosopherTupleSpace", "show:", ",", "printString", "cr", "read:callback:", "\x5c\x5c", "+", "write:"]
+}),
+$globals.LindaBasicDemo.klass);
+
+$core.addMethod(
+$core.method({
+selector: "philMasterTotal:",
+protocol: 'pholosoper table',
+fn: function (num){
+"use strict";
+
+var self=this;
+var ts;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+ts=self._philosopherTupleSpace();
+(1)._to_do_(num,(function(i){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(ts)._write_($globals.HashedCollection._newFromPairs_(["type","chopstick","i",i]));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["write:"]=1;
+//>>excludeEnd("ctx");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({i:i},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+$recv($recv(num).__minus((1)))._timesRepeat_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(ts)._write_($globals.HashedCollection._newFromPairs_(["type","ticket"]));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
+//>>excludeEnd("ctx");
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"philMasterTotal:",{num:num,ts:ts},$globals.LindaBasicDemo.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["num"],
+source: "philMasterTotal: num\x0a\x09\x22LindaBasicDemo philosopherTupleSpace take: #{} callback: [:e :t| Transcript show: t; cr].\x0a\x0a\x09LindaBasicDemo philMasterTotal: 5.\x0a\x0a\x091 to: 5 do: [:i |\x0a\x09\x09[LindaBasicDemo phil: i total: 5] valueWithInterval: 2000\x0a\x09]\x22\x0a\x0a| ts |\x0a\x09ts := self philosopherTupleSpace.\x0a\x091 to: num do: [:i |\x0a\x09\x09ts write: #{'type' -> 'chopstick' . 'i' -> i}.\x0a\x09].\x0a\x09\x0a\x09(num - 1) timesRepeat: [\x0a\x09\x09ts write: #{'type' -> 'ticket'} .\x0a\x09]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["philosopherTupleSpace", "to:do:", "write:", "timesRepeat:", "-"]
+}),
+$globals.LindaBasicDemo.klass);
+
+$core.addMethod(
+$core.method({
+selector: "philosopherTupleSpace",
+protocol: 'pholosoper table',
+fn: function (){
+"use strict";
+
+var self=this;
+var lindaClient;
+function $LindaClient(){return $globals.LindaClient||(typeof LindaClient=="undefined"?nil:LindaClient)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+lindaClient=$recv($LindaClient())._serverUrl_("http://node-linda-ststudy.herokuapp.com");
+$1=$recv(lindaClient)._tupleSpace_("philTable");
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"philosopherTupleSpace",{lindaClient:lindaClient},$globals.LindaBasicDemo.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "philosopherTupleSpace\x0a\x09| lindaClient |\x0a\x09lindaClient := LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com'.\x0a\x09^lindaClient tupleSpace: 'philTable'\x0a\x09\x0a\x09",
+referencedClasses: ["LindaClient"],
+//>>excludeEnd("ide");
+messageSends: ["serverUrl:", "tupleSpace:"]
+}),
+$globals.LindaBasicDemo.klass);
+
+
 $core.addClass('LindaClientApp', $globals.Object, ['lindaClient', 'viewModel', 'watchId'], 'LindaClientDemo');
 $core.addMethod(
 $core.method({
