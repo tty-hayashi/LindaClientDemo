@@ -119,6 +119,14 @@ gXKey
 	^'gX'.
 !
 
+gYKey
+	^'gY'.
+!
+
+gZKey
+	^'gZ'.
+!
+
 handleNameKey
 	^'handleName'.
 ! !
@@ -145,15 +153,19 @@ lindaClient: anObject
 !
 
 serverUrl
-	^ (viewModel at: #serverUrl) value
+	^ (self viewModel at: #serverUrl) value
 !
 
 tickets
-	^ (viewModel at: #tickets) value
+	^ (self viewModel at: #tickets) value
 !
 
 tickets: anInteger
-	(viewModel at: #tickets) value: anInteger
+	(self viewModel at: #tickets) value: anInteger
+!
+
+viewModel
+	^viewModel ifNil: [viewModel := #{}]
 ! !
 
 !LindaClientApp methodsFor: 'action'!
@@ -203,7 +215,7 @@ setupViewModel
 
 	viewModel := #{
 		#tickets -> (ko observable: 0) .
-		#serverUrl -> (ko observable: 'https://node-linda-ststudy.herokuapp.com') 
+		#serverUrl -> (ko observable: 'http://node-linda-ststudy.herokuapp.com') 
 	}.
 ! !
 
@@ -242,10 +254,11 @@ example
 
 	| app tickets n lot ts ans|
 	app := LindaFactorialMaster new.
+	app setupViewModel.
 	app tickets: 5.
 	n := 100.
 	lot := n / app tickets.
-	app lindaClient: (LindaClient serverUrl: 'http://127.0.0.1:8931').
+	app lindaClient: (LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com').
 	ts := app lindaClient tupleSpace: 'factorial'.
 	(1 to: n by: lot) do:[:i | 
 		ts write: #{#type -> #fact . #i -> i. #lot -> lot}.].
@@ -275,9 +288,8 @@ reduce: n
 
 example
 
-	| linda tickets base lot ts ans|
-	tickets := 5.
-	linda := LindaClient serverUrl: 'http://127.0.0.1:8931'.
+	| linda  base lot ts ans|
+	linda := LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com'.
 	ts := linda tupleSpace: 'factorial'.
 	ts take: #{#type -> #fact} callback: [:err :t | 
 		base := t data at: 'i'.
@@ -354,7 +366,7 @@ example
 
 	| app  lot ts ans|
 	app := LindaFibMaster new.
-	app lindaClient: (LindaClient serverUrl: 'http://127.0.0.1:8931').
+	app lindaClient: (LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com').
 	app n: 10.
 	app map.
 	app readResultTuple.
@@ -430,7 +442,7 @@ example
 
 	| solver |
 	solver := LindaFibSolver new.
-	solver lindaClient: (LindaClient serverUrl: 'http://127.0.0.1:8931').
+	solver lindaClient: (LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com').
 	solver tupleSpace take: #{#type -> 'fib'} callback: [:err :t | 
 		solver reduce: (t data at: 'n')]
 !
@@ -533,7 +545,7 @@ example
 
 	| solver |
 	solver := LindaFibWorker new.
-	solver lindaClient: (LindaClient serverUrl: 'http://127.0.0.1:8931').
+	solver lindaClient: (LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com').
 	solver tupleSpace take: #{#type -> 'fib'} callback: [:err :t | 
 		solver reduce: (t data at: 'n')]
 !
@@ -547,10 +559,6 @@ LindaClientApp subclass: #LindaGyroMaster
 	package: 'LindaClientDemo'!
 
 !LindaGyroMaster methodsFor: 'accessing'!
-
-tupeSpace
-	^self lindaClient tupleSpace: GyroTuple tupleSpaceName
-!
 
 tupleSpace
 	^self lindaClient tupleSpace: GyroTuple tupleSpaceName
