@@ -2742,7 +2742,7 @@ fn: function (xValue,yValue,zValue){
 
 var self=this;
 var tuple;
-function $GyroTupe(){return $globals.GyroTupe||(typeof GyroTupe=="undefined"?nil:GyroTupe)}
+function $GyroTuple(){return $globals.GyroTuple||(typeof GyroTuple=="undefined"?nil:GyroTuple)}
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -2822,7 +2822,7 @@ $14=$recv($15).__comma("deg)");
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
 $recv($13)._value_($14);
-tuple=$recv($GyroTupe())._new();
+tuple=$recv($GyroTuple())._new();
 tuple;
 $recv(tuple)._handleName_(self._handleName());
 $recv(tuple)._gx_(self._gX());
@@ -2837,8 +2837,8 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["xValue", "yValue", "zValue"],
-source: "gX: xValue gY: yValue gZ: zValue\x0a\x09| tuple |\x0a\x09(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) \x0a\x09\x09ifTrue: [\x0a\x09\x0a\x09\x09\x09self gX: (xValue rounded) * 10.\x0a\x09\x09\x09self gY: (yValue rounded) * 10.\x0a\x09\x09\x09self gZ: (zValue rounded) * 10.\x0a\x0a\x09\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', yValue printString, 'deg)', \x0a\x09\x09\x09\x09' rotateY(', xValue printString, 'deg)'.\x0a\x09\x09\x09tuple := GyroTupe new.\x0a\x09\x09\x09tuple handleName: self handleName.\x0a\x09\x09\x09tuple gx: self gX.\x0a\x09\x09\x09tuple gY: self gY.\x0a\x09\x09\x09tuple gZ: self gZ.\x0a\x09\x09\x09self tupleSpace write: tuple.\x0a\x09\x09]\x0a\x09",
-referencedClasses: ["GyroTupe"],
+source: "gX: xValue gY: yValue gZ: zValue\x0a\x09| tuple |\x0a\x09(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) \x0a\x09\x09ifTrue: [\x0a\x09\x0a\x09\x09\x09self gX: (xValue rounded) * 10.\x0a\x09\x09\x09self gY: (yValue rounded) * 10.\x0a\x09\x09\x09self gZ: (zValue rounded) * 10.\x0a\x0a\x09\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', yValue printString, 'deg)', \x0a\x09\x09\x09\x09' rotateY(', xValue printString, 'deg)'.\x0a\x09\x09\x09tuple := GyroTuple new.\x0a\x09\x09\x09tuple handleName: self handleName.\x0a\x09\x09\x09tuple gx: self gX.\x0a\x09\x09\x09tuple gY: self gY.\x0a\x09\x09\x09tuple gZ: self gZ.\x0a\x09\x09\x09self tupleSpace write: tuple.\x0a\x09\x09]\x0a\x09",
+referencedClasses: ["GyroTuple"],
 //>>excludeEnd("ide");
 messageSends: ["ifTrue:", "&", "~=", "gX", "gY", "gZ", "gX:", "*", "rounded", "gY:", "gZ:", "value:", "at:", ",", "printString", "new", "handleName:", "handleName", "gx:", "write:", "tupleSpace"]
 }),

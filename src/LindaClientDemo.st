@@ -682,7 +682,7 @@ gX: xValue gY: yValue gZ: zValue
 
 			(viewModel at: #rotateYX) value: 'rotateX(', yValue printString, 'deg)', 
 				' rotateY(', xValue printString, 'deg)'.
-			tuple := GyroTupe new.
+			tuple := GyroTuple new.
 			tuple handleName: self handleName.
 			tuple gx: self gX.
 			tuple gY: self gY.
