@@ -612,6 +612,7 @@ setupHandle
 augmentPage
 
 	super augmentPage.
+	self setupLindaClient.
 !
 
 devicemotionHandler
