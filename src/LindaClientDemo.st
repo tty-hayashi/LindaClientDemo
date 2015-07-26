@@ -184,9 +184,9 @@ doSilkTAG
 augmentPage
 	
 	'#start' asJQuery click: [ self setupHandle ].
-
 	self setupViewModel.
 	ko applyBindings: viewModel.
+	self setupLindaClient.
 !
 
 setupLindaClient
@@ -612,7 +612,6 @@ setupHandle
 augmentPage
 
 	super augmentPage.
-	self setupLindaClient.
 !
 
 devicemotionHandler

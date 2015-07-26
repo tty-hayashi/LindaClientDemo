@@ -581,6 +581,7 @@ return self._setupHandle();
 }));
 self._setupViewModel();
 $recv(ko)._applyBindings_(self["@viewModel"]);
+self._setupLindaClient();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"augmentPage",{},$globals.LindaClientApp)});
@@ -588,10 +589,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09\x0a\x09'#start' asJQuery click: [ self setupHandle ].\x0a\x0a\x09self setupViewModel.\x0a\x09ko applyBindings: viewModel.",
+source: "augmentPage\x0a\x09\x0a\x09'#start' asJQuery click: [ self setupHandle ].\x0a\x09self setupViewModel.\x0a\x09ko applyBindings: viewModel.\x0a\x09self setupLindaClient.",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["click:", "asJQuery", "setupHandle", "setupViewModel", "applyBindings:"]
+messageSends: ["click:", "asJQuery", "setupHandle", "setupViewModel", "applyBindings:", "setupLindaClient"]
 }),
 $globals.LindaClientApp);
 
@@ -2520,7 +2521,6 @@ $globals.LindaGyroWorker.superclass.fn.prototype._augmentPage.apply($recv(self),
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
-self._setupLindaClient();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"augmentPage",{},$globals.LindaGyroWorker)});
@@ -2528,10 +2528,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x0a\x09super augmentPage.\x0a\x09self setupLindaClient.\x0a\x0a\x09\x0a\x09",
+source: "augmentPage\x0a\x0a\x09super augmentPage.\x0a\x0a\x0a\x09\x0a\x09",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["augmentPage", "setupLindaClient"]
+messageSends: ["augmentPage"]
 }),
 $globals.LindaGyroWorker);
 
