@@ -177,13 +177,18 @@ doJQueryPrepend: aMsg
 
 doSilkTAG
 	'#output-list' asSilk LI: 'Silk TAG: added me!!'
+!
+
+startDemo
+
+	self setupLindaClient.
 ! !
 
 !LindaClientApp methodsFor: 'starting'!
 
 augmentPage
 	
-	'#start' asJQuery click: [ self setupHandle ].
+	'#start' asJQuery click: [ self startDemo ].
 	self setupViewModel.
 	ko applyBindings: viewModel.
 	self setupLindaClient.
@@ -541,7 +546,28 @@ LindaClientApp subclass: #LindaGyroMaster
 	instanceVariableNames: ''
 	package: 'LindaClientDemo'!
 
-!LindaGyroMaster methodsFor: 'as yet unclassified'!
+!LindaGyroMaster methodsFor: 'accessing'!
+
+tupeSpace
+	^self lindaClient tupleSpace: GyroTuple tupleSpaceName
+!
+
+tupleSpace
+	^self lindaClient tupleSpace: GyroTuple tupleSpaceName
+! !
+
+!LindaGyroMaster methodsFor: 'action'!
+
+startDemo
+	| tuple |
+	super startDemo.
+	tuple := GyroTuple new.
+	self tupleSpace watch: tuple callback: [:err :t |
+		self doJQueryPrepend: t asJSON printString.
+	].
+! !
+
+!LindaGyroMaster methodsFor: 'starting'!
 
 augmentPage
 	super augmentPage.
@@ -583,6 +609,10 @@ handleName
 
 tupeSpace
 	^self lindaClient tupleSpace: GyroTuple tupleSpaceName
+!
+
+tupleSpace
+	^self lindaClient tupleSpace: GyroTuple tupleSpaceName
 ! !
 
 !LindaGyroWorker methodsFor: 'action'!
@@ -603,8 +633,12 @@ doSilkTAG
 
 setupHandle
 
-	self setupLindaClient.
 	window addEventListener: #devicemotion with: self devicemotionHandler.
+!
+
+startDemo
+	super startDemo.
+	self setupHandle.
 ! !
 
 !LindaGyroWorker methodsFor: 'starting'!
