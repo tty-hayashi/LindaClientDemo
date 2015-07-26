@@ -1,5 +1,135 @@
 Smalltalk createPackage: 'LindaClientDemo'!
 (Smalltalk packageAt: 'LindaClientDemo') imports: {'ko' -> 'knockout'. 'linda' -> 'linda-client'. 'socketIo' -> 'socket.io'. 'amber/jquery/Wrappers-JQuery'. 'amber/web/Web'. 'silk/Silk'}!
+Tuple subclass: #FibTuple
+	instanceVariableNames: ''
+	package: 'LindaClientDemo'!
+
+!FibTuple methodsFor: 'accessing'!
+
+answer
+
+	^self data at: self class answerKey
+!
+
+answer: anInteger
+
+	self data at: self class answerKey put: anInteger
+!
+
+n
+
+	^self data at: self class nKey
+!
+
+n: anIndex
+
+	^self data at: self class nKey put: anIndex
+! !
+
+!FibTuple class methodsFor: 'accessor '!
+
+answerKey
+	^'answer'.
+!
+
+fibTypeKey
+	^'fib'.
+!
+
+nKey
+	^'n'.
+!
+
+resultTypeKey
+	^'fib-result'.
+! !
+
+!FibTuple class methodsFor: 'as yet unclassified'!
+
+fib
+	| tuple |
+	tuple := self new.
+	tuple type: self fibTypeKey.
+	^tuple
+!
+
+result
+	| tuple |
+	tuple := self new.
+	tuple type: self resultTypeKey.
+	^tuple
+! !
+
+!FibTuple class methodsFor: 'tuple space'!
+
+tupleSpaceName
+
+	^'fibSpace'
+! !
+
+Tuple subclass: #GyroTuple
+	instanceVariableNames: ''
+	package: 'LindaClientDemo'!
+
+!GyroTuple methodsFor: 'accessing'!
+
+gX
+
+	^self data at: self class gXKey
+!
+
+gX: aValue
+
+	self data at: self class gXKey put: aValue
+!
+
+gY
+
+	^self data at: self class gYKey
+!
+
+gY: aValue
+
+	self data at: self class gYKey put: aValue
+!
+
+gZ
+
+	^self data at: self class gZKey
+!
+
+gZ: aValue
+
+	self data at: self class gZKey put: aValue
+!
+
+handleName
+
+	^self data at: self class handleNameKey
+!
+
+handleName: aString
+
+	self data at: self class handleNameKey put: aString
+! !
+
+!GyroTuple class methodsFor: 'accessor key'!
+
+gXKey
+	^'gX'.
+!
+
+handleNameKey
+	^'handleName'.
+! !
+
+!GyroTuple class methodsFor: 'tuple space'!
+
+tupleSpaceName
+
+	^'gyroSpace'
+! !
+
 Object subclass: #LindaClientApp
 	instanceVariableNames: 'serverUrl tickets lindaClient viewModel'
 	package: 'LindaClientDemo'!
@@ -14,12 +144,16 @@ lindaClient: anObject
 	lindaClient := anObject
 !
 
-tickets
-	^ tickets
+serverUrl
+	^ (viewModel at: #serverUrl) value
 !
 
-tickets: anObject
-	tickets := anObject
+tickets
+	^ (viewModel at: #tickets) value
+!
+
+tickets: anInteger
+	(viewModel at: #tickets) value: anInteger
 ! !
 
 !LindaClientApp methodsFor: 'action'!
@@ -48,10 +182,22 @@ doSilkTAG
 !LindaClientApp methodsFor: 'starting'!
 
 augmentPage
-	'#amber-with' asJQuery click: [ self doAmberWith ].
-	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
-	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
-	window addEventListener: #deviceorientation with: self deviceorientationHandler
+	
+	self setupViewModel.
+	ko applyBindings: viewModel.
+!
+
+setupLindaClient
+
+	lindaClient := LindaClient serverUrl: self serverUrl
+!
+
+setupViewModel
+
+	viewModel := #{
+		#tickets -> (ko observable: 0) .
+		#serverUrl -> (ko observable: 'http://127.0.0.1:8931') 
+	}.
 ! !
 
 !LindaClientApp class methodsFor: 'starting'!
@@ -393,6 +539,12 @@ LindaClientApp subclass: #LindaGyroMaster
 	instanceVariableNames: ''
 	package: 'LindaClientDemo'!
 
+!LindaGyroMaster methodsFor: 'as yet unclassified'!
+
+augmentPage
+	super augmentPage.
+! !
+
 LindaClientApp subclass: #LindaGyroWorker
 	instanceVariableNames: ''
 	package: 'LindaClientDemo'!
@@ -425,6 +577,10 @@ gZ: aValue
 
 handleName 
 	^(viewModel at: #handleName ) value
+!
+
+tupeSpace
+	^self lindaClient tupleSpace: GyroTuple tupleSpaceName
 ! !
 
 !LindaGyroWorker methodsFor: 'action'!
@@ -450,29 +606,11 @@ setupHandle
 !LindaGyroWorker methodsFor: 'starting'!
 
 augmentPage
-	'#amber-with' asJQuery click: [ self doAmberWith ].
-	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
-	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
+
+	super augmentPage.
+
 	'#start' asJQuery click: [ self setupHandle ].
 
-	viewModel := #{
-		#handleName -> (ko observable: 'handle name') .
-		#gX -> (ko observable: 0) .
-		#gY -> (ko observable: 0) .
-		#gZ -> (ko observable: 0) .
-		
-		"
-		#tiltLR -> (ko observable: 0).
-		#tiltFB -> (ko observable: 0).
-		#webRotate -> (ko observable: 'rotate(', (30) printString, 'deg) rotate3d(1,0,0, ', ((30) * -1) printString, 'deg)').
-		#mozRotate -> (ko observable: 'rotate(', (30) printString, 'deg)').
-		"
-		
-		#rotateYX -> (ko observable: 
-		'rotateX(', 30 printString, 'deg)', 
-		' rotateY(', 30 printString, 'deg)')
-	}.
-	ko applyBindings: viewModel.
 	window addEventListener: #devicemotion with: self devicemotionHandler.
 !
 
@@ -483,20 +621,6 @@ devicemotionHandler
 			gY: (event accelerationIncludingGravity y rounded)
 			gZ: (event accelerationIncludingGravity z rounded)		
 	].
-!
-
-gX: xValue gY: yValue gZ: zValue
-	
-	(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) 
-		ifTrue: [
-	
-			self gX: (xValue rounded) * 10.
-			self gY: (yValue rounded) * 10.
-			self gZ: (zValue rounded) * 10.
-
-			(viewModel at: #rotateYX) value: 'rotateX(', yValue printString, 'deg)', 
-				' rotateY(', xValue printString, 'deg)'.
-		]
 !
 
 olddevicemotionHandler
@@ -520,11 +644,50 @@ olddevicemotionHandler
 		
 		
 	].
+!
+
+setupViewModel
+
+	super setupViewModel.
+	
+	viewModel addAll: #{
+		#handleName -> (ko observable: 'handle name') .
+		#gX -> (ko observable: 0) .
+		#gY -> (ko observable: 0) .
+		#gZ -> (ko observable: 0) .
+		
+		"
+		#tiltLR -> (ko observable: 0).
+		#tiltFB -> (ko observable: 0).
+		#webRotate -> (ko observable: 'rotate(', (30) printString, 'deg) rotate3d(1,0,0, ', ((30) * -1) printString, 'deg)').
+		#mozRotate -> (ko observable: 'rotate(', (30) printString, 'deg)').
+		"
+		
+		#rotateYX -> (ko observable: 
+		'rotateX(', 30 printString, 'deg)', 
+		' rotateY(', 30 printString, 'deg)')
+	}.
 ! !
 
-!LindaGyroWorker class methodsFor: 'starting'!
+!LindaGyroWorker methodsFor: 'updating'!
 
-start
-	self new augmentPage
+gX: xValue gY: yValue gZ: zValue
+	| tuple |
+	(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) 
+		ifTrue: [
+	
+			self gX: (xValue rounded) * 10.
+			self gY: (yValue rounded) * 10.
+			self gZ: (zValue rounded) * 10.
+
+			(viewModel at: #rotateYX) value: 'rotateX(', yValue printString, 'deg)', 
+				' rotateY(', xValue printString, 'deg)'.
+			tuple := GyroTupe new.
+			tuple handleName: self handleName.
+			tuple gx: self gX.
+			tuple gY: self gY.
+			tuple gZ: self gZ.
+			self tupleSpace write: tuple.
+		]
 ! !
 

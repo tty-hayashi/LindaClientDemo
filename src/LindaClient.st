@@ -1,6 +1,5 @@
 Smalltalk createPackage: 'LindaClient'!
 (Smalltalk packageAt: 'LindaClient') imports: {'linda' -> 'linda-client'. 'socketIo' -> 'socket.io'. 'amber/jquery/Wrappers-JQuery'. 'amber/web/Web'. 'silk/Silk'}!
-
 Object subclass: #LindaProxy
 	instanceVariableNames: 'proxy'
 	package: 'LindaClient'!
@@ -164,81 +163,6 @@ fromJSON: aProxy
 	aProxy ifNil: [^nil].
 	tupleClassName := aProxy data at: 'class' ifAbsent: ['Tuple'].
 	^(Smalltalk globals at: tupleClassName) proxy: aProxy
-! !
-
-Tuple subclass: #FibTuple
-	instanceVariableNames: ''
-	package: 'LindaClient'!
-
-!FibTuple methodsFor: 'as yet unclassified'!
-
-answer
-
-	^self data at: self class answerKey
-!
-
-answer: anInteger
-
-	self data at: self class answerKey put: anInteger
-!
-
-n
-
-	^self data at: self class nKey
-!
-
-n: anIndex
-
-	^self data at: self class nKey put: anIndex
-!
-
-value
-
-	^self data at: 'value'
-!
-
-value: anInteger
-
-	self data at: 'value' put: anInteger
-! !
-
-!FibTuple class methodsFor: 'accessor '!
-
-answerKey
-	^'answer'.
-!
-
-fibTypeKey
-	^'fib'.
-!
-
-nKey
-	^'n'.
-!
-
-resultTypeKey
-	^'fib-result'.
-!
-
-tupleSpaceName
-
-	^'fibSpace'
-! !
-
-!FibTuple class methodsFor: 'as yet unclassified'!
-
-fib
-	| tuple |
-	tuple := self new.
-	tuple type: self fibTypeKey.
-	^tuple
-!
-
-result
-	| tuple |
-	tuple := self new.
-	tuple type: self resultTypeKey.
-	^tuple
 ! !
 
 LindaProxy subclass: #TupleSpace
