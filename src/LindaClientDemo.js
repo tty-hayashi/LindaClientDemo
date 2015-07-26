@@ -598,7 +598,7 @@ messageSends: []
 $globals.GyroTuple.klass);
 
 
-$core.addClass('LindaClientApp', $globals.Object, ['serverUrl', 'tickets', 'lindaClient', 'viewModel'], 'LindaClientDemo');
+$core.addClass('LindaClientApp', $globals.Object, ['lindaClient', 'viewModel', 'watchId'], 'LindaClientDemo');
 $core.addMethod(
 $core.method({
 selector: "augmentPage",
@@ -2564,7 +2564,7 @@ messageSends: ["augmentPage", "new"]
 $globals.LindaFibWorker.klass);
 
 
-$core.addClass('LindaGyroMaster', $globals.LindaClientApp, [], 'LindaClientDemo');
+$core.addClass('LindaGyroMaster', $globals.LindaClientApp, ['list', 'workers', 'listModel'], 'LindaClientDemo');
 $core.addMethod(
 $core.method({
 selector: "augmentPage",
@@ -2591,10 +2591,44 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09super augmentPage.\x0a\x09\x0a\x09",
+source: "augmentPage\x0a\x09super augmentPage.",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["augmentPage"]
+}),
+$globals.LindaGyroMaster);
+
+$core.addMethod(
+$core.method({
+selector: "setupViewModel",
+protocol: 'starting',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true, 
+//>>excludeEnd("ctx");
+$globals.LindaGyroMaster.superclass.fn.prototype._setupViewModel.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+$recv(self["@viewModel"])._addAll_($globals.HashedCollection._newFromPairs_(["workers",$recv(ko)._observableArray_([])]));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"setupViewModel",{},$globals.LindaGyroMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "setupViewModel\x0a\x09super setupViewModel.\x0a\x09viewModel addAll: #{\x0a\x09\x09#workers -> (ko observableArray: #())\x0a\x09}.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["setupViewModel", "addAll:", "observableArray:"]
 }),
 $globals.LindaGyroMaster);
 
@@ -2608,9 +2642,11 @@ fn: function (){
 var self=this;
 var tuple;
 function $GyroTuple(){return $globals.GyroTuple||(typeof GyroTuple=="undefined"?nil:GyroTuple)}
+function $OrderedCollection(){return $globals.OrderedCollection||(typeof OrderedCollection=="undefined"?nil:OrderedCollection)}
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
+var $1,$2,$receiver;
 (
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true, 
@@ -2619,14 +2655,39 @@ $globals.LindaGyroMaster.superclass.fn.prototype._startDemo.apply($recv(self), [
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
+self._inspect();
 tuple=$recv($GyroTuple())._new();
-$recv(self._tupleSpace())._watch_callback_(tuple,(function(err,t){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["new"]=1;
+//>>excludeEnd("ctx");
+$1=self["@watchId"];
+if(($receiver = $1) == null || $receiver.isNil){
+$1;
+} else {
+$2=self._tupleSpace();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["tupleSpace"]=1;
+//>>excludeEnd("ctx");
+$recv($2)._cancel_(self["@watchId"]);
+};
+self["@list"]=$recv($OrderedCollection())._new();
+self["@watchId"]=$recv(self._tupleSpace())._watch_callback_(tuple,(function(err,t){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return self._doJQueryPrepend_($recv($recv(t)._asJSON())._printString());
+$recv(self["@list"])._add_(t);
+self._workerAt_put_($recv(t)._fromAddress(),t);
+return $recv($recv(self._viewModel())._at_("workers"))._value_($recv($recv(self._workers())._values())._collect_((function(e){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({err:err,t:t},$ctx1,1)});
+return $core.withContext(function($ctx3) {
+//>>excludeEnd("ctx");
+return $recv(e)._data();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx3) {$ctx3.fillBlock({e:e},$ctx2,3)});
+//>>excludeEnd("ctx");
+})));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({err:err,t:t},$ctx1,2)});
 //>>excludeEnd("ctx");
 }));
 return self;
@@ -2636,10 +2697,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startDemo\x0a\x09| tuple |\x0a\x09super startDemo.\x0a\x09tuple := GyroTuple new.\x0a\x09self tupleSpace watch: tuple callback: [:err :t |\x0a\x09\x09self doJQueryPrepend: t asJSON printString.\x0a\x09].",
-referencedClasses: ["GyroTuple"],
+source: "startDemo\x0a\x09| tuple |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := GyroTuple new.\x0a\x09watchId ifNotNil: [self tupleSpace cancel: watchId].\x0a\x09list := OrderedCollection new.\x0a\x09watchId := self tupleSpace watch: tuple callback: [:err :t |\x0a\x09\x09list add: t.\x0a\x09\x09self workerAt: t fromAddress put: t.\x0a\x09\x09(self viewModel at: #workers) value: (self workers values collect: [:e | e data]).\x0a\x0a\x09\x09\x22self doJQueryPrepend: t asJSON printString.\x22\x0a\x09].",
+referencedClasses: ["GyroTuple", "OrderedCollection"],
 //>>excludeEnd("ide");
-messageSends: ["startDemo", "new", "watch:callback:", "tupleSpace", "doJQueryPrepend:", "printString", "asJSON"]
+messageSends: ["startDemo", "inspect", "new", "ifNotNil:", "cancel:", "tupleSpace", "watch:callback:", "add:", "workerAt:put:", "fromAddress", "value:", "at:", "viewModel", "collect:", "values", "workers", "data"]
 }),
 $globals.LindaGyroMaster);
 
@@ -2668,6 +2729,93 @@ source: "tupleSpace\x0a\x09^self lindaClient tupleSpace: GyroTuple tupleSpaceNam
 referencedClasses: ["GyroTuple"],
 //>>excludeEnd("ide");
 messageSends: ["tupleSpace:", "lindaClient", "tupleSpaceName"]
+}),
+$globals.LindaGyroMaster);
+
+$core.addMethod(
+$core.method({
+selector: "workerAt:",
+protocol: 'accessing',
+fn: function (aKey){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._workers())._at_(aKey);
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"workerAt:",{aKey:aKey},$globals.LindaGyroMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aKey"],
+source: "workerAt: aKey\x0a\x09^self workers at: aKey",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:", "workers"]
+}),
+$globals.LindaGyroMaster);
+
+$core.addMethod(
+$core.method({
+selector: "workerAt:put:",
+protocol: 'accessing',
+fn: function (aKey,aWorker){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self._workers())._at_put_(aKey,aWorker);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"workerAt:put:",{aKey:aKey,aWorker:aWorker},$globals.LindaGyroMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aKey", "aWorker"],
+source: "workerAt: aKey put: aWorker\x0a\x09self workers at: aKey put: aWorker",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:put:", "workers"]
+}),
+$globals.LindaGyroMaster);
+
+$core.addMethod(
+$core.method({
+selector: "workers",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$2,$receiver;
+$1=self["@workers"];
+if(($receiver = $1) == null || $receiver.isNil){
+self["@workers"]=$globals.HashedCollection._newFromPairs_([]);
+self["@workers"];
+} else {
+$1;
+};
+$2=self["@workers"];
+return $2;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"workers",{},$globals.LindaGyroMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "workers\x0a\x09workers ifNil: [workers := #{}].\x0a\x09^workers",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["ifNil:"]
 }),
 $globals.LindaGyroMaster);
 
