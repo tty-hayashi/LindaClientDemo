@@ -574,7 +574,7 @@ $recv("#start"._asJQuery())._click_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return self._setupHandle();
+return self._startDemo();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -589,10 +589,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09\x0a\x09'#start' asJQuery click: [ self setupHandle ].\x0a\x09self setupViewModel.\x0a\x09ko applyBindings: viewModel.\x0a\x09self setupLindaClient.",
+source: "augmentPage\x0a\x09\x0a\x09'#start' asJQuery click: [ self startDemo ].\x0a\x09self setupViewModel.\x0a\x09ko applyBindings: viewModel.\x0a\x09self setupLindaClient.",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["click:", "asJQuery", "setupHandle", "setupViewModel", "applyBindings:", "setupLindaClient"]
+messageSends: ["click:", "asJQuery", "startDemo", "setupViewModel", "applyBindings:", "setupLindaClient"]
 }),
 $globals.LindaClientApp);
 
@@ -845,6 +845,32 @@ source: "setupViewModel\x0a\x0a\x09viewModel := #{\x0a\x09\x09#tickets -> (ko ob
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["observable:"]
+}),
+$globals.LindaClientApp);
+
+$core.addMethod(
+$core.method({
+selector: "startDemo",
+protocol: 'action',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self._setupLindaClient();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"startDemo",{},$globals.LindaClientApp)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "startDemo\x0a\x0a\x09self setupLindaClient.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["setupLindaClient"]
 }),
 $globals.LindaClientApp);
 
@@ -2469,7 +2495,7 @@ $core.addClass('LindaGyroMaster', $globals.LindaClientApp, [], 'LindaClientDemo'
 $core.addMethod(
 $core.method({
 selector: "augmentPage",
-protocol: 'as yet unclassified',
+protocol: 'starting',
 fn: function (){
 "use strict";
 
@@ -2496,6 +2522,107 @@ source: "augmentPage\x0a\x09super augmentPage.\x0a\x09\x0a\x09",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["augmentPage"]
+}),
+$globals.LindaGyroMaster);
+
+$core.addMethod(
+$core.method({
+selector: "startDemo",
+protocol: 'action',
+fn: function (){
+"use strict";
+
+var self=this;
+var tuple;
+function $GyroTuple(){return $globals.GyroTuple||(typeof GyroTuple=="undefined"?nil:GyroTuple)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true, 
+//>>excludeEnd("ctx");
+$globals.LindaGyroMaster.superclass.fn.prototype._startDemo.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+tuple=$recv($GyroTuple())._new();
+$recv(self._tupleSpace())._watch_callback_(tuple,(function(err,t){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return self._doJQueryPrepend_($recv($recv(t)._asJSON())._printString());
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({err:err,t:t},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"startDemo",{tuple:tuple},$globals.LindaGyroMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "startDemo\x0a\x09| tuple |\x0a\x09super startDemo.\x0a\x09tuple := GyroTuple new.\x0a\x09self tupleSpace watch: tuple callback: [:err :t |\x0a\x09\x09self doJQueryPrepend: t asJSON printString.\x0a\x09].",
+referencedClasses: ["GyroTuple"],
+//>>excludeEnd("ide");
+messageSends: ["startDemo", "new", "watch:callback:", "tupleSpace", "doJQueryPrepend:", "printString", "asJSON"]
+}),
+$globals.LindaGyroMaster);
+
+$core.addMethod(
+$core.method({
+selector: "tupeSpace",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+function $GyroTuple(){return $globals.GyroTuple||(typeof GyroTuple=="undefined"?nil:GyroTuple)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._lindaClient())._tupleSpace_($recv($GyroTuple())._tupleSpaceName());
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"tupeSpace",{},$globals.LindaGyroMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "tupeSpace\x0a\x09^self lindaClient tupleSpace: GyroTuple tupleSpaceName",
+referencedClasses: ["GyroTuple"],
+//>>excludeEnd("ide");
+messageSends: ["tupleSpace:", "lindaClient", "tupleSpaceName"]
+}),
+$globals.LindaGyroMaster);
+
+$core.addMethod(
+$core.method({
+selector: "tupleSpace",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+function $GyroTuple(){return $globals.GyroTuple||(typeof GyroTuple=="undefined"?nil:GyroTuple)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._lindaClient())._tupleSpace_($recv($GyroTuple())._tupleSpaceName());
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"tupleSpace",{},$globals.LindaGyroMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "tupleSpace\x0a\x09^self lindaClient tupleSpace: GyroTuple tupleSpaceName",
+referencedClasses: ["GyroTuple"],
+//>>excludeEnd("ide");
+messageSends: ["tupleSpace:", "lindaClient", "tupleSpaceName"]
 }),
 $globals.LindaGyroMaster);
 
@@ -2783,6 +2910,9 @@ $9=$recv($10).__star((10));
 $ctx1.sendIdx["*"]=1;
 //>>excludeEnd("ctx");
 self._gX_($9);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["gX:"]=1;
+//>>excludeEnd("ctx");
 $12=$recv(yValue)._rounded();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["rounded"]=2;
@@ -2825,7 +2955,7 @@ $recv($13)._value_($14);
 tuple=$recv($GyroTuple())._new();
 tuple;
 $recv(tuple)._handleName_(self._handleName());
-$recv(tuple)._gx_(self._gX());
+$recv(tuple)._gX_(self._gX());
 $recv(tuple)._gY_(self._gY());
 $recv(tuple)._gZ_(self._gZ());
 $recv(self._tupleSpace())._write_(tuple);
@@ -2837,10 +2967,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["xValue", "yValue", "zValue"],
-source: "gX: xValue gY: yValue gZ: zValue\x0a\x09| tuple |\x0a\x09(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) \x0a\x09\x09ifTrue: [\x0a\x09\x0a\x09\x09\x09self gX: (xValue rounded) * 10.\x0a\x09\x09\x09self gY: (yValue rounded) * 10.\x0a\x09\x09\x09self gZ: (zValue rounded) * 10.\x0a\x0a\x09\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', yValue printString, 'deg)', \x0a\x09\x09\x09\x09' rotateY(', xValue printString, 'deg)'.\x0a\x09\x09\x09tuple := GyroTuple new.\x0a\x09\x09\x09tuple handleName: self handleName.\x0a\x09\x09\x09tuple gx: self gX.\x0a\x09\x09\x09tuple gY: self gY.\x0a\x09\x09\x09tuple gZ: self gZ.\x0a\x09\x09\x09self tupleSpace write: tuple.\x0a\x09\x09]\x0a\x09",
+source: "gX: xValue gY: yValue gZ: zValue\x0a\x09| tuple |\x0a\x09(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) \x0a\x09\x09ifTrue: [\x0a\x09\x0a\x09\x09\x09self gX: (xValue rounded) * 10.\x0a\x09\x09\x09self gY: (yValue rounded) * 10.\x0a\x09\x09\x09self gZ: (zValue rounded) * 10.\x0a\x0a\x09\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', yValue printString, 'deg)', \x0a\x09\x09\x09\x09' rotateY(', xValue printString, 'deg)'.\x0a\x09\x09\x09tuple := GyroTuple new.\x0a\x09\x09\x09tuple handleName: self handleName.\x0a\x09\x09\x09tuple gX: self gX.\x0a\x09\x09\x09tuple gY: self gY.\x0a\x09\x09\x09tuple gZ: self gZ.\x0a\x09\x09\x09self tupleSpace write: tuple.\x0a\x09\x09]\x0a\x09",
 referencedClasses: ["GyroTuple"],
 //>>excludeEnd("ide");
-messageSends: ["ifTrue:", "&", "~=", "gX", "gY", "gZ", "gX:", "*", "rounded", "gY:", "gZ:", "value:", "at:", ",", "printString", "new", "handleName:", "handleName", "gx:", "write:", "tupleSpace"]
+messageSends: ["ifTrue:", "&", "~=", "gX", "gY", "gZ", "gX:", "*", "rounded", "gY:", "gZ:", "value:", "at:", ",", "printString", "new", "handleName:", "handleName", "write:", "tupleSpace"]
 }),
 $globals.LindaGyroWorker);
 
@@ -3095,7 +3225,6 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self._setupLindaClient();
 $recv(window)._addEventListener_with_("devicemotion",self._devicemotionHandler());
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -3104,10 +3233,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "setupHandle\x0a\x0a\x09self setupLindaClient.\x0a\x09window addEventListener: #devicemotion with: self devicemotionHandler.",
+source: "setupHandle\x0a\x0a\x09window addEventListener: #devicemotion with: self devicemotionHandler.",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["setupLindaClient", "addEventListener:with:", "devicemotionHandler"]
+messageSends: ["addEventListener:with:", "devicemotionHandler"]
 }),
 $globals.LindaGyroWorker);
 
@@ -3189,6 +3318,40 @@ $globals.LindaGyroWorker);
 
 $core.addMethod(
 $core.method({
+selector: "startDemo",
+protocol: 'action',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true, 
+//>>excludeEnd("ctx");
+$globals.LindaGyroWorker.superclass.fn.prototype._startDemo.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+self._setupHandle();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"startDemo",{},$globals.LindaGyroWorker)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "startDemo\x0a\x09super startDemo.\x0a\x09self setupHandle.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["startDemo", "setupHandle"]
+}),
+$globals.LindaGyroWorker);
+
+$core.addMethod(
+$core.method({
 selector: "tupeSpace",
 protocol: 'accessing',
 fn: function (){
@@ -3209,6 +3372,34 @@ return $1;
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
 source: "tupeSpace\x0a\x09^self lindaClient tupleSpace: GyroTuple tupleSpaceName",
+referencedClasses: ["GyroTuple"],
+//>>excludeEnd("ide");
+messageSends: ["tupleSpace:", "lindaClient", "tupleSpaceName"]
+}),
+$globals.LindaGyroWorker);
+
+$core.addMethod(
+$core.method({
+selector: "tupleSpace",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+function $GyroTuple(){return $globals.GyroTuple||(typeof GyroTuple=="undefined"?nil:GyroTuple)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._lindaClient())._tupleSpace_($recv($GyroTuple())._tupleSpaceName());
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"tupleSpace",{},$globals.LindaGyroWorker)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "tupleSpace\x0a\x09^self lindaClient tupleSpace: GyroTuple tupleSpaceName",
 referencedClasses: ["GyroTuple"],
 //>>excludeEnd("ide");
 messageSends: ["tupleSpace:", "lindaClient", "tupleSpaceName"]
