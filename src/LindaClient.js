@@ -226,8 +226,12 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1;
-$1=$recv(self._io())._uri();
+var $2,$1;
+$2=$recv(self._io())._io();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["io"]=1;
+//>>excludeEnd("ctx");
+$1=$recv($2)._uri();
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"serverUrl",{},$globals.LindaClient)});
@@ -235,7 +239,7 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "serverUrl\x0a\x09^self io uri",
+source: "serverUrl\x0a\x09^self io io uri",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["uri", "io"]
@@ -270,6 +274,28 @@ messageSends: ["proxy:", "tuplespace:", "proxy"]
 }),
 $globals.LindaClient);
 
+
+$globals.LindaClient.klass.iVarNames = ['defaultServerUrl'];
+$core.addMethod(
+$core.method({
+selector: "changeDeefaultServerUrlForHeroku",
+protocol: 'utilities',
+fn: function (){
+"use strict";
+
+var self=this;
+self["@defaultServerUrl"]="http://node-linda-ststudy.herokuapp.com";
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "changeDeefaultServerUrlForHeroku\x0a\x09\x22LindaCLient changeDeefaultServerUrlForHeroku\x22\x0a\x09\x0a\x09defaultServerUrl := 'http://node-linda-ststudy.herokuapp.com'",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.LindaClient.klass);
 
 $core.addMethod(
 $core.method({
@@ -320,6 +346,88 @@ source: "connect: aSocketIo\x0a\x09| newClient |\x0a\x09newClient := self proxy:
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["proxy:", "new", "linda", "connect:", "yourself"]
+}),
+$globals.LindaClient.klass);
+
+$core.addMethod(
+$core.method({
+selector: "default",
+protocol: 'instance creation',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=self._serverUrl_(self._defaultServerUrl());
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"default",{},$globals.LindaClient.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "default\x0a\x09^self serverUrl: self defaultServerUrl ",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["serverUrl:", "defaultServerUrl"]
+}),
+$globals.LindaClient.klass);
+
+$core.addMethod(
+$core.method({
+selector: "defaultServerUrl",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$2,$receiver;
+$1=self["@defaultServerUrl"];
+if(($receiver = $1) == null || $receiver.isNil){
+self["@defaultServerUrl"]="http://127.0.0.1:8931/";
+self["@defaultServerUrl"];
+} else {
+$1;
+};
+$2=self["@defaultServerUrl"];
+return $2;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"defaultServerUrl",{},$globals.LindaClient.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "defaultServerUrl\x0a\x0a\x09defaultServerUrl ifNil: [defaultServerUrl := 'http://127.0.0.1:8931/'].\x0a\x09^defaultServerUrl",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["ifNil:"]
+}),
+$globals.LindaClient.klass);
+
+$core.addMethod(
+$core.method({
+selector: "flushDeefaultServerUrlForHeroku",
+protocol: 'utilities',
+fn: function (){
+"use strict";
+
+var self=this;
+self["@defaultServerUrl"]=nil;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "flushDeefaultServerUrlForHeroku\x0a\x09\x22LindaCLient flushDeefaultServerUrlForHeroku\x22\x0a\x09\x0a\x09defaultServerUrl := nil",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
 }),
 $globals.LindaClient.klass);
 
