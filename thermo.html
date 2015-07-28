@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<title>Gyro Master</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, user-scalable=yes">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="author" content="tetha" />
+		<script type='text/javascript' src='the.js'></script>
+		<link rel="stylesheet" type="text/css" href="3d.css">
+	</head>
+  <body>
+
+  <p>lindaサーバーURL: <input data-bind="value: serverUrl"/></p>
+  <button id="start">START</button>
+  <button id="airconOn">エアコン ON</button>
+  <button id="airconOff">エアコン OFF</button>
+
+  <table>
+	  <thead>
+		  <tr>
+			  <th>sensor</th><th>celsius</th><th>time</th>
+		  </tr>
+	  </thead>
+	  <tbody data-bind="foreach: workers">
+		  <tr>
+			  <td data-bind="text: sensor"></td>
+			  <td data-bind="text: celsius"></td>
+			  <td data-bind="text: time"></td>
+		  </tr>
+	  </tbody>
+  </table>
+  
+  <ul id="output-list"></ul>
+
+
+  <script type='text/javascript'>
+      require(['app'], function (amber) {
+          amber.initialize({
+            //used for all new packages in IDE
+            'transport.defaultAmdNamespace': "amber-lindaclient"
+          });
+          require(["amber-ide-starter-dialog"], function (dlg) { dlg.start(); });
+          amber.globals.LindaThermo._start();
+      });
+  </script>
+
+  
+
+  </body>
+
+</html>
