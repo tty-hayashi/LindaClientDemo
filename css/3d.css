@@ -7,13 +7,18 @@
     -webkit-perspective-origin: 0px 0px;
 }
 html {
-    font-size : 75%; 
+    font-size : 100%; 
 }
  
 @media screen and (min-width : 768px){
-    html{ font-size : 87.5%;} 
+    html{ font-size : 120%;} 
 }
  
 @media screen and (min-width : 1024px) {
     html{ font-size : 100%}; 
+}
+
+article,aside,canvas,details,figcaption,figure,
+header,footer,main,menu,nav,section,summary {
+	display: block;
 }
