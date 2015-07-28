@@ -138,6 +138,58 @@ tupleSpaceName
 	^'gyroSpace'
 ! !
 
+Object subclass: #LindaBasicDemo
+	instanceVariableNames: ''
+	package: 'LindaClientDemo'!
+
+!LindaBasicDemo class methodsFor: 'pholosoper table'!
+
+phil: anIndex total: num
+	"[LindaBasicDemo phil: 4 total: 5] valueWithInterval: 2000"
+	
+	| ts |
+	ts := self philosopherTupleSpace.
+	
+	Transcript show: 'Phil ', anIndex printString, ' is thinking'; cr.
+	ts read: #{'type' -> 'ticket'} callback: [:err1 :ti |
+		ts read: #{'type' -> 'chopstick' . 'i' -> anIndex} callback: [:err2 :c1 |
+			ts read: #{'type' -> 'chopstick' . 'i' -> ((anIndex + 1) \\ num)} callback: [:err3 :c2 |
+				Transcript show: 'Phil ', anIndex printString, ' starts eating'; cr.
+				Transcript show: 'Phil ', anIndex printString, ' ends eating'; cr.
+				ts write: #{'type' -> 'chopstick' . 'i' -> anIndex}.
+				ts write: #{'type' -> 'chopstick' . 'i' -> ((anIndex + 1) \\ num)}.
+				ts write: #{'type' -> 'ticket'} .
+			].
+		].
+	].
+!
+
+philMasterTotal: num
+	"LindaBasicDemo philosopherTupleSpace take: #{} callback: [:e :t| Transcript show: t; cr].
+
+	LindaBasicDemo philMasterTotal: 5.
+
+	1 to: 5 do: [:i |
+		[LindaBasicDemo phil: i total: 5] valueWithInterval: (10 atRandom * 1000)
+	]"
+
+	| ts |
+	ts := self philosopherTupleSpace.
+	1 to: num do: [:i |
+		ts write: #{'type' -> 'chopstick' . 'i' -> i}.
+	].
+	
+	(num - 1) timesRepeat: [
+		ts write: #{'type' -> 'ticket'} .
+	]
+!
+
+philosopherTupleSpace
+	| lindaClient |
+	lindaClient := LindaClient default.
+	^lindaClient tupleSpace: 'philTable'
+! !
+
 Object subclass: #LindaClientApp
 	instanceVariableNames: 'lindaClient viewModel watchId'
 	package: 'LindaClientDemo'!
@@ -215,7 +267,7 @@ setupViewModel
 
 	viewModel := #{
 		#tickets -> (ko observable: 0) .
-		#serverUrl -> (ko observable: 'http://node-linda-ststudy.herokuapp.com') 
+		#serverUrl -> (ko observable: LindaClient defaultServerUrl) 
 	}.
 ! !
 
@@ -235,12 +287,6 @@ LindaClientApp subclass: #LindaFactorialMaster
 
 !LindaFactorialMaster methodsFor: 'starting'!
 
-augmentPage
-	'#amber-with' asJQuery click: [ self doAmberWith ].
-	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
-	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
-!
-
 map
 	"Map "
 !
@@ -258,7 +304,7 @@ example
 	app tickets: 5.
 	n := 100.
 	lot := n / app tickets.
-	app lindaClient: (LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com').
+	app lindaClient: (LindaClient default).
 	ts := app lindaClient tupleSpace: 'factorial'.
 	(1 to: n by: lot) do:[:i | 
 		ts write: #{#type -> #fact . #i -> i. #lot -> lot}.].
@@ -275,21 +321,21 @@ start
 	self new augmentPage
 ! !
 
-LindaClientApp subclass: #LindaFactorialSolver
+LindaClientApp subclass: #LindaFactorialWorker
 	instanceVariableNames: ''
 	package: 'LindaClientDemo'!
 
-!LindaFactorialSolver methodsFor: 'as yet unclassified'!
+!LindaFactorialWorker methodsFor: 'as yet unclassified'!
 
 reduce: n
 ! !
 
-!LindaFactorialSolver class methodsFor: 'as yet unclassified'!
+!LindaFactorialWorker class methodsFor: 'as yet unclassified'!
 
 example
 
 	| linda  base lot ts ans|
-	linda := LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com'.
+	linda := LindaClient default.
 	ts := linda tupleSpace: 'factorial'.
 	ts take: #{#type -> #fact} callback: [:err :t | 
 		base := t data at: 'i'.
@@ -366,85 +412,11 @@ example
 
 	| app  lot ts ans|
 	app := LindaFibMaster new.
-	app lindaClient: (LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com').
+	app lindaClient: (LindaClient default).
 	app n: 10.
 	app map.
 	app readResultTuple.
 	app inspect
-!
-
-start
-	self new augmentPage
-! !
-
-LindaClientApp subclass: #LindaFibSolver
-	instanceVariableNames: ''
-	package: 'LindaClientDemo'!
-
-!LindaFibSolver methodsFor: 'starting'!
-
-augmentPage
-	'#amber-with' asJQuery click: [ self doAmberWith ].
-	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
-	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
-!
-
-orgfib: n
-		^ n < 2
-		ifTrue: [1]
-		ifFalse: [(self fib:(n - 1)) + (self fib: (n - 2)) + 1]
-!
-
-readResultNoWait: anIndex 
-	| ans id tuple |
-	ans := OrderedCollection new.
-	tuple := FibTuple result.
-	tuple n: anIndex.
-	id := self tupleSpace read: tuple callback: [:err :tu | ans add: tu ].
-	[self tupleSpace cancel: id] valueWithTimeout:1.
-	^ans reject: [:e | e isNil]
-!
-
-reduce: n
-	| ans id value v1 v2 |
-	ans := self readResultNoWait: n.
-	ans isEmpty
-		ifTrue: [n < 3
-					ifTrue: [self writeResult: n value: 1]
-					ifFalse: [
-						self tupleSpace read: #{#type -> 'fib-result' . #n -> (n - 2)} callback: [:e1 :t1 |
-							self tupleSpace read: #{#type -> 'fib-result' .  #n -> (n - 1)} callback: [:e2 :t2 |
-								v1 := (t1 data at: 'answer').
-								v2 := (t2 data at: 'answer').
-								self writeResult: n value: (v1 + v2).
-								]
-							]
-						]
-					]
-!
-
-tupleSpace
-
-	^self lindaClient tupleSpace: FibTuple tupleSpaceName
-!
-
-writeResult: anIndex value: aValue
-	| tuple |
-	tuple := FibTuple result.
-	tuple n: anIndex.
-	tuple answer: aValue.
-	self tupleSpace write: tuple
-! !
-
-!LindaFibSolver class methodsFor: 'starting'!
-
-example
-
-	| solver |
-	solver := LindaFibSolver new.
-	solver lindaClient: (LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com').
-	solver tupleSpace take: #{#type -> 'fib'} callback: [:err :t | 
-		solver reduce: (t data at: 'n')]
 !
 
 start
@@ -470,7 +442,7 @@ targetNumber
 startReduce
 
 	Transcript show: 'pan pan pan'; cr.
-	self lindaClient: (LindaClient serverUrl: 'http://127.0.0.1:8931').
+	self lindaClient: (LindaClient default).
 	self tupleSpace take: #{#type -> 'fib'} callback: [:err :t | 
 		self reduce: (t data at: 'n')]
 ! !
@@ -545,7 +517,7 @@ example
 
 	| solver |
 	solver := LindaFibWorker new.
-	solver lindaClient: (LindaClient serverUrl: 'http://node-linda-ststudy.herokuapp.com').
+	solver lindaClient: (LindaClient default).
 	solver tupleSpace take: #{#type -> 'fib'} callback: [:err :t | 
 		solver reduce: (t data at: 'n')]
 !
@@ -555,7 +527,7 @@ start
 ! !
 
 LindaClientApp subclass: #LindaGyroMaster
-	instanceVariableNames: 'list workers listModel'
+	instanceVariableNames: 'workersTable debugList'
 	package: 'LindaClientDemo'!
 
 !LindaGyroMaster methodsFor: 'accessing'!
@@ -565,16 +537,16 @@ tupleSpace
 !
 
 workerAt: aKey
-	^self workers at: aKey
+	^self workersTable at: aKey
 !
 
 workerAt: aKey put: aWorker
-	self workers at: aKey put: aWorker
+	self workersTable at: aKey put: aWorker
 !
 
-workers
-	workers ifNil: [workers := #{}].
-	^workers
+workersTable
+	workersTable ifNil: [workersTable := #{}].
+	^workersTable
 ! !
 
 !LindaGyroMaster methodsFor: 'action'!
@@ -585,11 +557,11 @@ startDemo
 	self inspect.
 	tuple := GyroTuple new.
 	watchId ifNotNil: [self tupleSpace cancel: watchId].
-	list := OrderedCollection new.
+	debugList := OrderedCollection new.
 	watchId := self tupleSpace watch: tuple callback: [:err :t |
-		list add: t.
+		debugList add: t.
 		self workerAt: t fromAddress put: t.
-		(self viewModel at: #workers) value: (self workers values collect: [:e | e data]).
+		(self viewModel at: #workers) value: (self workersTable values collect: [:e | e data]).
 
 		"self doJQueryPrepend: t asJSON printString."
 	].
@@ -758,5 +730,400 @@ gX: xValue gY: yValue gZ: zValue
 			tuple gZ: self gZ.
 			self tupleSpace write: tuple.
 		]
+! !
+
+LindaClientApp subclass: #LindaSievelMaster
+	instanceVariableNames: ''
+	package: 'LindaClientDemo'!
+
+!LindaSievelMaster methodsFor: 'starting'!
+
+augmentPage
+	'#amber-with' asJQuery click: [ self doAmberWith ].
+	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
+	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
+!
+
+map
+	"Map "
+!
+
+reduce
+! !
+
+!LindaSievelMaster class methodsFor: 'starting'!
+
+example
+
+	| app tickets n lot ts ans|
+	app := LindaFactorialMaster new.
+	app setupViewModel.
+	app tickets: 5.
+	n := 100.
+	lot := n / app tickets.
+	app lindaClient: (LindaClient default).
+	ts := app lindaClient tupleSpace: 'factorial'.
+	(1 to: n by: lot) do:[:i | 
+		ts write: #{#type -> #fact . #i -> i. #lot -> lot}.].
+	ans := OrderedCollection new.
+	(1 to: app tickets) do:[:i | 	
+		ts take: #{#type -> #ans} callback: [:err :t |
+			ans add: (t data at: #ans).
+			(i = app tickets)
+				ifTrue: [(ans inject: 1 into: [:sum :e | sum * e]) inspect].
+		]].
+!
+
+example1
+	"基本的な素数タプルリスト作成"
+	
+	| app tickets n lot ts ans tuple|
+	app := LindaFactorialMaster new.
+	app setupViewModel.
+	app tickets: 5.
+	n := 100.
+	lot := n / app tickets.
+	app lindaClient: LindaClient default.
+	ts := app lindaClient tupleSpace: PrimeTuple tupleSpaceName.
+	tuple := PrimeTuple beMax: 100.
+	ts write: tuple.
+	(1 to: n by: lot) do:[:i | 
+		ts write: #{#type -> #fact . #i -> i. #lot -> lot}.].
+	ans := OrderedCollection new.
+	(1 to: app tickets) do:[:i | 	
+		ts take: #{#type -> #ans} callback: [:err :t |
+			ans add: (t data at: #ans).
+			(i = app tickets)
+				ifTrue: [(ans inject: 1 into: [:sum :e | sum * e]) inspect].
+		]].
+!
+
+start
+	self new augmentPage
+! !
+
+LindaClientApp subclass: #LindaSievelWorker
+	instanceVariableNames: ''
+	package: 'LindaClientDemo'!
+
+!LindaSievelWorker methodsFor: 'as yet unclassified'!
+
+base
+	^(self viewModel at: 'base') value
+!
+
+base: anInteger
+	^(self viewModel at: 'base') value: anInteger
+!
+
+reduce: n
+! !
+
+!LindaSievelWorker class methodsFor: 'as yet unclassified'!
+
+example
+
+	| linda tuple base lot ts ans|
+	linda := LindaClient default.
+	ts := linda tupleSpace: PrimeTuple tupleSpaceName.
+	ts take: #{#type -> #fact} callback: [:err :t | 
+		base := t data at: 'i'.
+		lot := t data at: 'lot'.
+		ans := (base to: (base + lot - 1)) inject: 1 into: [:sum :elm | sum * elm].
+		ts write: #{#type -> #primes . #i -> base . #ans -> ans} .
+	].
+!
+
+example1
+	"結果並列法"
+	
+	| linda tuple base lot ts ans|
+	linda := LindaClient default.
+	ts := linda tupleSpace: PrimeTuple tupleSpaceName.
+	tuple := PrimTuple notFIxed.
+	
+	ts read: tuple callback: [:err :t | 
+		base := t data at: 'i'.
+		lot := t data at: 'lot'.
+		ans := (base to: (base + lot - 1)) inject: 1 into: [:sum :elm | sum * elm].
+		ts write: #{#type -> #primes . #i -> base . #ans -> ans} .
+	].
+! !
+
+LindaClientApp subclass: #LindaThermo
+	instanceVariableNames: 'workersTable debugList'
+	package: 'LindaClientDemo'!
+
+!LindaThermo methodsFor: 'accessing'!
+
+tupleSpace
+	^self lindaClient tupleSpace: ThermoTuple tupleSpaceName
+!
+
+workerAt: aKey put: aWorker
+	self workersTable at: aKey put: aWorker
+!
+
+workers
+	^(self viewModel at: #workers) value
+!
+
+workersTable
+	workersTable ifNil: [workersTable := #{}].
+	^workersTable
+! !
+
+!LindaThermo methodsFor: 'action'!
+
+airconOff
+	| tuple list |
+	super startDemo.
+	self inspect.
+	tuple := ThermoTuple new.
+	tuple airconOff.
+	self tupleSpace write: tuple.
+!
+
+airconOn
+	| tuple list |
+	super startDemo.
+	self inspect.
+	tuple := ThermoTuple new.
+	tuple airconOn.
+	self tupleSpace write: tuple.
+!
+
+startDemo
+	| tuple |
+	super startDemo.
+	self inspect.
+	tuple := ThermoTuple new.
+	
+	watchId ifNotNil: [self tupleSpace cancel: watchId].
+	debugList := OrderedCollection new.
+	watchId := self tupleSpace watch: tuple callback: [:err :t |
+		t ifNotNil: [
+		debugList add: t.
+		self workerAt: t fromAddress put: t.
+		(self viewModel at: #workers) value: (self workers add: t). ]
+
+		"self doJQueryPrepend: t asJSON printString."
+	].
+! !
+
+!LindaThermo methodsFor: 'starting'!
+
+augmentPage
+	super augmentPage.
+	'#airconOn' asJQuery click: [ self airconOn ].
+	'#airconOff' asJQuery click: [ self airconOff ].
+!
+
+setupViewModel
+	super setupViewModel.
+	viewModel addAll: #{
+		#workers -> (ko observableArray: #())
+	}.
+! !
+
+Tuple subclass: #PrimeTuple
+	instanceVariableNames: ''
+	package: 'LindaClientDemo'!
+
+!PrimeTuple methodsFor: 'accessing'!
+
+i
+
+	^self data at: self class iKey
+!
+
+i: aValue
+
+	self data at: self class iKey put: aValue
+!
+
+isFixed
+
+	^self data at: self class isFixedKey
+!
+
+isFixed: aValue
+
+	self data at: self class isFixedKey put: aValue
+!
+
+isPrime
+
+	^self data at: self class isPrimeKey
+!
+
+isPrime: aValue
+
+	self data at: self class isPrimeKey put: aValue
+!
+
+max
+
+	^self data at: self class maxKey
+!
+
+max: aValue
+
+	self data at: self class maxKey put: aValue
+! !
+
+!PrimeTuple methodsFor: 'initialization'!
+
+initialize
+	super initialize.
+	self isFixed: false.
+	self isPrime: true
+! !
+
+!PrimeTuple methodsFor: 'status changing'!
+
+beFixed
+
+	self isFixed: true
+!
+
+beNotFixed
+
+	self isFixed: false
+!
+
+beNotPrime
+
+	self isPrime: false
+! !
+
+!PrimeTuple class methodsFor: 'accessor key'!
+
+iKey
+	^'i'.
+!
+
+isFixedKey
+	^'isFiexed'.
+!
+
+isPrimeKey
+	^'isPrime'.
+!
+
+maxKey
+	^'max'.
+! !
+
+!PrimeTuple class methodsFor: 'instance create'!
+
+beMax
+!
+
+beMax: anInteger
+
+	| tuple |
+	tuple := self new.
+	self max: anInteger.
+	^tuple
+!
+
+i: anInteger
+	"PrimeTuple i: 3"
+	^self new i: anInteger
+!
+
+notFixed
+	^self new
+! !
+
+!PrimeTuple class methodsFor: 'tuple space'!
+
+tupleSpaceName
+
+	^'sieve'
+! !
+
+Tuple subclass: #ThermoTuple
+	instanceVariableNames: ''
+	package: 'LindaClientDemo'!
+
+!ThermoTuple methodsFor: 'accessing'!
+
+aircon
+
+	^self data at: self class airconKey
+!
+
+aircon: aValue
+
+	self data at: self class airconKey put: aValue
+!
+
+celsius
+
+	^self data at: self class celsiusKey
+!
+
+celsius: aValue
+
+	self data at: self class celsiusKey put: aValue
+!
+
+sensor
+
+	^self data at: self class sensorKey
+!
+
+sensor: aValue
+
+	self data at: self class sensorKey put: aValue
+!
+
+time
+
+	^self data at: self class timeKey
+!
+
+time: aValue
+
+	self data at: self class timeKey put: aValue
+! !
+
+!ThermoTuple methodsFor: 'status changing'!
+
+airconOff
+
+	self aircon: 'off'
+!
+
+airconOn
+
+	self aircon: 'on'
+! !
+
+!ThermoTuple class methodsFor: 'accessor key'!
+
+airconKey
+	^'aircon'.
+!
+
+celsiusKey
+	^'celsius'.
+!
+
+sensorKey
+	^'sensor'.
+!
+
+timeKey
+	^'time'.
+! !
+
+!ThermoTuple class methodsFor: 'tuple space'!
+
+tupleSpaceName
+
+	^'sensors'
 ! !
 

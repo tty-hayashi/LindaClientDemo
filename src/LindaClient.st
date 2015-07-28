@@ -44,7 +44,7 @@ io
 !
 
 serverUrl
-	^self io uri
+	^self io io uri
 ! !
 
 !LindaClient methodsFor: 'services'!
@@ -56,6 +56,16 @@ connect: aSocketIo
 
 tupleSpace: aName
 	^TupleSpace proxy: (self proxy tuplespace: aName).
+! !
+
+LindaClient class instanceVariableNames: 'defaultServerUrl'!
+
+!LindaClient class methodsFor: 'accessing'!
+
+defaultServerUrl
+
+	defaultServerUrl ifNil: [defaultServerUrl := 'http://127.0.0.1:8931/'].
+	^defaultServerUrl
 ! !
 
 !LindaClient class methodsFor: 'examples'!
@@ -71,6 +81,10 @@ connect: aSocketIo
 	^newClient connect: aSocketIo; yourself
 !
 
+default
+	^self serverUrl: self defaultServerUrl
+!
+
 serverUrl: aUrlString
 
 	^self connect: (SocketIo serverUrl: aUrlString).
@@ -81,6 +95,20 @@ serverUrl: aUrlString
 linda
 	"JS function LindaClient"
 	^Linda
+! !
+
+!LindaClient class methodsFor: 'utilities'!
+
+changeDeefaultServerUrlForHeroku
+	"LindaCLient changeDeefaultServerUrlForHeroku"
+	
+	defaultServerUrl := 'http://node-linda-ststudy.herokuapp.com'
+!
+
+flushDeefaultServerUrlForHeroku
+	"LindaCLient flushDeefaultServerUrlForHeroku"
+	
+	defaultServerUrl := nil
 ! !
 
 LindaProxy subclass: #ReadTakeOption
