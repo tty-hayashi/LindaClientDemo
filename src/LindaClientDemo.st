@@ -532,6 +532,10 @@ LindaClientApp subclass: #LindaGyroMaster
 
 !LindaGyroMaster methodsFor: 'accessing'!
 
+dataOfWorkersTable
+	^self workersTable values collect: [:e | e data]
+!
+
 tupleSpace
 	^self lindaClient tupleSpace: GyroTuple tupleSpaceName
 !
@@ -561,7 +565,7 @@ startDemo
 	watchId := self tupleSpace watch: tuple callback: [:err :t |
 		debugList add: t.
 		self workerAt: t fromAddress put: t.
-		(self viewModel at: #workers) value: (self workersTable values collect: [:e | e data]).
+		(self viewModel at: #workers) value: self dataOfWorkersTable.
 
 		"self doJQueryPrepend: t asJSON printString."
 	].
@@ -851,26 +855,22 @@ example1
 ! !
 
 LindaClientApp subclass: #LindaThermo
-	instanceVariableNames: 'workersTable debugList'
+	instanceVariableNames: 'workersTable workerList'
 	package: 'LindaClientDemo'!
 
 !LindaThermo methodsFor: 'accessing'!
+
+dataOfWorkerList
+	^self workerList collect: [:e | e data]
+!
 
 tupleSpace
 	^self lindaClient tupleSpace: ThermoTuple tupleSpaceName
 !
 
-workerAt: aKey put: aWorker
-	self workersTable at: aKey put: aWorker
-!
-
-workers
-	^(self viewModel at: #workers) value
-!
-
-workersTable
-	workersTable ifNil: [workersTable := #{}].
-	^workersTable
+workerList
+	workerList ifNil: [workerList := #()].
+	^workerList
 ! !
 
 !LindaThermo methodsFor: 'action'!
@@ -894,20 +894,18 @@ airconOn
 !
 
 startDemo
-	| tuple |
+	| tuple log |
 	super startDemo.
 	self inspect.
 	tuple := ThermoTuple new.
 	
 	watchId ifNotNil: [self tupleSpace cancel: watchId].
-	debugList := OrderedCollection new.
 	watchId := self tupleSpace watch: tuple callback: [:err :t |
 		t ifNotNil: [
-		debugList add: t.
-		self workerAt: t fromAddress put: t.
-		(self viewModel at: #workers) value: (self workers add: t). ]
+			self workerList addFirst: t.
+			(self viewModel at: #workers) value: self dataOfWorkerList. ]
 
-		"self doJQueryPrepend: t asJSON printString."
+			"self doJQueryPrepend: t asJSON printString."
 	].
 ! !
 
@@ -1052,7 +1050,7 @@ Tuple subclass: #ThermoTuple
 
 aircon
 
-	^self data at: self class airconKey
+	^self data at: self class airconKey ifAbsent: ['N/A']
 !
 
 aircon: aValue
@@ -1062,7 +1060,7 @@ aircon: aValue
 
 celsius
 
-	^self data at: self class celsiusKey
+	^self data at: self class celsiusKey ifAbsent: ['N/A']
 !
 
 celsius: aValue
@@ -1072,7 +1070,7 @@ celsius: aValue
 
 sensor
 
-	^self data at: self class sensorKey
+	^self data at: self class sensorKey ifAbsent: ['N/A']
 !
 
 sensor: aValue
@@ -1082,12 +1080,22 @@ sensor: aValue
 
 time
 
-	^self data at: self class timeKey
+	^self data at: self class timeKey ifAbsent: ['N/A']
 !
 
 time: aValue
 
 	self data at: self class timeKey put: aValue
+! !
+
+!ThermoTuple methodsFor: 'initialization'!
+
+initialize
+	super initialize.
+
+	self sensor: ''.
+	self celsius: 1000.
+	self time: ''
 ! !
 
 !ThermoTuple methodsFor: 'status changing'!
@@ -1100,6 +1108,11 @@ airconOff
 airconOn
 
 	self aircon: 'on'
+!
+
+airconTimer
+
+	self aircon: 'timer'
 ! !
 
 !ThermoTuple class methodsFor: 'accessor key'!

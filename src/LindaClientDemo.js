@@ -2375,6 +2375,41 @@ $globals.LindaGyroMaster);
 
 $core.addMethod(
 $core.method({
+selector: "dataOfWorkersTable",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv($recv(self._workersTable())._values())._collect_((function(e){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(e)._data();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({e:e},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"dataOfWorkersTable",{},$globals.LindaGyroMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "dataOfWorkersTable\x0a\x09^self workersTable values collect: [:e | e data]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["collect:", "values", "workersTable", "data"]
+}),
+$globals.LindaGyroMaster);
+
+$core.addMethod(
+$core.method({
 selector: "setupViewModel",
 protocol: 'starting',
 fn: function (){
@@ -2452,15 +2487,7 @@ return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
 $recv(self["@debugList"])._add_(t);
 self._workerAt_put_($recv(t)._fromAddress(),t);
-return $recv($recv(self._viewModel())._at_("workers"))._value_($recv($recv(self._workersTable())._values())._collect_((function(e){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx3) {
-//>>excludeEnd("ctx");
-return $recv(e)._data();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx3) {$ctx3.fillBlock({e:e},$ctx2,3)});
-//>>excludeEnd("ctx");
-})));
+return $recv($recv(self._viewModel())._at_("workers"))._value_(self._dataOfWorkersTable());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({err:err,t:t},$ctx1,2)});
 //>>excludeEnd("ctx");
@@ -2472,10 +2499,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startDemo\x0a\x09| tuple |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := GyroTuple new.\x0a\x09watchId ifNotNil: [self tupleSpace cancel: watchId].\x0a\x09debugList := OrderedCollection new.\x0a\x09watchId := self tupleSpace watch: tuple callback: [:err :t |\x0a\x09\x09debugList add: t.\x0a\x09\x09self workerAt: t fromAddress put: t.\x0a\x09\x09(self viewModel at: #workers) value: (self workersTable values collect: [:e | e data]).\x0a\x0a\x09\x09\x22self doJQueryPrepend: t asJSON printString.\x22\x0a\x09].",
+source: "startDemo\x0a\x09| tuple |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := GyroTuple new.\x0a\x09watchId ifNotNil: [self tupleSpace cancel: watchId].\x0a\x09debugList := OrderedCollection new.\x0a\x09watchId := self tupleSpace watch: tuple callback: [:err :t |\x0a\x09\x09debugList add: t.\x0a\x09\x09self workerAt: t fromAddress put: t.\x0a\x09\x09(self viewModel at: #workers) value: self dataOfWorkersTable.\x0a\x0a\x09\x09\x22self doJQueryPrepend: t asJSON printString.\x22\x0a\x09].",
 referencedClasses: ["GyroTuple", "OrderedCollection"],
 //>>excludeEnd("ide");
-messageSends: ["startDemo", "inspect", "new", "ifNotNil:", "cancel:", "tupleSpace", "watch:callback:", "add:", "workerAt:put:", "fromAddress", "value:", "at:", "viewModel", "collect:", "values", "workersTable", "data"]
+messageSends: ["startDemo", "inspect", "new", "ifNotNil:", "cancel:", "tupleSpace", "watch:callback:", "add:", "workerAt:put:", "fromAddress", "value:", "at:", "viewModel", "dataOfWorkersTable"]
 }),
 $globals.LindaGyroMaster);
 
@@ -3896,7 +3923,7 @@ messageSends: ["default", "tupleSpace:", "tupleSpaceName", "notFIxed", "read:cal
 $globals.LindaSievelWorker.klass);
 
 
-$core.addClass('LindaThermo', $globals.LindaClientApp, ['workersTable', 'debugList'], 'LindaClientDemo');
+$core.addClass('LindaThermo', $globals.LindaClientApp, ['workersTable', 'workerList'], 'LindaClientDemo');
 $core.addMethod(
 $core.method({
 selector: "airconOff",
@@ -4036,6 +4063,41 @@ $globals.LindaThermo);
 
 $core.addMethod(
 $core.method({
+selector: "dataOfWorkerList",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._workerList())._collect_((function(e){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(e)._data();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({e:e},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"dataOfWorkerList",{},$globals.LindaThermo)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "dataOfWorkerList\x0a\x09^self workerList collect: [:e | e data]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["collect:", "workerList", "data"]
+}),
+$globals.LindaThermo);
+
+$core.addMethod(
+$core.method({
 selector: "setupViewModel",
 protocol: 'starting',
 fn: function (){
@@ -4076,9 +4138,8 @@ fn: function (){
 "use strict";
 
 var self=this;
-var tuple;
+var tuple,log;
 function $ThermoTuple(){return $globals.ThermoTuple||(typeof ThermoTuple=="undefined"?nil:ThermoTuple)}
-function $OrderedCollection(){return $globals.OrderedCollection||(typeof OrderedCollection=="undefined"?nil:OrderedCollection)}
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -4093,9 +4154,6 @@ $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
 self._inspect();
 tuple=$recv($ThermoTuple())._new();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["new"]=1;
-//>>excludeEnd("ctx");
 $1=self["@watchId"];
 if(($receiver = $1) == null || $receiver.isNil){
 $1;
@@ -4106,7 +4164,6 @@ $ctx1.sendIdx["tupleSpace"]=1;
 //>>excludeEnd("ctx");
 $recv($2)._cancel_(self["@watchId"]);
 };
-self["@debugList"]=$recv($OrderedCollection())._new();
 self["@watchId"]=$recv(self._tupleSpace())._watch_callback_(tuple,(function(err,t){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
@@ -4114,12 +4171,8 @@ return $core.withContext(function($ctx2) {
 if(($receiver = t) == null || $receiver.isNil){
 return t;
 } else {
-$recv(self["@debugList"])._add_(t);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["add:"]=1;
-//>>excludeEnd("ctx");
-self._workerAt_put_($recv(t)._fromAddress(),t);
-return $recv($recv(self._viewModel())._at_("workers"))._value_($recv(self._workers())._add_(t));
+$recv(self._workerList())._addFirst_(t);
+return $recv($recv(self._viewModel())._at_("workers"))._value_(self._dataOfWorkerList());
 };
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({err:err,t:t},$ctx1,2)});
@@ -4127,15 +4180,15 @@ return $recv($recv(self._viewModel())._at_("workers"))._value_($recv(self._worke
 }));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"startDemo",{tuple:tuple},$globals.LindaThermo)});
+}, function($ctx1) {$ctx1.fill(self,"startDemo",{tuple:tuple,log:log},$globals.LindaThermo)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startDemo\x0a\x09| tuple |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple new.\x0a\x09\x0a\x09watchId ifNotNil: [self tupleSpace cancel: watchId].\x0a\x09debugList := OrderedCollection new.\x0a\x09watchId := self tupleSpace watch: tuple callback: [:err :t |\x0a\x09\x09t ifNotNil: [\x0a\x09\x09debugList add: t.\x0a\x09\x09self workerAt: t fromAddress put: t.\x0a\x09\x09(self viewModel at: #workers) value: (self workers add: t). ]\x0a\x0a\x09\x09\x22self doJQueryPrepend: t asJSON printString.\x22\x0a\x09].",
-referencedClasses: ["ThermoTuple", "OrderedCollection"],
+source: "startDemo\x0a\x09| tuple log |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple new.\x0a\x09\x0a\x09watchId ifNotNil: [self tupleSpace cancel: watchId].\x0a\x09watchId := self tupleSpace watch: tuple callback: [:err :t |\x0a\x09\x09t ifNotNil: [\x0a\x09\x09\x09self workerList addFirst: t.\x0a\x09\x09\x09(self viewModel at: #workers) value: self dataOfWorkerList. ]\x0a\x0a\x09\x09\x09\x22self doJQueryPrepend: t asJSON printString.\x22\x0a\x09].",
+referencedClasses: ["ThermoTuple"],
 //>>excludeEnd("ide");
-messageSends: ["startDemo", "inspect", "new", "ifNotNil:", "cancel:", "tupleSpace", "watch:callback:", "add:", "workerAt:put:", "fromAddress", "value:", "at:", "viewModel", "workers"]
+messageSends: ["startDemo", "inspect", "new", "ifNotNil:", "cancel:", "tupleSpace", "watch:callback:", "addFirst:", "workerList", "value:", "at:", "viewModel", "dataOfWorkerList"]
 }),
 $globals.LindaThermo);
 
@@ -4169,60 +4222,7 @@ $globals.LindaThermo);
 
 $core.addMethod(
 $core.method({
-selector: "workerAt:put:",
-protocol: 'accessing',
-fn: function (aKey,aWorker){
-"use strict";
-
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-$recv(self._workersTable())._at_put_(aKey,aWorker);
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"workerAt:put:",{aKey:aKey,aWorker:aWorker},$globals.LindaThermo)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aKey", "aWorker"],
-source: "workerAt: aKey put: aWorker\x0a\x09self workersTable at: aKey put: aWorker",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["at:put:", "workersTable"]
-}),
-$globals.LindaThermo);
-
-$core.addMethod(
-$core.method({
-selector: "workers",
-protocol: 'accessing',
-fn: function (){
-"use strict";
-
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-$1=$recv($recv(self._viewModel())._at_("workers"))._value();
-return $1;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"workers",{},$globals.LindaThermo)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "workers\x0a\x09^(self viewModel at: #workers) value",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["value", "at:", "viewModel"]
-}),
-$globals.LindaThermo);
-
-$core.addMethod(
-$core.method({
-selector: "workersTable",
+selector: "workerList",
 protocol: 'accessing',
 fn: function (){
 "use strict";
@@ -4232,22 +4232,22 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1,$2,$receiver;
-$1=self["@workersTable"];
+$1=self["@workerList"];
 if(($receiver = $1) == null || $receiver.isNil){
-self["@workersTable"]=$globals.HashedCollection._newFromPairs_([]);
-self["@workersTable"];
+self["@workerList"]=[];
+self["@workerList"];
 } else {
 $1;
 };
-$2=self["@workersTable"];
+$2=self["@workerList"];
 return $2;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"workersTable",{},$globals.LindaThermo)});
+}, function($ctx1) {$ctx1.fill(self,"workerList",{},$globals.LindaThermo)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "workersTable\x0a\x09workersTable ifNil: [workersTable := #{}].\x0a\x09^workersTable",
+source: "workerList\x0a\x09workerList ifNil: [workerList := #()].\x0a\x09^workerList",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["ifNil:"]
@@ -4801,7 +4801,10 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv(self._data())._at_($recv(self._class())._airconKey());
+$1=$recv(self._data())._at_ifAbsent_($recv(self._class())._airconKey(),(function(){
+return "N/A";
+
+}));
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"aircon",{},$globals.ThermoTuple)});
@@ -4809,10 +4812,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "aircon\x0a\x0a\x09^self data at: self class airconKey",
+source: "aircon\x0a\x0a\x09^self data at: self class airconKey ifAbsent: ['N/A']",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["at:", "data", "airconKey", "class"]
+messageSends: ["at:ifAbsent:", "data", "airconKey", "class"]
 }),
 $globals.ThermoTuple);
 
@@ -4896,6 +4899,32 @@ $globals.ThermoTuple);
 
 $core.addMethod(
 $core.method({
+selector: "airconTimer",
+protocol: 'status changing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self._aircon_("timer");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"airconTimer",{},$globals.ThermoTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "airconTimer\x0a\x0a\x09self aircon: 'timer'",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["aircon:"]
+}),
+$globals.ThermoTuple);
+
+$core.addMethod(
+$core.method({
 selector: "celsius",
 protocol: 'accessing',
 fn: function (){
@@ -4906,7 +4935,10 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv(self._data())._at_($recv(self._class())._celsiusKey());
+$1=$recv(self._data())._at_ifAbsent_($recv(self._class())._celsiusKey(),(function(){
+return "N/A";
+
+}));
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"celsius",{},$globals.ThermoTuple)});
@@ -4914,10 +4946,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "celsius\x0a\x0a\x09^self data at: self class celsiusKey",
+source: "celsius\x0a\x0a\x09^self data at: self class celsiusKey ifAbsent: ['N/A']",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["at:", "data", "celsiusKey", "class"]
+messageSends: ["at:ifAbsent:", "data", "celsiusKey", "class"]
 }),
 $globals.ThermoTuple);
 
@@ -4949,6 +4981,42 @@ $globals.ThermoTuple);
 
 $core.addMethod(
 $core.method({
+selector: "initialize",
+protocol: 'initialization',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true, 
+//>>excludeEnd("ctx");
+$globals.ThermoTuple.superclass.fn.prototype._initialize.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+self._sensor_("");
+self._celsius_((1000));
+self._time_("");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.ThermoTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "initialize\x0a\x09super initialize.\x0a\x0a\x09self sensor: ''.\x0a\x09self celsius: 1000.\x0a\x09self time: ''",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["initialize", "sensor:", "celsius:", "time:"]
+}),
+$globals.ThermoTuple);
+
+$core.addMethod(
+$core.method({
 selector: "sensor",
 protocol: 'accessing',
 fn: function (){
@@ -4959,7 +5027,10 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv(self._data())._at_($recv(self._class())._sensorKey());
+$1=$recv(self._data())._at_ifAbsent_($recv(self._class())._sensorKey(),(function(){
+return "N/A";
+
+}));
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"sensor",{},$globals.ThermoTuple)});
@@ -4967,10 +5038,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "sensor\x0a\x0a\x09^self data at: self class sensorKey",
+source: "sensor\x0a\x0a\x09^self data at: self class sensorKey ifAbsent: ['N/A']",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["at:", "data", "sensorKey", "class"]
+messageSends: ["at:ifAbsent:", "data", "sensorKey", "class"]
 }),
 $globals.ThermoTuple);
 
@@ -5012,7 +5083,10 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv(self._data())._at_($recv(self._class())._timeKey());
+$1=$recv(self._data())._at_ifAbsent_($recv(self._class())._timeKey(),(function(){
+return "N/A";
+
+}));
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"time",{},$globals.ThermoTuple)});
@@ -5020,10 +5094,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "time\x0a\x0a\x09^self data at: self class timeKey",
+source: "time\x0a\x0a\x09^self data at: self class timeKey ifAbsent: ['N/A']",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["at:", "data", "timeKey", "class"]
+messageSends: ["at:ifAbsent:", "data", "timeKey", "class"]
 }),
 $globals.ThermoTuple);
 
