@@ -64,7 +64,8 @@ LindaClient class instanceVariableNames: 'defaultServerUrl'!
 
 defaultServerUrl
 
-	defaultServerUrl ifNil: [defaultServerUrl := 'http://127.0.0.1:8931/'].
+	"defaultServerUrl ifNil: [defaultServerUrl := 'http://127.0.0.1:8931/']."
+	defaultServerUrl ifNil: [defaultServerUrl := 'http://node-linda-ststudy.herokuapp.com'].
 	^defaultServerUrl
 ! !
 

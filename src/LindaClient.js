@@ -390,7 +390,7 @@ return $core.withContext(function($ctx1) {
 var $1,$2,$receiver;
 $1=self["@defaultServerUrl"];
 if(($receiver = $1) == null || $receiver.isNil){
-self["@defaultServerUrl"]="http://127.0.0.1:8931/";
+self["@defaultServerUrl"]="http://node-linda-ststudy.herokuapp.com";
 self["@defaultServerUrl"];
 } else {
 $1;
@@ -403,7 +403,7 @@ return $2;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "defaultServerUrl\x0a\x0a\x09defaultServerUrl ifNil: [defaultServerUrl := 'http://127.0.0.1:8931/'].\x0a\x09^defaultServerUrl",
+source: "defaultServerUrl\x0a\x0a\x09\x22defaultServerUrl ifNil: [defaultServerUrl := 'http://127.0.0.1:8931/'].\x22\x0a\x09defaultServerUrl ifNil: [defaultServerUrl := 'http://node-linda-ststudy.herokuapp.com'].\x0a\x09^defaultServerUrl",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["ifNil:"]
