@@ -1108,6 +1108,7 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 self._setupLindaClient();
+$recv("#start"._asJQuery())._text_("監視中 STOP");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"startDemo",{},$globals.LindaClientApp)});
@@ -1115,10 +1116,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startDemo\x0a\x0a\x09self setupLindaClient.",
+source: "startDemo\x0a\x0a\x09self setupLindaClient.\x0a\x09'#start' asJQuery text: '監視中 STOP'",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["setupLindaClient"]
+messageSends: ["setupLindaClient", "text:", "asJQuery"]
 }),
 $globals.LindaClientApp);
 
@@ -3923,7 +3924,7 @@ messageSends: ["default", "tupleSpace:", "tupleSpaceName", "notFIxed", "read:cal
 $globals.LindaSievelWorker.klass);
 
 
-$core.addClass('LindaThermo', $globals.LindaClientApp, ['workersTable', 'workerList'], 'LindaClientDemo');
+$core.addClass('LindaThermo', $globals.LindaClientApp, ['workerList'], 'LindaClientDemo');
 $core.addMethod(
 $core.method({
 selector: "airconOff",
@@ -3946,7 +3947,7 @@ $globals.LindaThermo.superclass.fn.prototype._startDemo.apply($recv(self), []));
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
 self._inspect();
-tuple=$recv($ThermoTuple())._new();
+tuple=$recv($ThermoTuple())._airconCommand();
 $recv(tuple)._airconOff();
 $recv(self._tupleSpace())._write_(tuple);
 return self;
@@ -3956,10 +3957,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "airconOff\x0a\x09| tuple list |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple new.\x0a\x09tuple airconOff.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
+source: "airconOff\x0a\x09| tuple list |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconOff.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
 referencedClasses: ["ThermoTuple"],
 //>>excludeEnd("ide");
-messageSends: ["startDemo", "inspect", "new", "airconOff", "write:", "tupleSpace"]
+messageSends: ["startDemo", "inspect", "airconCommand", "airconOff", "write:", "tupleSpace"]
 }),
 $globals.LindaThermo);
 
@@ -3985,7 +3986,7 @@ $globals.LindaThermo.superclass.fn.prototype._startDemo.apply($recv(self), []));
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
 self._inspect();
-tuple=$recv($ThermoTuple())._new();
+tuple=$recv($ThermoTuple())._airconCommand();
 $recv(tuple)._airconOn();
 $recv(self._tupleSpace())._write_(tuple);
 return self;
@@ -3995,10 +3996,49 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "airconOn\x0a\x09| tuple list |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple new.\x0a\x09tuple airconOn.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
+source: "airconOn\x0a\x09| tuple list |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconOn.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
 referencedClasses: ["ThermoTuple"],
 //>>excludeEnd("ide");
-messageSends: ["startDemo", "inspect", "new", "airconOn", "write:", "tupleSpace"]
+messageSends: ["startDemo", "inspect", "airconCommand", "airconOn", "write:", "tupleSpace"]
+}),
+$globals.LindaThermo);
+
+$core.addMethod(
+$core.method({
+selector: "airconTimer",
+protocol: 'action',
+fn: function (){
+"use strict";
+
+var self=this;
+var tuple,list;
+function $ThermoTuple(){return $globals.ThermoTuple||(typeof ThermoTuple=="undefined"?nil:ThermoTuple)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true, 
+//>>excludeEnd("ctx");
+$globals.LindaThermo.superclass.fn.prototype._startDemo.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+self._inspect();
+tuple=$recv($ThermoTuple())._airconCommand();
+$recv(tuple)._airconTimer();
+$recv(self._tupleSpace())._write_(tuple);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"airconTimer",{tuple:tuple,list:list},$globals.LindaThermo)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "airconTimer\x0a\x09| tuple list |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconTimer.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
+referencedClasses: ["ThermoTuple"],
+//>>excludeEnd("ide");
+messageSends: ["startDemo", "inspect", "airconCommand", "airconTimer", "write:", "tupleSpace"]
 }),
 $globals.LindaThermo);
 
@@ -4981,7 +5021,7 @@ $globals.ThermoTuple);
 
 $core.addMethod(
 $core.method({
-selector: "initialize",
+selector: "initForAircon",
 protocol: 'initialization',
 fn: function (){
 "use strict";
@@ -5003,12 +5043,12 @@ self._celsius_((1000));
 self._time_("");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.ThermoTuple)});
+}, function($ctx1) {$ctx1.fill(self,"initForAircon",{},$globals.ThermoTuple)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "initialize\x0a\x09super initialize.\x0a\x0a\x09self sensor: ''.\x0a\x09self celsius: 1000.\x0a\x09self time: ''",
+source: "initForAircon\x0a\x09super initialize.\x0a\x0a\x09self sensor: ''.\x0a\x09self celsius: 1000.\x0a\x09self time: ''",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["initialize", "sensor:", "celsius:", "time:"]
@@ -5127,6 +5167,36 @@ messageSends: ["at:put:", "data", "timeKey", "class"]
 }),
 $globals.ThermoTuple);
 
+
+$core.addMethod(
+$core.method({
+selector: "airconCommand",
+protocol: 'accessor key',
+fn: function (){
+"use strict";
+
+var self=this;
+var tuple;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+tuple=self._new();
+$recv(tuple)._initForAircon();
+$1=tuple;
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"airconCommand",{tuple:tuple},$globals.ThermoTuple.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "airconCommand\x0a\x0a\x09| tuple |\x0a\x09tuple := self new.\x0a\x09tuple initForAircon.\x0a\x09^tuple",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["new", "initForAircon"]
+}),
+$globals.ThermoTuple.klass);
 
 $core.addMethod(
 $core.method({

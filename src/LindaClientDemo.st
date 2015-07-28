@@ -246,6 +246,7 @@ doSilkTAG
 startDemo
 
 	self setupLindaClient.
+	'#start' asJQuery text: '監視中 STOP'
 ! !
 
 !LindaClientApp methodsFor: 'starting'!
@@ -855,7 +856,7 @@ example1
 ! !
 
 LindaClientApp subclass: #LindaThermo
-	instanceVariableNames: 'workersTable workerList'
+	instanceVariableNames: 'workerList'
 	package: 'LindaClientDemo'!
 
 !LindaThermo methodsFor: 'accessing'!
@@ -879,7 +880,7 @@ airconOff
 	| tuple list |
 	super startDemo.
 	self inspect.
-	tuple := ThermoTuple new.
+	tuple := ThermoTuple airconCommand.
 	tuple airconOff.
 	self tupleSpace write: tuple.
 !
@@ -888,8 +889,17 @@ airconOn
 	| tuple list |
 	super startDemo.
 	self inspect.
-	tuple := ThermoTuple new.
+	tuple := ThermoTuple airconCommand.
 	tuple airconOn.
+	self tupleSpace write: tuple.
+!
+
+airconTimer
+	| tuple list |
+	super startDemo.
+	self inspect.
+	tuple := ThermoTuple airconCommand.
+	tuple airconTimer.
 	self tupleSpace write: tuple.
 !
 
@@ -1090,7 +1100,7 @@ time: aValue
 
 !ThermoTuple methodsFor: 'initialization'!
 
-initialize
+initForAircon
 	super initialize.
 
 	self sensor: ''.
@@ -1116,6 +1126,14 @@ airconTimer
 ! !
 
 !ThermoTuple class methodsFor: 'accessor key'!
+
+airconCommand
+
+	| tuple |
+	tuple := self new.
+	tuple initForAircon.
+	^tuple
+!
 
 airconKey
 	^'aircon'.
