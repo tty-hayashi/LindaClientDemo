@@ -647,9 +647,9 @@ augmentPage
 devicemotionHandler
 	^[:event |
 		self 
-			gX: (event acceleration x )
-			gY: (event acceleration y )
-			gZ: (event acceleration z )		
+			gX: (event acceleration x * 100) rounded
+			gY: (event acceleration y * 100) rounded
+			gZ: (event acceleration z * 100) rounded		
 "
 			gX: (event accelerationIncludingGravity x )
 			gY: (event accelerationIncludingGravity y )
