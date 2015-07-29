@@ -6,6 +6,14 @@
     -webkit-perspective: 400;
     -webkit-perspective-origin: 0px 0px;
 }
+#mini-box3d {
+    width: 10%;
+    height:20px;
+    padding: 0px;
+    text-align: center;
+    -webkit-perspective: 400;
+    -webkit-perspective-origin: 0px 0px;
+}
 html {
     font-size : 100%; 
 }
