@@ -711,9 +711,9 @@ gX: xValue gY: yValue gZ: zValue
 	(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) 
 		ifTrue: [
 	
-			self gX: (xValue rounded) * 100.
-			self gY: (yValue rounded) * 100.
-			self gZ: (zValue rounded) * 100.
+			self gX: (xValue rounded).
+			self gY: (yValue rounded).
+			self gZ: (zValue rounded).
 
 			(viewModel at: #rotateYX) value: 'rotateX(', (yValue * 100) negated printString, 'deg)', 
 				' rotateY(', (xValue * 100) negated printString, 'deg)'.
