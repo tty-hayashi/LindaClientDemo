@@ -708,7 +708,7 @@ setupViewModel
 
 gX: xValue gY: yValue gZ: zValue
 	| tuple |
-	(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) 
+	(self gX ~= xValue) | (self gY ~= yValue) | (self gZ ~= zValue) 
 		ifTrue: [
 	
 			self gX: (xValue ).

@@ -2715,15 +2715,15 @@ $5=$recv($6).__tild_eq(yValue);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["~="]=2;
 //>>excludeEnd("ctx");
-$2=$recv($3).__and($5);
+$2=$recv($3).__or($5);
 $8=self._gZ();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["gZ"]=1;
 //>>excludeEnd("ctx");
 $7=$recv($8).__tild_eq(zValue);
-$1=$recv($2).__and($7);
+$1=$recv($2).__or($7);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["&"]=1;
+$ctx1.sendIdx["|"]=1;
 //>>excludeEnd("ctx");
 if($core.assert($1)){
 self._gX_(xValue);
@@ -2784,10 +2784,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["xValue", "yValue", "zValue"],
-source: "gX: xValue gY: yValue gZ: zValue\x0a\x09| tuple |\x0a\x09(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) \x0a\x09\x09ifTrue: [\x0a\x09\x0a\x09\x09\x09self gX: (xValue ).\x0a\x09\x09\x09self gY: (yValue ).\x0a\x09\x09\x09self gZ: (zValue ).\x0a\x0a\x09\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', (yValue * 100) negated printString, 'deg)', \x0a\x09\x09\x09\x09' rotateY(', (xValue * 100) negated printString, 'deg)'.\x0a\x09\x09\x09tuple := GyroTuple new.\x0a\x09\x09\x09tuple handleName: self handleName.\x0a\x09\x09\x09tuple gX: self gX.\x0a\x09\x09\x09tuple gY: self gY.\x0a\x09\x09\x09tuple gZ: self gZ.\x0a\x09\x09\x09self tupleSpace write: tuple.\x0a\x09\x09]\x0a\x09",
+source: "gX: xValue gY: yValue gZ: zValue\x0a\x09| tuple |\x0a\x09(self gX ~= xValue) | (self gY ~= yValue) | (self gZ ~= zValue) \x0a\x09\x09ifTrue: [\x0a\x09\x0a\x09\x09\x09self gX: (xValue ).\x0a\x09\x09\x09self gY: (yValue ).\x0a\x09\x09\x09self gZ: (zValue ).\x0a\x0a\x09\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', (yValue * 100) negated printString, 'deg)', \x0a\x09\x09\x09\x09' rotateY(', (xValue * 100) negated printString, 'deg)'.\x0a\x09\x09\x09tuple := GyroTuple new.\x0a\x09\x09\x09tuple handleName: self handleName.\x0a\x09\x09\x09tuple gX: self gX.\x0a\x09\x09\x09tuple gY: self gY.\x0a\x09\x09\x09tuple gZ: self gZ.\x0a\x09\x09\x09self tupleSpace write: tuple.\x0a\x09\x09]\x0a\x09",
 referencedClasses: ["GyroTuple"],
 //>>excludeEnd("ide");
-messageSends: ["ifTrue:", "&", "~=", "gX", "gY", "gZ", "gX:", "gY:", "gZ:", "value:", "at:", ",", "printString", "negated", "*", "new", "handleName:", "handleName", "write:", "tupleSpace"]
+messageSends: ["ifTrue:", "|", "~=", "gX", "gY", "gZ", "gX:", "gY:", "gZ:", "value:", "at:", ",", "printString", "negated", "*", "new", "handleName:", "handleName", "write:", "tupleSpace"]
 }),
 $globals.LindaGyroWorker);
 
