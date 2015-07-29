@@ -917,6 +917,15 @@ startDemo
 
 			"self doJQueryPrepend: t asJSON printString."
 	].
+!
+
+thermoQuery
+	| tuple list |
+	super startDemo.
+	self inspect.
+	tuple := ThermoTuple airconCommand.
+	tuple airconQuery.
+	self tupleSpace write: tuple.
 ! !
 
 !LindaThermo methodsFor: 'starting'!
@@ -925,6 +934,7 @@ augmentPage
 	super augmentPage.
 	'#airconOn' asJQuery click: [ self airconOn ].
 	'#airconOff' asJQuery click: [ self airconOff ].
+	'#thermoQuery' asJQuery click: [ self thermoQuery ].
 !
 
 setupViewModel
@@ -1118,6 +1128,11 @@ airconOff
 airconOn
 
 	self aircon: 'on'
+!
+
+airconQuery
+
+	self aircon: 'query'
 !
 
 airconTimer
