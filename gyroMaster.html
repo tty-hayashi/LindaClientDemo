@@ -13,8 +13,12 @@
 
   </head>
   <body>
+    <div></div>
+    <p>lindaサーバーURL: 
+    <select data-bind="options: availableServers,
+                       value: serverUrl,
+                       optionsCaption: '-選択してください-'"></select></p>
 
-    <p>lindaサーバーURL: <input data-bind="value: serverUrl"/></p>
     <button id="start">START</button>
     <div id="data">
 <!-- 
