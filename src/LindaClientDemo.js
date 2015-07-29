@@ -2598,22 +2598,38 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $3,$2,$5,$4,$1;
+var $5,$4,$3,$2,$9,$8,$7,$6,$1;
 $1=(function(event){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$3=$recv(event)._acceleration();
+$5=$recv(event)._acceleration();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["acceleration"]=1;
 //>>excludeEnd("ctx");
-$2=$recv($3)._x();
-$5=$recv(event)._acceleration();
+$4=$recv($5)._x();
+$3=$recv($4).__star((100));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["*"]=1;
+//>>excludeEnd("ctx");
+$2=$recv($3)._rounded();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["rounded"]=1;
+//>>excludeEnd("ctx");
+$9=$recv(event)._acceleration();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["acceleration"]=2;
 //>>excludeEnd("ctx");
-$4=$recv($5)._y();
-return self._gX_gY_gZ_($2,$4,$recv($recv(event)._acceleration())._z());
+$8=$recv($9)._y();
+$7=$recv($8).__star((100));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["*"]=2;
+//>>excludeEnd("ctx");
+$6=$recv($7)._rounded();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["rounded"]=2;
+//>>excludeEnd("ctx");
+return self._gX_gY_gZ_($2,$6,$recv($recv($recv($recv(event)._acceleration())._z()).__star((100)))._rounded());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({event:event},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -2625,10 +2641,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09self \x0a\x09\x09\x09gX: (event acceleration x )\x0a\x09\x09\x09gY: (event acceleration y )\x0a\x09\x09\x09gZ: (event acceleration z )\x09\x09\x0a\x22\x0a\x09\x09\x09gX: (event accelerationIncludingGravity x )\x0a\x09\x09\x09gY: (event accelerationIncludingGravity y )\x0a\x09\x09\x09gZ: (event accelerationIncludingGravity z )\x09\x09\x0a\x22\x0a\x09].",
+source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09self \x0a\x09\x09\x09gX: (event acceleration x * 100) rounded\x0a\x09\x09\x09gY: (event acceleration y * 100) rounded\x0a\x09\x09\x09gZ: (event acceleration z * 100) rounded\x09\x09\x0a\x22\x0a\x09\x09\x09gX: (event accelerationIncludingGravity x )\x0a\x09\x09\x09gY: (event accelerationIncludingGravity y )\x0a\x09\x09\x09gZ: (event accelerationIncludingGravity z )\x09\x09\x0a\x22\x0a\x09].",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["gX:gY:gZ:", "x", "acceleration", "y", "z"]
+messageSends: ["gX:gY:gZ:", "rounded", "*", "x", "acceleration", "y", "z"]
 }),
 $globals.LindaGyroWorker);
 
