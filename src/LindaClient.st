@@ -64,9 +64,14 @@ LindaClient class instanceVariableNames: 'defaultServerUrl'!
 
 defaultServerUrl
 
-	"defaultServerUrl ifNil: [defaultServerUrl := 'http://127.0.0.1:8931/']."
-	defaultServerUrl ifNil: [defaultServerUrl := 'http://node-linda-ststudy.herokuapp.com'].
+	"defaultServerUrl ifNil: [defaultServerUrl := self serverUrls second]."
+	defaultServerUrl ifNil: [defaultServerUrl := self serverUrls first].
 	^defaultServerUrl
+!
+
+serverUrls
+
+	^#('http://127.0.0.1:8931/' 'http://node-linda-ststudy.herokuapp.com')
 ! !
 
 !LindaClient class methodsFor: 'examples'!
@@ -111,10 +116,6 @@ flushDeefaultServerUrlForHeroku
 	
 	defaultServerUrl := nil
 ! !
-
-LindaProxy subclass: #ReadTakeOption
-	instanceVariableNames: ''
-	package: 'LindaClient'!
 
 LindaProxy subclass: #SocketIo
 	instanceVariableNames: ''

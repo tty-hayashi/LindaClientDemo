@@ -12,12 +12,12 @@
   </head>
 
   <body>
-  <button id="start">START</button>
-  <p>対象:<span data-bind="text: targetNumber"></span></p>
-  <p>結果:<span data-bind="text: resultNumber"></span></p>
-  <ul id="output-list"></ul>
-  <div id="log"></div>
-  <script type='text/javascript'>
+    <button id="start">START</button>
+    <p>対象:<span data-bind="text: targetNumber"></span></p>
+    <p>結果:<span data-bind="text: resultNumber"></span></p>
+    <ul id="output-list"></ul>
+    <div id="log"></div>
+    <script type='text/javascript'>
       require(['app'], function (amber) {
           amber.initialize({
             //used for all new packages in IDE
@@ -26,10 +26,7 @@
           require(["amber-ide-starter-dialog"], function (dlg) { dlg.start(); });
           amber.globals.LindaFibWorker._start();
       });
-  </script>
-
-  
-
+    </script>
   </body>
 
 </html>

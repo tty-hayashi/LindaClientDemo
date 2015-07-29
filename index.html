@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <title>LindaClient</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -13,15 +12,15 @@
   </head>
 
   <body>
-  <a href="fibWorker.html">フィボナッチ・ワーカー</a><p/>
-  <a href="gyroWorker.html">ジャイロ・ワーカー</a><p/>
-  <a href="thermo.html">スマートホーム（ｗ</a><p/>
-  <button id="amber-with">Hello from TagBrush >> with:</button>
-  <button id="silk-tag">Hello from Silk >> TAG:</button>
-  <button id="jquery-append">Hello from jQuery append</button>
-  <ol id="output-list"></ol>
-  <div id="log"></div>
-  <script type='text/javascript'>
+    <a href="fibWorker.html">フィボナッチ・ワーカー</a><p/>
+    <a href="gyroWorker.html">ジャイロ・ワーカー</a><p/>
+    <a href="thermo.html">スマートホーム（ｗ</a><p/>
+    <button id="amber-with">Hello from TagBrush >> with:</button>
+    <button id="silk-tag">Hello from Silk >> TAG:</button>
+    <button id="jquery-append">Hello from jQuery append</button>
+    <ul id="output-list"></ul>
+    <div id="log"></div>
+    <script type='text/javascript'>
       require(['app'], function (amber) {
           amber.initialize({
             //used for all new packages in IDE
@@ -31,9 +30,6 @@
           amber.globals.LindaClientApp._start();
       });
   </script>
-
-  
-
   </body>
 
 </html>
