@@ -633,15 +633,15 @@ augmentPage
 devicemotionHandler
 	^[:event |
 		self 
-"
+
 			gX: (event acceleration x * 100) rounded
 			gY: (event acceleration y * 100) rounded
 			gZ: (event acceleration z * 100) rounded		
 "
-			gX: (event accelerationIncludingGravity x * 100) rounded
-			gY: (event accelerationIncludingGravity y * 100) rounded
-			gZ: (event accelerationIncludingGravity z * 100) rounded		
-
+			gX: (event accelerationIncludingGravity x * 10) rounded
+			gY: (event accelerationIncludingGravity y * 10) rounded
+			gZ: (event accelerationIncludingGravity z * 10) rounded		
+"
 	].
 !
 
@@ -702,8 +702,8 @@ gX: xValue gY: yValue gZ: zValue
 			self gY: (yValue ).
 			self gZ: (zValue ).
 
-			(viewModel at: #rotateYX) value: 'rotateX(', (yValue * 100) negated printString, 'deg)', 
-				' rotateY(', (xValue * 100) negated printString, 'deg)'.
+			(viewModel at: #rotateYX) value: 'rotateX(', (yValue) negated printString, 'deg)', 
+				' rotateY(', (xValue) negated printString, 'deg)'.
 			tuple := GyroTuple new.
 			tuple handleName: self handleName.
 			tuple gX: self gX.

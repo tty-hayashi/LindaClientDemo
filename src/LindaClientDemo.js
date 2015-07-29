@@ -2511,9 +2511,9 @@ $1=(function(event){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$5=$recv(event)._accelerationIncludingGravity();
+$5=$recv(event)._acceleration();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["accelerationIncludingGravity"]=1;
+$ctx2.sendIdx["acceleration"]=1;
 //>>excludeEnd("ctx");
 $4=$recv($5)._x();
 $3=$recv($4).__star((100));
@@ -2524,9 +2524,9 @@ $2=$recv($3)._rounded();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["rounded"]=1;
 //>>excludeEnd("ctx");
-$9=$recv(event)._accelerationIncludingGravity();
+$9=$recv(event)._acceleration();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["accelerationIncludingGravity"]=2;
+$ctx2.sendIdx["acceleration"]=2;
 //>>excludeEnd("ctx");
 $8=$recv($9)._y();
 $7=$recv($8).__star((100));
@@ -2537,7 +2537,7 @@ $6=$recv($7)._rounded();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["rounded"]=2;
 //>>excludeEnd("ctx");
-return self._gX_gY_gZ_($2,$6,$recv($recv($recv($recv(event)._accelerationIncludingGravity())._z()).__star((100)))._rounded());
+return self._gX_gY_gZ_($2,$6,$recv($recv($recv($recv(event)._acceleration())._z()).__star((100)))._rounded());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({event:event},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -2549,10 +2549,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09self \x0a\x22\x0a\x09\x09\x09gX: (event acceleration x * 100) rounded\x0a\x09\x09\x09gY: (event acceleration y * 100) rounded\x0a\x09\x09\x09gZ: (event acceleration z * 100) rounded\x09\x09\x0a\x22\x0a\x09\x09\x09gX: (event accelerationIncludingGravity x * 100) rounded\x0a\x09\x09\x09gY: (event accelerationIncludingGravity y * 100) rounded\x0a\x09\x09\x09gZ: (event accelerationIncludingGravity z * 100) rounded\x09\x09\x0a\x0a\x09].",
+source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09self \x0a\x0a\x09\x09\x09gX: (event acceleration x * 100) rounded\x0a\x09\x09\x09gY: (event acceleration y * 100) rounded\x0a\x09\x09\x09gZ: (event acceleration z * 100) rounded\x09\x09\x0a\x22\x0a\x09\x09\x09gX: (event accelerationIncludingGravity x * 10) rounded\x0a\x09\x09\x09gY: (event accelerationIncludingGravity y * 10) rounded\x0a\x09\x09\x09gZ: (event accelerationIncludingGravity z * 10) rounded\x09\x09\x0a\x22\x0a\x09].",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["gX:gY:gZ:", "rounded", "*", "x", "accelerationIncludingGravity", "y", "z"]
+messageSends: ["gX:gY:gZ:", "rounded", "*", "x", "acceleration", "y", "z"]
 }),
 $globals.LindaGyroWorker);
 
@@ -2622,7 +2622,7 @@ function $GyroTuple(){return $globals.GyroTuple||(typeof GyroTuple=="undefined"?
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $4,$3,$6,$5,$2,$8,$7,$1,$9,$17,$16,$15,$14,$13,$12,$11,$10;
+var $4,$3,$6,$5,$2,$8,$7,$1,$9,$16,$15,$14,$13,$12,$11,$10;
 $4=self._gX();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["gX"]=1;
@@ -2663,11 +2663,7 @@ self._gZ_(zValue);
 $ctx1.sendIdx["gZ:"]=1;
 //>>excludeEnd("ctx");
 $9=$recv(self["@viewModel"])._at_("rotateYX");
-$17=$recv(yValue).__star((100));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["*"]=1;
-//>>excludeEnd("ctx");
-$16=$recv($17)._negated();
+$16=$recv(yValue)._negated();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["negated"]=1;
 //>>excludeEnd("ctx");
@@ -2684,7 +2680,7 @@ $12=$recv($13).__comma(" rotateY(");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=3;
 //>>excludeEnd("ctx");
-$11=$recv($12).__comma($recv($recv($recv(xValue).__star((100)))._negated())._printString());
+$11=$recv($12).__comma($recv($recv(xValue)._negated())._printString());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=2;
 //>>excludeEnd("ctx");
@@ -2708,10 +2704,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["xValue", "yValue", "zValue"],
-source: "gX: xValue gY: yValue gZ: zValue\x0a\x09| tuple |\x0a\x09(self gX ~= xValue) | (self gY ~= yValue) | (self gZ ~= zValue) \x0a\x09\x09ifTrue: [\x0a\x09\x0a\x09\x09\x09self gX: (xValue ).\x0a\x09\x09\x09self gY: (yValue ).\x0a\x09\x09\x09self gZ: (zValue ).\x0a\x0a\x09\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', (yValue * 100) negated printString, 'deg)', \x0a\x09\x09\x09\x09' rotateY(', (xValue * 100) negated printString, 'deg)'.\x0a\x09\x09\x09tuple := GyroTuple new.\x0a\x09\x09\x09tuple handleName: self handleName.\x0a\x09\x09\x09tuple gX: self gX.\x0a\x09\x09\x09tuple gY: self gY.\x0a\x09\x09\x09tuple gZ: self gZ.\x0a\x09\x09\x09self tupleSpace write: tuple.\x0a\x09\x09]\x0a\x09",
+source: "gX: xValue gY: yValue gZ: zValue\x0a\x09| tuple |\x0a\x09(self gX ~= xValue) | (self gY ~= yValue) | (self gZ ~= zValue) \x0a\x09\x09ifTrue: [\x0a\x09\x0a\x09\x09\x09self gX: (xValue ).\x0a\x09\x09\x09self gY: (yValue ).\x0a\x09\x09\x09self gZ: (zValue ).\x0a\x0a\x09\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', (yValue) negated printString, 'deg)', \x0a\x09\x09\x09\x09' rotateY(', (xValue) negated printString, 'deg)'.\x0a\x09\x09\x09tuple := GyroTuple new.\x0a\x09\x09\x09tuple handleName: self handleName.\x0a\x09\x09\x09tuple gX: self gX.\x0a\x09\x09\x09tuple gY: self gY.\x0a\x09\x09\x09tuple gZ: self gZ.\x0a\x09\x09\x09self tupleSpace write: tuple.\x0a\x09\x09]\x0a\x09",
 referencedClasses: ["GyroTuple"],
 //>>excludeEnd("ide");
-messageSends: ["ifTrue:", "|", "~=", "gX", "gY", "gZ", "gX:", "gY:", "gZ:", "value:", "at:", ",", "printString", "negated", "*", "new", "handleName:", "handleName", "write:", "tupleSpace"]
+messageSends: ["ifTrue:", "|", "~=", "gX", "gY", "gZ", "gX:", "gY:", "gZ:", "value:", "at:", ",", "printString", "negated", "new", "handleName:", "handleName", "write:", "tupleSpace"]
 }),
 $globals.LindaGyroWorker);
 
