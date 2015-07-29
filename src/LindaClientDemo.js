@@ -4053,7 +4053,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1;
+var $1,$2;
 (
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true, 
@@ -4078,13 +4078,29 @@ return self._airconOn();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["click:"]=1;
 //>>excludeEnd("ctx");
-$recv("#airconOff"._asJQuery())._click_((function(){
+$2="#airconOff"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["asJQuery"]=2;
+//>>excludeEnd("ctx");
+$recv($2)._click_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
 return self._airconOff();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["click:"]=2;
+//>>excludeEnd("ctx");
+$recv("#thermoQuery"._asJQuery())._click_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return self._thermoQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,3)});
 //>>excludeEnd("ctx");
 }));
 return self;
@@ -4094,10 +4110,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09super augmentPage.\x0a\x09'#airconOn' asJQuery click: [ self airconOn ].\x0a\x09'#airconOff' asJQuery click: [ self airconOff ].",
+source: "augmentPage\x0a\x09super augmentPage.\x0a\x09'#airconOn' asJQuery click: [ self airconOn ].\x0a\x09'#airconOff' asJQuery click: [ self airconOff ].\x0a\x09'#thermoQuery' asJQuery click: [ self thermoQuery ].",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["augmentPage", "click:", "asJQuery", "airconOn", "airconOff"]
+messageSends: ["augmentPage", "click:", "asJQuery", "airconOn", "airconOff", "thermoQuery"]
 }),
 $globals.LindaThermo);
 
@@ -4229,6 +4245,45 @@ source: "startDemo\x0a\x09| tuple log |\x0a\x09super startDemo.\x0a\x09self insp
 referencedClasses: ["ThermoTuple"],
 //>>excludeEnd("ide");
 messageSends: ["startDemo", "inspect", "new", "ifNotNil:", "cancel:", "tupleSpace", "watch:callback:", "addFirst:", "workerList", "value:", "at:", "viewModel", "dataOfWorkerList"]
+}),
+$globals.LindaThermo);
+
+$core.addMethod(
+$core.method({
+selector: "thermoQuery",
+protocol: 'action',
+fn: function (){
+"use strict";
+
+var self=this;
+var tuple,list;
+function $ThermoTuple(){return $globals.ThermoTuple||(typeof ThermoTuple=="undefined"?nil:ThermoTuple)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true, 
+//>>excludeEnd("ctx");
+$globals.LindaThermo.superclass.fn.prototype._startDemo.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+self._inspect();
+tuple=$recv($ThermoTuple())._airconCommand();
+$recv(tuple)._airconQuery();
+$recv(self._tupleSpace())._write_(tuple);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"thermoQuery",{tuple:tuple,list:list},$globals.LindaThermo)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "thermoQuery\x0a\x09| tuple list |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconQuery.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
+referencedClasses: ["ThermoTuple"],
+//>>excludeEnd("ide");
+messageSends: ["startDemo", "inspect", "airconCommand", "airconQuery", "write:", "tupleSpace"]
 }),
 $globals.LindaThermo);
 
@@ -4931,6 +4986,32 @@ return self;
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
 source: "airconOn\x0a\x0a\x09self aircon: 'on'",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["aircon:"]
+}),
+$globals.ThermoTuple);
+
+$core.addMethod(
+$core.method({
+selector: "airconQuery",
+protocol: 'status changing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self._aircon_("query");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"airconQuery",{},$globals.ThermoTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "airconQuery\x0a\x0a\x09self aircon: 'query'",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["aircon:"]
