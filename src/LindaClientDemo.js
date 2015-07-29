@@ -2698,7 +2698,7 @@ function $GyroTuple(){return $globals.GyroTuple||(typeof GyroTuple=="undefined"?
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $4,$3,$6,$5,$2,$8,$7,$1,$9,$10,$11,$19,$18,$17,$16,$15,$14,$13,$12;
+var $4,$3,$6,$5,$2,$8,$7,$1,$9,$17,$16,$15,$14,$13,$12,$11,$10;
 $4=self._gX();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["gX"]=1;
@@ -2726,57 +2726,49 @@ $1=$recv($2).__and($7);
 $ctx1.sendIdx["&"]=1;
 //>>excludeEnd("ctx");
 if($core.assert($1)){
-$9=$recv(xValue)._rounded();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["rounded"]=1;
-//>>excludeEnd("ctx");
-self._gX_($9);
+self._gX_(xValue);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["gX:"]=1;
 //>>excludeEnd("ctx");
-$10=$recv(yValue)._rounded();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["rounded"]=2;
-//>>excludeEnd("ctx");
-self._gY_($10);
+self._gY_(yValue);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["gY:"]=1;
 //>>excludeEnd("ctx");
-self._gZ_($recv(zValue)._rounded());
+self._gZ_(zValue);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["gZ:"]=1;
 //>>excludeEnd("ctx");
-$11=$recv(self["@viewModel"])._at_("rotateYX");
-$19=$recv(yValue).__star((100));
+$9=$recv(self["@viewModel"])._at_("rotateYX");
+$17=$recv(yValue).__star((100));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["*"]=1;
 //>>excludeEnd("ctx");
-$18=$recv($19)._negated();
+$16=$recv($17)._negated();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["negated"]=1;
 //>>excludeEnd("ctx");
-$17=$recv($18)._printString();
+$15=$recv($16)._printString();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["printString"]=1;
 //>>excludeEnd("ctx");
-$16="rotateX(".__comma($17);
-$15=$recv($16).__comma("deg)");
+$14="rotateX(".__comma($15);
+$13=$recv($14).__comma("deg)");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=4;
 //>>excludeEnd("ctx");
-$14=$recv($15).__comma(" rotateY(");
+$12=$recv($13).__comma(" rotateY(");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=3;
 //>>excludeEnd("ctx");
-$13=$recv($14).__comma($recv($recv($recv(xValue).__star((100)))._negated())._printString());
+$11=$recv($12).__comma($recv($recv($recv(xValue).__star((100)))._negated())._printString());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=2;
 //>>excludeEnd("ctx");
-$12=$recv($13).__comma("deg)");
+$10=$recv($11).__comma("deg)");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
-$recv($11)._value_($12);
+$recv($9)._value_($10);
 tuple=$recv($GyroTuple())._new();
 tuple;
 $recv(tuple)._handleName_(self._handleName());
@@ -2792,10 +2784,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["xValue", "yValue", "zValue"],
-source: "gX: xValue gY: yValue gZ: zValue\x0a\x09| tuple |\x0a\x09(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) \x0a\x09\x09ifTrue: [\x0a\x09\x0a\x09\x09\x09self gX: (xValue rounded).\x0a\x09\x09\x09self gY: (yValue rounded).\x0a\x09\x09\x09self gZ: (zValue rounded).\x0a\x0a\x09\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', (yValue * 100) negated printString, 'deg)', \x0a\x09\x09\x09\x09' rotateY(', (xValue * 100) negated printString, 'deg)'.\x0a\x09\x09\x09tuple := GyroTuple new.\x0a\x09\x09\x09tuple handleName: self handleName.\x0a\x09\x09\x09tuple gX: self gX.\x0a\x09\x09\x09tuple gY: self gY.\x0a\x09\x09\x09tuple gZ: self gZ.\x0a\x09\x09\x09self tupleSpace write: tuple.\x0a\x09\x09]\x0a\x09",
+source: "gX: xValue gY: yValue gZ: zValue\x0a\x09| tuple |\x0a\x09(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) \x0a\x09\x09ifTrue: [\x0a\x09\x0a\x09\x09\x09self gX: (xValue ).\x0a\x09\x09\x09self gY: (yValue ).\x0a\x09\x09\x09self gZ: (zValue ).\x0a\x0a\x09\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', (yValue * 100) negated printString, 'deg)', \x0a\x09\x09\x09\x09' rotateY(', (xValue * 100) negated printString, 'deg)'.\x0a\x09\x09\x09tuple := GyroTuple new.\x0a\x09\x09\x09tuple handleName: self handleName.\x0a\x09\x09\x09tuple gX: self gX.\x0a\x09\x09\x09tuple gY: self gY.\x0a\x09\x09\x09tuple gZ: self gZ.\x0a\x09\x09\x09self tupleSpace write: tuple.\x0a\x09\x09]\x0a\x09",
 referencedClasses: ["GyroTuple"],
 //>>excludeEnd("ide");
-messageSends: ["ifTrue:", "&", "~=", "gX", "gY", "gZ", "gX:", "rounded", "gY:", "gZ:", "value:", "at:", ",", "printString", "negated", "*", "new", "handleName:", "handleName", "write:", "tupleSpace"]
+messageSends: ["ifTrue:", "&", "~=", "gX", "gY", "gZ", "gX:", "gY:", "gZ:", "value:", "at:", ",", "printString", "negated", "*", "new", "handleName:", "handleName", "write:", "tupleSpace"]
 }),
 $globals.LindaGyroWorker);
 
