@@ -12,26 +12,26 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css">
   </head>
   <body>
-	  <p>lindaサーバーURL: <input data-bind="value: serverUrl"/></p>
-	  <p>ハンドル名:<input data-bind="value: handleName"/></p>
-	  <button id="start">START</button>
-	  <div id="data">
-<!-- 
+    <p>lindaサーバーURL: <input data-bind="value: serverUrl"/></p>
+    <p>ハンドル名:<input data-bind="value: handleName"/></p>
+    <button id="start">START</button>
+    <div id="data">
+      <!-- 
 	  <p>tiltLR: <span data-bind="text: tiltLR"></span></p>
 	  <p>tiltFB: <span data-bind="text: tiltFB"></span></p>
--->
-	  <p>X: <span data-bind="text: gX"></span></p>
-	  <p>Y: <span data-bind="text: gY"></span></p>
-	  <p>Z: <span data-bind="text: gZ"></span></p>
-  </div>
-  <div id="box3d">
-  	  <img src="amslertest.gif" id="plane" width="275" height="275" data-bind="style: {WebkitTransform: rotateYX(), MozTransform: rotateYX(), transform: rotateYX()}" >
+	  -->
+      <p>X: <span data-bind="text: gX"></span></p>
+      <p>Y: <span data-bind="text: gY"></span></p>
+      <p>Z: <span data-bind="text: gZ"></span></p>
+    </div>
+    <div id="box3d">
+      <img src="amslertest.gif" id="plane" width="275" height="275" data-bind="style: {WebkitTransform: rotateYX(), MozTransform: rotateYX(), transform: rotateYX()}" >
 	   <!--  <img src="amslertest.gif" id="plane" width="192" height="192" data-bind="style: {WebkitTransform: webRotate(), MozTransform: mozRotate(), transform: webRotate()}" > -->
-  </div>
-  <ol id="output-list"></ul>
+    </div>
+    <ul id="output-list"></ul>
 
 
-  <script type='text/javascript'>
+    <script type='text/javascript'>
       require(['app'], function (amber) {
           amber.initialize({
             //used for all new packages in IDE
@@ -40,10 +40,7 @@
           require(["amber-ide-starter-dialog"], function (dlg) { dlg.start(); });
           amber.globals.LindaGyroWorker._start();
       });
-  </script>
-
-  
-
+    </script>
   </body>
 
 </html>

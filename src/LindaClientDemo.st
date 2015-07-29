@@ -1,5 +1,5 @@
 Smalltalk createPackage: 'LindaClientDemo'!
-(Smalltalk packageAt: 'LindaClientDemo') imports: {'ko' -> 'knockout'. 'linda' -> 'linda-client'. 'socketIo' -> 'socket.io'. 'amber/jquery/Wrappers-JQuery'. 'amber/web/Web'. 'silk/Silk'}!
+(Smalltalk packageAt: 'LindaClientDemo') imports: {'ko' -> 'knockout'. 'amber/jquery/Wrappers-JQuery'. 'amber/web/Web'. 'silk/Silk'}!
 Tuple subclass: #FibTuple
 	instanceVariableNames: ''
 	package: 'LindaClientDemo'!
@@ -142,6 +142,14 @@ Object subclass: #LindaBasicDemo
 	instanceVariableNames: ''
 	package: 'LindaClientDemo'!
 
+!LindaBasicDemo class methodsFor: 'defaults'!
+
+defaultrTupleSpace
+	| lindaClient |
+	lindaClient := LindaClient default.
+	^lindaClient tupleSpace: 'default'
+! !
+
 !LindaBasicDemo class methodsFor: 'pholosoper table'!
 
 phil: anIndex total: num
@@ -268,6 +276,7 @@ setupViewModel
 
 	viewModel := #{
 		#tickets -> (ko observable: 0) .
+		#availableServers -> (ko observableArray: LindaClient serverUrls) .
 		#serverUrl -> (ko observable: LindaClient defaultServerUrl) 
 	}.
 ! !
@@ -399,14 +408,6 @@ tupleSpace
 	^self lindaClient tupleSpace: FibTuple tupleSpaceName
 ! !
 
-!LindaFibMaster methodsFor: 'starting'!
-
-augmentPage
-	'#amber-with' asJQuery click: [ self doAmberWith ].
-	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
-	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
-! !
-
 !LindaFibMaster class methodsFor: 'starting'!
 
 example
@@ -451,9 +452,6 @@ startReduce
 !LindaFibWorker methodsFor: 'starting'!
 
 augmentPage
-	'#amber-with' asJQuery click: [ self doAmberWith ].
-	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
-	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
 	'#start' asJQuery click: [ self startReduce ].
 	
 	viewModel := #{
@@ -629,20 +627,6 @@ tupleSpace
 
 !LindaGyroWorker methodsFor: 'action'!
 
-doAmberWith
-	| tag |
-	tag := (HTMLCanvas onJQuery: '#output-list' asJQuery) root.
-	tag with: [ :html | html li with: 'Amber Web #with: added me!!' ]
-!
-
-doJQueryAppend
-	'#output-list' asJQuery append: '<li>jQuery append added me!!</li>'
-!
-
-doSilkTAG
-	'#output-list' asSilk LI: 'Silk TAG: added me!!'
-!
-
 setupHandle
 
 	window addEventListener: #devicemotion with: self devicemotionHandler.
@@ -663,9 +647,14 @@ augmentPage
 devicemotionHandler
 	^[:event |
 		self 
-			gX: (event accelerationIncludingGravity x rounded)
-			gY: (event accelerationIncludingGravity y rounded)
-			gZ: (event accelerationIncludingGravity z rounded)		
+			gX: (event acceleration x )
+			gY: (event acceleration y )
+			gZ: (event acceleration z )		
+"
+			gX: (event accelerationIncludingGravity x )
+			gY: (event accelerationIncludingGravity y )
+			gZ: (event accelerationIncludingGravity z )		
+"
 	].
 !
 
@@ -722,12 +711,12 @@ gX: xValue gY: yValue gZ: zValue
 	(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) 
 		ifTrue: [
 	
-			self gX: (xValue rounded) * 10.
-			self gY: (yValue rounded) * 10.
-			self gZ: (zValue rounded) * 10.
+			self gX: (xValue rounded) * 100.
+			self gY: (yValue rounded) * 100.
+			self gZ: (zValue rounded) * 100.
 
-			(viewModel at: #rotateYX) value: 'rotateX(', yValue printString, 'deg)', 
-				' rotateY(', xValue printString, 'deg)'.
+			(viewModel at: #rotateYX) value: 'rotateX(', (yValue * 100) negated printString, 'deg)', 
+				' rotateY(', (xValue * 100) negated printString, 'deg)'.
 			tuple := GyroTuple new.
 			tuple handleName: self handleName.
 			tuple gX: self gX.
@@ -742,12 +731,6 @@ LindaClientApp subclass: #LindaSievelMaster
 	package: 'LindaClientDemo'!
 
 !LindaSievelMaster methodsFor: 'starting'!
-
-augmentPage
-	'#amber-with' asJQuery click: [ self doAmberWith ].
-	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
-	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
-!
 
 map
 	"Map "
@@ -878,7 +861,7 @@ workerList
 
 airconOff
 	| tuple list |
-	super startDemo.
+	self startDemo.
 	self inspect.
 	tuple := ThermoTuple airconCommand.
 	tuple airconOff.
@@ -887,7 +870,7 @@ airconOff
 
 airconOn
 	| tuple list |
-	super startDemo.
+	self startDemo.
 	self inspect.
 	tuple := ThermoTuple airconCommand.
 	tuple airconOn.
@@ -896,7 +879,7 @@ airconOn
 
 airconTimer
 	| tuple list |
-	super startDemo.
+	self startDemo.
 	self inspect.
 	tuple := ThermoTuple airconCommand.
 	tuple airconTimer.
@@ -921,7 +904,7 @@ startDemo
 
 thermoQuery
 	| tuple list |
-	super startDemo.
+	self startDemo.
 	self inspect.
 	tuple := ThermoTuple airconCommand.
 	tuple airconQuery.
@@ -1122,17 +1105,20 @@ initForAircon
 
 airconOff
 
-	self aircon: 'off'
+	self aircon: 'off'.
+	self time: 'エアコン消せ'
 !
 
 airconOn
 
-	self aircon: 'on'
+	self aircon: 'on'.
+	self time: 'エアコン点けれ'
 !
 
 airconQuery
 
-	self aircon: 'query'
+	self aircon: 'query'.
+	self time: '何℃か教えれ'
 !
 
 airconTimer

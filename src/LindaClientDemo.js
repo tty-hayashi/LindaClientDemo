@@ -1,16 +1,16 @@
 define("amber-lindaclient/LindaClientDemo", ["amber/boot"
 //>>excludeStart("imports", pragmas.excludeImports);
-, "knockout", "linda-client", "socket.io", "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"
+, "knockout", "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"
 //>>excludeEnd("imports");
 , "amber-lindaclient/LindaClient", "amber_core/Kernel-Objects"], function($boot
 //>>excludeStart("imports", pragmas.excludeImports);
-,ko,linda,socketIo
+,ko
 //>>excludeEnd("imports");
 ){"use strict";
 var $core=$boot.api,nil=$boot.nil,$recv=$boot.asReceiver,$globals=$boot.globals;
 $core.addPackage('LindaClientDemo');
 $core.packages["LindaClientDemo"].innerEval = function (expr) { return eval(expr); };
-$core.packages["LindaClientDemo"].imports = ["ko=knockout", "linda=linda-client", "socketIo=socket.io", "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"];
+$core.packages["LindaClientDemo"].imports = ["ko=knockout", "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"];
 $core.packages["LindaClientDemo"].transport = {"type":"amd","amdNamespace":"amber-lindaclient"};
 
 $core.addClass('FibTuple', $globals.Tuple, [], 'LindaClientDemo');
@@ -602,6 +602,36 @@ $core.addClass('LindaBasicDemo', $globals.Object, [], 'LindaClientDemo');
 
 $core.addMethod(
 $core.method({
+selector: "defaultrTupleSpace",
+protocol: 'defaults',
+fn: function (){
+"use strict";
+
+var self=this;
+var lindaClient;
+function $LindaClient(){return $globals.LindaClient||(typeof LindaClient=="undefined"?nil:LindaClient)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+lindaClient=$recv($LindaClient())._default();
+$1=$recv(lindaClient)._tupleSpace_("default");
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"defaultrTupleSpace",{lindaClient:lindaClient},$globals.LindaBasicDemo.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "defaultrTupleSpace\x0a\x09| lindaClient |\x0a\x09lindaClient := LindaClient default.\x0a\x09^lindaClient tupleSpace: 'default'\x0a\x09\x0a\x09",
+referencedClasses: ["LindaClient"],
+//>>excludeEnd("ide");
+messageSends: ["default", "tupleSpace:"]
+}),
+$globals.LindaBasicDemo.klass);
+
+$core.addMethod(
+$core.method({
 selector: "phil:total:",
 protocol: 'pholosoper table',
 fn: function (anIndex,num){
@@ -1081,7 +1111,7 @@ $1=$recv(ko)._observable_((0));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["observable:"]=1;
 //>>excludeEnd("ctx");
-self["@viewModel"]=$globals.HashedCollection._newFromPairs_(["tickets",$1,"serverUrl",$recv(ko)._observable_($recv($LindaClient())._defaultServerUrl())]);
+self["@viewModel"]=$globals.HashedCollection._newFromPairs_(["tickets",$1,"availableServers",$recv(ko)._observableArray_($recv($LindaClient())._serverUrls()),"serverUrl",$recv(ko)._observable_($recv($LindaClient())._defaultServerUrl())]);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"setupViewModel",{},$globals.LindaClientApp)});
@@ -1089,10 +1119,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "setupViewModel\x0a\x0a\x09viewModel := #{\x0a\x09\x09#tickets -> (ko observable: 0) .\x0a\x09\x09#serverUrl -> (ko observable: LindaClient defaultServerUrl) \x0a\x09}.",
+source: "setupViewModel\x0a\x0a\x09viewModel := #{\x0a\x09\x09#tickets -> (ko observable: 0) .\x0a\x09\x09#availableServers -> (ko observableArray: LindaClient serverUrls) .\x0a\x09\x09#serverUrl -> (ko observable: LindaClient defaultServerUrl) \x0a\x09}.",
 referencedClasses: ["LindaClient"],
 //>>excludeEnd("ide");
-messageSends: ["observable:", "defaultServerUrl"]
+messageSends: ["observable:", "observableArray:", "serverUrls", "defaultServerUrl"]
 }),
 $globals.LindaClientApp);
 
@@ -1506,66 +1536,6 @@ $globals.LindaFactorialWorker.klass);
 $core.addClass('LindaFibMaster', $globals.LindaClientApp, ['n', 'result'], 'LindaClientDemo');
 $core.addMethod(
 $core.method({
-selector: "augmentPage",
-protocol: 'starting',
-fn: function (){
-"use strict";
-
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-$1="#amber-with"._asJQuery();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["asJQuery"]=1;
-//>>excludeEnd("ctx");
-$recv($1)._click_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._doAmberWith();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["click:"]=1;
-//>>excludeEnd("ctx");
-$recv("#silk-tag"._asSilk())._on_bind_("click",(function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._doSilkTAG();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
-//>>excludeEnd("ctx");
-}));
-$recv("#jquery-append"._asJQuery())._click_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._doJQueryAppend();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,3)});
-//>>excludeEnd("ctx");
-}));
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"augmentPage",{},$globals.LindaFibMaster)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "augmentPage\x0a\x09'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["click:", "asJQuery", "doAmberWith", "on:bind:", "asSilk", "doSilkTAG", "doJQueryAppend"]
-}),
-$globals.LindaFibMaster);
-
-$core.addMethod(
-$core.method({
 selector: "map",
 protocol: 'accessing',
 fn: function (){
@@ -1871,62 +1841,21 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$2,$3;
-$1="#amber-with"._asJQuery();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["asJQuery"]=1;
-//>>excludeEnd("ctx");
-$recv($1)._click_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._doAmberWith();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["click:"]=1;
-//>>excludeEnd("ctx");
-$recv("#silk-tag"._asSilk())._on_bind_("click",(function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._doSilkTAG();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
-//>>excludeEnd("ctx");
-}));
-$2="#jquery-append"._asJQuery();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["asJQuery"]=2;
-//>>excludeEnd("ctx");
-$recv($2)._click_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._doJQueryAppend();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,3)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["click:"]=2;
-//>>excludeEnd("ctx");
+var $1;
 $recv("#start"._asJQuery())._click_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
 return self._startReduce();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,4)});
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
 }));
-$3=$recv(ko)._observable_((0));
+$1=$recv(ko)._observable_((0));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["observable:"]=1;
 //>>excludeEnd("ctx");
-self["@viewModel"]=$globals.HashedCollection._newFromPairs_(["targetNumber",$3,"resultNumber",$recv(ko)._observable_((0))]);
+self["@viewModel"]=$globals.HashedCollection._newFromPairs_(["targetNumber",$1,"resultNumber",$recv(ko)._observable_((0))]);
 $recv(ko)._applyBindings_(self["@viewModel"]);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1935,10 +1864,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x0a\x09'#start' asJQuery click: [ self startReduce ].\x0a\x09\x0a\x09viewModel := #{\x0a\x09\x09#targetNumber -> (ko observable: 0) .\x0a\x09\x09#resultNumber -> (ko observable: 0) \x0a\x09}.\x0a\x09ko applyBindings: viewModel.",
+source: "augmentPage\x0a\x09'#start' asJQuery click: [ self startReduce ].\x0a\x09\x0a\x09viewModel := #{\x0a\x09\x09#targetNumber -> (ko observable: 0) .\x0a\x09\x09#resultNumber -> (ko observable: 0) \x0a\x09}.\x0a\x09ko applyBindings: viewModel.",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["click:", "asJQuery", "doAmberWith", "on:bind:", "asSilk", "doSilkTAG", "doJQueryAppend", "startReduce", "observable:", "applyBindings:"]
+messageSends: ["click:", "asJQuery", "startReduce", "observable:", "applyBindings:"]
 }),
 $globals.LindaFibWorker);
 
@@ -2669,30 +2598,22 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $4,$3,$2,$7,$6,$5,$1;
+var $3,$2,$5,$4,$1;
 $1=(function(event){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$4=$recv(event)._accelerationIncludingGravity();
+$3=$recv(event)._acceleration();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["accelerationIncludingGravity"]=1;
+$ctx2.sendIdx["acceleration"]=1;
 //>>excludeEnd("ctx");
-$3=$recv($4)._x();
-$2=$recv($3)._rounded();
+$2=$recv($3)._x();
+$5=$recv(event)._acceleration();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["rounded"]=1;
+$ctx2.sendIdx["acceleration"]=2;
 //>>excludeEnd("ctx");
-$7=$recv(event)._accelerationIncludingGravity();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["accelerationIncludingGravity"]=2;
-//>>excludeEnd("ctx");
-$6=$recv($7)._y();
-$5=$recv($6)._rounded();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["rounded"]=2;
-//>>excludeEnd("ctx");
-return self._gX_gY_gZ_($2,$5,$recv($recv($recv(event)._accelerationIncludingGravity())._z())._rounded());
+$4=$recv($5)._y();
+return self._gX_gY_gZ_($2,$4,$recv($recv(event)._acceleration())._z());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({event:event},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -2704,102 +2625,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09self \x0a\x09\x09\x09gX: (event accelerationIncludingGravity x rounded)\x0a\x09\x09\x09gY: (event accelerationIncludingGravity y rounded)\x0a\x09\x09\x09gZ: (event accelerationIncludingGravity z rounded)\x09\x09\x0a\x09].",
+source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09self \x0a\x09\x09\x09gX: (event acceleration x )\x0a\x09\x09\x09gY: (event acceleration y )\x0a\x09\x09\x09gZ: (event acceleration z )\x09\x09\x0a\x22\x0a\x09\x09\x09gX: (event accelerationIncludingGravity x )\x0a\x09\x09\x09gY: (event accelerationIncludingGravity y )\x0a\x09\x09\x09gZ: (event accelerationIncludingGravity z )\x09\x09\x0a\x22\x0a\x09].",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["gX:gY:gZ:", "rounded", "x", "accelerationIncludingGravity", "y", "z"]
-}),
-$globals.LindaGyroWorker);
-
-$core.addMethod(
-$core.method({
-selector: "doAmberWith",
-protocol: 'action',
-fn: function (){
-"use strict";
-
-var self=this;
-var tag;
-function $HTMLCanvas(){return $globals.HTMLCanvas||(typeof HTMLCanvas=="undefined"?nil:HTMLCanvas)}
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-tag=$recv($recv($HTMLCanvas())._onJQuery_("#output-list"._asJQuery()))._root();
-$recv(tag)._with_((function(html){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return $recv($recv(html)._li())._with_("Amber Web #with: added me!");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({html:html},$ctx1,1)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["with:"]=1;
-//>>excludeEnd("ctx");
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"doAmberWith",{tag:tag},$globals.LindaGyroWorker)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "doAmberWith\x0a\x09| tag |\x0a\x09tag := (HTMLCanvas onJQuery: '#output-list' asJQuery) root.\x0a\x09tag with: [ :html | html li with: 'Amber Web #with: added me!' ]",
-referencedClasses: ["HTMLCanvas"],
-//>>excludeEnd("ide");
-messageSends: ["root", "onJQuery:", "asJQuery", "with:", "li"]
-}),
-$globals.LindaGyroWorker);
-
-$core.addMethod(
-$core.method({
-selector: "doJQueryAppend",
-protocol: 'action',
-fn: function (){
-"use strict";
-
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-$recv("#output-list"._asJQuery())._append_("<li>jQuery append added me!</li>");
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"doJQueryAppend",{},$globals.LindaGyroWorker)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "doJQueryAppend\x0a\x09'#output-list' asJQuery append: '<li>jQuery append added me!</li>'",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["append:", "asJQuery"]
-}),
-$globals.LindaGyroWorker);
-
-$core.addMethod(
-$core.method({
-selector: "doSilkTAG",
-protocol: 'action',
-fn: function (){
-"use strict";
-
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-$recv("#output-list"._asSilk())._LI_("Silk TAG: added me!");
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"doSilkTAG",{},$globals.LindaGyroWorker)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "doSilkTAG\x0a\x09'#output-list' asSilk LI: 'Silk TAG: added me!'",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["LI:", "asSilk"]
+messageSends: ["gX:gY:gZ:", "x", "acceleration", "y", "z"]
 }),
 $globals.LindaGyroWorker);
 
@@ -2869,7 +2698,7 @@ function $GyroTuple(){return $globals.GyroTuple||(typeof GyroTuple=="undefined"?
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $4,$3,$6,$5,$2,$8,$7,$1,$10,$9,$12,$11,$13,$19,$18,$17,$16,$15,$14;
+var $4,$3,$6,$5,$2,$8,$7,$1,$10,$9,$12,$11,$13,$14,$22,$21,$20,$19,$18,$17,$16,$15;
 $4=self._gX();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["gX"]=1;
@@ -2901,7 +2730,7 @@ $10=$recv(xValue)._rounded();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["rounded"]=1;
 //>>excludeEnd("ctx");
-$9=$recv($10).__star((10));
+$9=$recv($10).__star((100));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["*"]=1;
 //>>excludeEnd("ctx");
@@ -2913,7 +2742,7 @@ $12=$recv(yValue)._rounded();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["rounded"]=2;
 //>>excludeEnd("ctx");
-$11=$recv($12).__star((10));
+$11=$recv($12).__star((100));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["*"]=2;
 //>>excludeEnd("ctx");
@@ -2921,33 +2750,45 @@ self._gY_($11);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["gY:"]=1;
 //>>excludeEnd("ctx");
-self._gZ_($recv($recv(zValue)._rounded()).__star((10)));
+$13=$recv($recv(zValue)._rounded()).__star((100));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["*"]=3;
+//>>excludeEnd("ctx");
+self._gZ_($13);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["gZ:"]=1;
 //>>excludeEnd("ctx");
-$13=$recv(self["@viewModel"])._at_("rotateYX");
-$19=$recv(yValue)._printString();
+$14=$recv(self["@viewModel"])._at_("rotateYX");
+$22=$recv(yValue).__star((100));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["*"]=4;
+//>>excludeEnd("ctx");
+$21=$recv($22)._negated();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["negated"]=1;
+//>>excludeEnd("ctx");
+$20=$recv($21)._printString();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["printString"]=1;
 //>>excludeEnd("ctx");
-$18="rotateX(".__comma($19);
-$17=$recv($18).__comma("deg)");
+$19="rotateX(".__comma($20);
+$18=$recv($19).__comma("deg)");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=4;
 //>>excludeEnd("ctx");
-$16=$recv($17).__comma(" rotateY(");
+$17=$recv($18).__comma(" rotateY(");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=3;
 //>>excludeEnd("ctx");
-$15=$recv($16).__comma($recv(xValue)._printString());
+$16=$recv($17).__comma($recv($recv($recv(xValue).__star((100)))._negated())._printString());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=2;
 //>>excludeEnd("ctx");
-$14=$recv($15).__comma("deg)");
+$15=$recv($16).__comma("deg)");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
-$recv($13)._value_($14);
+$recv($14)._value_($15);
 tuple=$recv($GyroTuple())._new();
 tuple;
 $recv(tuple)._handleName_(self._handleName());
@@ -2963,10 +2804,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["xValue", "yValue", "zValue"],
-source: "gX: xValue gY: yValue gZ: zValue\x0a\x09| tuple |\x0a\x09(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) \x0a\x09\x09ifTrue: [\x0a\x09\x0a\x09\x09\x09self gX: (xValue rounded) * 10.\x0a\x09\x09\x09self gY: (yValue rounded) * 10.\x0a\x09\x09\x09self gZ: (zValue rounded) * 10.\x0a\x0a\x09\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', yValue printString, 'deg)', \x0a\x09\x09\x09\x09' rotateY(', xValue printString, 'deg)'.\x0a\x09\x09\x09tuple := GyroTuple new.\x0a\x09\x09\x09tuple handleName: self handleName.\x0a\x09\x09\x09tuple gX: self gX.\x0a\x09\x09\x09tuple gY: self gY.\x0a\x09\x09\x09tuple gZ: self gZ.\x0a\x09\x09\x09self tupleSpace write: tuple.\x0a\x09\x09]\x0a\x09",
+source: "gX: xValue gY: yValue gZ: zValue\x0a\x09| tuple |\x0a\x09(self gX ~= xValue) & (self gY ~= yValue) & (self gZ ~= zValue) \x0a\x09\x09ifTrue: [\x0a\x09\x0a\x09\x09\x09self gX: (xValue rounded) * 100.\x0a\x09\x09\x09self gY: (yValue rounded) * 100.\x0a\x09\x09\x09self gZ: (zValue rounded) * 100.\x0a\x0a\x09\x09\x09(viewModel at: #rotateYX) value: 'rotateX(', (yValue * 100) negated printString, 'deg)', \x0a\x09\x09\x09\x09' rotateY(', (xValue * 100) negated printString, 'deg)'.\x0a\x09\x09\x09tuple := GyroTuple new.\x0a\x09\x09\x09tuple handleName: self handleName.\x0a\x09\x09\x09tuple gX: self gX.\x0a\x09\x09\x09tuple gY: self gY.\x0a\x09\x09\x09tuple gZ: self gZ.\x0a\x09\x09\x09self tupleSpace write: tuple.\x0a\x09\x09]\x0a\x09",
 referencedClasses: ["GyroTuple"],
 //>>excludeEnd("ide");
-messageSends: ["ifTrue:", "&", "~=", "gX", "gY", "gZ", "gX:", "*", "rounded", "gY:", "gZ:", "value:", "at:", ",", "printString", "new", "handleName:", "handleName", "write:", "tupleSpace"]
+messageSends: ["ifTrue:", "&", "~=", "gX", "gY", "gZ", "gX:", "*", "rounded", "gY:", "gZ:", "value:", "at:", ",", "printString", "negated", "new", "handleName:", "handleName", "write:", "tupleSpace"]
 }),
 $globals.LindaGyroWorker);
 
@@ -3405,66 +3246,6 @@ $globals.LindaGyroWorker);
 
 
 $core.addClass('LindaSievelMaster', $globals.LindaClientApp, [], 'LindaClientDemo');
-$core.addMethod(
-$core.method({
-selector: "augmentPage",
-protocol: 'starting',
-fn: function (){
-"use strict";
-
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-$1="#amber-with"._asJQuery();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["asJQuery"]=1;
-//>>excludeEnd("ctx");
-$recv($1)._click_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._doAmberWith();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["click:"]=1;
-//>>excludeEnd("ctx");
-$recv("#silk-tag"._asSilk())._on_bind_("click",(function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._doSilkTAG();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
-//>>excludeEnd("ctx");
-}));
-$recv("#jquery-append"._asJQuery())._click_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return self._doJQueryAppend();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,3)});
-//>>excludeEnd("ctx");
-}));
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"augmentPage",{},$globals.LindaSievelMaster)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "augmentPage\x0a\x09'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["click:", "asJQuery", "doAmberWith", "on:bind:", "asSilk", "doSilkTAG", "doJQueryAppend"]
-}),
-$globals.LindaSievelMaster);
-
 $core.addMethod(
 $core.method({
 selector: "map",
@@ -3938,14 +3719,7 @@ function $ThermoTuple(){return $globals.ThermoTuple||(typeof ThermoTuple=="undef
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-(
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.supercall = true, 
-//>>excludeEnd("ctx");
-$globals.LindaThermo.superclass.fn.prototype._startDemo.apply($recv(self), []));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.supercall = false;
-//>>excludeEnd("ctx");;
+self._startDemo();
 self._inspect();
 tuple=$recv($ThermoTuple())._airconCommand();
 $recv(tuple)._airconOff();
@@ -3957,7 +3731,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "airconOff\x0a\x09| tuple list |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconOff.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
+source: "airconOff\x0a\x09| tuple list |\x0a\x09self startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconOff.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
 referencedClasses: ["ThermoTuple"],
 //>>excludeEnd("ide");
 messageSends: ["startDemo", "inspect", "airconCommand", "airconOff", "write:", "tupleSpace"]
@@ -3977,14 +3751,7 @@ function $ThermoTuple(){return $globals.ThermoTuple||(typeof ThermoTuple=="undef
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-(
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.supercall = true, 
-//>>excludeEnd("ctx");
-$globals.LindaThermo.superclass.fn.prototype._startDemo.apply($recv(self), []));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.supercall = false;
-//>>excludeEnd("ctx");;
+self._startDemo();
 self._inspect();
 tuple=$recv($ThermoTuple())._airconCommand();
 $recv(tuple)._airconOn();
@@ -3996,7 +3763,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "airconOn\x0a\x09| tuple list |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconOn.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
+source: "airconOn\x0a\x09| tuple list |\x0a\x09self startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconOn.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
 referencedClasses: ["ThermoTuple"],
 //>>excludeEnd("ide");
 messageSends: ["startDemo", "inspect", "airconCommand", "airconOn", "write:", "tupleSpace"]
@@ -4016,14 +3783,7 @@ function $ThermoTuple(){return $globals.ThermoTuple||(typeof ThermoTuple=="undef
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-(
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.supercall = true, 
-//>>excludeEnd("ctx");
-$globals.LindaThermo.superclass.fn.prototype._startDemo.apply($recv(self), []));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.supercall = false;
-//>>excludeEnd("ctx");;
+self._startDemo();
 self._inspect();
 tuple=$recv($ThermoTuple())._airconCommand();
 $recv(tuple)._airconTimer();
@@ -4035,7 +3795,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "airconTimer\x0a\x09| tuple list |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconTimer.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
+source: "airconTimer\x0a\x09| tuple list |\x0a\x09self startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconTimer.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
 referencedClasses: ["ThermoTuple"],
 //>>excludeEnd("ide");
 messageSends: ["startDemo", "inspect", "airconCommand", "airconTimer", "write:", "tupleSpace"]
@@ -4261,14 +4021,7 @@ function $ThermoTuple(){return $globals.ThermoTuple||(typeof ThermoTuple=="undef
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-(
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.supercall = true, 
-//>>excludeEnd("ctx");
-$globals.LindaThermo.superclass.fn.prototype._startDemo.apply($recv(self), []));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.supercall = false;
-//>>excludeEnd("ctx");;
+self._startDemo();
 self._inspect();
 tuple=$recv($ThermoTuple())._airconCommand();
 $recv(tuple)._airconQuery();
@@ -4280,7 +4033,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "thermoQuery\x0a\x09| tuple list |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconQuery.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
+source: "thermoQuery\x0a\x09| tuple list |\x0a\x09self startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconQuery.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
 referencedClasses: ["ThermoTuple"],
 //>>excludeEnd("ide");
 messageSends: ["startDemo", "inspect", "airconCommand", "airconQuery", "write:", "tupleSpace"]
@@ -4952,6 +4705,7 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 self._aircon_("off");
+self._time_("エアコン消せ");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"airconOff",{},$globals.ThermoTuple)});
@@ -4959,10 +4713,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "airconOff\x0a\x0a\x09self aircon: 'off'",
+source: "airconOff\x0a\x0a\x09self aircon: 'off'.\x0a\x09self time: 'エアコン消せ'",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["aircon:"]
+messageSends: ["aircon:", "time:"]
 }),
 $globals.ThermoTuple);
 
@@ -4978,6 +4732,7 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 self._aircon_("on");
+self._time_("エアコン点けれ");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"airconOn",{},$globals.ThermoTuple)});
@@ -4985,10 +4740,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "airconOn\x0a\x0a\x09self aircon: 'on'",
+source: "airconOn\x0a\x0a\x09self aircon: 'on'.\x0a\x09self time: 'エアコン点けれ'",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["aircon:"]
+messageSends: ["aircon:", "time:"]
 }),
 $globals.ThermoTuple);
 
@@ -5004,6 +4759,7 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 self._aircon_("query");
+self._time_("何℃か教えれ");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"airconQuery",{},$globals.ThermoTuple)});
@@ -5011,10 +4767,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "airconQuery\x0a\x0a\x09self aircon: 'query'",
+source: "airconQuery\x0a\x0a\x09self aircon: 'query'.\x0a\x09self time: '何℃か教えれ'",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["aircon:"]
+messageSends: ["aircon:", "time:"]
 }),
 $globals.ThermoTuple);
 

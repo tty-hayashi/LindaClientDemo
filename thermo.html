@@ -12,12 +12,15 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css">
   </head>
   <body>
-
-  <p>lindaサーバーURL: <input data-bind="value: serverUrl"/></p>
-  <p><button id="start">START</button></p>
-  <p><button id="thermoQuery">今何℃？</button></p>
-  <p><button id="airconOn">エアコン ON</button></p>
-  <p><button id="airconOff">エアコン OFF</button></p>
+    <div></div>
+    <p>lindaサーバーURL: 
+    <select data-bind="options: availableServers,
+                       value: serverUrl,
+                       optionsCaption: '-選択してください-'"></select></p>
+  <div><button id="start">START</button>
+    <button id="thermoQuery">今何℃？</button></div>
+  <p><button id="airconOn">エアコン ON</button>
+    <button id="airconOff">エアコン OFF</button></p>
 
   <table>
 	  <thead>

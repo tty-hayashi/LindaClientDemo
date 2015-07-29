@@ -390,7 +390,7 @@ return $core.withContext(function($ctx1) {
 var $1,$2,$receiver;
 $1=self["@defaultServerUrl"];
 if(($receiver = $1) == null || $receiver.isNil){
-self["@defaultServerUrl"]="http://node-linda-ststudy.herokuapp.com";
+self["@defaultServerUrl"]=$recv(self._serverUrls())._first();
 self["@defaultServerUrl"];
 } else {
 $1;
@@ -403,10 +403,10 @@ return $2;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "defaultServerUrl\x0a\x0a\x09\x22defaultServerUrl ifNil: [defaultServerUrl := 'http://127.0.0.1:8931/'].\x22\x0a\x09defaultServerUrl ifNil: [defaultServerUrl := 'http://node-linda-ststudy.herokuapp.com'].\x0a\x09^defaultServerUrl",
+source: "defaultServerUrl\x0a\x0a\x09\x22defaultServerUrl ifNil: [defaultServerUrl := self serverUrls second].\x22\x0a\x09defaultServerUrl ifNil: [defaultServerUrl := self serverUrls first].\x0a\x09^defaultServerUrl",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["ifNil:"]
+messageSends: ["ifNil:", "first", "serverUrls"]
 }),
 $globals.LindaClient.klass);
 
@@ -480,8 +480,27 @@ messageSends: ["connect:", "serverUrl:"]
 }),
 $globals.LindaClient.klass);
 
+$core.addMethod(
+$core.method({
+selector: "serverUrls",
+protocol: 'accessing',
+fn: function (){
+"use strict";
 
-$core.addClass('ReadTakeOption', $globals.LindaProxy, [], 'LindaClient');
+var self=this;
+var $1;
+$1=["http://127.0.0.1:8931/", "http://node-linda-ststudy.herokuapp.com"];
+return $1;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "serverUrls\x0a\x0a\x09^#('http://127.0.0.1:8931/' 'http://node-linda-ststudy.herokuapp.com')",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.LindaClient.klass);
 
 
 $core.addClass('SocketIo', $globals.LindaProxy, [], 'LindaClient');
