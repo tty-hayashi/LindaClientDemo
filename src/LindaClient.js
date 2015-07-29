@@ -1096,7 +1096,7 @@ $core.addMethod(
 $core.method({
 selector: "read:",
 protocol: 'services',
-fn: function (aTupleHashedCollection){
+fn: function (aTuple){
 "use strict";
 
 var self=this;
@@ -1108,7 +1108,7 @@ return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
 ans=$recv($OrderedCollection())._new();
-self._read_callback_(aTupleHashedCollection,(function(e,t){
+self._read_callback_(aTuple,(function(e,t){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -1120,12 +1120,12 @@ return $recv(ans)._add_($recv($Tuple())._fromJSON_(t));
 $1=ans;
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"read:",{aTupleHashedCollection:aTupleHashedCollection,ans:ans},$globals.TupleSpace)});
+}, function($ctx1) {$ctx1.fill(self,"read:",{aTuple:aTuple,ans:ans},$globals.TupleSpace)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aTupleHashedCollection"],
-source: "read: aTupleHashedCollection\x0a\x09\x22aBlockClosure <[:err :tuple | ]>\x22\x0a\x09| ans |\x0a\x09ans := OrderedCollection new.\x0a\x09self read: aTupleHashedCollection callback: [:e :t| ans add: (Tuple fromJSON: t)].\x0a\x09^ans ",
+args: ["aTuple"],
+source: "read: aTuple\x0a\x09\x22aTuple\x09<Tuple | HaschedCollection>\x0a\x09aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09| ans |\x0a\x09ans := OrderedCollection new.\x0a\x09self read: aTuple callback: [:e :t| ans add: (Tuple fromJSON: t)].\x0a\x09^ans ",
 referencedClasses: ["OrderedCollection", "Tuple"],
 //>>excludeEnd("ide");
 messageSends: ["new", "read:callback:", "add:", "fromJSON:"]
@@ -1136,7 +1136,7 @@ $core.addMethod(
 $core.method({
 selector: "read:callback:",
 protocol: 'services',
-fn: function (aTupleHashedCollection,aBlockClosure){
+fn: function (aTuple,aBlockClosure){
 "use strict";
 
 var self=this;
@@ -1145,7 +1145,7 @@ function $Tuple(){return $globals.Tuple||(typeof Tuple=="undefined"?nil:Tuple)}
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv(self._proxy())._read_with_($recv(aTupleHashedCollection)._asJSON(),(function(e,t){
+$1=$recv(self._proxy())._read_with_($recv(aTuple)._asJSON(),(function(e,t){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -1156,15 +1156,60 @@ return $recv(aBlockClosure)._value_value_(e,$recv($Tuple())._fromJSON_(t));
 }));
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"read:callback:",{aTupleHashedCollection:aTupleHashedCollection,aBlockClosure:aBlockClosure},$globals.TupleSpace)});
+}, function($ctx1) {$ctx1.fill(self,"read:callback:",{aTuple:aTuple,aBlockClosure:aBlockClosure},$globals.TupleSpace)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aTupleHashedCollection", "aBlockClosure"],
-source: "read: aTupleHashedCollection callback: aBlockClosure\x0a\x09\x22aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09^self proxy read: aTupleHashedCollection asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]",
+args: ["aTuple", "aBlockClosure"],
+source: "read: aTuple callback: aBlockClosure\x0a\x09\x22aTuple\x09<Tuple | HaschedCollection>\x0a\x09aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09^self proxy read: aTuple asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]",
 referencedClasses: ["Tuple"],
 //>>excludeEnd("ide");
 messageSends: ["read:with:", "proxy", "asJSON", "value:value:", "fromJSON:"]
+}),
+$globals.TupleSpace);
+
+$core.addMethod(
+$core.method({
+selector: "readp:wait:callback:",
+protocol: 'services',
+fn: function (aTuple,aMilliseconds,aBlockClosure){
+"use strict";
+
+var self=this;
+var id;
+function $Tuple(){return $globals.Tuple||(typeof Tuple=="undefined"?nil:Tuple)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+id=self._read_with_($recv(aTuple)._asJSON(),(function(e,t){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(aBlockClosure)._value_value_(e,$recv($Tuple())._fromJSON_(t));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({e:e,t:t},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+$recv((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return self._cancel_(id);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
+//>>excludeEnd("ctx");
+}))._valueWithTimeout_(aMilliseconds);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"readp:wait:callback:",{aTuple:aTuple,aMilliseconds:aMilliseconds,aBlockClosure:aBlockClosure,id:id},$globals.TupleSpace)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aTuple", "aMilliseconds", "aBlockClosure"],
+source: "readp: aTuple wait: aMilliseconds callback: aBlockClosure \x0a\x09\x22aTuple\x09<Tuple | HaschedCollection>\x0a\x09aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09| id |\x0a\x09id := self read: aTuple asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)].\x0a\x09[self cancel: id] valueWithTimeout: aMilliseconds",
+referencedClasses: ["Tuple"],
+//>>excludeEnd("ide");
+messageSends: ["read:with:", "asJSON", "value:value:", "fromJSON:", "valueWithTimeout:", "cancel:"]
 }),
 $globals.TupleSpace);
 
@@ -1199,7 +1244,7 @@ $core.addMethod(
 $core.method({
 selector: "take:",
 protocol: 'services',
-fn: function (aTupleHashedCollection){
+fn: function (aTuple){
 "use strict";
 
 var self=this;
@@ -1210,7 +1255,7 @@ return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
 ans=$recv($OrderedCollection())._new();
-self._take_callback_(aTupleHashedCollection,(function(e,t){
+self._take_callback_(aTuple,(function(e,t){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -1222,12 +1267,12 @@ return $recv(ans)._add_(t);
 $1=ans;
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"take:",{aTupleHashedCollection:aTupleHashedCollection,ans:ans},$globals.TupleSpace)});
+}, function($ctx1) {$ctx1.fill(self,"take:",{aTuple:aTuple,ans:ans},$globals.TupleSpace)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aTupleHashedCollection"],
-source: "take: aTupleHashedCollection\x0a\x09\x22aBlockClosure <[:err :tuple | ]>\x22\x0a\x09| ans |\x0a\x09ans := OrderedCollection new.\x0a\x09self take: aTupleHashedCollection callback: [:e :t| ans add: t].\x0a\x09^ans ",
+args: ["aTuple"],
+source: "take: aTuple\x0a\x09\x22aTuple\x09<Tuple | HaschedCollection>\x0a\x09aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09| ans |\x0a\x09ans := OrderedCollection new.\x0a\x09self take: aTuple callback: [:e :t| ans add: t].\x0a\x09^ans ",
 referencedClasses: ["OrderedCollection"],
 //>>excludeEnd("ide");
 messageSends: ["new", "take:callback:", "add:"]
@@ -1238,7 +1283,7 @@ $core.addMethod(
 $core.method({
 selector: "take:callback:",
 protocol: 'services',
-fn: function (aTupleHashedCollection,aBlockClosure){
+fn: function (aTuple,aBlockClosure){
 "use strict";
 
 var self=this;
@@ -1247,7 +1292,7 @@ function $Tuple(){return $globals.Tuple||(typeof Tuple=="undefined"?nil:Tuple)}
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv(self._proxy())._take_with_($recv(aTupleHashedCollection)._asJSON(),(function(e,t){
+$1=$recv(self._proxy())._take_with_($recv(aTuple)._asJSON(),(function(e,t){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -1258,12 +1303,12 @@ return $recv(aBlockClosure)._value_value_(e,$recv($Tuple())._fromJSON_(t));
 }));
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"take:callback:",{aTupleHashedCollection:aTupleHashedCollection,aBlockClosure:aBlockClosure},$globals.TupleSpace)});
+}, function($ctx1) {$ctx1.fill(self,"take:callback:",{aTuple:aTuple,aBlockClosure:aBlockClosure},$globals.TupleSpace)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aTupleHashedCollection", "aBlockClosure"],
-source: "take: aTupleHashedCollection callback: aBlockClosure\x0a\x09\x22aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09^self proxy take: aTupleHashedCollection asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]",
+args: ["aTuple", "aBlockClosure"],
+source: "take: aTuple callback: aBlockClosure\x0a\x09\x22aTuple\x09<Tuple | HaschedCollection>\x0a\x09aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09^self proxy take: aTuple asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]",
 referencedClasses: ["Tuple"],
 //>>excludeEnd("ide");
 messageSends: ["take:with:", "proxy", "asJSON", "value:value:", "fromJSON:"]
@@ -1272,9 +1317,54 @@ $globals.TupleSpace);
 
 $core.addMethod(
 $core.method({
+selector: "takep:wait:callback:",
+protocol: 'services',
+fn: function (aTuple,aMilliseconds,aBlockClosure){
+"use strict";
+
+var self=this;
+var id;
+function $Tuple(){return $globals.Tuple||(typeof Tuple=="undefined"?nil:Tuple)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+id=self._take_with_($recv(aTuple)._asJSON(),(function(e,t){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(aBlockClosure)._value_value_(e,$recv($Tuple())._fromJSON_(t));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({e:e,t:t},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+$recv((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return self._cancel_(id);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
+//>>excludeEnd("ctx");
+}))._valueWithTimeout_(aMilliseconds);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"takep:wait:callback:",{aTuple:aTuple,aMilliseconds:aMilliseconds,aBlockClosure:aBlockClosure,id:id},$globals.TupleSpace)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aTuple", "aMilliseconds", "aBlockClosure"],
+source: "takep: aTuple  wait: aMilliseconds callback: aBlockClosure\x0a\x09\x22aTuple\x09<Tuple | HaschedCollection>\x0a\x09aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09| id |\x0a\x09id := self take: aTuple asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)].\x0a\x09[self cancel: id] valueWithTimeout: aMilliseconds",
+referencedClasses: ["Tuple"],
+//>>excludeEnd("ide");
+messageSends: ["take:with:", "asJSON", "value:value:", "fromJSON:", "valueWithTimeout:", "cancel:"]
+}),
+$globals.TupleSpace);
+
+$core.addMethod(
+$core.method({
 selector: "watch:callback:",
 protocol: 'services',
-fn: function (aTupleHashedCollection,aBlockClosure){
+fn: function (aTuple,aBlockClosure){
 "use strict";
 
 var self=this;
@@ -1283,7 +1373,7 @@ function $Tuple(){return $globals.Tuple||(typeof Tuple=="undefined"?nil:Tuple)}
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv(self._proxy())._watch_with_($recv(aTupleHashedCollection)._asJSON(),(function(e,t){
+$1=$recv(self._proxy())._watch_with_($recv(aTuple)._asJSON(),(function(e,t){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -1294,12 +1384,12 @@ return $recv(aBlockClosure)._value_value_(e,$recv($Tuple())._fromJSON_(t));
 }));
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"watch:callback:",{aTupleHashedCollection:aTupleHashedCollection,aBlockClosure:aBlockClosure},$globals.TupleSpace)});
+}, function($ctx1) {$ctx1.fill(self,"watch:callback:",{aTuple:aTuple,aBlockClosure:aBlockClosure},$globals.TupleSpace)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aTupleHashedCollection", "aBlockClosure"],
-source: "watch: aTupleHashedCollection callback: aBlockClosure\x0a\x09\x22aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09^self proxy watch: aTupleHashedCollection asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]",
+args: ["aTuple", "aBlockClosure"],
+source: "watch: aTuple callback: aBlockClosure\x0a\x09\x22aTuple\x09<Tuple | HaschedCollection>\x0a\x09aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09^self proxy watch: aTuple asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]",
 referencedClasses: ["Tuple"],
 //>>excludeEnd("ide");
 messageSends: ["watch:with:", "proxy", "asJSON", "value:value:", "fromJSON:"]
@@ -1337,22 +1427,22 @@ $core.addMethod(
 $core.method({
 selector: "write:",
 protocol: 'services',
-fn: function (aTupleHashedCollection){
+fn: function (aTuple){
 "use strict";
 
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self._write_options_(aTupleHashedCollection,nil);
+self._write_options_(aTuple,nil);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"write:",{aTupleHashedCollection:aTupleHashedCollection},$globals.TupleSpace)});
+}, function($ctx1) {$ctx1.fill(self,"write:",{aTuple:aTuple},$globals.TupleSpace)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aTupleHashedCollection"],
-source: "write: aTupleHashedCollection \x0a\x0a\x09self write: aTupleHashedCollection options: nil",
+args: ["aTuple"],
+source: "write: aTuple \x0a\x09\x22aTuple\x09<Tuple | HaschedCollection>\x22\x0a\x0a\x09self write: aTuple options: nil",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["write:options:"]
@@ -1363,22 +1453,22 @@ $core.addMethod(
 $core.method({
 selector: "write:expireSeconds:",
 protocol: 'services',
-fn: function (aTupleHashedCollection,anInteger){
+fn: function (aTuple,anInteger){
 "use strict";
 
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self._write_options_(aTupleHashedCollection,$globals.HashedCollection._newFromPairs_(["expire",anInteger]));
+self._write_options_(aTuple,$globals.HashedCollection._newFromPairs_(["expire",anInteger]));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"write:expireSeconds:",{aTupleHashedCollection:aTupleHashedCollection,anInteger:anInteger},$globals.TupleSpace)});
+}, function($ctx1) {$ctx1.fill(self,"write:expireSeconds:",{aTuple:aTuple,anInteger:anInteger},$globals.TupleSpace)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aTupleHashedCollection", "anInteger"],
-source: "write: aTupleHashedCollection expireSeconds: anInteger\x0a\x0a\x09self write: aTupleHashedCollection options: #{#expire -> anInteger}",
+args: ["aTuple", "anInteger"],
+source: "write: aTuple expireSeconds: anInteger\x09\x0a\x09\x22aTuple\x09<Tuple | HaschedCollection>\x22\x0a\x09\x0a\x09self write: aTuple options: #{#expire -> anInteger}",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["write:options:"]
@@ -1410,7 +1500,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aTuple", "optionsHashedCollection"],
-source: "write: aTuple options: optionsHashedCollection\x0a\x0a\x09self proxy write: aTuple asJSON with: optionsHashedCollection asJSON",
+source: "write: aTuple options: optionsHashedCollection\x0a\x09\x22aTuple\x09<Tuple | HaschedCollection>\x22\x0a\x0a\x09self proxy write: aTuple asJSON with: optionsHashedCollection asJSON",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["write:with:", "proxy", "asJSON"]

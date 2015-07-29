@@ -246,51 +246,79 @@ option: aHashedCollection
 	^self proxy option: aHashedCollection
 !
 
-read: aTupleHashedCollection
-	"aBlockClosure <[:err :tuple | ]>"
+read: aTuple
+	"aTuple	<Tuple | HaschedCollection>
+	aBlockClosure <[:err :tuple | ]>"
+	
 	| ans |
 	ans := OrderedCollection new.
-	self read: aTupleHashedCollection callback: [:e :t| ans add: (Tuple fromJSON: t)].
+	self read: aTuple callback: [:e :t| ans add: (Tuple fromJSON: t)].
 	^ans
 !
 
-read: aTupleHashedCollection callback: aBlockClosure
-	"aBlockClosure <[:err :tuple | ]>"
+read: aTuple callback: aBlockClosure
+	"aTuple	<Tuple | HaschedCollection>
+	aBlockClosure <[:err :tuple | ]>"
 	
-	^self proxy read: aTupleHashedCollection asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]
+	^self proxy read: aTuple asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]
 !
 
-take: aTupleHashedCollection
-	"aBlockClosure <[:err :tuple | ]>"
+readp: aTuple wait: aMilliseconds callback: aBlockClosure 
+	"aTuple	<Tuple | HaschedCollection>
+	aBlockClosure <[:err :tuple | ]>"
+	
+	| id |
+	id := self read: aTuple asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)].
+	[self cancel: id] valueWithTimeout: aMilliseconds
+!
+
+take: aTuple
+	"aTuple	<Tuple | HaschedCollection>
+	aBlockClosure <[:err :tuple | ]>"
+	
 	| ans |
 	ans := OrderedCollection new.
-	self take: aTupleHashedCollection callback: [:e :t| ans add: t].
+	self take: aTuple callback: [:e :t| ans add: t].
 	^ans
 !
 
-take: aTupleHashedCollection callback: aBlockClosure
-	"aBlockClosure <[:err :tuple | ]>"
+take: aTuple callback: aBlockClosure
+	"aTuple	<Tuple | HaschedCollection>
+	aBlockClosure <[:err :tuple | ]>"
 	
-	^self proxy take: aTupleHashedCollection asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]
+	^self proxy take: aTuple asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]
 !
 
-watch: aTupleHashedCollection callback: aBlockClosure
-	"aBlockClosure <[:err :tuple | ]>"
+takep: aTuple  wait: aMilliseconds callback: aBlockClosure
+	"aTuple	<Tuple | HaschedCollection>
+	aBlockClosure <[:err :tuple | ]>"
 	
-	^self proxy watch: aTupleHashedCollection asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]
+	| id |
+	id := self take: aTuple asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)].
+	[self cancel: id] valueWithTimeout: aMilliseconds
 !
 
-write: aTupleHashedCollection 
-
-	self write: aTupleHashedCollection options: nil
+watch: aTuple callback: aBlockClosure
+	"aTuple	<Tuple | HaschedCollection>
+	aBlockClosure <[:err :tuple | ]>"
+	
+	^self proxy watch: aTuple asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)]
 !
 
-write: aTupleHashedCollection expireSeconds: anInteger
+write: aTuple 
+	"aTuple	<Tuple | HaschedCollection>"
 
-	self write: aTupleHashedCollection options: #{#expire -> anInteger}
+	self write: aTuple options: nil
+!
+
+write: aTuple expireSeconds: anInteger	
+	"aTuple	<Tuple | HaschedCollection>"
+	
+	self write: aTuple options: #{#expire -> anInteger}
 !
 
 write: aTuple options: optionsHashedCollection
+	"aTuple	<Tuple | HaschedCollection>"
 
 	self proxy write: aTuple asJSON with: optionsHashedCollection asJSON
 ! !

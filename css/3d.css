@@ -30,3 +30,7 @@ article,aside,canvas,details,figcaption,figure,
 header,footer,main,menu,nav,section,summary {
 	display: block;
 }
+
+table   { width: 100%; }
+th, section td  { padding: 10px; border: 1px solid #ddd; }
+th  { background: #f4f4f4; }

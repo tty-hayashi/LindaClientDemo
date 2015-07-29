@@ -44,7 +44,7 @@ resultTypeKey
 	^'fib-result'.
 ! !
 
-!FibTuple class methodsFor: 'as yet unclassified'!
+!FibTuple class methodsFor: 'instance creation'!
 
 fib
 	| tuple |
@@ -150,6 +150,38 @@ defaultTupleSpace
 	^lindaClient tupleSpace: 'default'
 ! !
 
+!LindaBasicDemo class methodsFor: 'factorial'!
+
+factorialMaster
+
+	| tickets n lot ts ans|
+	tickets := 5.
+	n := 100.
+	lot := n /  tickets.
+	ts := LindaBasicDemo defaultTupleSpace.
+	(1 to: n by: lot) do:[:i | 
+		ts write: #{#type -> #fact . #i -> i. #lot -> lot}.].
+	ans := OrderedCollection new.
+	(1 to: tickets) do:[:i | 	
+		ts take: #{#type -> #ans} callback: [:err :t |
+			ans add: (t data at: #ans).
+			(i = tickets)
+				ifTrue: [(ans inject: 1 into: [:sum :e | sum * e]) inspect].
+		]].
+!
+
+factorialWorker
+
+	| base lot ts ans|
+	ts := LindaBasicDemo defaultTupleSpace.
+	ts take: #{#type -> #fact} callback: [:err :t | 
+		base := t data at: 'i'.
+		lot := t data at: 'lot'.
+		ans := (base to: (base + lot - 1)) inject: 1 into: [:sum :elm | sum * elm].
+		ts write: #{#type -> #ans . #i -> base . #ans -> ans} .
+	].
+! !
+
 !LindaBasicDemo class methodsFor: 'pholosoper table'!
 
 phil: anIndex total: num
@@ -240,7 +272,7 @@ doJQueryPrepend: aMsg
 startDemo
 
 	self setupLindaClient.
-	'#start' asJQuery text: '監視中'
+	'#start' asJQuery text: 'デモ中'
 ! !
 
 !LindaClientApp methodsFor: 'starting'!
@@ -251,6 +283,11 @@ augmentPage
 	self setupViewModel.
 	ko applyBindings: viewModel.
 	self setupLindaClient.
+!
+
+resetStartButton
+	
+	'#start' asJQuery text: 'START'
 !
 
 setupLindaClient
@@ -277,72 +314,8 @@ start
 	self new augmentPage
 ! !
 
-LindaClientApp subclass: #LindaFactorialMaster
-	instanceVariableNames: ''
-	package: 'LindaClientDemo'!
-
-!LindaFactorialMaster methodsFor: 'starting'!
-
-map
-	"Map "
-!
-
-reduce
-! !
-
-!LindaFactorialMaster class methodsFor: 'starting'!
-
-example
-
-	| app tickets n lot ts ans|
-	app := LindaFactorialMaster new.
-	app setupViewModel.
-	app tickets: 5.
-	n := 100.
-	lot := n / app tickets.
-	app lindaClient: (LindaClient default).
-	ts := app lindaClient tupleSpace: 'factorial'.
-	(1 to: n by: lot) do:[:i | 
-		ts write: #{#type -> #fact . #i -> i. #lot -> lot}.].
-	ans := OrderedCollection new.
-	(1 to: app tickets) do:[:i | 	
-		ts take: #{#type -> #ans} callback: [:err :t |
-			ans add: (t data at: #ans).
-			(i = app tickets)
-				ifTrue: [(ans inject: 1 into: [:sum :e | sum * e]) inspect].
-		]].
-!
-
-start
-	self new augmentPage
-! !
-
-LindaClientApp subclass: #LindaFactorialWorker
-	instanceVariableNames: ''
-	package: 'LindaClientDemo'!
-
-!LindaFactorialWorker methodsFor: 'as yet unclassified'!
-
-reduce: n
-! !
-
-!LindaFactorialWorker class methodsFor: 'as yet unclassified'!
-
-example
-
-	| linda  base lot ts ans|
-	linda := LindaClient default.
-	ts := linda tupleSpace: 'factorial'.
-	ts take: #{#type -> #fact} callback: [:err :t | 
-		base := t data at: 'i'.
-		lot := t data at: 'lot'.
-		ans := (base to: (base + lot - 1)) inject: 1 into: [:sum :elm | sum * elm].
-		ts write: #{#type -> #ans . #i -> base . #ans -> ans} .
-	].
-! !
-
 LindaClientApp subclass: #LindaFibMaster
-	instanceVariableNames: 'n result'
+	instanceVariableNames: 'n result startDate'
 	package: 'LindaClientDemo'!
 
 !LindaFibMaster methodsFor: 'accessing'!
@@ -360,17 +333,12 @@ map
 	self tupleSpace write: resultTuple.
 !
 
-mapProblem
-
-	self removeIoCallbacks.
-!
-
 n
-	^ n
+	^(self viewModel at:#n) value asNumber
 !
 
 n: anObject
-	n := anObject
+	(self viewModel at:#n) value: anObject
 !
 
 readResultTuple
@@ -378,20 +346,61 @@ readResultTuple
 	tuple := FibTuple result.
 	tuple n: self n.
 	self tupleSpace read: tuple callback: [:err :t | 
+		self timeToRun: Date now - startDate.
 		self result: t answer]
 !
 
 result
-	^ result
+	^ (self viewModel at: #result) value
 !
 
 result: anObject
-	result := anObject
+	(self viewModel at: #result) value: anObject
+!
+
+startMap
+	| requestTuple resultTuple |
+	resultTuple := FibTuple result.
+	
+	(self n to: 1 by: -1) do: [:i |
+		requestTuple := FibTuple fib.
+		requestTuple n: i.
+		self tupleSpace write: requestTuple].
+		
+	resultTuple n: 0; answer: 0.
+	self tupleSpace write: resultTuple.
+!
+
+timeToRun: anObject
+	(self viewModel at: #timeToRun) value: anObject
 !
 
 tupleSpace
 
 	^self lindaClient tupleSpace: FibTuple tupleSpaceName
+! !
+
+!LindaFibMaster methodsFor: 'action'!
+
+startDemo
+	| msec |
+	super startDemo.
+	self result: 0.
+	self timeToRun: 0.
+	startDate := Date now.
+	self startMap.
+	self readResultTuple.
+! !
+
+!LindaFibMaster methodsFor: 'starting'!
+
+setupViewModel
+	super setupViewModel.
+	viewModel addAll: #{
+		#n -> (ko observable: 5) .
+		#result -> (ko observable: 0) .
+		#timeToRun -> (ko observable: 0) 
+	}.
 ! !
 
 !LindaFibMaster class methodsFor: 'starting'!
@@ -402,7 +411,7 @@ example
 	app := LindaFibMaster new.
 	app lindaClient: (LindaClient default).
 	app n: 10.
-	app map.
+	app startMap.
 	app readResultTuple.
 	app inspect
 !
@@ -427,25 +436,20 @@ targetNumber
 
 !LindaFibWorker methodsFor: 'action'!
 
+startDemo
+
+	super startDemo.
+	self startReduce
+!
+
 startReduce
 
-	Transcript show: 'pan pan pan'; cr.
-	self lindaClient: (LindaClient default).
 	self tupleSpace take: #{#type -> 'fib'} callback: [:err :t | 
-		self reduce: (t data at: 'n')]
+		self reduce: (t data at: 'n').
+		self resetStartButton]
 ! !
 
 !LindaFibWorker methodsFor: 'starting'!
-
-augmentPage
-	'#start' asJQuery click: [ self startReduce ].
-	
-	viewModel := #{
-		#targetNumber -> (ko observable: 0) .
-		#resultNumber -> (ko observable: 0) 
-	}.
-	ko applyBindings: viewModel.
-!
 
 orgfib: n
 		^ n < 2
@@ -465,7 +469,6 @@ readResultNoWait: anIndex
 
 reduce: n
 	| ans id value v1 v2 |
-	self doJQueryPrepend: '値: ' , n printString.
 	ans := self readResultNoWait: n.
 	ans isEmpty
 		ifTrue: [n < 3
@@ -482,6 +485,14 @@ reduce: n
 					]
 !
 
+setupViewModel
+	super setupViewModel.
+	viewModel addAll: #{
+		#targetNumber -> (ko observable: 0) .
+		#resultNumber -> (ko observable: 0) 
+	}.
+!
+
 tupleSpace
 
 	^self lindaClient tupleSpace: FibTuple tupleSpaceName
@@ -489,7 +500,7 @@ tupleSpace
 
 writeResult: anIndex value: aValue
 	| tuple |
-	self doJQueryPrepend: '結果: ', aValue printString.
+	self doJQueryPrepend:'第', anIndex printString, '番目のフィボナッチ数: ', aValue printString.
 	tuple := FibTuple result.
 	tuple n: anIndex.
 	tuple answer: aValue.
@@ -825,11 +836,11 @@ example1
 	].
 ! !
 
-LindaClientApp subclass: #LindaThermo
+LindaClientApp subclass: #LindaThermoController
 	instanceVariableNames: 'workerList'
 	package: 'LindaClientDemo'!
 
-!LindaThermo methodsFor: 'accessing'!
+!LindaThermoController methodsFor: 'accessing'!
 
 dataOfWorkerList
 	^self workerList collect: [:e | e data]
@@ -844,7 +855,7 @@ workerList
 	^workerList
 ! !
 
-!LindaThermo methodsFor: 'action'!
+!LindaThermoController methodsFor: 'action'!
 
 airconOff
 	| tuple list |
@@ -898,7 +909,7 @@ thermoQuery
 	self tupleSpace write: tuple.
 ! !
 
-!LindaThermo methodsFor: 'starting'!
+!LindaThermoController methodsFor: 'starting'!
 
 augmentPage
 	super augmentPage.
