@@ -12,7 +12,12 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css">
   </head>
   <body>
-    <p>lindaサーバーURL: <input data-bind="value: serverUrl"/></p>
+    <div></div>
+    <p>lindaサーバーURL: 
+    <select data-bind="options: availableServers,
+                       value: serverUrl,
+                       optionsCaption: '-選択してください-'"></select></p>
+
     <p>ハンドル名:<input data-bind="value: handleName"/></p>
     <button id="start">START</button>
     <div id="data">
