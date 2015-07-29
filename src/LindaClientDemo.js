@@ -602,7 +602,7 @@ $core.addClass('LindaBasicDemo', $globals.Object, [], 'LindaClientDemo');
 
 $core.addMethod(
 $core.method({
-selector: "defaultrTupleSpace",
+selector: "defaultTupleSpace",
 protocol: 'defaults',
 fn: function (){
 "use strict";
@@ -618,12 +618,12 @@ lindaClient=$recv($LindaClient())._default();
 $1=$recv(lindaClient)._tupleSpace_("default");
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"defaultrTupleSpace",{lindaClient:lindaClient},$globals.LindaBasicDemo.klass)});
+}, function($ctx1) {$ctx1.fill(self,"defaultTupleSpace",{lindaClient:lindaClient},$globals.LindaBasicDemo.klass)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "defaultrTupleSpace\x0a\x09| lindaClient |\x0a\x09lindaClient := LindaClient default.\x0a\x09^lindaClient tupleSpace: 'default'\x0a\x09\x0a\x09",
+source: "defaultTupleSpace\x0a\x09| lindaClient |\x0a\x09lindaClient := LindaClient default.\x0a\x09^lindaClient tupleSpace: 'default'\x0a\x09\x0a\x09",
 referencedClasses: ["LindaClient"],
 //>>excludeEnd("ide");
 messageSends: ["default", "tupleSpace:"]
@@ -875,72 +875,6 @@ $globals.LindaClientApp);
 
 $core.addMethod(
 $core.method({
-selector: "doAmberWith",
-protocol: 'action',
-fn: function (){
-"use strict";
-
-var self=this;
-var tag;
-function $HTMLCanvas(){return $globals.HTMLCanvas||(typeof HTMLCanvas=="undefined"?nil:HTMLCanvas)}
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-tag=$recv($recv($HTMLCanvas())._onJQuery_("#output-list"._asJQuery()))._root();
-$recv(tag)._with_((function(html){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return $recv($recv(html)._li())._with_("Amber Web #with: added me!");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({html:html},$ctx1,1)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["with:"]=1;
-//>>excludeEnd("ctx");
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"doAmberWith",{tag:tag},$globals.LindaClientApp)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "doAmberWith\x0a\x09| tag |\x0a\x09tag := (HTMLCanvas onJQuery: '#output-list' asJQuery) root.\x0a\x09tag with: [ :html | html li with: 'Amber Web #with: added me!' ]",
-referencedClasses: ["HTMLCanvas"],
-//>>excludeEnd("ide");
-messageSends: ["root", "onJQuery:", "asJQuery", "with:", "li"]
-}),
-$globals.LindaClientApp);
-
-$core.addMethod(
-$core.method({
-selector: "doJQueryAppend",
-protocol: 'action',
-fn: function (){
-"use strict";
-
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-$recv("#output-list"._asJQuery())._append_("<li>jQuery append added me!</li>");
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"doJQueryAppend",{},$globals.LindaClientApp)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "doJQueryAppend\x0a\x09'#output-list' asJQuery append: '<li>jQuery append added me!</li>'",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["append:", "asJQuery"]
-}),
-$globals.LindaClientApp);
-
-$core.addMethod(
-$core.method({
 selector: "doJQueryPrepend:",
 protocol: 'action',
 fn: function (aMsg){
@@ -968,32 +902,6 @@ source: "doJQueryPrepend: aMsg\x0a\x09| elem|\x0a\x09elem := '<li>' asJQuery.\x0
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["asJQuery", "html:", "prepend:"]
-}),
-$globals.LindaClientApp);
-
-$core.addMethod(
-$core.method({
-selector: "doSilkTAG",
-protocol: 'action',
-fn: function (){
-"use strict";
-
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-$recv("#output-list"._asSilk())._LI_("Silk TAG: added me!");
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"doSilkTAG",{},$globals.LindaClientApp)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "doSilkTAG\x0a\x09'#output-list' asSilk LI: 'Silk TAG: added me!'",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["LI:", "asSilk"]
 }),
 $globals.LindaClientApp);
 
@@ -1138,7 +1046,7 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 self._setupLindaClient();
-$recv("#start"._asJQuery())._text_("監視中 STOP");
+$recv("#start"._asJQuery())._text_("監視中");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"startDemo",{},$globals.LindaClientApp)});
@@ -1146,7 +1054,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startDemo\x0a\x0a\x09self setupLindaClient.\x0a\x09'#start' asJQuery text: '監視中 STOP'",
+source: "startDemo\x0a\x0a\x09self setupLindaClient.\x0a\x09'#start' asJQuery text: '監視中'",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["setupLindaClient", "text:", "asJQuery"]
@@ -2603,9 +2511,9 @@ $1=(function(event){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$5=$recv(event)._acceleration();
+$5=$recv(event)._accelerationIncludingGravity();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["acceleration"]=1;
+$ctx2.sendIdx["accelerationIncludingGravity"]=1;
 //>>excludeEnd("ctx");
 $4=$recv($5)._x();
 $3=$recv($4).__star((100));
@@ -2616,9 +2524,9 @@ $2=$recv($3)._rounded();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["rounded"]=1;
 //>>excludeEnd("ctx");
-$9=$recv(event)._acceleration();
+$9=$recv(event)._accelerationIncludingGravity();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["acceleration"]=2;
+$ctx2.sendIdx["accelerationIncludingGravity"]=2;
 //>>excludeEnd("ctx");
 $8=$recv($9)._y();
 $7=$recv($8).__star((100));
@@ -2629,7 +2537,7 @@ $6=$recv($7)._rounded();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["rounded"]=2;
 //>>excludeEnd("ctx");
-return self._gX_gY_gZ_($2,$6,$recv($recv($recv($recv(event)._acceleration())._z()).__star((100)))._rounded());
+return self._gX_gY_gZ_($2,$6,$recv($recv($recv($recv(event)._accelerationIncludingGravity())._z()).__star((100)))._rounded());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({event:event},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -2641,10 +2549,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09self \x0a\x09\x09\x09gX: (event acceleration x * 100) rounded\x0a\x09\x09\x09gY: (event acceleration y * 100) rounded\x0a\x09\x09\x09gZ: (event acceleration z * 100) rounded\x09\x09\x0a\x22\x0a\x09\x09\x09gX: (event accelerationIncludingGravity x )\x0a\x09\x09\x09gY: (event accelerationIncludingGravity y )\x0a\x09\x09\x09gZ: (event accelerationIncludingGravity z )\x09\x09\x0a\x22\x0a\x09].",
+source: "devicemotionHandler\x0a\x09^[:event |\x0a\x09\x09self \x0a\x22\x0a\x09\x09\x09gX: (event acceleration x * 100) rounded\x0a\x09\x09\x09gY: (event acceleration y * 100) rounded\x0a\x09\x09\x09gZ: (event acceleration z * 100) rounded\x09\x09\x0a\x22\x0a\x09\x09\x09gX: (event accelerationIncludingGravity x * 100) rounded\x0a\x09\x09\x09gY: (event accelerationIncludingGravity y * 100) rounded\x0a\x09\x09\x09gZ: (event accelerationIncludingGravity z * 100) rounded\x09\x09\x0a\x0a\x09].",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["gX:gY:gZ:", "rounded", "*", "x", "acceleration", "y", "z"]
+messageSends: ["gX:gY:gZ:", "rounded", "*", "x", "accelerationIncludingGravity", "y", "z"]
 }),
 $globals.LindaGyroWorker);
 

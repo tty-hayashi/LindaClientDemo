@@ -144,7 +144,7 @@ Object subclass: #LindaBasicDemo
 
 !LindaBasicDemo class methodsFor: 'defaults'!
 
-defaultrTupleSpace
+defaultTupleSpace
 	| lindaClient |
 	lindaClient := LindaClient default.
 	^lindaClient tupleSpace: 'default'
@@ -230,16 +230,6 @@ viewModel
 
 !LindaClientApp methodsFor: 'action'!
 
-doAmberWith
-	| tag |
-	tag := (HTMLCanvas onJQuery: '#output-list' asJQuery) root.
-	tag with: [ :html | html li with: 'Amber Web #with: added me!!' ]
-!
-
-doJQueryAppend
-	'#output-list' asJQuery append: '<li>jQuery append added me!!</li>'
-!
-
 doJQueryPrepend: aMsg
 	| elem|
 	elem := '<li>' asJQuery.
@@ -247,14 +237,10 @@ doJQueryPrepend: aMsg
 	'#output-list' asJQuery prepend: elem
 !
 
-doSilkTAG
-	'#output-list' asSilk LI: 'Silk TAG: added me!!'
-!
-
 startDemo
 
 	self setupLindaClient.
-	'#start' asJQuery text: '監視中 STOP'
+	'#start' asJQuery text: '監視中'
 ! !
 
 !LindaClientApp methodsFor: 'starting'!
@@ -647,14 +633,15 @@ augmentPage
 devicemotionHandler
 	^[:event |
 		self 
+"
 			gX: (event acceleration x * 100) rounded
 			gY: (event acceleration y * 100) rounded
 			gZ: (event acceleration z * 100) rounded		
 "
-			gX: (event accelerationIncludingGravity x )
-			gY: (event accelerationIncludingGravity y )
-			gZ: (event accelerationIncludingGravity z )		
-"
+			gX: (event accelerationIncludingGravity x * 100) rounded
+			gY: (event accelerationIncludingGravity y * 100) rounded
+			gZ: (event accelerationIncludingGravity z * 100) rounded		
+
 	].
 !
 
