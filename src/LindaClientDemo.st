@@ -341,6 +341,14 @@ n: anObject
 	(self viewModel at:#n) value: anObject
 !
 
+numberOfEntry
+	^(self viewModel at:#numberOfEntry) value
+!
+
+numberOfEntry: anObject
+	(self viewModel at:#numberOfEntry) value: anObject
+!
+
 readResultTuple
 	| tuple |
 	tuple := FibTuple result.
@@ -382,6 +390,16 @@ tupleSpace
 
 !LindaFibMaster methodsFor: 'action'!
 
+incNumberOfEntry
+
+	self numberOfEntry: (self numberOfEntry + 1)
+!
+
+resetNumberOfEntry
+
+	self numberOfEntry: 0
+!
+
 startDemo
 	| msec |
 	super startDemo.
@@ -394,12 +412,26 @@ startDemo
 
 !LindaFibMaster methodsFor: 'starting'!
 
+augmentPage
+	| ts entryTuple |
+	super augmentPage.
+	self resetNumberOfEntry.
+	ts := self tupleSpace.
+	entryTuple := #{'type' -> 'entry'}.
+	ts watch: entryTuple callback: [:e1 :t1 | 
+		ts take: entryTuple callback: [:e2 :t2 |
+			self incNumberOfEntry.
+		].
+	]
+!
+
 setupViewModel
 	super setupViewModel.
 	viewModel addAll: #{
 		#n -> (ko observable: 5) .
 		#result -> (ko observable: 0) .
-		#timeToRun -> (ko observable: 0) 
+		#timeToRun -> (ko observable: 0) .
+		#numberOfEntry -> (ko observable: 0)
 	}.
 ! !
 
@@ -439,6 +471,7 @@ targetNumber
 startDemo
 
 	super startDemo.
+	self tupleSpace write: #{#type -> 'entry'}.
 	self startReduce
 !
 
