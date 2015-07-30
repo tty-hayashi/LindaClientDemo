@@ -268,7 +268,7 @@ readp: aTuple wait: aMilliseconds callback: aBlockClosure
 	aBlockClosure <[:err :tuple | ]>"
 	
 	| id |
-	id := self read: aTuple asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)].
+	id := self read: aTuple asJSON callback: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)].
 	[self cancel: id] valueWithTimeout: aMilliseconds
 !
 
@@ -294,7 +294,7 @@ takep: aTuple  wait: aMilliseconds callback: aBlockClosure
 	aBlockClosure <[:err :tuple | ]>"
 	
 	| id |
-	id := self take: aTuple asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)].
+	id := self take: aTuple asJSON callback: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)].
 	[self cancel: id] valueWithTimeout: aMilliseconds
 !
 

@@ -13,6 +13,175 @@ $core.packages["LindaClientDemo"].innerEval = function (expr) { return eval(expr
 $core.packages["LindaClientDemo"].imports = ["ko=knockout", "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"];
 $core.packages["LindaClientDemo"].transport = {"type":"amd","amdNamespace":"amber-lindaclient"};
 
+$core.addClass('CompassTuple', $globals.Tuple, [], 'LindaClientDemo');
+$core.addMethod(
+$core.method({
+selector: "handleName",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._data())._at_($recv(self._class())._handleNameKey());
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"handleName",{},$globals.CompassTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "handleName\x0a\x0a\x09^self data at: self class handleNameKey",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:", "data", "handleNameKey", "class"]
+}),
+$globals.CompassTuple);
+
+$core.addMethod(
+$core.method({
+selector: "handleName:",
+protocol: 'accessing',
+fn: function (aString){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self._data())._at_put_($recv(self._class())._handleNameKey(),aString);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"handleName:",{aString:aString},$globals.CompassTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "handleName: aString\x0a\x0a\x09self data at: self class handleNameKey put: aString",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:put:", "data", "handleNameKey", "class"]
+}),
+$globals.CompassTuple);
+
+$core.addMethod(
+$core.method({
+selector: "heading",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._data())._at_($recv(self._class())._headingKey());
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"heading",{},$globals.CompassTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "heading\x0a\x0a\x09^self data at: self class headingKey",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:", "data", "headingKey", "class"]
+}),
+$globals.CompassTuple);
+
+$core.addMethod(
+$core.method({
+selector: "heading:",
+protocol: 'accessing',
+fn: function (aString){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self._data())._at_put_($recv(self._class())._headingKey(),aString);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"heading:",{aString:aString},$globals.CompassTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "heading: aString\x0a\x0a\x09self data at: self class headingKey put: aString",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:put:", "data", "headingKey", "class"]
+}),
+$globals.CompassTuple);
+
+
+$core.addMethod(
+$core.method({
+selector: "handleNameKey",
+protocol: 'accessor key',
+fn: function (){
+"use strict";
+
+var self=this;
+return "handleName";
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "handleNameKey\x0a\x09^'handleName'.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.CompassTuple.klass);
+
+$core.addMethod(
+$core.method({
+selector: "headingKey",
+protocol: 'accessor key',
+fn: function (){
+"use strict";
+
+var self=this;
+return "heading";
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "headingKey\x0a\x09^'heading'.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.CompassTuple.klass);
+
+$core.addMethod(
+$core.method({
+selector: "tupleSpaceName",
+protocol: 'tuple space',
+fn: function (){
+"use strict";
+
+var self=this;
+return "compass";
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "tupleSpaceName\x0a\x0a\x09^'compass'",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.CompassTuple.klass);
+
+
 $core.addClass('FibTuple', $globals.Tuple, [], 'LindaClientDemo');
 $core.addMethod(
 $core.method({
@@ -1357,6 +1526,381 @@ messageSends: ["augmentPage", "new"]
 $globals.LindaClientApp.klass);
 
 
+$core.addClass('LindaCompass', $globals.LindaClientApp, [], 'LindaClientDemo');
+$core.addMethod(
+$core.method({
+selector: "augmentPage",
+protocol: 'starting',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true, 
+//>>excludeEnd("ctx");
+$globals.LindaCompass.superclass.fn.prototype._augmentPage.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"augmentPage",{},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "augmentPage\x0a\x0a\x09super augmentPage.\x0a\x0a\x0a\x09\x0a\x09",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["augmentPage"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
+selector: "deviceorientationHandler",
+protocol: 'starting',
+fn: function (){
+"use strict";
+
+var self=this;
+function $CompassTuple(){return $globals.CompassTuple||(typeof CompassTuple=="undefined"?nil:CompassTuple)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $2,$1,$receiver;
+$1=(function(event){
+var tmp,tuple;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+tmp=$recv(event)._webkitCompassHeading();
+tmp;
+$2=tmp;
+if(($receiver = $2) == null || $receiver.isNil){
+self._updateHeading_($recv(event)._alpha());
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["updateHeading:"]=1;
+//>>excludeEnd("ctx");
+} else {
+self._updateHeading_(tmp);
+};
+tuple=$recv($CompassTuple())._new();
+tuple;
+return $recv(tuple)._heading_(self._heading());
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({event:event,tmp:tmp,tuple:tuple},$ctx1,1)});
+//>>excludeEnd("ctx");
+});
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"deviceorientationHandler",{},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "deviceorientationHandler\x0a\x09^[:event |\x0a\x09\x09| tmp tuple |\x0a\x09\x09tmp := event webkitCompassHeading.\x0a\x09\x09tmp ifNil: [self updateHeading: event alpha]\x0a\x09\x09\x09ifNotNil: [self updateHeading: tmp].\x0a\x09\x09tuple := CompassTuple new.\x0a\x09\x09tuple heading: self heading.\x0a\x09\x09\x22self tupleSpace write: tuple.\x22\x0a\x09].",
+referencedClasses: ["CompassTuple"],
+//>>excludeEnd("ide");
+messageSends: ["webkitCompassHeading", "ifNil:ifNotNil:", "updateHeading:", "alpha", "new", "heading:", "heading"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
+selector: "handleName",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv($recv(self["@viewModel"])._at_("handleName"))._value();
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"handleName",{},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "handleName \x0a\x09^(viewModel at: #handleName ) value",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value", "at:"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
+selector: "heading",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv($recv(self["@viewModel"])._at_("heading"))._value();
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"heading",{},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "heading\x0a\x09^(viewModel at: #heading) value",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value", "at:"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
+selector: "heading:",
+protocol: 'accessing',
+fn: function (aValue){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv($recv(self["@viewModel"])._at_("heading"))._value_(aValue);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"heading:",{aValue:aValue},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aValue"],
+source: "heading: aValue\x0a\x09(viewModel at: #heading) value: aValue",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value:", "at:"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
+selector: "rotateStr:",
+protocol: 'updating',
+fn: function (anInteger){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv("rotate(".__comma($recv(anInteger)._printString())).__comma("deg)");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"rotateStr:",{anInteger:anInteger},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anInteger"],
+source: "rotateStr: anInteger\x0a\x0a\x09^('rotate(', anInteger printString, 'deg)')",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: [",", "printString"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
+selector: "setupHandle",
+protocol: 'action',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(window)._addEventListener_with_with_("deviceorientation",self._deviceorientationHandler(),false);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"setupHandle",{},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "setupHandle\x0a\x0a\x09window addEventListener: #deviceorientation \x0a\x09\x09with: self deviceorientationHandler\x0a\x09\x09with: false.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["addEventListener:with:with:", "deviceorientationHandler"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
+selector: "setupViewModel",
+protocol: 'starting',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$3,$4,$5,$6,$2;
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true, 
+//>>excludeEnd("ctx");
+$globals.LindaCompass.superclass.fn.prototype._setupViewModel.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+$1=self["@viewModel"];
+$3=$recv(ko)._observable_("handle name");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["observable:"]=1;
+//>>excludeEnd("ctx");
+$4=$recv(ko)._observable_((0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["observable:"]=2;
+//>>excludeEnd("ctx");
+$5=$recv(ko)._observable_((0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["observable:"]=3;
+//>>excludeEnd("ctx");
+$6=$recv(ko)._observable_((0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["observable:"]=4;
+//>>excludeEnd("ctx");
+$2=$globals.HashedCollection._newFromPairs_(["handleName",$3,"heading",$4,"accuracy",$5,"gZ",$6,"rotate",$recv(ko)._observable_(self._rotateStr_((0)))]);
+$recv($1)._addAll_($2);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"setupViewModel",{},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "setupViewModel\x0a\x0a\x09super setupViewModel.\x0a\x09\x0a\x09viewModel addAll: #{\x0a\x09\x09#handleName -> (ko observable: 'handle name') .\x0a\x09\x09#heading -> (ko observable: 0) .\x0a\x09\x09#accuracy -> (ko observable: 0) .\x0a\x09\x09#gZ -> (ko observable: 0) .\x0a\x09\x09\x0a\x09\x09#rotate -> (ko observable: (self rotateStr: 0))\x0a\x09}.\x0a\x09\x0a\x09\x0a\x09",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["setupViewModel", "addAll:", "observable:", "rotateStr:"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
+selector: "startDemo",
+protocol: 'action',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true, 
+//>>excludeEnd("ctx");
+$globals.LindaCompass.superclass.fn.prototype._startDemo.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+self._setupHandle();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"startDemo",{},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "startDemo\x0a\x09super startDemo.\x0a\x09self setupHandle.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["startDemo", "setupHandle"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
+selector: "tupleSpace",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+function $CompassTuple(){return $globals.CompassTuple||(typeof CompassTuple=="undefined"?nil:CompassTuple)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._lindaClient())._tupleSpace_($recv($CompassTuple())._tupleSpaceName());
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"tupleSpace",{},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "tupleSpace\x0a\x09^self lindaClient tupleSpace: CompassTuple tupleSpaceName",
+referencedClasses: ["CompassTuple"],
+//>>excludeEnd("ide");
+messageSends: ["tupleSpace:", "lindaClient", "tupleSpaceName"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
+selector: "updateHeading:",
+protocol: 'updating',
+fn: function (anInteger){
+"use strict";
+
+var self=this;
+var aValue;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(anInteger).__lt((0));
+if($core.assert($1)){
+aValue=$recv(anInteger).__plus((360));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["+"]=1;
+//>>excludeEnd("ctx");
+} else {
+aValue=anInteger;
+};
+aValue=$recv(aValue).__plus($recv(window)._orientation());
+self._heading_(aValue);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"updateHeading:",{anInteger:anInteger,aValue:aValue},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anInteger"],
+source: "updateHeading: anInteger\x0a\x0a\x09| aValue |\x0a\x09aValue := anInteger < 0 \x0a\x09\x09ifTrue: [anInteger + 360]\x0a\x09\x09ifFalse: [anInteger].\x0a\x09aValue := aValue + window orientation.\x0a\x09self heading: aValue",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["ifTrue:ifFalse:", "<", "+", "orientation", "heading:"]
+}),
+$globals.LindaCompass);
+
+
+
 $core.addClass('LindaFibMaster', $globals.LindaClientApp, ['n', 'result', 'startDate'], 'LindaClientDemo');
 $core.addMethod(
 $core.method({
@@ -1378,6 +1922,15 @@ $globals.LindaFibMaster.superclass.fn.prototype._augmentPage.apply($recv(self), 
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
+$recv("#clear"._asJQuery())._click_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return self._clearResults();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
 self._resetNumberOfEntry();
 ts=self._tupleSpace();
 entryTuple=$globals.HashedCollection._newFromPairs_(["type","entry"]);
@@ -1391,11 +1944,11 @@ return $core.withContext(function($ctx3) {
 //>>excludeEnd("ctx");
 return self._incNumberOfEntry();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx3) {$ctx3.fillBlock({e2:e2,t2:t2},$ctx2,2)});
+}, function($ctx3) {$ctx3.fillBlock({e2:e2,t2:t2},$ctx2,3)});
 //>>excludeEnd("ctx");
 }));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({e1:e1,t1:t1},$ctx1,1)});
+}, function($ctx2) {$ctx2.fillBlock({e1:e1,t1:t1},$ctx1,2)});
 //>>excludeEnd("ctx");
 }));
 return self;
@@ -1405,10 +1958,93 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09| ts entryTuple |\x0a\x09super augmentPage.\x0a\x09self resetNumberOfEntry.\x0a\x09ts := self tupleSpace.\x0a\x09entryTuple := #{'type' -> 'entry'}.\x0a\x09ts watch: entryTuple callback: [:e1 :t1 | \x0a\x09\x09ts take: entryTuple callback: [:e2 :t2 |\x0a\x09\x09\x09self incNumberOfEntry.\x0a\x09\x09].\x0a\x09]",
+source: "augmentPage\x0a\x09| ts entryTuple |\x0a\x09super augmentPage.\x0a\x09'#clear' asJQuery click: [ self clearResults ].\x0a\x0a\x09self resetNumberOfEntry.\x0a\x09ts := self tupleSpace.\x0a\x09entryTuple := #{'type' -> 'entry'}.\x0a\x09ts watch: entryTuple callback: [:e1 :t1 | \x0a\x09\x09ts take: entryTuple callback: [:e2 :t2 |\x0a\x09\x09\x09self incNumberOfEntry.\x0a\x09\x09].\x0a\x09]",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["augmentPage", "resetNumberOfEntry", "tupleSpace", "watch:callback:", "take:callback:", "incNumberOfEntry"]
+messageSends: ["augmentPage", "click:", "asJQuery", "clearResults", "resetNumberOfEntry", "tupleSpace", "watch:callback:", "take:callback:", "incNumberOfEntry"]
+}),
+$globals.LindaFibMaster);
+
+$core.addMethod(
+$core.method({
+selector: "clearResults",
+protocol: 'action',
+fn: function (){
+"use strict";
+
+var self=this;
+var resultTuple;
+function $FibTuple(){return $globals.FibTuple||(typeof FibTuple=="undefined"?nil:FibTuple)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$2,$3;
+resultTuple=$recv($FibTuple())._result();
+$recv($recv(self._n())._to_by_((1),(-1)))._do_((function(i){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+$recv(resultTuple)._n_(i);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["n:"]=1;
+//>>excludeEnd("ctx");
+$1=self._tupleSpace();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["tupleSpace"]=1;
+//>>excludeEnd("ctx");
+return $recv($1)._takep_wait_callback_(resultTuple,(10),(function(e,t){
+
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["takep:wait:callback:"]=1;
+//>>excludeEnd("ctx");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({i:i},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+$2=resultTuple;
+$recv($2)._n_((0));
+$3=$recv($2)._answer_((0));
+$recv(self._tupleSpace())._takep_wait_callback_(resultTuple,(10),(function(e,t){
+
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"clearResults",{resultTuple:resultTuple},$globals.LindaFibMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "clearResults\x0a\x0a\x09|  resultTuple |\x0a\x09resultTuple := FibTuple result.\x0a\x09(self n to: 1 by: -1) do: [:i |\x0a\x09\x09resultTuple n: i.\x0a\x09\x09self tupleSpace takep: resultTuple wait: 10 callback: [:e :t | ]].\x0a\x09\x09\x0a\x09resultTuple n: 0; answer: 0.\x0a\x09self tupleSpace takep: resultTuple wait: 10 callback: [:e :t | ].",
+referencedClasses: ["FibTuple"],
+//>>excludeEnd("ide");
+messageSends: ["result", "do:", "to:by:", "n", "n:", "takep:wait:callback:", "tupleSpace", "answer:"]
+}),
+$globals.LindaFibMaster);
+
+$core.addMethod(
+$core.method({
+selector: "decNumberOfEntry",
+protocol: 'action',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self._numberOfEntry_($recv(self._numberOfEntry()).__minus((1)));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"decNumberOfEntry",{},$globals.LindaFibMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "decNumberOfEntry\x0a\x0a\x09self numberOfEntry: (self numberOfEntry - 1)",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["numberOfEntry:", "-", "numberOfEntry"]
 }),
 $globals.LindaFibMaster);
 
@@ -1836,10 +2472,11 @@ $1=self._tupleSpace();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["tupleSpace"]=1;
 //>>excludeEnd("ctx");
-return $recv($1)._write_(requestTuple);
+$recv($1)._write_(requestTuple);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["write:"]=1;
 //>>excludeEnd("ctx");
+return self._decNumberOfEntry();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({i:i},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -1855,10 +2492,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startMap\x0a\x09| requestTuple resultTuple |\x0a\x09resultTuple := FibTuple result.\x0a\x09\x0a\x09(self n to: 1 by: -1) do: [:i |\x0a\x09\x09requestTuple := FibTuple fib.\x0a\x09\x09requestTuple n: i.\x0a\x09\x09self tupleSpace write: requestTuple].\x0a\x09\x09\x0a\x09resultTuple n: 0; answer: 0.\x0a\x09self tupleSpace write: resultTuple.",
+source: "startMap\x0a\x09| requestTuple resultTuple |\x0a\x09resultTuple := FibTuple result.\x0a\x09\x0a\x09(self n to: 1 by: -1) do: [:i |\x0a\x09\x09requestTuple := FibTuple fib.\x0a\x09\x09requestTuple n: i.\x0a\x09\x09self tupleSpace write: requestTuple.\x0a\x09\x09self decNumberOfEntry].\x0a\x09\x09\x0a\x09resultTuple n: 0; answer: 0.\x0a\x09self tupleSpace write: resultTuple.",
 referencedClasses: ["FibTuple"],
 //>>excludeEnd("ide");
-messageSends: ["result", "do:", "to:by:", "n", "fib", "n:", "write:", "tupleSpace", "answer:"]
+messageSends: ["result", "do:", "to:by:", "n", "fib", "n:", "write:", "tupleSpace", "decNumberOfEntry", "answer:"]
 }),
 $globals.LindaFibMaster);
 

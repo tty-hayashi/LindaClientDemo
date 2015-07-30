@@ -1181,7 +1181,7 @@ function $Tuple(){return $globals.Tuple||(typeof Tuple=="undefined"?nil:Tuple)}
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-id=self._read_with_($recv(aTuple)._asJSON(),(function(e,t){
+id=self._read_callback_($recv(aTuple)._asJSON(),(function(e,t){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -1206,10 +1206,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aTuple", "aMilliseconds", "aBlockClosure"],
-source: "readp: aTuple wait: aMilliseconds callback: aBlockClosure \x0a\x09\x22aTuple\x09<Tuple | HaschedCollection>\x0a\x09aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09| id |\x0a\x09id := self read: aTuple asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)].\x0a\x09[self cancel: id] valueWithTimeout: aMilliseconds",
+source: "readp: aTuple wait: aMilliseconds callback: aBlockClosure \x0a\x09\x22aTuple\x09<Tuple | HaschedCollection>\x0a\x09aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09| id |\x0a\x09id := self read: aTuple asJSON callback: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)].\x0a\x09[self cancel: id] valueWithTimeout: aMilliseconds",
 referencedClasses: ["Tuple"],
 //>>excludeEnd("ide");
-messageSends: ["read:with:", "asJSON", "value:value:", "fromJSON:", "valueWithTimeout:", "cancel:"]
+messageSends: ["read:callback:", "asJSON", "value:value:", "fromJSON:", "valueWithTimeout:", "cancel:"]
 }),
 $globals.TupleSpace);
 
@@ -1328,7 +1328,7 @@ function $Tuple(){return $globals.Tuple||(typeof Tuple=="undefined"?nil:Tuple)}
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-id=self._take_with_($recv(aTuple)._asJSON(),(function(e,t){
+id=self._take_callback_($recv(aTuple)._asJSON(),(function(e,t){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -1353,10 +1353,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aTuple", "aMilliseconds", "aBlockClosure"],
-source: "takep: aTuple  wait: aMilliseconds callback: aBlockClosure\x0a\x09\x22aTuple\x09<Tuple | HaschedCollection>\x0a\x09aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09| id |\x0a\x09id := self take: aTuple asJSON with: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)].\x0a\x09[self cancel: id] valueWithTimeout: aMilliseconds",
+source: "takep: aTuple  wait: aMilliseconds callback: aBlockClosure\x0a\x09\x22aTuple\x09<Tuple | HaschedCollection>\x0a\x09aBlockClosure <[:err :tuple | ]>\x22\x0a\x09\x0a\x09| id |\x0a\x09id := self take: aTuple asJSON callback: [:e :t | aBlockClosure value: e value: (Tuple fromJSON: t)].\x0a\x09[self cancel: id] valueWithTimeout: aMilliseconds",
 referencedClasses: ["Tuple"],
 //>>excludeEnd("ide");
-messageSends: ["take:with:", "asJSON", "value:value:", "fromJSON:", "valueWithTimeout:", "cancel:"]
+messageSends: ["take:callback:", "asJSON", "value:value:", "fromJSON:", "valueWithTimeout:", "cancel:"]
 }),
 $globals.TupleSpace);
 
