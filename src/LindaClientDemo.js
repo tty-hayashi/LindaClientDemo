@@ -1702,7 +1702,7 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv("rotate(".__comma($recv(anInteger)._printString())).__comma("deg)");
+$1=$recv("rotate(".__comma($recv($recv(anInteger)._negated())._printString())).__comma("deg)");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -1713,10 +1713,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["anInteger"],
-source: "rotateStr: anInteger\x0a\x0a\x09^('rotate(', anInteger printString, 'deg)')",
+source: "rotateStr: anInteger\x0a\x0a\x09^('rotate(', anInteger negated printString, 'deg)')",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: [",", "printString"]
+messageSends: [",", "printString", "negated"]
 }),
 $globals.LindaCompass);
 
@@ -4541,7 +4541,6 @@ function $ThermoTuple(){return $globals.ThermoTuple||(typeof ThermoTuple=="undef
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 self._startDemo();
-self._inspect();
 tuple=$recv($ThermoTuple())._airconCommand();
 $recv(tuple)._airconOff();
 $recv(self._tupleSpace())._write_(tuple);
@@ -4552,10 +4551,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "airconOff\x0a\x09| tuple list |\x0a\x09self startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconOff.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
+source: "airconOff\x0a\x09| tuple list |\x0a\x09self startDemo.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconOff.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
 referencedClasses: ["ThermoTuple"],
 //>>excludeEnd("ide");
-messageSends: ["startDemo", "inspect", "airconCommand", "airconOff", "write:", "tupleSpace"]
+messageSends: ["startDemo", "airconCommand", "airconOff", "write:", "tupleSpace"]
 }),
 $globals.LindaThermoController);
 
@@ -4573,7 +4572,6 @@ function $ThermoTuple(){return $globals.ThermoTuple||(typeof ThermoTuple=="undef
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 self._startDemo();
-self._inspect();
 tuple=$recv($ThermoTuple())._airconCommand();
 $recv(tuple)._airconOn();
 $recv(self._tupleSpace())._write_(tuple);
@@ -4584,10 +4582,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "airconOn\x0a\x09| tuple list |\x0a\x09self startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconOn.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
+source: "airconOn\x0a\x09| tuple list |\x0a\x09self startDemo.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconOn.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
 referencedClasses: ["ThermoTuple"],
 //>>excludeEnd("ide");
-messageSends: ["startDemo", "inspect", "airconCommand", "airconOn", "write:", "tupleSpace"]
+messageSends: ["startDemo", "airconCommand", "airconOn", "write:", "tupleSpace"]
 }),
 $globals.LindaThermoController);
 
@@ -4605,7 +4603,6 @@ function $ThermoTuple(){return $globals.ThermoTuple||(typeof ThermoTuple=="undef
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 self._startDemo();
-self._inspect();
 tuple=$recv($ThermoTuple())._airconCommand();
 $recv(tuple)._airconTimer();
 $recv(self._tupleSpace())._write_(tuple);
@@ -4616,10 +4613,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "airconTimer\x0a\x09| tuple list |\x0a\x09self startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconTimer.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
+source: "airconTimer\x0a\x09| tuple list |\x0a\x09self startDemo.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconTimer.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
 referencedClasses: ["ThermoTuple"],
 //>>excludeEnd("ide");
-messageSends: ["startDemo", "inspect", "airconCommand", "airconTimer", "write:", "tupleSpace"]
+messageSends: ["startDemo", "airconCommand", "airconTimer", "write:", "tupleSpace"]
 }),
 $globals.LindaThermoController);
 
@@ -4843,7 +4840,6 @@ function $ThermoTuple(){return $globals.ThermoTuple||(typeof ThermoTuple=="undef
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 self._startDemo();
-self._inspect();
 tuple=$recv($ThermoTuple())._airconCommand();
 $recv(tuple)._airconQuery();
 $recv(self._tupleSpace())._write_(tuple);
@@ -4854,10 +4850,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "thermoQuery\x0a\x09| tuple list |\x0a\x09self startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconQuery.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
+source: "thermoQuery\x0a\x09| tuple list |\x0a\x09self startDemo.\x0a\x09tuple := ThermoTuple airconCommand.\x0a\x09tuple airconQuery.\x0a\x09self tupleSpace write: tuple.\x0a\x09",
 referencedClasses: ["ThermoTuple"],
 //>>excludeEnd("ide");
-messageSends: ["startDemo", "inspect", "airconCommand", "airconQuery", "write:", "tupleSpace"]
+messageSends: ["startDemo", "airconCommand", "airconQuery", "write:", "tupleSpace"]
 }),
 $globals.LindaThermoController);
 
