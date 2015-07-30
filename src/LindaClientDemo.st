@@ -24,6 +24,16 @@ heading
 heading: aString
 
 	self data at: self class headingKey put: aString
+!
+
+headingRotate
+
+	^self data at: self class headingRotateKey
+!
+
+headingRotate: aString
+
+	self data at: self class headingRotateKey put: aString
 ! !
 
 !CompassTuple class methodsFor: 'accessor key'!
@@ -34,6 +44,10 @@ handleNameKey
 
 headingKey
 	^'heading'.
+!
+
+headingRotateKey
+	^'headingRotate'.
 ! !
 
 !CompassTuple class methodsFor: 'tuple space'!
@@ -375,6 +389,14 @@ heading: aValue
 	(viewModel at: #heading) value: aValue
 !
 
+headingRotate
+	^(viewModel at: #headingRotate) value
+!
+
+headingRotate: aValue
+	(viewModel at: #headingRotate) value: aValue
+!
+
 tupleSpace
 	^self lindaClient tupleSpace: CompassTuple tupleSpaceName
 ! !
@@ -404,10 +426,11 @@ deviceorientationHandler
 	^[:event |
 		| tmp tuple |
 		tmp := event webkitCompassHeading.
-		tmp ifNil: [self updateHeading: event alpha]
-			ifNotNil: [self updateHeading: tmp].
+		tmp ifNil: [tmp := event alpha].
+		self updateHeading: tmp.
 		tuple := CompassTuple new.
 		tuple heading: self heading.
+		tuple headingRotate: self headingRotate.
 		"self tupleSpace write: tuple."
 	].
 !
@@ -419,9 +442,8 @@ setupViewModel
 	viewModel addAll: #{
 		#handleName -> (ko observable: 'handle name') .
 		#accuracy -> (ko observable: 0) .
-		#gZ -> (ko observable: 0) .
-		
-		#heading -> (ko observable: (self rotateStr: 0))
+		#heading -> (ko observable: 0) .
+		#headingRotate -> (ko observable: (self rotateStr: 0))
 	}.
 ! !
 
@@ -439,7 +461,8 @@ updateHeading: anInteger
 		ifTrue: [anInteger + 360]
 		ifFalse: [anInteger].
 	aValue := aValue + window orientation.
-	self heading: aValue
+	self heading: aValue.
+	self headingRotateKey: (self rotateStr: aValue)
 ! !
 
 LindaClientApp subclass: #LindaFibMaster
@@ -1065,7 +1088,6 @@ airconTimer
 startDemo
 	| tuple log |
 	super startDemo.
-	self inspect.
 	tuple := ThermoTuple new.
 	
 	watchId ifNotNil: [self tupleSpace cancel: watchId].

@@ -120,6 +120,59 @@ messageSends: ["at:put:", "data", "headingKey", "class"]
 }),
 $globals.CompassTuple);
 
+$core.addMethod(
+$core.method({
+selector: "headingRotate",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._data())._at_($recv(self._class())._headingRotateKey());
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"headingRotate",{},$globals.CompassTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "headingRotate\x0a\x0a\x09^self data at: self class headingRotateKey",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:", "data", "headingRotateKey", "class"]
+}),
+$globals.CompassTuple);
+
+$core.addMethod(
+$core.method({
+selector: "headingRotate:",
+protocol: 'accessing',
+fn: function (aString){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self._data())._at_put_($recv(self._class())._headingRotateKey(),aString);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"headingRotate:",{aString:aString},$globals.CompassTuple)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "headingRotate: aString\x0a\x0a\x09self data at: self class headingRotateKey put: aString",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:put:", "data", "headingRotateKey", "class"]
+}),
+$globals.CompassTuple);
+
 
 $core.addMethod(
 $core.method({
@@ -155,6 +208,26 @@ return "heading";
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
 source: "headingKey\x0a\x09^'heading'.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.CompassTuple.klass);
+
+$core.addMethod(
+$core.method({
+selector: "headingRotateKey",
+protocol: 'accessor key',
+fn: function (){
+"use strict";
+
+var self=this;
+return "headingRotate";
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "headingRotateKey\x0a\x09^'headingRotate'.",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: []
@@ -1582,16 +1655,16 @@ tmp=$recv(event)._webkitCompassHeading();
 tmp;
 $2=tmp;
 if(($receiver = $2) == null || $receiver.isNil){
-self._updateHeading_($recv(event)._alpha());
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["updateHeading:"]=1;
-//>>excludeEnd("ctx");
+tmp=$recv(event)._alpha();
+tmp;
 } else {
-self._updateHeading_(tmp);
+$2;
 };
+self._updateHeading_(tmp);
 tuple=$recv($CompassTuple())._new();
 tuple;
-return $recv(tuple)._heading_(self._heading());
+$recv(tuple)._heading_(self._heading());
+return $recv(tuple)._headingRotate_(self._headingRotate());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({event:event,tmp:tmp,tuple:tuple},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -1603,10 +1676,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "deviceorientationHandler\x0a\x09^[:event |\x0a\x09\x09| tmp tuple |\x0a\x09\x09tmp := event webkitCompassHeading.\x0a\x09\x09tmp ifNil: [self updateHeading: event alpha]\x0a\x09\x09\x09ifNotNil: [self updateHeading: tmp].\x0a\x09\x09tuple := CompassTuple new.\x0a\x09\x09tuple heading: self heading.\x0a\x09\x09\x22self tupleSpace write: tuple.\x22\x0a\x09].",
+source: "deviceorientationHandler\x0a\x09^[:event |\x0a\x09\x09| tmp tuple |\x0a\x09\x09tmp := event webkitCompassHeading.\x0a\x09\x09tmp ifNil: [tmp := event alpha].\x0a\x09\x09self updateHeading: tmp.\x0a\x09\x09tuple := CompassTuple new.\x0a\x09\x09tuple heading: self heading.\x0a\x09\x09tuple headingRotate: self headingRotate.\x0a\x09\x09\x22self tupleSpace write: tuple.\x22\x0a\x09].",
 referencedClasses: ["CompassTuple"],
 //>>excludeEnd("ide");
-messageSends: ["webkitCompassHeading", "ifNil:ifNotNil:", "updateHeading:", "alpha", "new", "heading:", "heading"]
+messageSends: ["webkitCompassHeading", "ifNil:", "alpha", "updateHeading:", "new", "heading:", "heading", "headingRotate:", "headingRotate"]
 }),
 $globals.LindaCompass);
 
@@ -1684,6 +1757,59 @@ return self;
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aValue"],
 source: "heading: aValue\x0a\x09(viewModel at: #heading) value: aValue",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value:", "at:"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
+selector: "headingRotate",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv($recv(self["@viewModel"])._at_("headingRotate"))._value();
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"headingRotate",{},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "headingRotate\x0a\x09^(viewModel at: #headingRotate) value",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value", "at:"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
+selector: "headingRotate:",
+protocol: 'accessing',
+fn: function (aValue){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv($recv(self["@viewModel"])._at_("headingRotate"))._value_(aValue);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"headingRotate:",{aValue:aValue},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aValue"],
+source: "headingRotate: aValue\x0a\x09(viewModel at: #headingRotate) value: aValue",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["value:", "at:"]
@@ -1779,7 +1905,7 @@ $5=$recv(ko)._observable_((0));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["observable:"]=3;
 //>>excludeEnd("ctx");
-$2=$globals.HashedCollection._newFromPairs_(["handleName",$3,"accuracy",$4,"gZ",$5,"heading",$recv(ko)._observable_(self._rotateStr_((0)))]);
+$2=$globals.HashedCollection._newFromPairs_(["handleName",$3,"accuracy",$4,"heading",$5,"headingRotate",$recv(ko)._observable_(self._rotateStr_((0)))]);
 $recv($1)._addAll_($2);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1788,7 +1914,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "setupViewModel\x0a\x0a\x09super setupViewModel.\x0a\x09\x0a\x09viewModel addAll: #{\x0a\x09\x09#handleName -> (ko observable: 'handle name') .\x0a\x09\x09#accuracy -> (ko observable: 0) .\x0a\x09\x09#gZ -> (ko observable: 0) .\x0a\x09\x09\x0a\x09\x09#heading -> (ko observable: (self rotateStr: 0))\x0a\x09}.\x0a\x09\x0a\x09\x0a\x09",
+source: "setupViewModel\x0a\x0a\x09super setupViewModel.\x0a\x09\x0a\x09viewModel addAll: #{\x0a\x09\x09#handleName -> (ko observable: 'handle name') .\x0a\x09\x09#accuracy -> (ko observable: 0) .\x0a\x09\x09#heading -> (ko observable: 0) .\x0a\x09\x09#headingRotate -> (ko observable: (self rotateStr: 0))\x0a\x09}.\x0a\x09\x0a\x09\x0a\x09",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["setupViewModel", "addAll:", "observable:", "rotateStr:"]
@@ -1881,6 +2007,7 @@ aValue=anInteger;
 };
 aValue=$recv(aValue).__plus($recv(window)._orientation());
 self._heading_(aValue);
+self._headingRotateKey_(self._rotateStr_(aValue));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"updateHeading:",{anInteger:anInteger,aValue:aValue},$globals.LindaCompass)});
@@ -1888,10 +2015,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["anInteger"],
-source: "updateHeading: anInteger\x0a\x0a\x09| aValue |\x0a\x09aValue := anInteger < 0 \x0a\x09\x09ifTrue: [anInteger + 360]\x0a\x09\x09ifFalse: [anInteger].\x0a\x09aValue := aValue + window orientation.\x0a\x09self heading: aValue",
+source: "updateHeading: anInteger\x0a\x0a\x09| aValue |\x0a\x09aValue := anInteger < 0 \x0a\x09\x09ifTrue: [anInteger + 360]\x0a\x09\x09ifFalse: [anInteger].\x0a\x09aValue := aValue + window orientation.\x0a\x09self heading: aValue.\x0a\x09self headingRotateKey: (self rotateStr: aValue)",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["ifTrue:ifFalse:", "<", "+", "orientation", "heading:"]
+messageSends: ["ifTrue:ifFalse:", "<", "+", "orientation", "heading:", "headingRotateKey:", "rotateStr:"]
 }),
 $globals.LindaCompass);
 
@@ -4782,7 +4909,6 @@ $globals.LindaThermoController.superclass.fn.prototype._startDemo.apply($recv(se
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
-self._inspect();
 tuple=$recv($ThermoTuple())._new();
 $1=self["@watchId"];
 if(($receiver = $1) == null || $receiver.isNil){
@@ -4815,10 +4941,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startDemo\x0a\x09| tuple log |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := ThermoTuple new.\x0a\x09\x0a\x09watchId ifNotNil: [self tupleSpace cancel: watchId].\x0a\x09watchId := self tupleSpace watch: tuple callback: [:err :t |\x0a\x09\x09t ifNotNil: [\x0a\x09\x09\x09self workerList addFirst: t.\x0a\x09\x09\x09(self viewModel at: #workers) value: self dataOfWorkerList. ]\x0a\x0a\x09\x09\x09\x22self doJQueryPrepend: t asJSON printString.\x22\x0a\x09].",
+source: "startDemo\x0a\x09| tuple log |\x0a\x09super startDemo.\x0a\x09tuple := ThermoTuple new.\x0a\x09\x0a\x09watchId ifNotNil: [self tupleSpace cancel: watchId].\x0a\x09watchId := self tupleSpace watch: tuple callback: [:err :t |\x0a\x09\x09t ifNotNil: [\x0a\x09\x09\x09self workerList addFirst: t.\x0a\x09\x09\x09(self viewModel at: #workers) value: self dataOfWorkerList. ]\x0a\x0a\x09\x09\x09\x22self doJQueryPrepend: t asJSON printString.\x22\x0a\x09].",
 referencedClasses: ["ThermoTuple"],
 //>>excludeEnd("ide");
-messageSends: ["startDemo", "inspect", "new", "ifNotNil:", "cancel:", "tupleSpace", "watch:callback:", "addFirst:", "workerList", "value:", "at:", "viewModel", "dataOfWorkerList"]
+messageSends: ["startDemo", "new", "ifNotNil:", "cancel:", "tupleSpace", "watch:callback:", "addFirst:", "workerList", "value:", "at:", "viewModel", "dataOfWorkerList"]
 }),
 $globals.LindaThermoController);
 
