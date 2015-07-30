@@ -462,7 +462,7 @@ updateHeading: anInteger
 		ifFalse: [anInteger].
 	aValue := aValue + window orientation.
 	self heading: aValue.
-	self headingRotateKey: (self rotateStr: aValue)
+	self headingRotate: (self rotateStr: aValue)
 ! !
 
 LindaClientApp subclass: #LindaFibMaster
