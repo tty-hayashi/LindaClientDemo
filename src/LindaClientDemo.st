@@ -461,7 +461,7 @@ deviceorientationHandler
 		tuple := CompassTuple new.
 		tuple heading: self heading.
 		tuple headingRotate: self headingRotate.
-		self interval > self intervalLimit ifTrue: [self tupleSpace write: tuple.].	
+		self tupleSpace write: tuple.	
 	].
 !
 
