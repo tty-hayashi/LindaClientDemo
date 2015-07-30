@@ -1211,7 +1211,7 @@ messageSends: ["default", "tupleSpace:"]
 $globals.LindaBasicDemo.klass);
 
 
-$core.addClass('LindaClientApp', $globals.Object, ['lindaClient', 'viewModel', 'watchId'], 'LindaClientDemo');
+$core.addClass('LindaClientApp', $globals.Object, ['lindaClient', 'viewModel', 'watchId', 'interval'], 'LindaClientDemo');
 $core.addMethod(
 $core.method({
 selector: "augmentPage",
@@ -1278,6 +1278,119 @@ source: "doJQueryPrepend: aMsg\x0a\x09| elem|\x0a\x09elem := '<li>' asJQuery.\x0
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["asJQuery", "html:", "prepend:"]
+}),
+$globals.LindaClientApp);
+
+$core.addMethod(
+$core.method({
+selector: "incInterval",
+protocol: 'action',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $2,$1;
+$2=self._interval();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["interval"]=1;
+//>>excludeEnd("ctx");
+$1=$recv($2).__gt(self._intervalLimit());
+if($core.assert($1)){
+self._interval_((0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["interval:"]=1;
+//>>excludeEnd("ctx");
+};
+self._interval_($recv(self._interval()).__plus((1)));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"incInterval",{},$globals.LindaClientApp)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "incInterval\x0a\x09self interval > self intervalLimit ifTrue: [self interval: 0].\x0a\x09self interval: self interval + 1",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["ifTrue:", ">", "interval", "intervalLimit", "interval:", "+"]
+}),
+$globals.LindaClientApp);
+
+$core.addMethod(
+$core.method({
+selector: "interval",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$2,$receiver;
+$1=self["@interval"];
+if(($receiver = $1) == null || $receiver.isNil){
+self["@interval"]=(0);
+self["@interval"];
+} else {
+$1;
+};
+$2=self["@interval"];
+return $2;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"interval",{},$globals.LindaClientApp)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "interval\x0a\x09interval ifNil: [interval := 0].\x0a\x09^ interval",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["ifNil:"]
+}),
+$globals.LindaClientApp);
+
+$core.addMethod(
+$core.method({
+selector: "interval:",
+protocol: 'accessing',
+fn: function (anObject){
+"use strict";
+
+var self=this;
+self["@interval"]=anObject;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anObject"],
+source: "interval: anObject\x0a\x09interval := anObject",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.LindaClientApp);
+
+$core.addMethod(
+$core.method({
+selector: "intervalLimit",
+protocol: 'action',
+fn: function (){
+"use strict";
+
+var self=this;
+return (100);
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "intervalLimit\x0a\x09^100",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
 }),
 $globals.LindaClientApp);
 
@@ -1549,6 +1662,70 @@ messageSends: ["ifNil:"]
 }),
 $globals.LindaClientApp);
 
+$core.addMethod(
+$core.method({
+selector: "viewModel:",
+protocol: 'accessing',
+fn: function (anObject){
+"use strict";
+
+var self=this;
+self["@viewModel"]=anObject;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anObject"],
+source: "viewModel: anObject\x0a\x09viewModel := anObject",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.LindaClientApp);
+
+$core.addMethod(
+$core.method({
+selector: "watchId",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+var $1;
+$1=self["@watchId"];
+return $1;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "watchId\x0a\x09^ watchId",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.LindaClientApp);
+
+$core.addMethod(
+$core.method({
+selector: "watchId:",
+protocol: 'accessing',
+fn: function (anObject){
+"use strict";
+
+var self=this;
+self["@watchId"]=anObject;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anObject"],
+source: "watchId: anObject\x0a\x09watchId := anObject",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.LindaClientApp);
+
 
 $core.addMethod(
 $core.method({
@@ -1645,7 +1822,7 @@ function $CompassTuple(){return $globals.CompassTuple||(typeof CompassTuple=="un
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $2,$1,$receiver;
+var $2,$3,$1,$receiver;
 $1=(function(event){
 var tmp,tuple;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1664,7 +1841,11 @@ self._updateHeading_(tmp);
 tuple=$recv($CompassTuple())._new();
 tuple;
 $recv(tuple)._heading_(self._heading());
-return $recv(tuple)._headingRotate_(self._headingRotate());
+$recv(tuple)._headingRotate_(self._headingRotate());
+$3=$recv(self._interval()).__gt(self._intervalLimit());
+if($core.assert($3)){
+return $recv(self._tupleSpace())._write_(tuple);
+};
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({event:event,tmp:tmp,tuple:tuple},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -1676,10 +1857,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "deviceorientationHandler\x0a\x09^[:event |\x0a\x09\x09| tmp tuple |\x0a\x09\x09tmp := event webkitCompassHeading.\x0a\x09\x09tmp ifNil: [tmp := event alpha].\x0a\x09\x09self updateHeading: tmp.\x0a\x09\x09tuple := CompassTuple new.\x0a\x09\x09tuple heading: self heading.\x0a\x09\x09tuple headingRotate: self headingRotate.\x0a\x09\x09\x22self tupleSpace write: tuple.\x22\x0a\x09].",
+source: "deviceorientationHandler\x0a\x09^[:event |\x0a\x09\x09| tmp tuple |\x0a\x09\x09tmp := event webkitCompassHeading.\x0a\x09\x09tmp ifNil: [tmp := event alpha].\x0a\x09\x09self updateHeading: tmp.\x0a\x09\x09tuple := CompassTuple new.\x0a\x09\x09tuple heading: self heading.\x0a\x09\x09tuple headingRotate: self headingRotate.\x0a\x09\x09self interval > self intervalLimit ifTrue: [self tupleSpace write: tuple.].\x09\x0a\x09].",
 referencedClasses: ["CompassTuple"],
 //>>excludeEnd("ide");
-messageSends: ["webkitCompassHeading", "ifNil:", "alpha", "updateHeading:", "new", "heading:", "heading", "headingRotate:", "headingRotate"]
+messageSends: ["webkitCompassHeading", "ifNil:", "alpha", "updateHeading:", "new", "heading:", "heading", "headingRotate:", "headingRotate", "ifTrue:", ">", "interval", "intervalLimit", "write:", "tupleSpace"]
 }),
 $globals.LindaCompass);
 
