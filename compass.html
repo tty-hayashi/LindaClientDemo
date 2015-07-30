@@ -45,7 +45,8 @@ div {
       <p>精度: <span data-bind="text: accuracy"></span></p>
     </div>
 
-    <img id="compass" src="res/arrow.png" width="40" height="118" data-bind="style: {WebkitTransform: rotate(), MozTransform: rotate(), transform: rotate()}"/>
+    <img id="compass" src="res/arrow.png" width="40" height="118"
+	    data-bind="style: {WebkitTransform: heading(), MozTransform: heading(), transform: heading()}"/>
 <!-- 
     <table>
       <thead>

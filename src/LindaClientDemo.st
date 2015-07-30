@@ -430,7 +430,7 @@ setupViewModel
 
 rotateStr: anInteger
 
-	^('rotate(', anInteger printString, 'deg)')
+	^('rotate(', anInteger negated printString, 'deg)')
 !
 
 updateHeading: anInteger
@@ -1042,7 +1042,6 @@ workerList
 airconOff
 	| tuple list |
 	self startDemo.
-	self inspect.
 	tuple := ThermoTuple airconCommand.
 	tuple airconOff.
 	self tupleSpace write: tuple.
@@ -1051,7 +1050,6 @@ airconOff
 airconOn
 	| tuple list |
 	self startDemo.
-	self inspect.
 	tuple := ThermoTuple airconCommand.
 	tuple airconOn.
 	self tupleSpace write: tuple.
@@ -1060,7 +1058,6 @@ airconOn
 airconTimer
 	| tuple list |
 	self startDemo.
-	self inspect.
 	tuple := ThermoTuple airconCommand.
 	tuple airconTimer.
 	self tupleSpace write: tuple.
@@ -1085,7 +1082,6 @@ startDemo
 thermoQuery
 	| tuple list |
 	self startDemo.
-	self inspect.
 	tuple := ThermoTuple airconCommand.
 	tuple airconQuery.
 	self tupleSpace write: tuple.
