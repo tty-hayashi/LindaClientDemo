@@ -1,5 +1,48 @@
 Smalltalk createPackage: 'LindaClientDemo'!
 (Smalltalk packageAt: 'LindaClientDemo') imports: {'ko' -> 'knockout'. 'amber/jquery/Wrappers-JQuery'. 'amber/web/Web'. 'silk/Silk'}!
+Tuple subclass: #CompassTuple
+	instanceVariableNames: ''
+	package: 'LindaClientDemo'!
+
+!CompassTuple methodsFor: 'accessing'!
+
+handleName
+
+	^self data at: self class handleNameKey
+!
+
+handleName: aString
+
+	self data at: self class handleNameKey put: aString
+!
+
+heading
+
+	^self data at: self class headingKey
+!
+
+heading: aString
+
+	self data at: self class headingKey put: aString
+! !
+
+!CompassTuple class methodsFor: 'accessor key'!
+
+handleNameKey
+	^'handleName'.
+!
+
+headingKey
+	^'heading'.
+! !
+
+!CompassTuple class methodsFor: 'tuple space'!
+
+tupleSpaceName
+
+	^'compass'
+! !
+
 Tuple subclass: #FibTuple
 	instanceVariableNames: ''
 	package: 'LindaClientDemo'!
@@ -314,6 +357,92 @@ start
 	self new augmentPage
 ! !
 
+LindaClientApp subclass: #LindaCompass
+	instanceVariableNames: ''
+	package: 'LindaClientDemo'!
+
+!LindaCompass methodsFor: 'accessing'!
+
+handleName 
+	^(viewModel at: #handleName ) value
+!
+
+heading
+	^(viewModel at: #heading) value
+!
+
+heading: aValue
+	(viewModel at: #heading) value: aValue
+!
+
+tupleSpace
+	^self lindaClient tupleSpace: CompassTuple tupleSpaceName
+! !
+
+!LindaCompass methodsFor: 'action'!
+
+setupHandle
+
+	window addEventListener: #deviceorientation 
+		with: self deviceorientationHandler
+		with: false.
+!
+
+startDemo
+	super startDemo.
+	self setupHandle.
+! !
+
+!LindaCompass methodsFor: 'starting'!
+
+augmentPage
+
+	super augmentPage.
+!
+
+deviceorientationHandler
+	^[:event |
+		| tmp tuple |
+		tmp := event webkitCompassHeading.
+		tmp ifNil: [self updateHeading: event alpha]
+			ifNotNil: [self updateHeading: tmp].
+		tuple := CompassTuple new.
+		tuple heading: self heading.
+		"self tupleSpace write: tuple."
+	].
+!
+
+setupViewModel
+
+	super setupViewModel.
+	
+	viewModel addAll: #{
+		#handleName -> (ko observable: 'handle name') .
+		#heading -> (ko observable: 0) .
+		#accuracy -> (ko observable: 0) .
+		#gZ -> (ko observable: 0) .
+		
+		#rotate -> (ko observable: (self rotateStr: 0))
+	}.
+! !
+
+!LindaCompass methodsFor: 'updating'!
+
+rotateStr: anInteger
+
+	^('rotate(', anInteger printString, 'deg)')
+!
+
+updateHeading: anInteger
+
+	| aValue |
+	aValue := anInteger < 0 
+		ifTrue: [anInteger + 360]
+		ifFalse: [anInteger].
+	aValue := aValue + window orientation.
+	self heading: aValue
+! !
+
 LindaClientApp subclass: #LindaFibMaster
 	instanceVariableNames: 'n result startDate'
 	package: 'LindaClientDemo'!
@@ -373,7 +502,8 @@ startMap
 	(self n to: 1 by: -1) do: [:i |
 		requestTuple := FibTuple fib.
 		requestTuple n: i.
-		self tupleSpace write: requestTuple].
+		self tupleSpace write: requestTuple.
+		self decNumberOfEntry].
 		
 	resultTuple n: 0; answer: 0.
 	self tupleSpace write: resultTuple.
@@ -389,6 +519,23 @@ tupleSpace
 ! !
 
 !LindaFibMaster methodsFor: 'action'!
+
+clearResults
+
+	|  resultTuple |
+	resultTuple := FibTuple result.
+	(self n to: 1 by: -1) do: [:i |
+		resultTuple n: i.
+		self tupleSpace takep: resultTuple wait: 10 callback: [:e :t | ]].
+		
+	resultTuple n: 0; answer: 0.
+	self tupleSpace takep: resultTuple wait: 10 callback: [:e :t | ].
+!
+
+decNumberOfEntry
+
+	self numberOfEntry: (self numberOfEntry - 1)
+!
 
 incNumberOfEntry
 
@@ -415,6 +562,8 @@ startDemo
 augmentPage
 	| ts entryTuple |
 	super augmentPage.
+	'#clear' asJQuery click: [ self clearResults ].
+
 	self resetNumberOfEntry.
 	ts := self tupleSpace.
 	entryTuple := #{'type' -> 'entry'}.
