@@ -1360,6 +1360,86 @@ $globals.LindaClientApp.klass);
 $core.addClass('LindaFibMaster', $globals.LindaClientApp, ['n', 'result', 'startDate'], 'LindaClientDemo');
 $core.addMethod(
 $core.method({
+selector: "augmentPage",
+protocol: 'starting',
+fn: function (){
+"use strict";
+
+var self=this;
+var ts,entryTuple;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true, 
+//>>excludeEnd("ctx");
+$globals.LindaFibMaster.superclass.fn.prototype._augmentPage.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+self._resetNumberOfEntry();
+ts=self._tupleSpace();
+entryTuple=$globals.HashedCollection._newFromPairs_(["type","entry"]);
+$recv(ts)._watch_callback_(entryTuple,(function(e1,t1){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(ts)._take_callback_(entryTuple,(function(e2,t2){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx3) {
+//>>excludeEnd("ctx");
+return self._incNumberOfEntry();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx3) {$ctx3.fillBlock({e2:e2,t2:t2},$ctx2,2)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({e1:e1,t1:t1},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"augmentPage",{ts:ts,entryTuple:entryTuple},$globals.LindaFibMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "augmentPage\x0a\x09| ts entryTuple |\x0a\x09super augmentPage.\x0a\x09self resetNumberOfEntry.\x0a\x09ts := self tupleSpace.\x0a\x09entryTuple := #{'type' -> 'entry'}.\x0a\x09ts watch: entryTuple callback: [:e1 :t1 | \x0a\x09\x09ts take: entryTuple callback: [:e2 :t2 |\x0a\x09\x09\x09self incNumberOfEntry.\x0a\x09\x09].\x0a\x09]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["augmentPage", "resetNumberOfEntry", "tupleSpace", "watch:callback:", "take:callback:", "incNumberOfEntry"]
+}),
+$globals.LindaFibMaster);
+
+$core.addMethod(
+$core.method({
+selector: "incNumberOfEntry",
+protocol: 'action',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self._numberOfEntry_($recv(self._numberOfEntry()).__plus((1)));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"incNumberOfEntry",{},$globals.LindaFibMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "incNumberOfEntry\x0a\x0a\x09self numberOfEntry: (self numberOfEntry + 1)",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["numberOfEntry:", "+", "numberOfEntry"]
+}),
+$globals.LindaFibMaster);
+
+$core.addMethod(
+$core.method({
 selector: "map",
 protocol: 'accessing',
 fn: function (){
@@ -1468,6 +1548,59 @@ $globals.LindaFibMaster);
 
 $core.addMethod(
 $core.method({
+selector: "numberOfEntry",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv($recv(self._viewModel())._at_("numberOfEntry"))._value();
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"numberOfEntry",{},$globals.LindaFibMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "numberOfEntry\x0a\x09^(self viewModel at:#numberOfEntry) value ",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value", "at:", "viewModel"]
+}),
+$globals.LindaFibMaster);
+
+$core.addMethod(
+$core.method({
+selector: "numberOfEntry:",
+protocol: 'accessing',
+fn: function (anObject){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv($recv(self._viewModel())._at_("numberOfEntry"))._value_(anObject);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"numberOfEntry:",{anObject:anObject},$globals.LindaFibMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anObject"],
+source: "numberOfEntry: anObject\x0a\x09(self viewModel at:#numberOfEntry) value: anObject",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value:", "at:", "viewModel"]
+}),
+$globals.LindaFibMaster);
+
+$core.addMethod(
+$core.method({
 selector: "readResultTuple",
 protocol: 'accessing',
 fn: function (){
@@ -1503,6 +1636,32 @@ source: "readResultTuple\x0a\x09| tuple |\x0a\x09tuple := FibTuple result.\x0a\x
 referencedClasses: ["FibTuple", "Date"],
 //>>excludeEnd("ide");
 messageSends: ["result", "n:", "n", "read:callback:", "tupleSpace", "timeToRun:", "-", "now", "result:", "answer"]
+}),
+$globals.LindaFibMaster);
+
+$core.addMethod(
+$core.method({
+selector: "resetNumberOfEntry",
+protocol: 'action',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self._numberOfEntry_((0));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"resetNumberOfEntry",{},$globals.LindaFibMaster)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "resetNumberOfEntry\x0a\x0a\x09self numberOfEntry: 0",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["numberOfEntry:"]
 }),
 $globals.LindaFibMaster);
 
@@ -1570,7 +1729,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$3,$4,$2;
+var $1,$3,$4,$5,$2;
 (
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true, 
@@ -1588,7 +1747,11 @@ $4=$recv(ko)._observable_((0));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["observable:"]=2;
 //>>excludeEnd("ctx");
-$2=$globals.HashedCollection._newFromPairs_(["n",$3,"result",$4,"timeToRun",$recv(ko)._observable_((0))]);
+$5=$recv(ko)._observable_((0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["observable:"]=3;
+//>>excludeEnd("ctx");
+$2=$globals.HashedCollection._newFromPairs_(["n",$3,"result",$4,"timeToRun",$5,"numberOfEntry",$recv(ko)._observable_((0))]);
 $recv($1)._addAll_($2);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1597,7 +1760,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "setupViewModel\x0a\x09super setupViewModel.\x0a\x09viewModel addAll: #{\x0a\x09\x09#n -> (ko observable: 5) .\x0a\x09\x09#result -> (ko observable: 0) .\x0a\x09\x09#timeToRun -> (ko observable: 0) \x0a\x09}.",
+source: "setupViewModel\x0a\x09super setupViewModel.\x0a\x09viewModel addAll: #{\x0a\x09\x09#n -> (ko observable: 5) .\x0a\x09\x09#result -> (ko observable: 0) .\x0a\x09\x09#timeToRun -> (ko observable: 0) .\x0a\x09\x09#numberOfEntry -> (ko observable: 0)\x0a\x09}.",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["setupViewModel", "addAll:", "observable:"]
@@ -2084,6 +2247,7 @@ $globals.LindaFibWorker.superclass.fn.prototype._startDemo.apply($recv(self), []
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
+$recv(self._tupleSpace())._write_($globals.HashedCollection._newFromPairs_(["type","entry"]));
 self._startReduce();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -2092,10 +2256,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startDemo\x0a\x0a\x09super startDemo.\x0a\x09self startReduce",
+source: "startDemo\x0a\x0a\x09super startDemo.\x0a\x09self tupleSpace write: #{#type -> 'entry'}.\x0a\x09self startReduce",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["startDemo", "startReduce"]
+messageSends: ["startDemo", "write:", "tupleSpace", "startReduce"]
 }),
 $globals.LindaFibWorker);
 

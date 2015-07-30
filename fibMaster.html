@@ -18,10 +18,14 @@
                        value: serverUrl,
                        optionsCaption: '-選択してください-'"></select></p>
     </div>
-    <p>元の数:<input data-bind="value: n"/></p>
-    <p>フィボナッチ数:<span data-bind="text: result"/></p>
-    <p>所要時間(msec):<span data-bind="text: timeToRun"/></p>
+    <br>
+    <p>現在、<span data-bind="text: numberOfEntry"></span>人くらい</p><br>
+    <br>
+    <p>元の数:<input data-bind="value: n"/></p><br>
+    <p>フィボナッチ数:<span data-bind="text: result"/></p><br>
+    <p>所要時間(msec):<span data-bind="text: timeToRun"/></p><br>
     <button id="start">START</button>
+    <br>
 
     <ol id="output-list"></ol>
     <div id="log"></div>
