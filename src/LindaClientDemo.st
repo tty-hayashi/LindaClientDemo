@@ -288,10 +288,19 @@ philosopherTupleSpace
 ! !
 
 Object subclass: #LindaClientApp
-	instanceVariableNames: 'lindaClient viewModel watchId'
+	instanceVariableNames: 'lindaClient viewModel watchId interval'
 	package: 'LindaClientDemo'!
 
 !LindaClientApp methodsFor: 'accessing'!
+
+interval
+	interval ifNil: [interval := 0].
+	^ interval
+!
+
+interval: anObject
+	interval := anObject
+!
 
 lindaClient
 	^ lindaClient
@@ -315,6 +324,18 @@ tickets: anInteger
 
 viewModel
 	^viewModel ifNil: [viewModel := #{}]
+!
+
+viewModel: anObject
+	viewModel := anObject
+!
+
+watchId
+	^ watchId
+!
+
+watchId: anObject
+	watchId := anObject
 ! !
 
 !LindaClientApp methodsFor: 'action'!
@@ -324,6 +345,15 @@ doJQueryPrepend: aMsg
 	elem := '<li>' asJQuery.
 	elem html: aMsg.
 	'#output-list' asJQuery prepend: elem
+!
+
+incInterval
+	self interval > self intervalLimit ifTrue: [self interval: 0].
+	self interval: self interval + 1
+!
+
+intervalLimit
+	^100
 !
 
 startDemo
@@ -431,7 +461,7 @@ deviceorientationHandler
 		tuple := CompassTuple new.
 		tuple heading: self heading.
 		tuple headingRotate: self headingRotate.
-		"self tupleSpace write: tuple."
+		self interval > self intervalLimit ifTrue: [self tupleSpace write: tuple.].	
 	].
 !
 
