@@ -1996,14 +1996,14 @@ var aValue;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv(anInteger).__lt((0));
+aValue=anInteger;
+$1=$recv(aValue).__lt((0));
 if($core.assert($1)){
-aValue=$recv(anInteger).__plus((360));
+aValue=$recv(aValue).__plus((360));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["+"]=1;
 //>>excludeEnd("ctx");
-} else {
-aValue=anInteger;
+aValue;
 };
 aValue=$recv(aValue).__plus($recv(window)._orientation());
 self._heading_(aValue);
@@ -2015,10 +2015,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["anInteger"],
-source: "updateHeading: anInteger\x0a\x0a\x09| aValue |\x0a\x09aValue := anInteger < 0 \x0a\x09\x09ifTrue: [anInteger + 360]\x0a\x09\x09ifFalse: [anInteger].\x0a\x09aValue := aValue + window orientation.\x0a\x09self heading: aValue.\x0a\x09self headingRotate: (self rotateStr: aValue)",
+source: "updateHeading: anInteger\x0a\x0a\x09| aValue |\x0a\x09aValue := anInteger.\x0a\x09aValue < 0 \x0a\x09\x09ifTrue: [aValue := aValue + 360].\x0a\x09aValue := aValue + window orientation.\x0a\x09self heading: aValue.\x0a\x09self headingRotate: (self rotateStr: aValue)",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["ifTrue:ifFalse:", "<", "+", "orientation", "heading:", "headingRotate:", "rotateStr:"]
+messageSends: ["ifTrue:", "<", "+", "orientation", "heading:", "headingRotate:", "rotateStr:"]
 }),
 $globals.LindaCompass);
 
