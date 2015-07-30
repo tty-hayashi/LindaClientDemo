@@ -2007,7 +2007,7 @@ aValue=anInteger;
 };
 aValue=$recv(aValue).__plus($recv(window)._orientation());
 self._heading_(aValue);
-self._headingRotateKey_(self._rotateStr_(aValue));
+self._headingRotate_(self._rotateStr_(aValue));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"updateHeading:",{anInteger:anInteger,aValue:aValue},$globals.LindaCompass)});
@@ -2015,10 +2015,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["anInteger"],
-source: "updateHeading: anInteger\x0a\x0a\x09| aValue |\x0a\x09aValue := anInteger < 0 \x0a\x09\x09ifTrue: [anInteger + 360]\x0a\x09\x09ifFalse: [anInteger].\x0a\x09aValue := aValue + window orientation.\x0a\x09self heading: aValue.\x0a\x09self headingRotateKey: (self rotateStr: aValue)",
+source: "updateHeading: anInteger\x0a\x0a\x09| aValue |\x0a\x09aValue := anInteger < 0 \x0a\x09\x09ifTrue: [anInteger + 360]\x0a\x09\x09ifFalse: [anInteger].\x0a\x09aValue := aValue + window orientation.\x0a\x09self heading: aValue.\x0a\x09self headingRotate: (self rotateStr: aValue)",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["ifTrue:ifFalse:", "<", "+", "orientation", "heading:", "headingRotateKey:", "rotateStr:"]
+messageSends: ["ifTrue:ifFalse:", "<", "+", "orientation", "heading:", "headingRotate:", "rotateStr:"]
 }),
 $globals.LindaCompass);
 
