@@ -1757,7 +1757,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$3,$4,$5,$6,$2;
+var $1,$3,$4,$5,$2;
 (
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true, 
@@ -1779,11 +1779,7 @@ $5=$recv(ko)._observable_((0));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["observable:"]=3;
 //>>excludeEnd("ctx");
-$6=$recv(ko)._observable_((0));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["observable:"]=4;
-//>>excludeEnd("ctx");
-$2=$globals.HashedCollection._newFromPairs_(["handleName",$3,"heading",$4,"accuracy",$5,"gZ",$6,"rotate",$recv(ko)._observable_(self._rotateStr_((0)))]);
+$2=$globals.HashedCollection._newFromPairs_(["handleName",$3,"accuracy",$4,"gZ",$5,"heading",$recv(ko)._observable_(self._rotateStr_((0)))]);
 $recv($1)._addAll_($2);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1792,7 +1788,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "setupViewModel\x0a\x0a\x09super setupViewModel.\x0a\x09\x0a\x09viewModel addAll: #{\x0a\x09\x09#handleName -> (ko observable: 'handle name') .\x0a\x09\x09#heading -> (ko observable: 0) .\x0a\x09\x09#accuracy -> (ko observable: 0) .\x0a\x09\x09#gZ -> (ko observable: 0) .\x0a\x09\x09\x0a\x09\x09#rotate -> (ko observable: (self rotateStr: 0))\x0a\x09}.\x0a\x09\x0a\x09\x0a\x09",
+source: "setupViewModel\x0a\x0a\x09super setupViewModel.\x0a\x09\x0a\x09viewModel addAll: #{\x0a\x09\x09#handleName -> (ko observable: 'handle name') .\x0a\x09\x09#accuracy -> (ko observable: 0) .\x0a\x09\x09#gZ -> (ko observable: 0) .\x0a\x09\x09\x0a\x09\x09#heading -> (ko observable: (self rotateStr: 0))\x0a\x09}.\x0a\x09\x0a\x09\x0a\x09",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["setupViewModel", "addAll:", "observable:", "rotateStr:"]

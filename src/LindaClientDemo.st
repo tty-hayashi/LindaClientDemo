@@ -418,11 +418,10 @@ setupViewModel
 	
 	viewModel addAll: #{
 		#handleName -> (ko observable: 'handle name') .
-		#heading -> (ko observable: 0) .
 		#accuracy -> (ko observable: 0) .
 		#gZ -> (ko observable: 0) .
 		
-		#rotate -> (ko observable: (self rotateStr: 0))
+		#heading -> (ko observable: (self rotateStr: 0))
 	}.
 ! !
 
