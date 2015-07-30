@@ -457,9 +457,9 @@ rotateStr: anInteger
 updateHeading: anInteger
 
 	| aValue |
-	aValue := anInteger < 0 
-		ifTrue: [anInteger + 360]
-		ifFalse: [anInteger].
+	aValue := anInteger.
+	aValue < 0 
+		ifTrue: [aValue := aValue + 360].
 	aValue := aValue + window orientation.
 	self heading: aValue.
 	self headingRotate: (self rotateStr: aValue)
