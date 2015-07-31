@@ -1875,6 +1875,7 @@ $2;
 self._updateHeading_(tmp);
 tuple=$recv($CompassTuple())._new();
 tuple;
+$recv(tuple)._handleName_(self._handleName());
 $recv(tuple)._heading_(self._heading());
 $recv(tuple)._headingRotate_(self._headingRotate());
 $3=$recv(self._interval()).__gt(self._intervalLimit());
@@ -1894,10 +1895,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "deviceorientationHandler\x0a\x09^[:event |\x0a\x09\x09| tmp tuple |\x0a\x09\x09tmp := event webkitCompassHeading.\x0a\x09\x09tmp ifNil: [tmp := event alpha].\x0a\x09\x09self updateHeading: tmp.\x0a\x09\x09tuple := CompassTuple new.\x0a\x09\x09tuple heading: self heading.\x0a\x09\x09tuple headingRotate: self headingRotate.\x0a\x09\x09self interval > self intervalLimit\x0a\x09\x09\x09ifTrue: [self tupleSpace write: tuple]\x0a\x09\x09\x09ifFalse: [self incInterval].\x0a\x09].",
+source: "deviceorientationHandler\x0a\x09^[:event |\x0a\x09\x09| tmp tuple |\x0a\x09\x09tmp := event webkitCompassHeading.\x0a\x09\x09tmp ifNil: [tmp := event alpha].\x0a\x09\x09self updateHeading: tmp.\x0a\x09\x09tuple := CompassTuple new.\x0a\x09\x09tuple handleName: self handleName.\x0a\x09\x09tuple heading: self heading.\x0a\x09\x09tuple headingRotate: self headingRotate.\x0a\x09\x09self interval > self intervalLimit\x0a\x09\x09\x09ifTrue: [self tupleSpace write: tuple]\x0a\x09\x09\x09ifFalse: [self incInterval].\x0a\x09].",
 referencedClasses: ["CompassTuple"],
 //>>excludeEnd("ide");
-messageSends: ["webkitCompassHeading", "ifNil:", "alpha", "updateHeading:", "new", "heading:", "heading", "headingRotate:", "headingRotate", "ifTrue:ifFalse:", ">", "interval", "intervalLimit", "write:", "tupleSpace", "incInterval"]
+messageSends: ["webkitCompassHeading", "ifNil:", "alpha", "updateHeading:", "new", "handleName:", "handleName", "heading:", "heading", "headingRotate:", "headingRotate", "ifTrue:ifFalse:", ">", "interval", "intervalLimit", "write:", "tupleSpace", "incInterval"]
 }),
 $globals.LindaCompass);
 
