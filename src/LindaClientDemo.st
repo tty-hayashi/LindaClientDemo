@@ -484,6 +484,7 @@ deviceorientationHandler
 		tmp ifNil: [tmp := event alpha].
 		self updateHeading: tmp.
 		tuple := CompassTuple new.
+		tuple handleName: self handleName.
 		tuple heading: self heading.
 		tuple headingRotate: self headingRotate.
 		self interval > self intervalLimit
