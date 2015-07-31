@@ -1822,7 +1822,7 @@ function $CompassTuple(){return $globals.CompassTuple||(typeof CompassTuple=="un
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $2,$1,$receiver;
+var $2,$3,$1,$receiver;
 $1=(function(event){
 var tmp,tuple;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1842,7 +1842,12 @@ tuple=$recv($CompassTuple())._new();
 tuple;
 $recv(tuple)._heading_(self._heading());
 $recv(tuple)._headingRotate_(self._headingRotate());
+$3=$recv(self._interval()).__gt($recv(self._intervalLimit())._i());
+if($core.assert($3)){
 return $recv(self._tupleSpace())._write_(tuple);
+} else {
+return self._incInterval();
+};
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({event:event,tmp:tmp,tuple:tuple},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -1854,10 +1859,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "deviceorientationHandler\x0a\x09^[:event |\x0a\x09\x09| tmp tuple |\x0a\x09\x09tmp := event webkitCompassHeading.\x0a\x09\x09tmp ifNil: [tmp := event alpha].\x0a\x09\x09self updateHeading: tmp.\x0a\x09\x09tuple := CompassTuple new.\x0a\x09\x09tuple heading: self heading.\x0a\x09\x09tuple headingRotate: self headingRotate.\x0a\x09\x09self tupleSpace write: tuple.\x09\x0a\x09].",
+source: "deviceorientationHandler\x0a\x09^[:event |\x0a\x09\x09| tmp tuple |\x0a\x09\x09tmp := event webkitCompassHeading.\x0a\x09\x09tmp ifNil: [tmp := event alpha].\x0a\x09\x09self updateHeading: tmp.\x0a\x09\x09tuple := CompassTuple new.\x0a\x09\x09tuple heading: self heading.\x0a\x09\x09tuple headingRotate: self headingRotate.\x0a\x09\x09self interval > self intervalLimit i\x0a\x09\x09\x09ifTrue: [self tupleSpace write: tuple]\x0a\x09\x09\x09ifFalse: [self incInterval].\x0a\x09].",
 referencedClasses: ["CompassTuple"],
 //>>excludeEnd("ide");
-messageSends: ["webkitCompassHeading", "ifNil:", "alpha", "updateHeading:", "new", "heading:", "heading", "headingRotate:", "headingRotate", "write:", "tupleSpace"]
+messageSends: ["webkitCompassHeading", "ifNil:", "alpha", "updateHeading:", "new", "heading:", "heading", "headingRotate:", "headingRotate", "ifTrue:ifFalse:", ">", "interval", "i", "intervalLimit", "write:", "tupleSpace", "incInterval"]
 }),
 $globals.LindaCompass);
 
