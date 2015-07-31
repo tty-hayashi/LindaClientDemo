@@ -47,7 +47,7 @@ div {
 
     <img id="compass" src="res/arrow.png" width="40" height="118"
 	    data-bind="style: {WebkitTransform: headingRotate(), MozTransform: headingRotate(), transform: headingRotate()}"/>
-<!-- 
+
     <table>
       <thead>
 	<tr>
@@ -57,13 +57,12 @@ div {
       <tbody data-bind="foreach: workers">
 	<tr>
 	  <td data-bind="text: handleName"></td>
-	  <td data-bind="text: gX"></td>
-	  <td data-bind="text: gY"></td>
-	  <td data-bind="text: gZ"></td>
+	  <td data-bind="text: heading"></td>
+	  <td data-bind="text: headingRotate"></td>
 	</tr>
       </tbody>
     </table>
-  -->
+
 
     <script type='text/javascript'>
       require(['app'], function (amber) {

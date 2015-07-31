@@ -1776,7 +1776,7 @@ messageSends: ["augmentPage", "new"]
 $globals.LindaClientApp.klass);
 
 
-$core.addClass('LindaCompass', $globals.LindaClientApp, [], 'LindaClientDemo');
+$core.addClass('LindaCompass', $globals.LindaClientApp, ['workersTable'], 'LindaClientDemo');
 $core.addMethod(
 $core.method({
 selector: "augmentPage",
@@ -1812,6 +1812,41 @@ $globals.LindaCompass);
 
 $core.addMethod(
 $core.method({
+selector: "dataOfWorkersTable",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv($recv(self._workersTable())._values())._collect_((function(e){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(e)._data();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({e:e},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"dataOfWorkersTable",{},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "dataOfWorkersTable\x0a\x09^self workersTable values collect: [:e | e data]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["collect:", "values", "workersTable", "data"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
 selector: "deviceorientationHandler",
 protocol: 'starting',
 fn: function (){
@@ -1842,7 +1877,7 @@ tuple=$recv($CompassTuple())._new();
 tuple;
 $recv(tuple)._heading_(self._heading());
 $recv(tuple)._headingRotate_(self._headingRotate());
-$3=$recv(self._interval()).__gt($recv(self._intervalLimit())._i());
+$3=$recv(self._interval()).__gt(self._intervalLimit());
 if($core.assert($3)){
 return $recv(self._tupleSpace())._write_(tuple);
 } else {
@@ -1859,10 +1894,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "deviceorientationHandler\x0a\x09^[:event |\x0a\x09\x09| tmp tuple |\x0a\x09\x09tmp := event webkitCompassHeading.\x0a\x09\x09tmp ifNil: [tmp := event alpha].\x0a\x09\x09self updateHeading: tmp.\x0a\x09\x09tuple := CompassTuple new.\x0a\x09\x09tuple heading: self heading.\x0a\x09\x09tuple headingRotate: self headingRotate.\x0a\x09\x09self interval > self intervalLimit i\x0a\x09\x09\x09ifTrue: [self tupleSpace write: tuple]\x0a\x09\x09\x09ifFalse: [self incInterval].\x0a\x09].",
+source: "deviceorientationHandler\x0a\x09^[:event |\x0a\x09\x09| tmp tuple |\x0a\x09\x09tmp := event webkitCompassHeading.\x0a\x09\x09tmp ifNil: [tmp := event alpha].\x0a\x09\x09self updateHeading: tmp.\x0a\x09\x09tuple := CompassTuple new.\x0a\x09\x09tuple heading: self heading.\x0a\x09\x09tuple headingRotate: self headingRotate.\x0a\x09\x09self interval > self intervalLimit\x0a\x09\x09\x09ifTrue: [self tupleSpace write: tuple]\x0a\x09\x09\x09ifFalse: [self incInterval].\x0a\x09].",
 referencedClasses: ["CompassTuple"],
 //>>excludeEnd("ide");
-messageSends: ["webkitCompassHeading", "ifNil:", "alpha", "updateHeading:", "new", "heading:", "heading", "headingRotate:", "headingRotate", "ifTrue:ifFalse:", ">", "interval", "i", "intervalLimit", "write:", "tupleSpace", "incInterval"]
+messageSends: ["webkitCompassHeading", "ifNil:", "alpha", "updateHeading:", "new", "heading:", "heading", "headingRotate:", "headingRotate", "ifTrue:ifFalse:", ">", "interval", "intervalLimit", "write:", "tupleSpace", "incInterval"]
 }),
 $globals.LindaCompass);
 
@@ -2088,7 +2123,7 @@ $5=$recv(ko)._observable_((0));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["observable:"]=3;
 //>>excludeEnd("ctx");
-$2=$globals.HashedCollection._newFromPairs_(["handleName",$3,"accuracy",$4,"heading",$5,"headingRotate",$recv(ko)._observable_(self._rotateStr_((0)))]);
+$2=$globals.HashedCollection._newFromPairs_(["handleName",$3,"accuracy",$4,"heading",$5,"headingRotate",$recv(ko)._observable_(self._rotateStr_((0))),"workers",$recv(ko)._observableArray_([])]);
 $recv($1)._addAll_($2);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -2097,10 +2132,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "setupViewModel\x0a\x0a\x09super setupViewModel.\x0a\x09\x0a\x09viewModel addAll: #{\x0a\x09\x09#handleName -> (ko observable: 'handle name') .\x0a\x09\x09#accuracy -> (ko observable: 0) .\x0a\x09\x09#heading -> (ko observable: 0) .\x0a\x09\x09#headingRotate -> (ko observable: (self rotateStr: 0))\x0a\x09}.\x0a\x09\x0a\x09\x0a\x09",
+source: "setupViewModel\x0a\x0a\x09super setupViewModel.\x0a\x09\x0a\x09viewModel addAll: #{\x0a\x09\x09#handleName -> (ko observable: 'handle name') .\x0a\x09\x09#accuracy -> (ko observable: 0) .\x0a\x09\x09#heading -> (ko observable: 0) .\x0a\x09\x09#headingRotate -> (ko observable: (self rotateStr: 0)) .\x0a\x09\x09#workers -> (ko observableArray: #())\x0a\x0a\x09}.\x0a\x09\x0a\x09\x0a\x09",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["setupViewModel", "addAll:", "observable:", "rotateStr:"]
+messageSends: ["setupViewModel", "addAll:", "observable:", "rotateStr:", "observableArray:"]
 }),
 $globals.LindaCompass);
 
@@ -2112,9 +2147,12 @@ fn: function (){
 "use strict";
 
 var self=this;
+var tuple;
+function $CompassTuple(){return $globals.CompassTuple||(typeof CompassTuple=="undefined"?nil:CompassTuple)}
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
+var $1,$2,$receiver;
 (
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true, 
@@ -2124,17 +2162,38 @@ $globals.LindaCompass.superclass.fn.prototype._startDemo.apply($recv(self), []))
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
 self._setupHandle();
+tuple=$recv($CompassTuple())._new();
+$1=self["@watchId"];
+if(($receiver = $1) == null || $receiver.isNil){
+$1;
+} else {
+$2=self._tupleSpace();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["tupleSpace"]=1;
+//>>excludeEnd("ctx");
+$recv($2)._cancel_(self["@watchId"]);
+};
+self["@watchId"]=$recv(self._tupleSpace())._watch_callback_(tuple,(function(err,t){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+self._workerAt_put_($recv(t)._fromAddress(),t);
+return $recv($recv(self._viewModel())._at_("workers"))._value_(self._dataOfWorkersTable());
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({err:err,t:t},$ctx1,2)});
+//>>excludeEnd("ctx");
+}));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"startDemo",{},$globals.LindaCompass)});
+}, function($ctx1) {$ctx1.fill(self,"startDemo",{tuple:tuple},$globals.LindaCompass)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startDemo\x0a\x09super startDemo.\x0a\x09self setupHandle.",
-referencedClasses: [],
+source: "startDemo\x0a\x0a\x09| tuple |\x0a\x09super startDemo.\x0a\x09self setupHandle.\x0a\x09tuple := CompassTuple new.\x0a\x09watchId ifNotNil: [self tupleSpace cancel: watchId].\x0a\x09watchId := self tupleSpace watch: tuple callback: [:err :t |\x0a\x09\x09self workerAt: t fromAddress put: t.\x0a\x09\x09(self viewModel at: #workers) value: self dataOfWorkersTable.\x0a\x09].",
+referencedClasses: ["CompassTuple"],
 //>>excludeEnd("ide");
-messageSends: ["startDemo", "setupHandle"]
+messageSends: ["startDemo", "setupHandle", "new", "ifNotNil:", "cancel:", "tupleSpace", "watch:callback:", "workerAt:put:", "fromAddress", "value:", "at:", "viewModel", "dataOfWorkersTable"]
 }),
 $globals.LindaCompass);
 
@@ -2202,6 +2261,93 @@ source: "updateHeading: anInteger\x0a\x0a\x09| aValue |\x0a\x09aValue := anInteg
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["ifTrue:", "<", "+", "orientation", "heading:", "headingRotate:", "rotateStr:"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
+selector: "workerAt:",
+protocol: 'accessing',
+fn: function (aKey){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self._workersTable())._at_(aKey);
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"workerAt:",{aKey:aKey},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aKey"],
+source: "workerAt: aKey\x0a\x09^self workersTable at: aKey",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:", "workersTable"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
+selector: "workerAt:put:",
+protocol: 'accessing',
+fn: function (aKey,aWorker){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self._workersTable())._at_put_(aKey,aWorker);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"workerAt:put:",{aKey:aKey,aWorker:aWorker},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aKey", "aWorker"],
+source: "workerAt: aKey put: aWorker\x0a\x09self workersTable at: aKey put: aWorker",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["at:put:", "workersTable"]
+}),
+$globals.LindaCompass);
+
+$core.addMethod(
+$core.method({
+selector: "workersTable",
+protocol: 'accessing',
+fn: function (){
+"use strict";
+
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$2,$receiver;
+$1=self["@workersTable"];
+if(($receiver = $1) == null || $receiver.isNil){
+self["@workersTable"]=$globals.HashedCollection._newFromPairs_([]);
+self["@workersTable"];
+} else {
+$1;
+};
+$2=self["@workersTable"];
+return $2;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"workersTable",{},$globals.LindaCompass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "workersTable\x0a\x09workersTable ifNil: [workersTable := #{}].\x0a\x09^workersTable",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["ifNil:"]
 }),
 $globals.LindaCompass);
 
@@ -3535,6 +3681,7 @@ tuple=$recv($GyroTuple())._new();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["new"]=1;
 //>>excludeEnd("ctx");
+self["@debugList"]=$recv($OrderedCollection())._new();
 $1=self["@watchId"];
 if(($receiver = $1) == null || $receiver.isNil){
 $1;
@@ -3545,7 +3692,6 @@ $ctx1.sendIdx["tupleSpace"]=1;
 //>>excludeEnd("ctx");
 $recv($2)._cancel_(self["@watchId"]);
 };
-self["@debugList"]=$recv($OrderedCollection())._new();
 self["@watchId"]=$recv(self._tupleSpace())._watch_callback_(tuple,(function(err,t){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
@@ -3564,7 +3710,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startDemo\x0a\x09| tuple |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := GyroTuple new.\x0a\x09watchId ifNotNil: [self tupleSpace cancel: watchId].\x0a\x09debugList := OrderedCollection new.\x0a\x09watchId := self tupleSpace watch: tuple callback: [:err :t |\x0a\x09\x09debugList add: t.\x0a\x09\x09self workerAt: t fromAddress put: t.\x0a\x09\x09(self viewModel at: #workers) value: self dataOfWorkersTable.\x0a\x0a\x09\x09\x22self doJQueryPrepend: t asJSON printString.\x22\x0a\x09].",
+source: "startDemo\x0a\x09| tuple |\x0a\x09super startDemo.\x0a\x09self inspect.\x0a\x09tuple := GyroTuple new.\x0a\x09debugList := OrderedCollection new.\x0a\x09watchId ifNotNil: [self tupleSpace cancel: watchId].\x0a\x09watchId := self tupleSpace watch: tuple callback: [:err :t |\x0a\x09\x09debugList add: t.\x0a\x09\x09self workerAt: t fromAddress put: t.\x0a\x09\x09(self viewModel at: #workers) value: self dataOfWorkersTable.\x0a\x0a\x09\x09\x22self doJQueryPrepend: t asJSON printString.\x22\x0a\x09].",
 referencedClasses: ["GyroTuple", "OrderedCollection"],
 //>>excludeEnd("ide");
 messageSends: ["startDemo", "inspect", "new", "ifNotNil:", "cancel:", "tupleSpace", "watch:callback:", "add:", "workerAt:put:", "fromAddress", "value:", "at:", "viewModel", "dataOfWorkersTable"]

@@ -402,10 +402,14 @@ start
 ! !
 
 LindaClientApp subclass: #LindaCompass
-	instanceVariableNames: ''
+	instanceVariableNames: 'workersTable'
 	package: 'LindaClientDemo'!
 
 !LindaCompass methodsFor: 'accessing'!
+
+dataOfWorkersTable
+	^self workersTable values collect: [:e | e data]
+!
 
 handleName 
 	^(viewModel at: #handleName ) value
@@ -429,6 +433,19 @@ headingRotate: aValue
 
 tupleSpace
 	^self lindaClient tupleSpace: CompassTuple tupleSpaceName
+!
+
+workerAt: aKey
+	^self workersTable at: aKey
+!
+
+workerAt: aKey put: aWorker
+	self workersTable at: aKey put: aWorker
+!
+
+workersTable
+	workersTable ifNil: [workersTable := #{}].
+	^workersTable
 ! !
 
 !LindaCompass methodsFor: 'action'!
@@ -441,8 +458,16 @@ setupHandle
 !
 
 startDemo
+
+	| tuple |
 	super startDemo.
 	self setupHandle.
+	tuple := CompassTuple new.
+	watchId ifNotNil: [self tupleSpace cancel: watchId].
+	watchId := self tupleSpace watch: tuple callback: [:err :t |
+		self workerAt: t fromAddress put: t.
+		(self viewModel at: #workers) value: self dataOfWorkersTable.
+	].
 ! !
 
 !LindaCompass methodsFor: 'starting'!
@@ -461,7 +486,7 @@ deviceorientationHandler
 		tuple := CompassTuple new.
 		tuple heading: self heading.
 		tuple headingRotate: self headingRotate.
-		self interval > self intervalLimit i
+		self interval > self intervalLimit
 			ifTrue: [self tupleSpace write: tuple]
 			ifFalse: [self incInterval].
 	].
@@ -475,7 +500,9 @@ setupViewModel
 		#handleName -> (ko observable: 'handle name') .
 		#accuracy -> (ko observable: 0) .
 		#heading -> (ko observable: 0) .
-		#headingRotate -> (ko observable: (self rotateStr: 0))
+		#headingRotate -> (ko observable: (self rotateStr: 0)) .
+		#workers -> (ko observableArray: #())
+
 	}.
 ! !
 
@@ -792,8 +819,8 @@ startDemo
 	super startDemo.
 	self inspect.
 	tuple := GyroTuple new.
-	watchId ifNotNil: [self tupleSpace cancel: watchId].
 	debugList := OrderedCollection new.
+	watchId ifNotNil: [self tupleSpace cancel: watchId].
 	watchId := self tupleSpace watch: tuple callback: [:err :t |
 		debugList add: t.
 		self workerAt: t fromAddress put: t.
