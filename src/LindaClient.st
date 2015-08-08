@@ -6,17 +6,19 @@ Object subclass: #LindaProxy
 
 !LindaProxy methodsFor: 'accessing'!
 
-keys: aJS
-	<	return Object.keys(aJS);
-	>
-!
-
 proxy
 	^ proxy
 !
 
 proxy: anObject
 	proxy := anObject
+! !
+
+!LindaProxy methodsFor: 'utilities'!
+
+keysOfJSON: aJS
+	<	return Object.keys(aJS);
+	>
 ! !
 
 !LindaProxy class methodsFor: 'as yet unclassified'!
@@ -150,12 +152,6 @@ LindaProxy subclass: #Tuple
 
 !Tuple methodsFor: 'accessing'!
 
-asJSON
-	self proxy ifNil: [proxy := self data asJSON].
-	self proxy at: #class put: self class name.
-	^proxy
-!
-
 data
 	data ifNil: [data := #{}.
 		self proxy ifNotNil: [self proxy data keysAndValuesDo: [:k :v | data at: k put: v]]].
@@ -170,16 +166,12 @@ expireAt
 	^ self proxy at: 'expire_at' ifAbsent: [nil]
 !
 
-from 
-	^self proxy at: 'from' ifAbsent: [nil]
-!
-
 fromAddress
 	^self proxy at: 'from' ifAbsent: [nil]
 !
 
 keys
-	^self keys: self data
+	^self keysOfJSON: self data
 !
 
 type
@@ -188,6 +180,14 @@ type
 
 type: anObject
 	self data at: #type put: anObject
+! !
+
+!Tuple methodsFor: 'converting'!
+
+asJSON
+	self proxy ifNil: [proxy := self data asJSON].
+	self proxy at: #class put: self class name.
+	^proxy
 ! !
 
 !Tuple class methodsFor: 'as yet unclassified'!

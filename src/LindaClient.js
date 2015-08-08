@@ -16,8 +16,8 @@ $core.packages["LindaClient"].transport = {"type":"amd","amdNamespace":"amber-li
 $core.addClass('LindaProxy', $globals.Object, ['proxy'], 'LindaClient');
 $core.addMethod(
 $core.method({
-selector: "keys:",
-protocol: 'accessing',
+selector: "keysOfJSON:",
+protocol: 'utilities',
 fn: function (aJS){
 "use strict";
 
@@ -29,12 +29,12 @@ return $core.withContext(function($ctx1) {
 	;
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"keys:",{aJS:aJS},$globals.LindaProxy)});
+}, function($ctx1) {$ctx1.fill(self,"keysOfJSON:",{aJS:aJS},$globals.LindaProxy)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aJS"],
-source: "keys: aJS\x0a\x09<\x09return Object.keys(aJS);\x0a\x09>",
+source: "keysOfJSON: aJS\x0a\x09<\x09return Object.keys(aJS);\x0a\x09>",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: []
@@ -613,7 +613,7 @@ $core.addClass('Tuple', $globals.LindaProxy, ['data', 'expireAt', 'fromAddress']
 $core.addMethod(
 $core.method({
 selector: "asJSON",
-protocol: 'accessing',
+protocol: 'converting',
 fn: function (){
 "use strict";
 
@@ -752,36 +752,6 @@ $globals.Tuple);
 
 $core.addMethod(
 $core.method({
-selector: "from",
-protocol: 'accessing',
-fn: function (){
-"use strict";
-
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-$1=$recv(self._proxy())._at_ifAbsent_("from",(function(){
-return nil;
-
-}));
-return $1;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"from",{},$globals.Tuple)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "from \x0a\x09^self proxy at: 'from' ifAbsent: [nil]",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["at:ifAbsent:", "proxy"]
-}),
-$globals.Tuple);
-
-$core.addMethod(
-$core.method({
 selector: "fromAddress",
 protocol: 'accessing',
 fn: function (){
@@ -822,7 +792,7 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=self._keys_(self._data());
+$1=self._keysOfJSON_(self._data());
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"keys",{},$globals.Tuple)});
@@ -830,10 +800,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "keys\x0a\x09^self keys: self data",
+source: "keys\x0a\x09^self keysOfJSON: self data",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["keys:", "data"]
+messageSends: ["keysOfJSON:", "data"]
 }),
 $globals.Tuple);
 

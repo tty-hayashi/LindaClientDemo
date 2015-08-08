@@ -7,6 +7,46 @@ $core.packages["LindaClient-Tests"].transport = {"type":"amd","amdNamespace":"am
 $core.addClass('LindaAbstractTest', $globals.TestCase, [], 'LindaClient-Tests');
 $core.addMethod(
 $core.method({
+selector: "sampleClient",
+protocol: 'as yet unclassified',
+fn: function (){
+"use strict";
+
+var self=this;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "sampleClient",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.LindaAbstractTest);
+
+$core.addMethod(
+$core.method({
+selector: "sampleTupleSpace",
+protocol: 'as yet unclassified',
+fn: function (){
+"use strict";
+
+var self=this;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "sampleTupleSpace",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.LindaAbstractTest);
+
+$core.addMethod(
+$core.method({
 selector: "serverUrl",
 protocol: 'as yet unclassified',
 fn: function (){
@@ -332,6 +372,12 @@ messageSends: ["assert:", "=", "uri", "serverUrl"]
 }),
 $globals.SocketIoTest);
 
+
+
+$core.addClass('TupleSpaceTest', $globals.LindaAbstractTest, [], 'LindaClient-Tests');
+
+
+$core.addClass('TupleTest', $globals.LindaAbstractTest, [], 'LindaClient-Tests');
 
 
 $core.addClass('Person', $globals.Object, ['name', 'address'], 'LindaClient-Tests');
