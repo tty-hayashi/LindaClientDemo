@@ -5,6 +5,12 @@ TestCase subclass: #LindaAbstractTest
 
 !LindaAbstractTest methodsFor: 'as yet unclassified'!
 
+sampleClient
+!
+
+sampleTupleSpace
+!
+
 serverUrl
 	^'http://127.0.0.1:8931'
 !
@@ -67,6 +73,14 @@ tearDown
 testUri
 	self assert: (sample uri = self serverUrl)
 ! !
+
+LindaAbstractTest subclass: #TupleSpaceTest
+	instanceVariableNames: ''
+	package: 'LindaClient-Tests'!
+
+LindaAbstractTest subclass: #TupleTest
+	instanceVariableNames: ''
+	package: 'LindaClient-Tests'!
 
 Object subclass: #Person
 	instanceVariableNames: 'name address'

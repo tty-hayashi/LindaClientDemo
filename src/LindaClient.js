@@ -13,11 +13,11 @@ $core.packages["LindaClient"].innerEval = function (expr) { return eval(expr); }
 $core.packages["LindaClient"].imports = ["linda=linda-client", "socketIo=socket.io", "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"];
 $core.packages["LindaClient"].transport = {"type":"amd","amdNamespace":"amber-lindaclient"};
 
-$core.addClass('LindaProxy', $globals.Object, ['proxy'], 'LindaClient');
+$core.addClass('NodeLindaProxy', $globals.Object, ['proxy'], 'LindaClient');
 $core.addMethod(
 $core.method({
-selector: "keys:",
-protocol: 'accessing',
+selector: "keysOfJSON:",
+protocol: 'utilities',
 fn: function (aJS){
 "use strict";
 
@@ -29,17 +29,17 @@ return $core.withContext(function($ctx1) {
 	;
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"keys:",{aJS:aJS},$globals.LindaProxy)});
+}, function($ctx1) {$ctx1.fill(self,"keysOfJSON:",{aJS:aJS},$globals.NodeLindaProxy)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aJS"],
-source: "keys: aJS\x0a\x09<\x09return Object.keys(aJS);\x0a\x09>",
+source: "keysOfJSON: aJS\x0a\x09<\x09return Object.keys(aJS);\x0a\x09>",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: []
 }),
-$globals.LindaProxy);
+$globals.NodeLindaProxy);
 
 $core.addMethod(
 $core.method({
@@ -61,7 +61,7 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: []
 }),
-$globals.LindaProxy);
+$globals.NodeLindaProxy);
 
 $core.addMethod(
 $core.method({
@@ -82,7 +82,7 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: []
 }),
-$globals.LindaProxy);
+$globals.NodeLindaProxy);
 
 
 $core.addMethod(
@@ -102,14 +102,14 @@ newProxy=(
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true, 
 //>>excludeEnd("ctx");
-$globals.LindaProxy.klass.superclass.fn.prototype._new.apply($recv(self), []));
+$globals.NodeLindaProxy.klass.superclass.fn.prototype._new.apply($recv(self), []));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
 $1=newProxy;
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"new",{newProxy:newProxy},$globals.LindaProxy.klass)});
+}, function($ctx1) {$ctx1.fill(self,"new",{newProxy:newProxy},$globals.NodeLindaProxy.klass)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -119,7 +119,7 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["new"]
 }),
-$globals.LindaProxy.klass);
+$globals.NodeLindaProxy.klass);
 
 $core.addMethod(
 $core.method({
@@ -143,7 +143,7 @@ $4=$recv($3)._yourself();
 $2=$4;
 return $2;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"proxy:",{aJSProxy:aJSProxy},$globals.LindaProxy.klass)});
+}, function($ctx1) {$ctx1.fill(self,"proxy:",{aJSProxy:aJSProxy},$globals.NodeLindaProxy.klass)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -153,10 +153,10 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["ifTrue:", "isNil", "proxy:", "new", "yourself"]
 }),
-$globals.LindaProxy.klass);
+$globals.NodeLindaProxy.klass);
 
 
-$core.addClass('LindaClient', $globals.LindaProxy, [], 'LindaClient');
+$core.addClass('LindaClient', $globals.NodeLindaProxy, [], 'LindaClient');
 $core.addMethod(
 $core.method({
 selector: "connect:",
@@ -503,7 +503,7 @@ messageSends: []
 $globals.LindaClient.klass);
 
 
-$core.addClass('SocketIo', $globals.LindaProxy, [], 'LindaClient');
+$core.addClass('SocketIo', $globals.NodeLindaProxy, [], 'LindaClient');
 $core.addMethod(
 $core.method({
 selector: "close",
@@ -609,11 +609,11 @@ messageSends: []
 $globals.SocketIo.klass);
 
 
-$core.addClass('Tuple', $globals.LindaProxy, ['data', 'expireAt', 'fromAddress'], 'LindaClient');
+$core.addClass('Tuple', $globals.NodeLindaProxy, ['data', 'expireAt', 'fromAddress'], 'LindaClient');
 $core.addMethod(
 $core.method({
 selector: "asJSON",
-protocol: 'accessing',
+protocol: 'converting',
 fn: function (){
 "use strict";
 
@@ -752,36 +752,6 @@ $globals.Tuple);
 
 $core.addMethod(
 $core.method({
-selector: "from",
-protocol: 'accessing',
-fn: function (){
-"use strict";
-
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-$1=$recv(self._proxy())._at_ifAbsent_("from",(function(){
-return nil;
-
-}));
-return $1;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"from",{},$globals.Tuple)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "from \x0a\x09^self proxy at: 'from' ifAbsent: [nil]",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["at:ifAbsent:", "proxy"]
-}),
-$globals.Tuple);
-
-$core.addMethod(
-$core.method({
 selector: "fromAddress",
 protocol: 'accessing',
 fn: function (){
@@ -822,7 +792,7 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=self._keys_(self._data());
+$1=self._keysOfJSON_(self._data());
 return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"keys",{},$globals.Tuple)});
@@ -830,10 +800,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "keys\x0a\x09^self keys: self data",
+source: "keys\x0a\x09^self keysOfJSON: self data",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["keys:", "data"]
+messageSends: ["keysOfJSON:", "data"]
 }),
 $globals.Tuple);
 
@@ -930,7 +900,7 @@ messageSends: ["ifNil:", "at:ifAbsent:", "data", "proxy:", "at:", "globals"]
 $globals.Tuple.klass);
 
 
-$core.addClass('TupleSpace', $globals.LindaProxy, [], 'LindaClient');
+$core.addClass('TupleSpace', $globals.NodeLindaProxy, [], 'LindaClient');
 $core.addMethod(
 $core.method({
 selector: "cancel:",
@@ -1216,7 +1186,7 @@ $globals.TupleSpace);
 $core.addMethod(
 $core.method({
 selector: "removeIoCallbacks",
-protocol: 'callback services',
+protocol: 'private',
 fn: function (){
 "use strict";
 

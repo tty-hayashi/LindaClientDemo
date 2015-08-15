@@ -314,14 +314,6 @@ serverUrl
 	^ (self viewModel at: #serverUrl) value
 !
 
-tickets
-	^ (self viewModel at: #tickets) value
-!
-
-tickets: anInteger
-	(self viewModel at: #tickets) value: anInteger
-!
-
 viewModel
 	^viewModel ifNil: [viewModel := #{}]
 !
@@ -384,8 +376,7 @@ setupLindaClient
 
 setupViewModel
 
-	viewModel := #{
-		#tickets -> (ko observable: 0) .
+	self viewModel addAll: #{
 		#availableServers -> (ko observableArray: LindaClient serverUrls) .
 		#serverUrl -> (ko observable: LindaClient defaultServerUrl) 
 	}.
@@ -988,118 +979,6 @@ gX: xValue gY: yValue gZ: zValue
 		]
 ! !
 
-LindaClientApp subclass: #LindaSievelMaster
-	instanceVariableNames: ''
-	package: 'LindaClientDemo'!
-
-!LindaSievelMaster methodsFor: 'starting'!
-
-map
-	"Map "
-!
-
-reduce
-! !
-
-!LindaSievelMaster class methodsFor: 'starting'!
-
-example
-
-	| app tickets n lot ts ans|
-	app := LindaFactorialMaster new.
-	app setupViewModel.
-	app tickets: 5.
-	n := 100.
-	lot := n / app tickets.
-	app lindaClient: (LindaClient default).
-	ts := app lindaClient tupleSpace: 'factorial'.
-	(1 to: n by: lot) do:[:i | 
-		ts write: #{#type -> #fact . #i -> i. #lot -> lot}.].
-	ans := OrderedCollection new.
-	(1 to: app tickets) do:[:i | 	
-		ts take: #{#type -> #ans} callback: [:err :t |
-			ans add: (t data at: #ans).
-			(i = app tickets)
-				ifTrue: [(ans inject: 1 into: [:sum :e | sum * e]) inspect].
-		]].
-!
-
-example1
-	"基本的な素数タプルリスト作成"
-	
-	| app tickets n lot ts ans tuple|
-	app := LindaFactorialMaster new.
-	app setupViewModel.
-	app tickets: 5.
-	n := 100.
-	lot := n / app tickets.
-	app lindaClient: LindaClient default.
-	ts := app lindaClient tupleSpace: PrimeTuple tupleSpaceName.
-	tuple := PrimeTuple beMax: 100.
-	ts write: tuple.
-	(1 to: n by: lot) do:[:i | 
-		ts write: #{#type -> #fact . #i -> i. #lot -> lot}.].
-	ans := OrderedCollection new.
-	(1 to: app tickets) do:[:i | 	
-		ts take: #{#type -> #ans} callback: [:err :t |
-			ans add: (t data at: #ans).
-			(i = app tickets)
-				ifTrue: [(ans inject: 1 into: [:sum :e | sum * e]) inspect].
-		]].
-!
-
-start
-	self new augmentPage
-! !
-
-LindaClientApp subclass: #LindaSievelWorker
-	instanceVariableNames: ''
-	package: 'LindaClientDemo'!
-
-!LindaSievelWorker methodsFor: 'as yet unclassified'!
-
-base
-	^(self viewModel at: 'base') value
-!
-
-base: anInteger
-	^(self viewModel at: 'base') value: anInteger
-!
-
-reduce: n
-! !
-
-!LindaSievelWorker class methodsFor: 'as yet unclassified'!
-
-example
-
-	| linda tuple base lot ts ans|
-	linda := LindaClient default.
-	ts := linda tupleSpace: PrimeTuple tupleSpaceName.
-	ts take: #{#type -> #fact} callback: [:err :t | 
-		base := t data at: 'i'.
-		lot := t data at: 'lot'.
-		ans := (base to: (base + lot - 1)) inject: 1 into: [:sum :elm | sum * elm].
-		ts write: #{#type -> #primes . #i -> base . #ans -> ans} .
-	].
-!
-
-example1
-	"結果並列法"
-	
-	| linda tuple base lot ts ans|
-	linda := LindaClient default.
-	ts := linda tupleSpace: PrimeTuple tupleSpaceName.
-	tuple := PrimTuple notFIxed.
-	
-	ts read: tuple callback: [:err :t | 
-		base := t data at: 'i'.
-		lot := t data at: 'lot'.
-		ans := (base to: (base + lot - 1)) inject: 1 into: [:sum :elm | sum * elm].
-		ts write: #{#type -> #primes . #i -> base . #ans -> ans} .
-	].
-! !
-
 LindaClientApp subclass: #LindaThermoController
 	instanceVariableNames: 'workerList'
 	package: 'LindaClientDemo'!
@@ -1155,8 +1034,6 @@ startDemo
 		t ifNotNil: [
 			self workerList addFirst: t.
 			(self viewModel at: #workers) value: self dataOfWorkerList. ]
-
-			"self doJQueryPrepend: t asJSON printString."
 	].
 !
 
