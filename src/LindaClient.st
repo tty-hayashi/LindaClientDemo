@@ -1,10 +1,10 @@
 Smalltalk createPackage: 'LindaClient'!
 (Smalltalk packageAt: 'LindaClient') imports: {'linda' -> 'linda-client'. 'socketIo' -> 'socket.io'. 'amber/jquery/Wrappers-JQuery'. 'amber/web/Web'. 'silk/Silk'}!
-Object subclass: #LindaProxy
+Object subclass: #NodeLindaProxy
 	instanceVariableNames: 'proxy'
 	package: 'LindaClient'!
 
-!LindaProxy methodsFor: 'accessing'!
+!NodeLindaProxy methodsFor: 'accessing'!
 
 proxy
 	^ proxy
@@ -14,14 +14,14 @@ proxy: anObject
 	proxy := anObject
 ! !
 
-!LindaProxy methodsFor: 'utilities'!
+!NodeLindaProxy methodsFor: 'utilities'!
 
 keysOfJSON: aJS
 	<	return Object.keys(aJS);
 	>
 ! !
 
-!LindaProxy class methodsFor: 'as yet unclassified'!
+!NodeLindaProxy class methodsFor: 'as yet unclassified'!
 
 new
 	| newProxy |
@@ -34,7 +34,7 @@ proxy: aJSProxy
 	^self new proxy: aJSProxy ; yourself
 ! !
 
-LindaProxy subclass: #LindaClient
+NodeLindaProxy subclass: #LindaClient
 	instanceVariableNames: ''
 	package: 'LindaClient'!
 
@@ -119,7 +119,7 @@ flushDeefaultServerUrlForHeroku
 	defaultServerUrl := nil
 ! !
 
-LindaProxy subclass: #SocketIo
+NodeLindaProxy subclass: #SocketIo
 	instanceVariableNames: ''
 	package: 'LindaClient'!
 
@@ -146,7 +146,7 @@ socketIo
 	^socketIo
 ! !
 
-LindaProxy subclass: #Tuple
+NodeLindaProxy subclass: #Tuple
 	instanceVariableNames: 'data expireAt fromAddress'
 	package: 'LindaClient'!
 
@@ -199,7 +199,7 @@ fromJSON: aProxy
 	^(Smalltalk globals at: tupleClassName) proxy: aProxy
 ! !
 
-LindaProxy subclass: #TupleSpace
+NodeLindaProxy subclass: #TupleSpace
 	instanceVariableNames: ''
 	package: 'LindaClient'!
 
@@ -227,7 +227,9 @@ createCallBackId
 createWatchCallbackId: aTupleHashedCollection
 
 	^(self proxy at: 'create_watch_callback_id') value: aTupleHashedCollection asJSON
-!
+! !
+
+!TupleSpace methodsFor: 'private'!
 
 removeIoCallbacks
 
